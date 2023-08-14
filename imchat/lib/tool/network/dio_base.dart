@@ -62,13 +62,31 @@ class DioBase {
     _dio = Dio(defaultOptions); // 使用默认配置
   }
   
-  Future post(String path, Map<String, dynamic>? params, {Map<String, dynamic>? header}) async {
+  Future<Response?> post(String path, Map<String, dynamic>? params, {Map<String, dynamic>? header}) async {
 
     try {
       Response? response = await _dio?.post(address + path, data: params,);
+      debugLog(path + params.toString());
       debugLog(response);
+      return response;
     }catch(e){
+      debugLog(path + params.toString());
       debugLog(e);
+      return Response(data: e, requestOptions: RequestOptions());
+    }
+  }
+
+  Future get(String path, Map<String, dynamic>? params, {Map<String, dynamic>? header}) async {
+
+    try {
+      Response? response = await _dio?.get(address + path, queryParameters: params,);
+      debugLog(path + params.toString());
+      debugLog(response);
+      return response;
+    }catch(e){
+      debugLog(path + params.toString());
+      debugLog(e);
+      return Response(data: e, requestOptions: RequestOptions());
     }
   }
 }

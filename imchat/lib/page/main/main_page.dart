@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
 import '../../utils/screen.dart';
 import '../../utils/toast_util.dart';
 import 'main_bottom_bar_view.dart';
@@ -53,7 +54,7 @@ class _MainPageState extends State<MainPage> {
             DateTime.now().difference(lastPopTime!) <
                 const Duration(seconds: 1)) {
           lastPopTime = DateTime.now();
-          showToast(msg: '再次点击退出');
+          showToast(msg: '再次点击退出'.localize);
           return false;
         }
         return true;
