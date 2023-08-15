@@ -65,6 +65,7 @@ class DioBase {
   Future<Response?> post(String path, Map<String, dynamic>? params, {Map<String, dynamic>? header}) async {
 
     try {
+      params?.removeWhere((key, value) => value == null);
       Response? response = await _dio?.post(address + path, data: params,);
       debugLog(path + params.toString());
       debugLog(response);
@@ -79,6 +80,7 @@ class DioBase {
   Future get(String path, Map<String, dynamic>? params, {Map<String, dynamic>? header}) async {
 
     try {
+      params?.removeWhere((key, value) => value == null);
       Response? response = await _dio?.get(address + path, queryParameters: params,);
       debugLog(path + params.toString());
       debugLog(response);

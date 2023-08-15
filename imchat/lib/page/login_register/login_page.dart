@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/config/config.dart';
@@ -7,6 +10,8 @@ import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/utils/toast_util.dart';
 
+import '../../tool/loading/loading_alert_widget.dart';
+import '../../utils/local_store.dart';
 import '../chat_page/chat_view/group_text_filed.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,6 +30,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    _loadData();
+  }
+
+  void _loadData() async {
+    nameController.text = (await LocalStore.getPassword()) ?? "";
+    psdController.text = (await LocalStore.getPassword()) ?? "";
   }
 
   String checkData() {
@@ -37,13 +48,14 @@ class _LoginPageState extends State<LoginPage> {
     return "";
   }
 
-  void _loadData() async {
+  void _loginEvent() async {
     String errorStr = checkData();
     if (errorStr.isNotEmpty) {
       showToast(msg: errorStr);
       return;
     }
-
+    FocusScope.of(context).unfocus();
+    LoadingAlertWidget.show(context);
     String userName = nameController.text;
     String pwd = psdController.text;
     //{"loginName": "casey11", "password": "123456"}
@@ -54,9 +66,12 @@ class _LoginPageState extends State<LoginPage> {
         "password": pwd,
       },
     );
-
+   /// LocalStore
+    LoadingAlertWidget.cancel(context);
     if(response?.isSuccess == true){
       IMConfig.token =  response?.respData;
+      LocalStore.saveUserAndPwd(userName, pwd);
+      Navigator.pushReplacementNamed(context, AppRoutes.main);
     }else {
       showToast(msg: response?.tips ?? "");
     }
@@ -144,6 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: GroupTextFiled(
                                 controller: psdController,
                                 placeholder: "请输入密码".localize,
+                                obscureText:true,
                                 maxLines: 1,
                               ),
                             ),
@@ -159,8 +175,11 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, AppRoutes.register);
+                          onTap: () async{
+                             var ret = await Navigator.pushNamed(context, AppRoutes.register);
+                             if(ret is String){
+                               nameController.text = ret;
+                             }
                           },
                           child: Text(
                             "注册账号".localize,
@@ -185,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 32),
                   GestureDetector(
-                    onTap: _loadData,
+                    onTap: _loginEvent,
                     child: Container(
                       height: 36,
                       alignment: Alignment.center,

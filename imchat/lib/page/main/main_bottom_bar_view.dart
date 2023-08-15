@@ -18,14 +18,6 @@ class MainBottomBarView extends StatefulWidget {
 class _MainBottomBarViewState extends State<MainBottomBarView> {
   int currentIndex = 0;
 
-  List<GifController> controllerArr = [
-    GifController(loop: false, autoPlay: true, inverted: true),
-    GifController(loop: false, autoPlay: true, inverted: true),
-    GifController(loop: false, autoPlay: true, inverted: true),
-    GifController(loop: false, autoPlay: true, inverted: true),
-    GifController(loop: false, autoPlay: true, inverted: true),
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -42,7 +34,7 @@ class _MainBottomBarViewState extends State<MainBottomBarView> {
           _buildItem(1, currentIndex == 1),
           _buildItem(2, currentIndex == 2),
           _buildItem(3, currentIndex == 3),
-          _buildItem(4, currentIndex == 4),
+       //   _buildItem(4, currentIndex == 4),
         ],
       ),
     );
@@ -52,14 +44,14 @@ class _MainBottomBarViewState extends State<MainBottomBarView> {
     return InkWell(
         onTap: () {
           if (index != currentIndex) {
-            controllerArr[currentIndex].play();
-            controllerArr[index].play();
+            widget.pageController?.jumpToPage(index);
+            currentIndex = index;
+            setState(() {});
           }
-          widget.pageController?.jumpToPage(index);
-          currentIndex = index;
+
         },
         child: SizedBox(
-          width: screen.screenWidth / 5,
+          width: screen.screenWidth / widget.titleArr.length,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -89,9 +81,6 @@ class _MainBottomBarViewState extends State<MainBottomBarView> {
 
   @override
   void dispose() {
-    for (var con in controllerArr) {
-      con.dispose();
-    }
     super.dispose();
   }
 }

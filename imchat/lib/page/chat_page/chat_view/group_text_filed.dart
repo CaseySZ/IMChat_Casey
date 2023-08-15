@@ -20,6 +20,7 @@ class GroupTextFiled extends StatefulWidget {
   final TextStyle? placeholderTextStyle;
   final List<TextInputFormatter>? inputFormatters;
   final bool? enabled;
+  final bool? obscureText;
   const GroupTextFiled({
     super.key,
     this.controller,
@@ -40,6 +41,7 @@ class GroupTextFiled extends StatefulWidget {
     this.placeholderTextStyle,
     this.inputFormatters,
     this.enabled,
+    this.obscureText = false,
   });
 
   @override
@@ -69,6 +71,7 @@ class _GroupTextFiledState extends State<GroupTextFiled> {
         autofocus: widget.autoFocus,
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,
+        obscureText:widget.obscureText ?? false,
         style: widget.textStyle ?? const TextStyle(
           color: Color(0xff353535),
           fontSize: 14,

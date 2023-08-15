@@ -4,7 +4,7 @@ extension ResponseStatus on Response {
 
   bool get isSuccess {
     if(data is Map){
-      return data["code"] == 200;
+      return data["code"] == 200 || data["code"] == "200";
     }
     return false;
   }

@@ -14,7 +14,7 @@ class LocalStore {
     return preferences.getString(_pwdKey);
   }
 
-  static saveLoginNamePwd(String? userName, String? pwd) async{
+  static saveUserAndPwd(String? userName, String? pwd) async{
     SharedPreferences preferences =  await SharedPreferences.getInstance();
     if(userName == null) {
       preferences.remove(_nameKey);
