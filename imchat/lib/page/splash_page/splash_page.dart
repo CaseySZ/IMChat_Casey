@@ -4,6 +4,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/tool/network/response_status.dart';
@@ -47,29 +48,20 @@ class _SplashPageState extends State<SplashPage> {
     String? userName= await LocalStore.getLoginName();
     String? pwd = await  LocalStore.getPassword();
     if(userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
-      response = await DioBase.instance.post("/api/login",
-        {
-          "loginName": userName,
-          "password": pwd,
-        },
-      );
-      if(response?.isSuccess == true){
-        IMConfig.token =  response?.respData;
-        response = await DioBase.instance.post("/api/index", {});
-        if(response?.isSuccess == true){
-          Future.delayed(const Duration(seconds: 1), () {
-            Navigator.pushReplacementNamed(context, AppRoutes.main);
-          });
-          return;
-        }
-        showToast(msg: response?.tips ?? "");
-      }else {
-
+      String? errorDesc =  await IMApi.login(userName!, pwd!);
+      if(errorDesc?.isNotEmpty == true) {
+        showToast(msg: errorDesc!);
+        return;
+      }
+      errorDesc =  await IMApi.appInfo();
+      if(errorDesc?.isNotEmpty == true) {
+        showToast(msg: errorDesc!);
+        return;
       }
     }
 
     Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.login);
+      Navigator.pushReplacementNamed(context, AppRoutes.main);
     });
   }
   

@@ -3,6 +3,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:imchat/config/config.dart';
 
 debugLog(Object? message, [Object? message2]) {
   if (kDebugMode) {
@@ -66,7 +67,15 @@ class DioBase {
 
     try {
       params?.removeWhere((key, value) => value == null);
-      Response? response = await _dio?.post(address + path, data: params,);
+      header ??= {};
+      Options? options;
+      if(IMConfig.token?.isNotEmpty == true || header.isNotEmpty == true){
+        if(IMConfig.token?.isNotEmpty == true) {
+          header.addAll({"Authorization": IMConfig.token});
+        }
+        options = Options(headers: header);
+      }
+      Response? response = await _dio?.post(address + path, data: params, options: options );
       debugLog(path + params.toString());
       debugLog(response);
       return response;
@@ -81,7 +90,15 @@ class DioBase {
 
     try {
       params?.removeWhere((key, value) => value == null);
-      Response? response = await _dio?.get(address + path, queryParameters: params,);
+      header ??= {};
+      Options? options;
+      if(IMConfig.token?.isNotEmpty == true || header.isNotEmpty == true){
+        if(IMConfig.token?.isNotEmpty == true) {
+          header.addAll({"Authorization": IMConfig.token});
+        }
+        options = Options(headers: header);
+      }
+      Response? response = await _dio?.get(address + path, queryParameters: params, options: options);
       debugLog(path + params.toString());
       debugLog(response);
       return response;

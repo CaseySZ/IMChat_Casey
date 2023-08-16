@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imchat/config/language.dart';
 import '../../utils/screen.dart';
 import '../../utils/toast_util.dart';
+import '../mine/mine_page.dart';
 import 'main_bottom_bar_view.dart';
 
 class MainPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _MainPageState extends State<MainPage> {
     const SizedBox(),
     const SizedBox(),
     const SizedBox(),
-    const SizedBox(),
+    const MinePage(),
   ];
 
   PageController pageController = PageController(initialPage: 0);

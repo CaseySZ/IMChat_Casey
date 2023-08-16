@@ -3,6 +3,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/routers/router_map.dart';
@@ -59,21 +60,13 @@ class _LoginPageState extends State<LoginPage> {
     String userName = nameController.text;
     String pwd = psdController.text;
     //{"loginName": "casey11", "password": "123456"}
-    Response? response = await DioBase.instance.post(
-      "/api/login",
-      {
-        "loginName": userName,
-        "password": pwd,
-      },
-    );
-   /// LocalStore
+    String? errorDesc = await IMApi.login(userName, pwd);
     LoadingAlertWidget.cancel(context);
-    if(response?.isSuccess == true){
-      IMConfig.token =  response?.respData;
+    if(errorDesc?.isNotEmpty == true){
+      showToast(msg: errorDesc!);
+    }else {
       LocalStore.saveUserAndPwd(userName, pwd);
       Navigator.pushReplacementNamed(context, AppRoutes.main);
-    }else {
-      showToast(msg: response?.tips ?? "");
     }
 
   }

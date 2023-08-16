@@ -73,7 +73,7 @@ class _CustomNewImageState extends State<CustomNewImage> {
         widget.imageUrl?.startsWith("https") == true) {
       return widget.imageUrl ?? "";
     }else{
-      return  widget.imageUrl ?? ""; //'${GlobalStore.getImgDomain()}/${widget.imageUrl}';
+      return  widget.imageUrl ?? "";
     }
 
     ///需要大图且不高斯
@@ -170,11 +170,9 @@ class _CustomNewImageState extends State<CustomNewImage> {
       height: widget.height ?? double.infinity,
       color: const Color(0xfff7f7f7),
       alignment: Alignment.center,
-      child: SvgPicture.asset(
-        "assets/svg/place.svg",
-        //width: widget.width != null ? widget.width! / 4 : double.infinity,
-        //height: widget.width != null ? widget.width! / 4 : double.infinity,
-      ),
+      // child: SvgPicture.asset(
+      //   "assets/svg/place.svg",
+      // ),
     );
   }
 }
