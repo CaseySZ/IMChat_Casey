@@ -1,0 +1,12 @@
+syntax ="proto3";
+option java_outer_classname ="Message";
+
+message Protocol{
+	string token = 1;
+	string cmd = 2;
+	string params = 3;
+	string response = 4;
+	string connectIp = 5;
+	string connectId = 6;
+
+}

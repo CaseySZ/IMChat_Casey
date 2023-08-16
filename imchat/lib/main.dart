@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:imchat/routers/router_map.dart';
+import 'package:imchat/web_socket/web_socket_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WebSocketModel.init();
   runApp(RefreshConfiguration(
     headerBuilder: () => WaterDropHeader(
       complete: Text(

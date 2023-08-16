@@ -14,3 +14,13 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+protoc --dart_out=../lib/proto ./**/*.proto
+
+
+protoc --dart_out= /Users/sy/Documents/GitHub/IMChat/imchat/lib/protobuf/dart /Users/sy/Documents/GitHub/IMChat/imchat/lib/protobuf/proto/*.proto
+
+protoc -I  /Users/sy/Documents/GitHub/IMChat/imchat/lib/protobuf/dart  --dart_out=/Users/sy/Documents/GitHub/IMChat/imchat/lib/protobuf/dart  /Users/sy/Documents/GitHub/IMChat/imchat/lib/protobuf/proto/*.proto --plugin ~/.pub-cache/bin/protoc-gen-dart 
+
+
