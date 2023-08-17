@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/tool/loading/empty_error_widget.dart';
+import 'package:imchat/tool/loading/loading_center_widget.dart';
+import 'package:imchat/web_socket/web_message_type.dart';
+import 'package:imchat/web_socket/web_socket_model.dart';
+import '../../protobuf/model/base.pb.dart';
 import '../../utils/screen.dart';
 import '../../utils/toast_util.dart';
 import '../mine/mine_page.dart';
@@ -35,12 +41,34 @@ class _MainPageState extends State<MainPage> {
   PageController pageController = PageController(initialPage: 0);
   int currentIndex = 0;
 
+
   @override
   void initState() {
     super.initState();
+    WebSocketModel.addListener(_receiveMessage);
+    _checkStatus();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loadData();
     });
+
+  }
+
+  void _checkStatus() {
+    Future.delayed(const Duration(seconds: 2), (){
+      if(IMConfig.isConnectSocketSuccess == true){
+        setState(() {});
+      }
+    });
+  }
+  void _receiveMessage(Protocol protocol){
+    if(protocol.cmd == MessageType.loginResponse){
+      if(protocol.isSuccess){
+        IMConfig.isConnectSocketSuccess = true;
+      }else {
+        IMConfig.isConnectSocketSuccess = false;
+      }
+      setState(() {});
+    }
   }
 
   void _loadData() async {}
@@ -83,9 +111,37 @@ class _MainPageState extends State<MainPage> {
                 pageController: pageController,
               ),
             ),
+            _buildLoadingStatus(),
           ],
         ),
       ),
     );
+  }
+
+
+  Widget _buildLoadingStatus() {
+    if(IMConfig.isConnectSocketSuccess == null){
+      return  InkWell(
+        onTap: (){
+
+        },
+        child:const LoadingCenterWidget(),
+      );
+    }else if(IMConfig.isConnectSocketSuccess == false){
+      return EmptyErrorWidget(
+        errorMsg: "IM服务器连接失败",
+        retryOnTap: () {
+
+        },
+      );
+    }else {
+      return const SizedBox();
+    }
+  }
+
+  @override
+  void dispose() {
+    WebSocketModel.removeListener(_receiveMessage);
+    super.dispose();
   }
 }

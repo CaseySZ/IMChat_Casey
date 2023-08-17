@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/tool/network/response_status.dart';
+import 'package:imchat/web_socket/web_socket_send.dart';
 
 import '../tool/network/dio_base.dart';
 
@@ -30,6 +31,7 @@ class IMApi {
       );
       if(response?.isSuccess == true){
         IMConfig.token =  response?.respData;
+        WebSocketSend.login();
       } else {
         return response?.tips;
       }

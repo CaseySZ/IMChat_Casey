@@ -51,6 +51,7 @@ class _SplashPageState extends State<SplashPage> {
       String? errorDesc =  await IMApi.login(userName!, pwd!);
       if(errorDesc?.isNotEmpty == true) {
         showToast(msg: errorDesc!);
+        Navigator.pushReplacementNamed(context, AppRoutes.login);
         return;
       }
       errorDesc =  await IMApi.appInfo();
@@ -58,11 +59,16 @@ class _SplashPageState extends State<SplashPage> {
         showToast(msg: errorDesc!);
         return;
       }
+      Future.delayed(const Duration(seconds: 1), () {
+        Navigator.pushReplacementNamed(context, AppRoutes.main);
+      });
+    }else {
+      Future.delayed(const Duration(seconds: 1), () {
+        Navigator.pushReplacementNamed(context, AppRoutes.login);
+      });
     }
 
-    Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.main);
-    });
+
   }
   
   @override
