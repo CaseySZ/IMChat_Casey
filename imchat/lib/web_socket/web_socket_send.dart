@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/protobuf/model/base.pb.dart';
+import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
 
 class WebSocketSend {
@@ -41,9 +42,42 @@ class WebSocketSend {
       "deviceBrand":deviceBrand,
     };
     String jsonParams = jsonEncode(params);
-    Protocol protocol = Protocol(token: IMConfig.token, cmd: "IM_CONNECT_REQUEST", params: jsonParams);
+    Protocol protocol = Protocol(token: IMConfig.token, cmd: MessageType.login, params: jsonParams);
     WebSocketModel.send(protocol);
   }
 
+
+  static sendHeartBeat() {
+
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Map<String, dynamic> params = {
+        "token": IMConfig.token,
+      };
+      String jsonParams = jsonEncode(params);
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.heart, params: jsonParams);
+      WebSocketModel.send(protocol);
+      Future.delayed(const Duration(seconds: 5), () {
+        sendHeartBeat();
+      });
+    }
+  }
+
+  //打开好友对话框发送指令
+  static sendOpenFriendBox(String friendNo) {
+
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Map<String, dynamic> params = {
+        "friendNo": friendNo,
+      };
+      String jsonParams = jsonEncode(params);
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.friendBox, params: jsonParams);
+      WebSocketModel.send(protocol);
+      Future.delayed(const Duration(seconds: 5), () {
+        sendHeartBeat();
+      });
+    }
+  }
 
 }

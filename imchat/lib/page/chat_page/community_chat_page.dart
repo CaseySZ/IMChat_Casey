@@ -12,19 +12,19 @@ import 'chat_view/album_picker_view.dart';
 import 'chat_view/chat_item_cell.dart';
 import 'chat_view/group_text_filed.dart';
 
-class CommunityChatPage extends StatefulWidget {
+class ChatDetailPage extends StatefulWidget {
   final String? groupId;
 
 
-  const CommunityChatPage({super.key, this.groupId});
+  const ChatDetailPage({super.key, this.groupId});
 
   @override
   State<StatefulWidget> createState() {
-    return _CommunityChatPageState();
+    return _ChatDetailPageState();
   }
 }
 
-class _CommunityChatPageState extends State<CommunityChatPage> {
+class _ChatDetailPageState extends State<ChatDetailPage> {
   TextEditingController controller = TextEditingController();
   RefreshController refreshController = RefreshController();
   List<dynamic>? chatArr;

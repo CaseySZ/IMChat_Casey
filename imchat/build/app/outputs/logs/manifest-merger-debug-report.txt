@@ -40,7 +40,6 @@ MERGED from [:shared_preferences_android] /Users/sy/Documents/GitHub/IMChat/imch
 MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-68:12
 MERGED from [:permission_handler_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/permission_handler_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:device_imei] /Users/sy/Documents/GitHub/IMChat/imchat/build/device_imei/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [:mac_address] /Users/sy/Documents/GitHub/IMChat/imchat/build/mac_address/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:package_info_plus] /Users/sy/Documents/GitHub/IMChat/imchat/build/package_info_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:fluttertoast] /Users/sy/Documents/GitHub/IMChat/imchat/build/fluttertoast/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:flutter_image_compress_common] /Users/sy/Documents/GitHub/IMChat/imchat/build/flutter_image_compress_common/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
@@ -175,8 +174,6 @@ MERGED from [:permission_handler_android] /Users/sy/Documents/GitHub/IMChat/imch
 MERGED from [:permission_handler_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/permission_handler_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:device_imei] /Users/sy/Documents/GitHub/IMChat/imchat/build/device_imei/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:device_imei] /Users/sy/Documents/GitHub/IMChat/imchat/build/device_imei/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:mac_address] /Users/sy/Documents/GitHub/IMChat/imchat/build/mac_address/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:mac_address] /Users/sy/Documents/GitHub/IMChat/imchat/build/mac_address/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:package_info_plus] /Users/sy/Documents/GitHub/IMChat/imchat/build/package_info_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:package_info_plus] /Users/sy/Documents/GitHub/IMChat/imchat/build/package_info_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:fluttertoast] /Users/sy/Documents/GitHub/IMChat/imchat/build/fluttertoast/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41

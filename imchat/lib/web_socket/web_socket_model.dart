@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:event_bus/event_bus.dart';
 import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
+import 'package:imchat/web_socket/web_socket_send.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
@@ -50,7 +51,7 @@ extension JsonProto on Protocol {
 }
 
 class WebSocketModel {
-
+  static bool? isConnectSocketSuccess;
   static final List<Function(Protocol protocol)> _listernArr = [];
 
   static void addListener(Function(Protocol protocol) item) {
@@ -80,14 +81,28 @@ class WebSocketModel {
     });
   }
 
+  static _retryConnect() {
+    channel =  IOWebSocketChannel.connect('ws://8.217.117.185:9090');
+    channel?.stream.listen((message) {
+      Protocol protocol = Protocol.fromBuffer(message);
+      parseMessage(protocol);
+    });
+  }
+
   static parseMessage(Protocol protocol){
     debugLog("webSocket:${protocol.cmd}, code: ${protocol.code}, data: ${protocol.data}");
-    if(protocol.cmd == MessageType.loginResponse){
+    if(protocol.cmd == MessageType.login.responseName){
       if(protocol.isSuccess){
-        IMConfig.isConnectSocketSuccess = true;
+        WebSocketModel.isConnectSocketSuccess = true;
+        WebSocketSend.sendHeartBeat();
       }else {
-        IMConfig.isConnectSocketSuccess = false;
+        WebSocketModel.isConnectSocketSuccess = false;
       }
+    }
+
+    if(protocol.cmd == MessageType.exit){
+      WebSocketModel.isConnectSocketSuccess = false;
+      _retryConnect();
     }
     notifyListeners(protocol);
   }

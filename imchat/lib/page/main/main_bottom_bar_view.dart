@@ -55,15 +55,10 @@ class _MainBottomBarViewState extends State<MainBottomBarView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Image.asset(
-              //   "assets/assets/root_menu_$index${(isSelected ? 1 : 0)}.png",
-              //   width: 20,
-              //   height: 20,
-              // ),
-              Container(
+              Image.asset(
+                "assets/images/root_menu_$index${(isSelected ? 1 : 0)}.png",
                 width: 20,
                 height: 20,
-                color: isSelected ? Colors.blue : Colors.grey,
               ),
               const SizedBox(height: 3),
               Text(

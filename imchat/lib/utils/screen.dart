@@ -34,6 +34,8 @@ class _Screen {
     paddingTop = MediaQuery.of(context).padding.top;
     paddingBottom = MediaQuery.of(context).padding.bottom;
   }
+}
 
-
+Widget buildLineWidget({double height = 1}){
+  return Container(height: height, color: const Color(0xfff6f7fb),);
 }

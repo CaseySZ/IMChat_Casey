@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:imchat/page/login_register/register_page.dart';
+import 'package:imchat/page/mine/mine_center_page.dart';
 
 import '../page/login_register/login_page.dart';
 import '../page/main/main_page.dart';
@@ -13,11 +14,13 @@ class AppRoutes {
   static const main = "main";
   static const login = 'login';
   static const register = "register";
+  static const mine_center = "mine_center";
   static final routes = {
     splash_page: (context, {arguments}) => const SplashPage(),
     main: (context, {arguments}) => const MainPage(),
     login:(context, {arguments}) => const LoginPage(),
     register:(context, {arguments}) => const RegisterPage(),
+    mine_center:(context, {arguments}) => const MineCenterPage(),
   };
 
   static var onGenerateRoute = (RouteSettings settings) {

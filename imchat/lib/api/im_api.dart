@@ -40,4 +40,36 @@ class IMApi {
       return e.toString();
     }
   }
+
+  static Future<String?> logout(String name, String pwd) async {
+    try {
+      Response? response = await DioBase.instance.post("/api/logout", {});
+      if(response?.isSuccess == true){
+        IMConfig.token = "";
+      } else {
+        return response?.tips;
+      }
+    } catch (e) {
+      debugLog(e);
+      return e.toString();
+    }
+  }
+
+  static Future<String?> addFriend(String friendNo, String applyContent) async {
+    try {
+      Response? response = await DioBase.instance.post(
+        "/api/friendApply/add",
+        {"friendNo": friendNo, "applyContent": applyContent},
+      );
+      if(response?.isSuccess == true){
+
+      } else {
+        return response?.tips;
+      }
+    } catch (e) {
+      debugLog(e);
+      return e.toString();
+    }
+  }
+
 }

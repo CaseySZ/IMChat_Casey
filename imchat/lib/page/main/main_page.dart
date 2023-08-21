@@ -8,6 +8,9 @@ import 'package:imchat/web_socket/web_socket_model.dart';
 import '../../protobuf/model/base.pb.dart';
 import '../../utils/screen.dart';
 import '../../utils/toast_util.dart';
+import '../chat_page/chat_main_page.dart';
+import '../contact_page/contact_main_page.dart';
+import '../find_page/find_page.dart';
 import '../mine/mine_page.dart';
 import 'main_bottom_bar_view.dart';
 
@@ -32,9 +35,9 @@ class _MainPageState extends State<MainPage> {
   ];
 
   List<Widget> pageViewArr = [
-    const SizedBox(),
-    const SizedBox(),
-    const SizedBox(),
+    const ChatMainPage(),
+    const ContactMainPage(),
+    const FindPage(),
     const MinePage(),
   ];
 
@@ -55,17 +58,17 @@ class _MainPageState extends State<MainPage> {
 
   void _checkStatus() {
     Future.delayed(const Duration(seconds: 2), (){
-      if(IMConfig.isConnectSocketSuccess == true){
+      if(WebSocketModel.isConnectSocketSuccess == true){
         setState(() {});
       }
     });
   }
   void _receiveMessage(Protocol protocol){
-    if(protocol.cmd == MessageType.loginResponse){
+    if(protocol.cmd == MessageType.login.responseName){
       if(protocol.isSuccess){
-        IMConfig.isConnectSocketSuccess = true;
+        WebSocketModel.isConnectSocketSuccess = true;
       }else {
-        IMConfig.isConnectSocketSuccess = false;
+        WebSocketModel.isConnectSocketSuccess = false;
       }
       setState(() {});
     }
@@ -120,14 +123,14 @@ class _MainPageState extends State<MainPage> {
 
 
   Widget _buildLoadingStatus() {
-    if(IMConfig.isConnectSocketSuccess == null){
+    if(WebSocketModel.isConnectSocketSuccess == null){
       return  InkWell(
         onTap: (){
 
         },
         child:const LoadingCenterWidget(),
       );
-    }else if(IMConfig.isConnectSocketSuccess == false){
+    }else if(WebSocketModel.isConnectSocketSuccess == false){
       return EmptyErrorWidget(
         errorMsg: "IM服务器连接失败",
         retryOnTap: () {
