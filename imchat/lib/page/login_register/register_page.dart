@@ -11,7 +11,7 @@ import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/utils/toast_util.dart';
 
-import '../chat_page/chat_view/group_text_filed.dart';
+import '../chat/chat_view/group_text_filed.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

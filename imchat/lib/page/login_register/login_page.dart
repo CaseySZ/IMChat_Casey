@@ -1,19 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
 
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/api/im_api.dart';
-import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/routers/router_map.dart';
-import 'package:imchat/tool/network/dio_base.dart';
-import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/utils/toast_util.dart';
 
 import '../../tool/loading/loading_alert_widget.dart';
 import '../../utils/local_store.dart';
-import '../chat_page/chat_view/group_text_filed.dart';
+import '../chat/chat_view/group_text_filed.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

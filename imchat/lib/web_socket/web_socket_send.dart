@@ -80,4 +80,14 @@ class WebSocketSend {
     }
   }
 
+  //好友列表
+  static getFriendList() {
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.friendList);
+      WebSocketModel.send(protocol);
+    }
+  }
+
+
 }

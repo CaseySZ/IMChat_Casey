@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/tool/loading/empty_error_widget.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
@@ -8,9 +7,9 @@ import 'package:imchat/web_socket/web_socket_model.dart';
 import '../../protobuf/model/base.pb.dart';
 import '../../utils/screen.dart';
 import '../../utils/toast_util.dart';
-import '../chat_page/chat_main_page.dart';
-import '../contact_page/contact_main_page.dart';
-import '../find_page/find_page.dart';
+import '../chat/chat_main_page.dart';
+import '../contact/contact_main_page.dart';
+import '../find/find_page.dart';
 import '../mine/mine_page.dart';
 import 'main_bottom_bar_view.dart';
 

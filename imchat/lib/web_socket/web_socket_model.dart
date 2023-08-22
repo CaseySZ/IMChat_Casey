@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:event_bus/event_bus.dart';
+import 'package:imchat/model/friend_item_info.dart';
 import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
@@ -11,7 +12,6 @@ import '../config/config.dart';
 import '../protobuf/model/base.pb.dart';
 
 extension JsonProto on Protocol {
-
   Map<String, dynamic> get mapInfo {
     try {
       Map<String, dynamic> model = jsonDecode(response);
@@ -77,7 +77,7 @@ class WebSocketModel {
     channel =  IOWebSocketChannel.connect('ws://8.217.117.185:9090');
     channel?.stream.listen((message) {
       Protocol protocol = Protocol.fromBuffer(message);
-      parseMessage(protocol);
+      _parseMessage(protocol);
     });
   }
 
@@ -85,11 +85,11 @@ class WebSocketModel {
     channel =  IOWebSocketChannel.connect('ws://8.217.117.185:9090');
     channel?.stream.listen((message) {
       Protocol protocol = Protocol.fromBuffer(message);
-      parseMessage(protocol);
+      _parseMessage(protocol);
     });
   }
 
-  static parseMessage(Protocol protocol){
+  static _parseMessage(Protocol protocol){
     debugLog("webSocket:${protocol.cmd}, code: ${protocol.code}, data: ${protocol.data}");
     if(protocol.cmd == MessageType.login.responseName){
       if(protocol.isSuccess){
@@ -100,7 +100,13 @@ class WebSocketModel {
       }
     }
 
-    if(protocol.cmd == MessageType.exit){
+    if(protocol.cmd == MessageType.friendList.responseName){
+      if(protocol.isSuccess) {
+        FriendItemInfo.parse(protocol.data);
+      }
+    }
+
+    if(protocol.cmd == MessageType.exit.responseName){
       WebSocketModel.isConnectSocketSuccess = false;
       _retryConnect();
     }
@@ -116,3 +122,4 @@ class WebSocketModel {
   }
 
 }
+

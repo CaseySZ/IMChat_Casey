@@ -3,7 +3,6 @@ import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
-
 import '../tool/network/dio_base.dart';
 
 class IMApi {
@@ -55,7 +54,7 @@ class IMApi {
     }
   }
 
-  static Future<String?> addFriend(String friendNo, String applyContent) async {
+  static Future<String?>  addFriend(String friendNo, String applyContent) async {
     try {
       Response? response = await DioBase.instance.post(
         "/api/friendApply/add",
@@ -63,6 +62,24 @@ class IMApi {
       );
       if(response?.isSuccess == true){
 
+      } else {
+        return response?.tips;
+      }
+    } catch (e) {
+      debugLog(e);
+      return e.toString();
+    }
+  }
+
+  // (contentType 0文字，1图片，2语言，3文件)
+  static Future<String?> sendMsg(String friendNo, String content, int contentType) async {
+    try {
+      Response? response = await DioBase.instance.post(
+        "/api/memberChatRecord/send",
+        {"friendNo": friendNo, "content": content, "contentType": contentType},
+      );
+      if(response?.isSuccess == true){
+        return "";
       } else {
         return response?.tips;
       }

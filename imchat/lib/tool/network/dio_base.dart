@@ -1,5 +1,5 @@
 
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, prefer_interpolation_to_compose_strings
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -24,24 +24,27 @@ debugLog(Object? message, [Object? message2]) {
     }else {
       print(message);
     }
-    if (message2 is String){
-      String logStr = message2;
-      int maxLength = 526;
-      if (logStr.length < maxLength){
-        print(message2);
-      }else {
-        for (int i = 0; i < logStr.length; i += maxLength) {
-          if (i + maxLength < logStr.length){
-            print(logStr.substring(i, i+maxLength));
-          }else {
-            print(logStr.substring(i, logStr.length));
+    if(message != null) {
+      if (message2 is String) {
+        String logStr = message2;
+        int maxLength = 526;
+        if (logStr.length < maxLength) {
+          print(message2);
+        } else {
+          for (int i = 0; i < logStr.length; i += maxLength) {
+            if (i + maxLength < logStr.length) {
+              print(logStr.substring(i, i + maxLength));
+            } else {
+              print(logStr.substring(i, logStr.length));
+            }
           }
         }
+      } else {
+        print(message2);
       }
-    }else {
-      print(message2);
     }
   }
+
 }
 
 class DioBase {
@@ -76,11 +79,13 @@ class DioBase {
         options = Options(headers: header);
       }
       Response? response = await _dio?.post(address + path, data: params, options: options );
-      debugLog(path + params.toString());
+      debugLog("url:" +  path);
+      debugLog(params.toString());
       debugLog(response);
       return response;
     }catch(e){
-      debugLog(path + params.toString());
+      debugLog("url:" +  path);
+      debugLog(params.toString());
       debugLog(e);
       return Response(data: e, requestOptions: RequestOptions());
     }
@@ -99,11 +104,13 @@ class DioBase {
         options = Options(headers: header);
       }
       Response? response = await _dio?.get(address + path, queryParameters: params, options: options);
-      debugLog(path + params.toString());
+      debugLog("url:" +  path);
+      debugLog(params.toString());
       debugLog(response);
       return response;
     }catch(e){
-      debugLog(path + params.toString());
+      debugLog("url:" +  path);
+      debugLog(params.toString());
       debugLog(e);
       return Response(data: e, requestOptions: RequestOptions());
     }
