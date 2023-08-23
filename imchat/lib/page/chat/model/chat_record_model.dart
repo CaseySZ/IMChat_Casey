@@ -23,6 +23,7 @@ class ChatRecordModel {
   String? id;
   String? sendNo;
   String? targetNo;
+  int? targetType; // 0好友，1 群
   int? sendType;
   String? chatCode;
   String? content;
@@ -35,8 +36,11 @@ class ChatRecordModel {
   String? sendNickName;
   String? sendHeadImage;
   String? receiveNo;
-
+  String? nickName;
+  int? isTop;
   bool? isShowTime = false;
+  int? messageNum;
+  String? personalitySign;
 
   ChatRecordModel();
 
@@ -44,8 +48,13 @@ class ChatRecordModel {
     id = json["id"];
     sendNo = json["sendNo"];
     targetNo = json["targetNo"];
+    nickName = json['nickName'];
+    targetType = json['targetType'];
     sendType = json["sendType"];
     content = json["content"];
+    if(json["lastContent"] != null){
+      content = json["lastContent"];
+    }
     chatCode = json["chatCode"];
     contentType = json["contentType"];
     readStatus = json["readStatus"];
@@ -53,7 +62,14 @@ class ChatRecordModel {
     sendNickNameRemark = json["sendNickNameRemark"];
     sendNickName = json["sendNickName"];
     sendHeadImage = json["sendHeadImage"];
+    if(json["headImage"] != null){
+      sendHeadImage = json["headImage"];
+    }
     receiveNo = json["receiveNo"];
+    isTop = json["isTop"];
+    messageNum = json["messageNum"];
+    personalitySign = json["personalitySign"];
+   // targetNo = json["targetNo"];
   }
 
   Map<String, dynamic> toJson() {

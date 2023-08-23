@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:imchat/config/config.dart';
+import 'package:imchat/model/user_info.dart';
 
 import '../../../tool/image/custom_new_image.dart';
 import '../model/chat_record_model.dart';
@@ -17,10 +19,21 @@ class ChatItemCell extends StatefulWidget {
 }
 
 class _ChatItemCellState extends State<ChatItemCell> {
+  UserInfo? get useInfo => IMConfig.userInfo;
   bool get isImg => widget.model?.contentType == 2;
 
-  bool get isMe => false ;// GlobalStore.isMe(widget.model?.uid);
-
+  bool get isMe =>  useInfo?.memberNo != widget.model?.receiveNo;
+  
+  String get chatContent {
+    if(widget.model?.content?.isNotEmpty == true){
+      int length =  widget.model?.content?.length ?? 0;
+      if(widget.model!.content!.substring(length-1, length) == "\n"){
+        return widget.model!.content!.substring(0, length-1);
+      }
+      return widget.model?.content ?? "";
+    }
+    return "";
+  }
   @override
   void initState() {
     super.initState();
@@ -102,7 +115,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
                         ),
                       ),
                       child: Text(
-                        widget.model?.content ?? "",
+                        chatContent,
                         style: const TextStyle(
                           color: Color(0xff262424),
                           fontSize: 14,
@@ -157,7 +170,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
                         ),
                       ),
                       child: Text(
-                        widget.model?.content ?? "",
+                        chatContent,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,

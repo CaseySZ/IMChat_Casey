@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gif_view/gif_view.dart';
 import '../../utils/screen.dart';
 
 class MainBottomBarView extends StatefulWidget {

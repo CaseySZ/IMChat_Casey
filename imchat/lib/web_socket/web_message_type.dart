@@ -27,6 +27,6 @@ class MessageType {
   // 消息总数返回
   static String messageTotal =  "IM_MESSAGE_TOTAL_RESPONSE";
 
-  //聊天对象通知 聊天记录
-  static String  chatHistory =  "IM_CHATGARGER_RESPONSE";
+  //聊天对象通知 聊天消息
+  static String chatMessage =  "IM_CHATGARGER_RESPONSE";
 }

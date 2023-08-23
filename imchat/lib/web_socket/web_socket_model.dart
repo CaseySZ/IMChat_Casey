@@ -1,14 +1,10 @@
 import 'dart:convert';
-
-import 'package:event_bus/event_bus.dart';
 import 'package:imchat/model/friend_item_info.dart';
 import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/status.dart' as status;
-
-import '../config/config.dart';
 import '../protobuf/model/base.pb.dart';
 
 extension JsonProto on Protocol {

@@ -20,6 +20,7 @@ class IMApi {
       debugLog(e);
       return e.toString();
     }
+    return null;
   }
 
   static Future<String?> login(String name, String pwd) async {
@@ -38,6 +39,7 @@ class IMApi {
       debugLog(e);
       return e.toString();
     }
+    return null;
   }
 
   static Future<String?> logout(String name, String pwd) async {
@@ -52,6 +54,7 @@ class IMApi {
       debugLog(e);
       return e.toString();
     }
+    return null;
   }
 
   static Future<String?>  addFriend(String friendNo, String applyContent) async {
@@ -69,6 +72,7 @@ class IMApi {
       debugLog(e);
       return e.toString();
     }
+    return null;
   }
 
   // (contentType 0文字，1图片，2语言，3文件)

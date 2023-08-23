@@ -2,10 +2,8 @@
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import '../network/dio_base.dart';
 import 'image_data_handle/image_manager.dart';
-import 'package:path/path.dart' as Path;
 
 class CustomNewImage extends StatefulWidget {
   final String? imageUrl;

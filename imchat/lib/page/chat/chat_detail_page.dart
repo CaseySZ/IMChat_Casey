@@ -11,7 +11,6 @@ import 'package:imchat/protobuf/model/base.pb.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
-import 'package:imchat/web_socket/web_socket_send.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../model/friend_item_info.dart';
 import '../../tool/appbar/base_app_bar.dart';
@@ -56,21 +55,76 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     });
   }
 
+  void _loadData({String? startChatRecordId}) async {
+    try {
+      Response? response =  await IMApi.getChatHistory(friendNo, startChatRecordId: startChatRecordId);
+      chatArr ??= [];
+      if(response?.isSuccess == true){
+        if(startChatRecordId == null){
+          chatArr?.clear();
+        }
+        chatResponse = ChatRecordResponse.fromJson(response?.respData);
+        // addChatMessage(chatResponse?.data ?? []);
+        if(chatResponse?.data?.isNotEmpty == true){
+          chatArr?.addAll(chatResponse?.data ?? []);
+          refreshController.loadComplete();
+        }else {
+          refreshController.loadNoData();
+        }
+        handleChatMessage();
+      }else {
+        refreshController.loadComplete();
+        showToast(msg: response?.tips ?? defaultErrorMsg);
+      }
+
+    } catch (e) {
+      refreshController.loadComplete();
+      showToast(msg: e.toString());
+      debugLog(e);
+    }
+    chatArr ??= [];
+    _handleMessageTimeDesc();
+    refreshController.refreshCompleted();
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+
   void webSocketLister(Protocol protocol){
-     if(protocol.cmd == MessageType.chatHistory && protocol.isSuccess == true){
+     if(protocol.cmd == MessageType.chatMessage && protocol.isSuccess == true){
       List<ChatRecordModel> list = protocol.dataArr?.map((e) => ChatRecordModel.fromJson(e)).toList() ?? [];
-      var myMessageList = list.where((element) => element.targetNo != userInfo?.memberNo).toList();
-      addChatMessage(myMessageList);
+      var myMessageList = list.where((element) => element.targetNo == widget.model?.friendNo && element.targetType == 0).toList();
+      for(int i = 0; i < myMessageList.length; i++){
+        // if (myMessageList[i].targetNo?.isNotEmpty == true) { // 自己发送的
+        //   myMessageList[i].receiveNo = widget.model?.friendNo;
+        // }else{
+        // }
+        myMessageList[i].receiveNo = userInfo?.memberNo;
+      }
+      handleChatMessage(list: myMessageList);
      }
   }
 
-  void addChatMessage(List<ChatRecordModel> list) {
+  void handleChatMessage({List<ChatRecordModel>? list}) {
     chatArr ??= [];
-    chatArr?.addAll(list);
-
-    for(int i = 0; i < chatArr!.length; i++){
-
+    if(list?.isNotEmpty == true) {
+      chatArr?.insertAll(0, list ?? []);
     }
+    ChatRecordModel? preModel;
+    for(int i = 0; i < chatArr!.length; i++){
+      ChatRecordModel model = chatArr![i];
+      if(model.createTime != null) {
+        if (model.createTime == preModel?.createTime) {
+          model.isShowTime = true;
+          preModel?.isShowTime = false;
+        } else {
+          model.isShowTime = true;
+        }
+      }
+      preModel = model;
+    }
+    setState(() {});
   }
 
   void showAlbumKeyboard() {
@@ -83,33 +137,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         isShowAlbumKeyboard = true;
         setState(() {});
       });
-    }
-  }
-
-  void _loadData({String? startChatRecordId}) async {
-    try {
-      Response? response =  await IMApi.getChatHistory(friendNo, startChatRecordId: startChatRecordId);
-      chatArr ??= [];
-       if(response?.isSuccess == true){
-         if(startChatRecordId == null){
-           chatArr?.clear();
-         }
-         chatResponse = ChatRecordResponse.fromJson(response?.respData);
-         addChatMessage(chatResponse?.data ?? []);
-       }else {
-         showToast(msg: response?.tips ?? defaultErrorMsg);
-       }
-
-    } catch (e) {
-      refreshController.loadComplete();
-      showToast(msg: e.toString());
-      debugLog(e);
-    }
-    chatArr ??= [];
-    _handleMessageTimeDesc();
-    refreshController.refreshCompleted();
-    if (mounted) {
-      setState(() {});
     }
   }
 
@@ -151,9 +178,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
             child: pullRefresh(
               enablePullDown: false,
               onRefresh: _loadData,
-              onLoading: () {
-
-              },
+              onLoading: chatArr?.isNotEmpty == true ? () {
+                _loadData(startChatRecordId: chatArr?.last.id);
+              } : null,
               refreshController: refreshController,
               child: ListView.builder(
                 itemCount: chatArr?.length ?? 0,
@@ -285,5 +312,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    WebSocketModel.removeListener(webSocketLister);
+    super.dispose();
   }
 }
