@@ -1,6 +1,6 @@
 
 
-extension Response on String {
+extension Resp on String {
   String get responseName {
     return replaceAll("_REQUEST", "_RESPONSE");
   }
@@ -23,4 +23,10 @@ class MessageType {
 
   // 好友列表
   static String friendList = "IM_FRIEND_REQUEST";
+
+  // 消息总数返回
+  static String messageTotal =  "IM_MESSAGE_TOTAL_RESPONSE";
+
+  //聊天对象通知 聊天记录
+  static String  chatHistory =  "IM_CHATGARGER_RESPONSE";
 }

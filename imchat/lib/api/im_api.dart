@@ -89,4 +89,18 @@ class IMApi {
     }
   }
 
+  static Future<Response?> getChatHistory(String friendNo, {String? startChatRecordId}) async {
+    try {
+      Response? response = await DioBase.instance.post(
+        "/api/memberChatRecord/page",
+        {"friendNo": friendNo, "startChatRecordId": startChatRecordId ?? "",},
+      );
+      return response;
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
+
 }

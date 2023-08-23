@@ -1,8 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_pickers/image_pickers.dart';
 import 'package:imchat/api/im_api.dart';
+import 'package:imchat/config/config.dart';
+import 'package:imchat/model/user_info.dart';
+import 'package:imchat/page/chat/model/chat_record_model.dart';
+import 'package:imchat/protobuf/model/base.pb.dart';
+import 'package:imchat/tool/network/response_status.dart';
+import 'package:imchat/web_socket/web_message_type.dart';
+import 'package:imchat/web_socket/web_socket_model.dart';
+import 'package:imchat/web_socket/web_socket_send.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../model/friend_item_info.dart';
 import '../../tool/appbar/base_app_bar.dart';
@@ -29,23 +38,39 @@ class ChatDetailPage extends StatefulWidget {
 class _ChatDetailPageState extends State<ChatDetailPage> {
   TextEditingController controller = TextEditingController();
   RefreshController refreshController = RefreshController();
-
+  UserInfo? get userInfo => IMConfig.userInfo;
   String get friendNo => widget.model?.friendNo ?? widget.model?.targetNo ?? "";
-
-  List<dynamic>? chatArr;
+  ChatRecordResponse? chatResponse;
+  List<ChatRecordModel>? chatArr;
   int currentPage = 1;
 
-  String? get groupId =>
-      "64ca22c28888ec052da663be"; //widget.groupId ?? widget.groupModel?.id;
   FocusNode focusNode = FocusNode();
   bool isShowAlbumKeyboard = false;
 
   @override
   void initState() {
     super.initState();
+    WebSocketModel.addListener(webSocketLister);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loadData();
     });
+  }
+
+  void webSocketLister(Protocol protocol){
+     if(protocol.cmd == MessageType.chatHistory && protocol.isSuccess == true){
+      List<ChatRecordModel> list = protocol.dataArr?.map((e) => ChatRecordModel.fromJson(e)).toList() ?? [];
+      var myMessageList = list.where((element) => element.targetNo != userInfo?.memberNo).toList();
+      addChatMessage(myMessageList);
+     }
+  }
+
+  void addChatMessage(List<ChatRecordModel> list) {
+    chatArr ??= [];
+    chatArr?.addAll(list);
+
+    for(int i = 0; i < chatArr!.length; i++){
+
+    }
   }
 
   void showAlbumKeyboard() {
@@ -61,27 +86,20 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     }
   }
 
-  void _loadData({int page = 1, int size = 10}) async {
+  void _loadData({String? startChatRecordId}) async {
     try {
-      // RespData? respData = await API().communityGroupChatRecord(
-      //     id: groupId, pageNumber: page, pageSize: size);
+      Response? response =  await IMApi.getChatHistory(friendNo, startChatRecordId: startChatRecordId);
       chatArr ??= [];
-      currentPage = page;
-      if (page == 1) {
-        chatArr?.clear();
-      }
-      // if (respData?.isSuccess == true) {
-      //   var response = CommunityChatResponse.fromJson(respData?.data);
-      //   chatArr?.addAll(response.chats ?? []);
-      //   if (response.hasNext == true) {
-      //     refreshController.loadComplete();
-      //   } else {
-      //     refreshController.loadNoData();
-      //   }
-      // } else {
-      //   refreshController.loadComplete();
-      //   showToast(msg: respData?.tips());
-      // }
+       if(response?.isSuccess == true){
+         if(startChatRecordId == null){
+           chatArr?.clear();
+         }
+         chatResponse = ChatRecordResponse.fromJson(response?.respData);
+         addChatMessage(chatResponse?.data ?? []);
+       }else {
+         showToast(msg: response?.tips ?? defaultErrorMsg);
+       }
+
     } catch (e) {
       refreshController.loadComplete();
       showToast(msg: e.toString());
@@ -133,7 +151,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
             child: pullRefresh(
               enablePullDown: false,
               onRefresh: _loadData,
-              onLoading: () => _loadData(page: currentPage + 1),
+              onLoading: () {
+
+              },
               refreshController: refreshController,
               child: ListView.builder(
                 itemCount: chatArr?.length ?? 0,

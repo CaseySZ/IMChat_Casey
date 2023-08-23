@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 
+String defaultErrorMsg = "网络异常";
 extension ResponseStatus on Response {
+
 
   bool get isSuccess {
     if(data is Map){

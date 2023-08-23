@@ -24,7 +24,7 @@ debugLog(Object? message, [Object? message2]) {
     }else {
       print(message);
     }
-    if(message != null) {
+    if(message2 != null) {
       if (message2 is String) {
         String logStr = message2;
         int maxLength = 526;

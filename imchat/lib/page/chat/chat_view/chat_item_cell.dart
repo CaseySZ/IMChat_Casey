@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../tool/image/custom_new_image.dart';
-import '../model/im_chat_data.dart';
+import '../model/chat_record_model.dart';
+
 
 
 class ChatItemCell extends StatefulWidget {
-  final IMChatItemData? model;
+  final ChatRecordModel? model;
 
   const ChatItemCell({super.key, this.model});
 
@@ -16,7 +17,7 @@ class ChatItemCell extends StatefulWidget {
 }
 
 class _ChatItemCellState extends State<ChatItemCell> {
-  bool get isImg => widget.model?.imgContent?.isNotEmpty == true;
+  bool get isImg => widget.model?.contentType == 2;
 
   bool get isMe => false ;// GlobalStore.isMe(widget.model?.uid);
 
@@ -68,7 +69,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomNewImage(
-                  imageUrl: widget.model?.avatar ?? "",
+                  imageUrl: widget.model?.sendHeadImage ?? "",
                   width: 40,
                   height: 40,
                   radius: 5,
@@ -77,10 +78,10 @@ class _ChatItemCellState extends State<ChatItemCell> {
                 if (isImg)
                   InkWell(
                     onTap: () {
-                      _showImageScan(widget.model?.imgContent ?? "");
+                      _showImageScan(widget.model?.content ?? "");
                     },
                     child: CustomNewImage(
-                      imageUrl: widget.model?.imgContent ?? "",
+                      imageUrl: widget.model?.content ?? "",
                       width: 173,
                       height: 96,
                     ),
@@ -132,10 +133,10 @@ class _ChatItemCellState extends State<ChatItemCell> {
                 if (isImg)
                   InkWell(
                     onTap: () {
-                      _showImageScan(widget.model?.imgContent ?? "");
+                      _showImageScan(widget.model?.content ?? "");
                     },
                     child: CustomNewImage(
-                      imageUrl: widget.model?.imgContent ?? "",
+                      imageUrl: widget.model?.content ?? "",
                       width: 173,
                       height: 96,
                     ),
@@ -166,7 +167,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
                   ),
                 const SizedBox(width: 12),
                 CustomNewImage(
-                  imageUrl: widget.model?.avatar,
+                  imageUrl: widget.model?.sendHeadImage,
                   width: 40,
                   height: 40,
                   radius: 5,
@@ -189,7 +190,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
           color: const Color(0xfff7f7f7).withOpacity(0.42),
         ),
         child: Text(
-          widget.model?.createAtDesc ?? "",
+          widget.model?.createTime ?? "",
           style: const TextStyle(
             color: Color(0xff999393),
             fontSize: 12,
