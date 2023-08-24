@@ -1,4 +1,9 @@
+import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/tool/network/response_status.dart';
@@ -92,6 +97,7 @@ class IMApi {
       return e.toString();
     }
   }
+
 
   static Future<Response?> getChatHistory(String friendNo, {String? startChatRecordId}) async {
     try {

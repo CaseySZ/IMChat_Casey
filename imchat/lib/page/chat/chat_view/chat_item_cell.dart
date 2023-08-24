@@ -1,11 +1,14 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
+import 'package:imchat/tool/loading/loading_center_widget.dart';
 
+import '../../../api/im_api.dart';
 import '../../../tool/image/custom_new_image.dart';
 import '../model/chat_record_model.dart';
-
-
 
 class ChatItemCell extends StatefulWidget {
   final ChatRecordModel? model;
@@ -20,40 +23,63 @@ class ChatItemCell extends StatefulWidget {
 
 class _ChatItemCellState extends State<ChatItemCell> {
   UserInfo? get useInfo => IMConfig.userInfo;
-  bool get isImg => widget.model?.contentType == 2;
 
-  bool get isMe =>  useInfo?.memberNo != widget.model?.receiveNo;
-  
+  bool get isImg => widget.model?.contentType == 1;
+
+  bool get isMe => useInfo?.memberNo != widget.model?.receiveNo;
+
   String get chatContent {
-    if(widget.model?.content?.isNotEmpty == true){
-      int length =  widget.model?.content?.length ?? 0;
-      if(widget.model!.content!.substring(length-1, length) == "\n"){
-        return widget.model!.content!.substring(0, length-1);
+    if (widget.model?.content?.isNotEmpty == true) {
+      int length = widget.model?.content?.length ?? 0;
+      if (widget.model!.content!.substring(length - 1, length) == "\n") {
+        return widget.model!.content!.substring(0, length - 1);
       }
       return widget.model?.content ?? "";
     }
     return "";
   }
+
   @override
   void initState() {
     super.initState();
   }
 
-  void _showImageScan(String imageUrl) {
-    if(imageUrl.isNotEmpty) {
+  void _sendTextMessage() async {
+    widget.model?.sendStatus = 0;
+    setState(() {});
+    String? errorDesc = await IMApi.sendMsg(
+      widget.model?.sendNo ?? "",
+      widget.model?.content ?? "",
+      widget.model?.contentType ?? 0,
+    );
+    if (errorDesc?.isNotEmpty != true) {
+      widget.model?.sendStatus = 1;
+    } else {
+      widget.model?.sendStatus = 2;
+    }
+    setState(() {});
+  }
+
+  void _showImageScan(String imageUrl, {bool? isLocalPath}) {
+    if (imageUrl.isNotEmpty) {
       showDialog(
         context: context,
-          barrierDismissible:false,
+        barrierDismissible: false,
         builder: (context) {
           return GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.pop(context);
             },
             child: Center(
-              child: CustomNewImage(
-                imageUrl: imageUrl,
-                width: MediaQuery.of(context).size.width,
-              ),
+              child: (isLocalPath == true)
+                  ? Image.file(
+                      File(imageUrl),
+                      width: MediaQuery.of(context).size.width,
+                    )
+                  : CustomNewImage(
+                      imageUrl: imageUrl,
+                      width: MediaQuery.of(context).size.width,
+                    ),
             ),
           );
         },
@@ -74,6 +100,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           _buildTime(),
           Container(
@@ -143,41 +170,79 @@ class _ChatItemCellState extends State<ChatItemCell> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                if (isImg)
-                  InkWell(
-                    onTap: () {
-                      _showImageScan(widget.model?.content ?? "");
-                    },
-                    child: CustomNewImage(
-                      imageUrl: widget.model?.content ?? "",
-                      width: 173,
-                      height: 96,
-                    ),
-                  )
-                else
-                  Flexible(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Color(0xfff51b1b),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8),
-                          topLeft: Radius.circular(8),
+                Flexible(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (widget.model?.sendStatus == 0)
+                        Container(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: const CupertinoActivityIndicator(
+                            color: Color(0xff000000),
+                            radius: 8,
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        chatContent,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
+                      if (widget.model?.sendStatus == 1)
+                        InkWell(
+                          onTap: () {
+                            _sendTextMessage();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: const Icon(
+                              Icons.error_outline_outlined,
+                              color: Color(0xfff51b1b),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      if (isImg)
+                        InkWell(
+                          onTap: () {
+                            if (widget.model?.localImgPath?.isNotEmpty == true) {
+                              _showImageScan(widget.model?.localImgPath ?? "");
+                            } else {
+                              _showImageScan(widget.model?.content ?? "");
+                            }
+                          },
+                          child: (widget.model?.localImgPath?.isNotEmpty == true)
+                              ? Image.file(
+                                  File(widget.model!.localImgPath!),
+                                  width: 173,
+                                  height: 96,
+                                )
+                              : CustomNewImage(
+                                  imageUrl: widget.model?.content,
+                                  width: 173,
+                                  height: 96,
+                                ),
+                        )
+                      else
+                        Flexible(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            decoration: const BoxDecoration(
+                              color: Color(0xfff51b1b),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8),
+                                topLeft: Radius.circular(8),
+                              ),
+                            ),
+                            child: Text(
+                              chatContent,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
+                ),
                 const SizedBox(width: 12),
                 CustomNewImage(
                   imageUrl: widget.model?.sendHeadImage,

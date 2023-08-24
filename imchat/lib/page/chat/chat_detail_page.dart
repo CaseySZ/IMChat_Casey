@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_pickers/image_pickers.dart';
+import 'package:imchat/api/file_api.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
+import 'package:imchat/page/chat/chat_view/soft_key_menu_view.dart';
 import 'package:imchat/page/chat/model/chat_record_model.dart';
 import 'package:imchat/protobuf/model/base.pb.dart';
 import 'package:imchat/tool/network/response_status.dart';
@@ -34,7 +36,7 @@ class ChatDetailPage extends StatefulWidget {
   }
 }
 
-class _ChatDetailPageState extends State<ChatDetailPage> {
+class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObserver{
   TextEditingController controller = TextEditingController();
   RefreshController refreshController = RefreshController();
   UserInfo? get userInfo => IMConfig.userInfo;
@@ -49,9 +51,24 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     WebSocketModel.addListener(webSocketLister);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loadData();
+    });
+  }
+  double keyboardSize = 277;
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if(mounted){
+        if(MediaQuery.of(context).viewInsets.bottom==0){
+          // 关闭键盘
+        }else{
+          keyboardSize =  MediaQuery.of(context).viewInsets.bottom;
+        }
+      }
     });
   }
 
@@ -83,7 +100,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       debugLog(e);
     }
     chatArr ??= [];
-    _handleMessageTimeDesc();
     refreshController.refreshCompleted();
     if (mounted) {
       setState(() {});
@@ -95,12 +111,21 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
      if(protocol.cmd == MessageType.chatMessage && protocol.isSuccess == true){
       List<ChatRecordModel> list = protocol.dataArr?.map((e) => ChatRecordModel.fromJson(e)).toList() ?? [];
       var myMessageList = list.where((element) => element.targetNo == widget.model?.friendNo && element.targetType == 0).toList();
+      List<ChatRecordModel> removeList = [];
       for(int i = 0; i < myMessageList.length; i++){
-        // if (myMessageList[i].targetNo?.isNotEmpty == true) { // 自己发送的
-        //   myMessageList[i].receiveNo = widget.model?.friendNo;
-        // }else{
-        // }
+        if (myMessageList[i].targetNo?.isNotEmpty == true) { // 自己发送的
+          myMessageList[i].receiveNo = widget.model?.friendNo;
+          for(int j = 0; j < (chatArr?.length ?? 0); j++){
+            if(chatArr![j].sendStatus != null && chatArr![j].content ==  myMessageList[i].content) {
+              chatArr![j].createTime = myMessageList[i].createTime;
+              removeList.add(myMessageList[i]);
+            }
+          }
+        }
         myMessageList[i].receiveNo = userInfo?.memberNo;
+      }
+      for(var model in removeList){
+        myMessageList.remove(model);
       }
       handleChatMessage(list: myMessageList);
      }
@@ -140,27 +165,41 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     }
   }
 
-  void _handleMessageTimeDesc() {
-    // CommunityChatItemData? preModel;
-    // for (int i = 0; i < (chatArr?.length ?? 0); i++) {
-    //   var model = chatArr![i];
-    //   model.createAtDesc ??= DateTimeUtil.utc4iso(model.createdAt);
-    //   if (model.isShowTime == null) {
-    //     if (model.createAtDesc == preModel?.createAtDesc) {
-    //       model.isShowTime = false;
-    //     } else {
-    //       model.isShowTime = true;
-    //     }
-    //   }
-    //   preModel = model;
-    // }
-  }
-
   bool isUpLoadImg = false;
 
   void _sendTextMessage({Media? imageInfo}) async {
-    String? errorDesc = await IMApi.sendMsg(friendNo, controller.text, imageInfo == null ? 0 : 1);
-    if(errorDesc?.isNotEmpty != true){
+    if(controller.text.isEmpty && imageInfo == null){
+      showToast(msg: "请输入内容");
+      return;
+    }
+    String contentText =  controller.text;
+    controller.text = "";
+    ChatRecordModel model = ChatRecordModel();
+    if(imageInfo != null){
+      model.localImgPath = imageInfo.path ?? "";
+    }else {
+      model.content = contentText;
+    }
+    model.sendStatus = 0;
+    model.sendNo = widget.model?.friendNo;
+    model.sendHeadImage = userInfo?.headImage;
+    model.contentType = imageInfo == null ? 0 : 1;
+    chatArr?.insert(0, model);
+    setState(() {});
+    if(imageInfo != null){
+      contentText =  await FileAPi.updateImg(imageInfo.path ?? "") ?? "";
+      if(contentText.isNotEmpty != true){
+        model.sendStatus = 1;
+        setState(() {});
+        return;
+      }
+    }
+    String? errorDesc = await IMApi.sendMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
+    if(errorDesc?.isNotEmpty == true){
+      model.sendStatus = 1;
+      showToast(msg: errorDesc ?? defaultErrorMsg);
+    }else {
+      model.sendStatus = 2;
 
     }
     setState(() {});
@@ -220,7 +259,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                               controller: controller,
                               textInputAction: TextInputAction.send,
                               focusNode: focusNode,
-                              placeholder: "请输入您要咨询的问题",
+                              placeholder: "请输入消息",
                               maxLines: 1,
                               onSubmitted: (text) {
                                 _sendTextMessage();
@@ -228,15 +267,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                             ),
                           ),
                           const SizedBox(width: 8),
-                          // Container(
-                          //   width: 30,
-                          //   height: 30,
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.blue,
-                          //     borderRadius: BorderRadius.circular(15),
-                          //   ),
-                          // ),
-                          // const SizedBox(width: 6),
                         ],
                       ),
                     ),
@@ -244,70 +274,30 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   const SizedBox(width: 16),
                   InkWell(
                     onTap: showAlbumKeyboard,
-                    child: isUpLoadImg
-                        ? Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffeb5445),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const CupertinoActivityIndicator(
-                              color: Colors.white,
-                              radius: 8,
-                            ),
-                          )
-                        : SvgPicture.asset(
-                            isShowAlbumKeyboard
-                                ? "assets/svg/close_btn.svg"
-                                : "assets/svg/add_red.svg",
-                            width: 30,
-                            height: 30,
-                          ),
-                  )
+                    child: SvgPicture.asset(
+                      isShowAlbumKeyboard
+                          ? "assets/svg/close_btn.svg"
+                          : "assets/svg/add_red.svg",
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
           if (isShowAlbumKeyboard)
-            Container(
-              height: 130,
-              padding: const EdgeInsets.only(left: 28),
-              alignment: Alignment.topLeft,
-              child: Row(
-                children: [
-                  AlbumPickerView(
-                    callback: (imageArr) {
-                      if (imageArr.isNotEmpty) {
-                        if (isUpLoadImg) {
-                          showToast(msg: "正在发送图片,请耐心等待");
-                          return;
-                        }
-                        _sendTextMessage(imageInfo: imageArr.first);
-                      }
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          "assets/images/album_key.png",
-                          width: 35,
-                          height: 35,
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          "相册",
-                          style: TextStyle(
-                            color: Color(0xff666262),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            SoftKeyMenuView(
+              height: keyboardSize - 50,
+              pictureCallback: (imageArr) {
+                if (imageArr.isNotEmpty) {
+                  if (isUpLoadImg) {
+                    showToast(msg: "正在发送图片,请耐心等待");
+                    return;
+                  }
+                  _sendTextMessage(imageInfo: imageArr.first);
+                }
+              },
             ),
         ],
       ),
@@ -317,6 +307,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   @override
   void dispose() {
     WebSocketModel.removeListener(webSocketLister);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 }

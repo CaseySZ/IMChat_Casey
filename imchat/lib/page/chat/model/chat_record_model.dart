@@ -27,6 +27,7 @@ class ChatRecordModel {
   int? sendType;
   String? chatCode;
   String? content;
+  String? localImgPath;
   int? contentType; //0文字，1图片，2语言，3文件，4红包，5转账，6消息回撤
 
   int? readStatus;
@@ -41,7 +42,8 @@ class ChatRecordModel {
   bool? isShowTime = false;
   int? messageNum;
   String? personalitySign;
-
+  int? sendStatus; // 0 发送中， 1发送失败, 其他正常
+  String? lastContent;
   ChatRecordModel();
 
   ChatRecordModel.fromJson(Map<String, dynamic> json) {
@@ -54,6 +56,7 @@ class ChatRecordModel {
     content = json["content"];
     if(json["lastContent"] != null){
       content = json["lastContent"];
+      lastContent = json["lastContent"];
     }
     chatCode = json["chatCode"];
     contentType = json["contentType"];

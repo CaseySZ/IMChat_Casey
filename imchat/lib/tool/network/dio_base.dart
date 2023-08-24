@@ -57,19 +57,23 @@ class DioBase {
   }
 
   Dio? _dio;
+  String? baseUrl;
   void init(String host) {
     final defaultOptions = BaseOptions(
       connectTimeout: const Duration(milliseconds: 15000),
       receiveTimeout: const Duration(milliseconds: 15000),
       validateStatus: (int? status) => status! < 600,
     );
+    baseUrl = host;
     _dio = Dio(defaultOptions); // 使用默认配置
   }
   
-  Future<Response?> post(String path, Map<String, dynamic>? params, {Map<String, dynamic>? header}) async {
+  Future<Response?> post(String path, dynamic params, {Map<String, dynamic>? header}) async {
 
     try {
-      params?.removeWhere((key, value) => value == null);
+      if(params is Map) {
+        params.removeWhere((key, value) => value == null);
+      }
       header ??= {};
       Options? options;
       if(IMConfig.token?.isNotEmpty == true || header.isNotEmpty == true){
@@ -78,13 +82,13 @@ class DioBase {
         }
         options = Options(headers: header);
       }
-      Response? response = await _dio?.post(address + path, data: params, options: options );
-      debugLog("url:" +  path);
+      Response? response = await _dio?.post((baseUrl ?? address) + path, data: params, options: options );
+      debugLog("url:" +  (baseUrl ?? address) + path);
       debugLog(params.toString());
       debugLog(response);
       return response;
     }catch(e){
-      debugLog("url:" +  path);
+      debugLog("url:" +  (baseUrl ?? address) + path);
       debugLog(params.toString());
       debugLog(e);
       return Response(data: e, requestOptions: RequestOptions());
@@ -103,13 +107,13 @@ class DioBase {
         }
         options = Options(headers: header);
       }
-      Response? response = await _dio?.get(address + path, queryParameters: params, options: options);
-      debugLog("url:" +  path);
+      Response? response = await _dio?.get((baseUrl ?? address) + path, queryParameters: params, options: options);
+      debugLog("url:" +  (baseUrl ?? address) + path);
       debugLog(params.toString());
       debugLog(response);
       return response;
     }catch(e){
-      debugLog("url:" +  path);
+      debugLog("url:" +  (baseUrl ?? address) + path);
       debugLog(params.toString());
       debugLog(e);
       return Response(data: e, requestOptions: RequestOptions());
