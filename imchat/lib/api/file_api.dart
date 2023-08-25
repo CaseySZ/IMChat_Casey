@@ -47,10 +47,35 @@ class FileAPi {
       FormData args = FormData.fromMap({
         'file': MultipartFile.fromBytes(compressFileData, filename: name),
       });
-      DioBase dioBase = DioBase()..init(IMConfig.fileServerUrl ?? "");
+    //  DioBase dioBase = DioBase()..init(IMConfig.fileServerUrl ?? "");
       Response? response = await DioBase.instance.post("/api/upload/image", args);
       if(response?.isSuccess == true){
-        return response?.respData["url"];
+        return response?.respData["path"];
+      } else {
+        showToast(msg: response?.tips ?? defaultErrorMsg);
+      }
+    } catch (e) {
+      debugLog(e);
+      showToast(msg: e.toString());
+    }
+    return null;
+  }
+
+  static Future<String?> updateFile(String filePath) async {
+    try {
+      debugLog("开始上传----", filePath);
+      int  maxImageSize = 200*1024;
+      var extent = getNameSuffix(filePath);
+      var name = '${DateTime.now().toIso8601String()}_${Random().nextInt(1024)}.$extent';
+      Uint8List fileData = File(filePath).readAsBytesSync();
+      Uint8List compressFileData = await compressImageList(fileData, maxSize: maxImageSize, compressCount:3);
+      FormData args = FormData.fromMap({
+        'file': MultipartFile.fromBytes(compressFileData, filename: name),
+      });
+      //  DioBase dioBase = DioBase()..init(IMConfig.fileServerUrl ?? "");
+      Response? response = await DioBase.instance.post("/api/upload/file", args);
+      if(response?.isSuccess == true){
+        return response?.respData["path"];
       } else {
         showToast(msg: response?.tips ?? defaultErrorMsg);
       }

@@ -80,6 +80,90 @@ class WebSocketSend {
     }
   }
 
+  //关闭好友对话框发送指令
+  static sendCloseFriendBox(String friendNo) {
+
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Map<String, dynamic> params = {
+        "friendNo": friendNo,
+      };
+      String jsonParams = jsonEncode(params);
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.closeFriendBox, params: jsonParams);
+      WebSocketModel.send(protocol);
+      Future.delayed(const Duration(seconds: 5), () {
+        sendHeartBeat();
+      });
+    }
+  }
+
+  //打开好友对话框发送指令
+  static sendOpenGroupBox(String groupNo) {
+
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Map<String, dynamic> params = {
+        "groupNo": groupNo,
+      };
+      String jsonParams = jsonEncode(params);
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.groupBox, params: jsonParams);
+      WebSocketModel.send(protocol);
+      Future.delayed(const Duration(seconds: 5), () {
+        sendHeartBeat();
+      });
+    }
+  }
+
+  //关闭好友对话框发送指令
+  static sendCloseGroupBox(String groupNo) {
+
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Map<String, dynamic> params = {
+        "groupNo": groupNo,
+      };
+      String jsonParams = jsonEncode(params);
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.closeGroupBox, params: jsonParams);
+      WebSocketModel.send(protocol);
+      Future.delayed(const Duration(seconds: 5), () {
+        sendHeartBeat();
+      });
+    }
+  }
+
+  // 编辑文本指令 发送
+  static sendEditFriendBox(String friendNo) {
+
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Map<String, dynamic> params = {
+        "friendNo": friendNo,
+      };
+      String jsonParams = jsonEncode(params);
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.editText, params: jsonParams);
+      WebSocketModel.send(protocol);
+      Future.delayed(const Duration(seconds: 5), () {
+        sendHeartBeat();
+      });
+    }
+  }
+  // 退出文本编辑指令发送
+  static sendExitFriendBox(String friendNo) {
+
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Map<String, dynamic> params = {
+        "friendNo": friendNo,
+      };
+      String jsonParams = jsonEncode(params);
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.stopEditText, params: jsonParams);
+      WebSocketModel.send(protocol);
+      Future.delayed(const Duration(seconds: 5), () {
+        sendHeartBeat();
+      });
+    }
+  }
+
   //好友列表
   static getFriendList() {
     if(WebSocketModel.isConnectSocketSuccess == true) {
@@ -89,6 +173,22 @@ class WebSocketSend {
     }
   }
 
+  // 退群
+  static exitGroup(String groupNo) {
+
+    if(WebSocketModel.isConnectSocketSuccess == true) {
+      Map<String, dynamic> params = {
+        "groupNo": groupNo,
+      };
+      String jsonParams = jsonEncode(params);
+      Protocol protocol = Protocol(
+          token: IMConfig.token, cmd: MessageType.exitGroup, params: jsonParams);
+      WebSocketModel.send(protocol);
+      Future.delayed(const Duration(seconds: 5), () {
+        sendHeartBeat();
+      });
+    }
+  }
 
 
 }

@@ -13,6 +13,7 @@ import 'package:imchat/protobuf/model/base.pb.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
+import 'package:imchat/web_socket/web_socket_send.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../model/friend_item_info.dart';
 import '../../tool/appbar/base_app_bar.dart';
@@ -26,9 +27,13 @@ import 'chat_view/group_text_filed.dart';
 
 class ChatDetailPage extends StatefulWidget {
   final FriendItemInfo? model;
+  final int chatType; // 0 好友聊天， 1 群聊
 
-
-  const ChatDetailPage({super.key, this.model});
+  const ChatDetailPage({
+    super.key,
+    this.model,
+    this.chatType = 0,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -36,10 +41,12 @@ class ChatDetailPage extends StatefulWidget {
   }
 }
 
-class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObserver{
+class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObserver {
   TextEditingController controller = TextEditingController();
   RefreshController refreshController = RefreshController();
+
   UserInfo? get userInfo => IMConfig.userInfo;
+
   String get friendNo => widget.model?.friendNo ?? widget.model?.targetNo ?? "";
   ChatRecordResponse? chatResponse;
   List<ChatRecordModel>? chatArr;
@@ -52,21 +59,26 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    if (widget.chatType == 0) {
+      WebSocketSend.sendOpenFriendBox(friendNo);
+    }
     WebSocketModel.addListener(webSocketLister);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loadData();
     });
   }
+
   double keyboardSize = 277;
+
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if(mounted){
-        if(MediaQuery.of(context).viewInsets.bottom==0){
+      if (mounted) {
+        if (MediaQuery.of(context).viewInsets.bottom == 0) {
           // 关闭键盘
-        }else{
-          keyboardSize =  MediaQuery.of(context).viewInsets.bottom;
+        } else {
+          keyboardSize = MediaQuery.of(context).viewInsets.bottom;
         }
       }
     });
@@ -74,26 +86,25 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
 
   void _loadData({String? startChatRecordId}) async {
     try {
-      Response? response =  await IMApi.getChatHistory(friendNo, startChatRecordId: startChatRecordId);
+      Response? response = await IMApi.getChatHistory(friendNo, startChatRecordId: startChatRecordId);
       chatArr ??= [];
-      if(response?.isSuccess == true){
-        if(startChatRecordId == null){
+      if (response?.isSuccess == true) {
+        if (startChatRecordId == null) {
           chatArr?.clear();
         }
         chatResponse = ChatRecordResponse.fromJson(response?.respData);
         // addChatMessage(chatResponse?.data ?? []);
-        if(chatResponse?.data?.isNotEmpty == true){
+        if (chatResponse?.data?.isNotEmpty == true) {
           chatArr?.addAll(chatResponse?.data ?? []);
           refreshController.loadComplete();
-        }else {
+        } else {
           refreshController.loadNoData();
         }
         handleChatMessage();
-      }else {
+      } else {
         refreshController.loadComplete();
         showToast(msg: response?.tips ?? defaultErrorMsg);
       }
-
     } catch (e) {
       refreshController.loadComplete();
       showToast(msg: e.toString());
@@ -106,17 +117,17 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     }
   }
 
-
-  void webSocketLister(Protocol protocol){
-     if(protocol.cmd == MessageType.chatMessage && protocol.isSuccess == true){
+  void webSocketLister(Protocol protocol) {
+    if (protocol.cmd == MessageType.friendChatMessage && protocol.isSuccess == true) {
       List<ChatRecordModel> list = protocol.dataArr?.map((e) => ChatRecordModel.fromJson(e)).toList() ?? [];
       var myMessageList = list.where((element) => element.targetNo == widget.model?.friendNo && element.targetType == 0).toList();
       List<ChatRecordModel> removeList = [];
-      for(int i = 0; i < myMessageList.length; i++){
-        if (myMessageList[i].targetNo?.isNotEmpty == true) { // 自己发送的
+      for (int i = 0; i < myMessageList.length; i++) {
+        if (myMessageList[i].targetNo?.isNotEmpty == true) {
+          // 自己发送的
           myMessageList[i].receiveNo = widget.model?.friendNo;
-          for(int j = 0; j < (chatArr?.length ?? 0); j++){
-            if(chatArr![j].sendStatus != null && chatArr![j].content ==  myMessageList[i].content) {
+          for (int j = 0; j < (chatArr?.length ?? 0); j++) {
+            if (chatArr![j].sendStatus != null && chatArr![j].content == myMessageList[i].content) {
               chatArr![j].createTime = myMessageList[i].createTime;
               removeList.add(myMessageList[i]);
             }
@@ -124,22 +135,22 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         }
         myMessageList[i].receiveNo = userInfo?.memberNo;
       }
-      for(var model in removeList){
+      for (var model in removeList) {
         myMessageList.remove(model);
       }
       handleChatMessage(list: myMessageList);
-     }
+    }
   }
 
   void handleChatMessage({List<ChatRecordModel>? list}) {
     chatArr ??= [];
-    if(list?.isNotEmpty == true) {
+    if (list?.isNotEmpty == true) {
       chatArr?.insertAll(0, list ?? []);
     }
     ChatRecordModel? preModel;
-    for(int i = 0; i < chatArr!.length; i++){
+    for (int i = 0; i < chatArr!.length; i++) {
       ChatRecordModel model = chatArr![i];
-      if(model.createTime != null) {
+      if (model.createTime != null) {
         if (model.createTime == preModel?.createTime) {
           model.isShowTime = true;
           preModel?.isShowTime = false;
@@ -168,16 +179,16 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   bool isUpLoadImg = false;
 
   void _sendTextMessage({Media? imageInfo}) async {
-    if(controller.text.isEmpty && imageInfo == null){
+    if (controller.text.isEmpty && imageInfo == null) {
       showToast(msg: "请输入内容");
       return;
     }
-    String contentText =  controller.text;
+    String contentText = controller.text;
     controller.text = "";
     ChatRecordModel model = ChatRecordModel();
-    if(imageInfo != null){
+    if (imageInfo != null) {
       model.localImgPath = imageInfo.path ?? "";
-    }else {
+    } else {
       model.content = contentText;
     }
     model.sendStatus = 0;
@@ -186,120 +197,136 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     model.contentType = imageInfo == null ? 0 : 1;
     chatArr?.insert(0, model);
     setState(() {});
-    if(imageInfo != null){
-      contentText =  await FileAPi.updateImg(imageInfo.path ?? "") ?? "";
-      if(contentText.isNotEmpty != true){
+    if (imageInfo != null) {
+      contentText = await FileAPi.updateImg(imageInfo.path ?? "") ?? "";
+      if (contentText.isNotEmpty != true) {
         model.sendStatus = 1;
         setState(() {});
         return;
       }
     }
     String? errorDesc = await IMApi.sendMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
-    if(errorDesc?.isNotEmpty == true){
+    if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
       showToast(msg: errorDesc ?? defaultErrorMsg);
-    }else {
+    } else {
       model.sendStatus = 2;
-
     }
     setState(() {});
   }
 
+  void _backEvent() {
+    if (widget.chatType == 0) {
+      WebSocketSend.sendCloseFriendBox(friendNo);
+    } else {
+      WebSocketSend.sendCloseGroupBox(friendNo);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: widget.model?.nickName ?? "",
-      ),
-      body: chatArr == null ? const LoadingCenterWidget() : Column(
-        children: [
-          Expanded(
-            child: pullRefresh(
-              enablePullDown: false,
-              onRefresh: _loadData,
-              onLoading: chatArr?.isNotEmpty == true ? () {
-                _loadData(startChatRecordId: chatArr?.last.id);
-              } : null,
-              refreshController: refreshController,
-              child: ListView.builder(
-                itemCount: chatArr?.length ?? 0,
-                reverse: true,
-                itemBuilder: (context, index) {
-                  return ChatItemCell(
-                    model: chatArr![index],
-                  );
-                },
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 8, 10, 22),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              border: Border(
-                top: BorderSide(color: Color(0xffececec), width: 0.5),
-              ),
-            ),
-            child: SizedBox(
-              height: 36,
-              child: Row(
+    return WillPopScope(
+      onWillPop: () async {
+        _backEvent();
+        return true;
+      },
+      child: Scaffold(
+        appBar: BaseAppBar(
+          title: widget.model?.nickName ?? "",
+          onBack: _backEvent,
+        ),
+        body: chatArr == null
+            ? const LoadingCenterWidget()
+            : Column(
                 children: [
                   Expanded(
-                    child: Container(
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: const Color(0xfff8f9fa),
-                        borderRadius: BorderRadius.circular(18),
+                    child: pullRefresh(
+                      enablePullDown: false,
+                      onRefresh: _loadData,
+                      onLoading: chatArr?.isNotEmpty == true
+                          ? () {
+                              _loadData(startChatRecordId: chatArr?.last.id);
+                            }
+                          : null,
+                      refreshController: refreshController,
+                      child: ListView.builder(
+                        itemCount: chatArr?.length ?? 0,
+                        reverse: true,
+                        itemBuilder: (context, index) {
+                          return ChatItemCell(
+                            model: chatArr![index],
+                          );
+                        },
                       ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 8, 10, 22),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      border: Border(
+                        top: BorderSide(color: Color(0xffececec), width: 0.5),
+                      ),
+                    ),
+                    child: SizedBox(
+                      height: 36,
                       child: Row(
                         children: [
                           Expanded(
-                            child: GroupTextFiled(
-                              bgColor: Colors.transparent,
-                              controller: controller,
-                              textInputAction: TextInputAction.send,
-                              focusNode: focusNode,
-                              placeholder: "请输入消息",
-                              maxLines: 1,
-                              onSubmitted: (text) {
-                                _sendTextMessage();
-                              },
+                            child: Container(
+                              height: 36,
+                              decoration: BoxDecoration(
+                                color: const Color(0xfff8f9fa),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: GroupTextFiled(
+                                      bgColor: Colors.transparent,
+                                      controller: controller,
+                                      textInputAction: TextInputAction.send,
+                                      focusNode: focusNode,
+                                      placeholder: "请输入消息",
+                                      maxLines: 1,
+                                      onSubmitted: (text) {
+                                        _sendTextMessage();
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                ],
+                              ),
                             ),
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 16),
+                          InkWell(
+                            onTap: showAlbumKeyboard,
+                            child: SvgPicture.asset(
+                              isShowAlbumKeyboard ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
+                              width: 30,
+                              height: 30,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  InkWell(
-                    onTap: showAlbumKeyboard,
-                    child: SvgPicture.asset(
-                      isShowAlbumKeyboard
-                          ? "assets/svg/close_btn.svg"
-                          : "assets/svg/add_red.svg",
-                      width: 30,
-                      height: 30,
+                  if (isShowAlbumKeyboard)
+                    SoftKeyMenuView(
+                      height: keyboardSize - 50,
+                      pictureCallback: (imageArr) {
+                        if (imageArr.isNotEmpty) {
+                          if (isUpLoadImg) {
+                            showToast(msg: "正在发送图片,请耐心等待");
+                            return;
+                          }
+                          _sendTextMessage(imageInfo: imageArr.first);
+                        }
+                      },
                     ),
-                  ),
                 ],
               ),
-            ),
-          ),
-          if (isShowAlbumKeyboard)
-            SoftKeyMenuView(
-              height: keyboardSize - 50,
-              pictureCallback: (imageArr) {
-                if (imageArr.isNotEmpty) {
-                  if (isUpLoadImg) {
-                    showToast(msg: "正在发送图片,请耐心等待");
-                    return;
-                  }
-                  _sendTextMessage(imageInfo: imageArr.first);
-                }
-              },
-            ),
-        ],
       ),
     );
   }
