@@ -44,7 +44,7 @@ class MessageType {
   //好友信息推送
   static String friendChatMessage = "IM_FRIEND_INFO_REQUEST";
 
-  //聊天对象通知
+  //聊天对象 消息通知
   static String chatBoxMessage = "IM_CHATGARGER_REQUEST";
 
   //好友聊天记录返回(包括自己的消息也返回，历史记录叠加)

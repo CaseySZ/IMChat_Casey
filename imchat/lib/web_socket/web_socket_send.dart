@@ -46,18 +46,22 @@ class WebSocketSend {
     WebSocketModel.send(protocol);
   }
 
-
+  static int preSendHeatTime = 0;
   static sendHeartBeat() {
-
     if(WebSocketModel.isConnectSocketSuccess == true) {
-      Map<String, dynamic> params = {
-        "token": IMConfig.token,
-      };
-      String jsonParams = jsonEncode(params);
-      Protocol protocol = Protocol(
-          token: IMConfig.token, cmd: MessageType.heart, params: jsonParams);
-      WebSocketModel.send(protocol);
-      Future.delayed(const Duration(seconds: 5), () {
+
+      int gap =  DateTime.now().millisecondsSinceEpoch - preSendHeatTime;
+      if(gap > 4000){
+        Map<String, dynamic> params = {
+          "token": IMConfig.token,
+        };
+        String jsonParams = jsonEncode(params);
+        Protocol protocol = Protocol(
+            token: IMConfig.token, cmd: MessageType.heart, params: jsonParams);
+        WebSocketModel.send(protocol);
+        preSendHeatTime = DateTime.now().millisecondsSinceEpoch;
+      }
+      Future.delayed(const Duration(seconds: 2), () {
         sendHeartBeat();
       });
     }

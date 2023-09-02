@@ -59,9 +59,7 @@ class _SplashPageState extends State<SplashPage> {
         showToast(msg: errorDesc!);
         return;
       }
-      Future.delayed(const Duration(seconds: 1), () {
-        Navigator.pushReplacementNamed(context, AppRoutes.main);
-      });
+      Navigator.pushReplacementNamed(context, AppRoutes.main);
     }else {
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.pushReplacementNamed(context, AppRoutes.login);

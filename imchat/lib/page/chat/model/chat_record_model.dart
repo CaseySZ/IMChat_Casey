@@ -27,10 +27,20 @@ class ChatRecordModel {
   int? sendType;
   String? chatCode;
   String? content;
+  String get chatContent {
+    if (content?.isNotEmpty == true) {
+      int length = content?.length ?? 0;
+      if (content!.substring(length - 1, length) == "\n") {
+        return content!.substring(0, length - 1);
+      }
+      return content ?? "";
+    }
+    return "";
+  }
   String? localImgPath;
   int? contentType; //0文字，1图片，2语言，3文件，4红包，5转账，6消息回撤
 
-  int? readStatus;
+  int? readStatus; // 0 未读， 1 已读
   String? createTime;
 
   String? sendNickNameRemark;

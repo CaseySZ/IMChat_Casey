@@ -118,25 +118,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   }
 
   void webSocketLister(Protocol protocol) {
-    if (protocol.cmd == MessageType.friendChatMessage && protocol.isSuccess == true) {
+    if (protocol.cmd == MessageType.chatBoxMessage.responseName && protocol.isSuccess == true) {
       List<ChatRecordModel> list = protocol.dataArr?.map((e) => ChatRecordModel.fromJson(e)).toList() ?? [];
       var myMessageList = list.where((element) => element.targetNo == widget.model?.friendNo && element.targetType == 0).toList();
-      List<ChatRecordModel> removeList = [];
       for (int i = 0; i < myMessageList.length; i++) {
-        if (myMessageList[i].targetNo?.isNotEmpty == true) {
-          // 自己发送的
-          myMessageList[i].receiveNo = widget.model?.friendNo;
-          for (int j = 0; j < (chatArr?.length ?? 0); j++) {
-            if (chatArr![j].sendStatus != null && chatArr![j].content == myMessageList[i].content) {
-              chatArr![j].createTime = myMessageList[i].createTime;
-              removeList.add(myMessageList[i]);
-            }
-          }
-        }
         myMessageList[i].receiveNo = userInfo?.memberNo;
-      }
-      for (var model in removeList) {
-        myMessageList.remove(model);
       }
       handleChatMessage(list: myMessageList);
     }
@@ -221,6 +207,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     } else {
       WebSocketSend.sendCloseGroupBox(friendNo);
     }
+    Navigator.pop(context, chatArr?.first);
   }
 
   @override
@@ -228,7 +215,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     return WillPopScope(
       onWillPop: () async {
         _backEvent();
-        return true;
+        return false;
       },
       child: Scaffold(
         appBar: BaseAppBar(
