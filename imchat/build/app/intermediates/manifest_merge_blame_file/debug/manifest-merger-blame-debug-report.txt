@@ -76,20 +76,20 @@
 42-->[:device_imei] /Users/sy/Documents/GitHub/IMChat/imchat/build/device_imei/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-83
 43
 44    <permission
-44-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/c4988ff80110f75080a936fc6f044848/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
+44-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/4acfdeb2adf0fe3e0971430d521282ce/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
 45        android:name="com.example.imchat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-45-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/c4988ff80110f75080a936fc6f044848/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
+45-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/4acfdeb2adf0fe3e0971430d521282ce/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
 46        android:protectionLevel="signature" />
-46-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/c4988ff80110f75080a936fc6f044848/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
+46-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/4acfdeb2adf0fe3e0971430d521282ce/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
 47
 48    <uses-permission android:name="com.example.imchat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-48-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/c4988ff80110f75080a936fc6f044848/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
-48-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/c4988ff80110f75080a936fc6f044848/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
+48-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/4acfdeb2adf0fe3e0971430d521282ce/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
+48-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/4acfdeb2adf0fe3e0971430d521282ce/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
 49
 50    <application
 51        android:name="android.app.Application"
 52        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-52-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/c4988ff80110f75080a936fc6f044848/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
+52-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/4acfdeb2adf0fe3e0971430d521282ce/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
 53        android:debuggable="true"
 54        android:icon="@mipmap/ic_launcher"
 55        android:label="imchat"
@@ -174,83 +174,83 @@
 112-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:55:13-44
 113
 114        <uses-library
-114-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+114-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/cbf0e98437bff11c0ba1af5b4c9b587a/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 115            android:name="androidx.window.extensions"
-115-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+115-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/cbf0e98437bff11c0ba1af5b4c9b587a/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
 116            android:required="false" />
-116-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+116-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/cbf0e98437bff11c0ba1af5b4c9b587a/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
 117        <uses-library
-117-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+117-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/cbf0e98437bff11c0ba1af5b4c9b587a/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
 118            android:name="androidx.window.sidecar"
-118-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+118-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/cbf0e98437bff11c0ba1af5b4c9b587a/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
 119            android:required="false" />
-119-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+119-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/cbf0e98437bff11c0ba1af5b4c9b587a/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
 120
 121        <provider
-121-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:10:9-18:20
+121-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:10:9-18:20
 122            android:name="com.luck.picture.lib.basic.PictureFileProvider"
-122-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:11:13-74
+122-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:11:13-74
 123            android:authorities="com.example.imchat.luckProvider"
-123-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:12:13-64
+123-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:12:13-64
 124            android:exported="false"
-124-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:13:13-37
+124-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:13:13-37
 125            android:grantUriPermissions="true" >
-125-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:14:13-47
+125-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:14:13-47
 126            <meta-data
-126-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:15:13-17:57
+126-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:15:13-17:57
 127                android:name="android.support.FILE_PROVIDER_PATHS"
-127-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:16:17-67
+127-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:16:17-67
 128                android:resource="@xml/ps_file_paths" />
-128-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:17:17-54
+128-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:17:17-54
 129        </provider>
 130
 131        <service
-131-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:20:9-23:56
+131-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:20:9-23:56
 132            android:name="com.luck.picture.lib.service.ForegroundService"
-132-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:21:13-74
+132-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:21:13-74
 133            android:enabled="true"
-133-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:22:13-35
+133-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:22:13-35
 134            android:foregroundServiceType="location" />
-134-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:23:13-53
+134-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:23:13-53
 135
 136        <activity
-136-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:25:9-29:20
+136-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:25:9-29:20
 137            android:name="com.luck.picture.lib.basic.PictureSelectorSupporterActivity"
-137-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:26:13-87
+137-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:26:13-87
 138            android:configChanges="orientation|keyboardHidden|screenSize"
-138-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:27:13-74
+138-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:27:13-74
 139            android:theme="@style/Base.Theme.NoActionBar" >
-139-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:28:13-58
+139-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:28:13-58
 140        </activity>
 141        <activity
-141-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:30:9-34:20
+141-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:30:9-34:20
 142            android:name="com.luck.picture.lib.basic.PictureSelectorTransparentActivity"
-142-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:31:13-89
+142-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:31:13-89
 143            android:configChanges="orientation|keyboardHidden|screenSize"
-143-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:32:13-74
+143-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:32:13-74
 144            android:theme="@style/Picture.Theme.Translucent" >
-144-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/0cbeb2beef2249fd0d5710eae54860b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:33:13-61
+144-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:33:13-61
 145        </activity>
 146        <activity
-146-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:10:9-14:72
+146-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:10:9-14:72
 147            android:name="com.yalantis.ucrop.UCropActivity"
-147-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:11:13-60
+147-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:11:13-60
 148            android:configChanges="orientation|keyboardHidden|screenSize"
-148-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:12:13-74
+148-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:12:13-74
 149            android:screenOrientation="portrait"
-149-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:13:13-49
+149-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:13:13-49
 150            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-150-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:14:13-69
+150-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:14:13-69
 151        <activity
-151-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:15:9-19:72
+151-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:15:9-19:72
 152            android:name="com.yalantis.ucrop.UCropMultipleActivity"
-152-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:16:13-68
+152-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:16:13-68
 153            android:configChanges="orientation|keyboardHidden|screenSize"
-153-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:17:13-74
+153-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:17:13-74
 154            android:screenOrientation="portrait"
-154-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:18:13-49
+154-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:18:13-49
 155            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-155-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/c998495b3df3770e719ca134be74824a/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:19:13-69
+155-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:19:13-69
 156    </application>
 157
 158</manifest>

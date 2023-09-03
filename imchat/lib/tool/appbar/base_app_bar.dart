@@ -46,7 +46,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.flexibleSpace,
     this.bottom,
-    this.elevation = 0.4, //阴影或下划线
+    this.elevation = 0.0, //阴影或下划线
     this.shadowColor,
     this.shape,
     this.backgroundColor,

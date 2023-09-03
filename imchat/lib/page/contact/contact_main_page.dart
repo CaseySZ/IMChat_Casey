@@ -18,8 +18,10 @@ class ContactMainPage extends StatefulWidget {
   }
 }
 
-class _ContactMainPageState extends State<ContactMainPage> {
+class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAliveClientMixin {
   List<FriendGroupInfo>? get friendList => FriendItemInfo.myList;
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -40,6 +42,7 @@ class _ContactMainPageState extends State<ContactMainPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: BaseAppBar(
         leading: const SizedBox(),

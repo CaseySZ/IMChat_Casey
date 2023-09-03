@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imchat/alert/home_menu_alert.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/page/chat/view/msg_box_cell.dart';
@@ -18,8 +19,10 @@ class ChatMainPage extends StatefulWidget {
   }
 }
 
-class _ChatMainPageState extends State<ChatMainPage> {
+class _ChatMainPageState extends State<ChatMainPage> with AutomaticKeepAliveClientMixin {
   List<ChatRecordModel>? chatArr;
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -45,13 +48,17 @@ class _ChatMainPageState extends State<ChatMainPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: BaseAppBar(
         title: "消息".localize,
-        onBack: (){},
+        elevation: 0.3,
+        leading: const SizedBox(),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              HomeMenuAlert.show(context);
+            },
             child: Container(
               padding: const EdgeInsets.only(right: 16),
               child: const Icon(
@@ -71,4 +78,6 @@ class _ChatMainPageState extends State<ChatMainPage> {
       ),
     );
   }
+
+
 }

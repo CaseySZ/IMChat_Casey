@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_pickers/image_pickers.dart';
+import 'package:imchat/alert/long_press_menu.dart';
 import 'package:imchat/api/file_api.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
@@ -54,6 +55,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
 
   FocusNode focusNode = FocusNode();
   bool isShowAlbumKeyboard = false;
+  bool isShowMenu = false;
+  double menuDx = 0;
+  double menuDy = 0;
 
   @override
   void initState() {
@@ -224,92 +228,112 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         ),
         body: chatArr == null
             ? const LoadingCenterWidget()
-            : Column(
+            : Stack(
+                fit: StackFit.expand,
                 children: [
-                  Expanded(
-                    child: pullRefresh(
-                      enablePullDown: false,
-                      onRefresh: _loadData,
-                      onLoading: chatArr?.isNotEmpty == true
-                          ? () {
-                              _loadData(startChatRecordId: chatArr?.last.id);
-                            }
-                          : null,
-                      refreshController: refreshController,
-                      child: ListView.builder(
-                        itemCount: chatArr?.length ?? 0,
-                        reverse: true,
-                        itemBuilder: (context, index) {
-                          return ChatItemCell(
-                            model: chatArr![index],
-                          );
-                        },
+                  Column(
+                    children: [
+                      Expanded(
+                        child: pullRefresh(
+                          enablePullDown: false,
+                          onRefresh: _loadData,
+                          onLoading: chatArr?.isNotEmpty == true
+                              ? () {
+                                  _loadData(startChatRecordId: chatArr?.last.id);
+                                }
+                              : null,
+                          refreshController: refreshController,
+                          child: ListView.builder(
+                            itemCount: chatArr?.length ?? 0,
+                            reverse: true,
+                            itemBuilder: (context, index) {
+                              return ChatItemCell(
+                                model: chatArr![index],
+                                callback: (dx, dy) {
+                                  isShowMenu = true;
+                                  menuDx = dx;
+                                  menuDy = dy;
+                                  setState(() {});
+                                },
+                              );
+                            },
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 8, 10, 22),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                        top: BorderSide(color: Color(0xffececec), width: 0.5),
-                      ),
-                    ),
-                    child: SizedBox(
-                      height: 36,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 36,
-                              decoration: BoxDecoration(
-                                color: const Color(0xfff8f9fa),
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: GroupTextFiled(
-                                      bgColor: Colors.transparent,
-                                      controller: controller,
-                                      textInputAction: TextInputAction.send,
-                                      focusNode: focusNode,
-                                      placeholder: "请输入消息",
-                                      maxLines: 1,
-                                      onSubmitted: (text) {
-                                        _sendTextMessage();
-                                      },
-                                    ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(20, 8, 10, 22),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                            top: BorderSide(color: Color(0xffececec), width: 0.5),
+                          ),
+                        ),
+                        child: SizedBox(
+                          height: 36,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  height: 36,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xfff8f9fa),
+                                    borderRadius: BorderRadius.circular(18),
                                   ),
-                                  const SizedBox(width: 8),
-                                ],
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: GroupTextFiled(
+                                          bgColor: Colors.transparent,
+                                          controller: controller,
+                                          textInputAction: TextInputAction.send,
+                                          focusNode: focusNode,
+                                          placeholder: "请输入消息",
+                                          maxLines: 1,
+                                          onSubmitted: (text) {
+                                            _sendTextMessage();
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
+                              const SizedBox(width: 16),
+                              InkWell(
+                                onTap: showAlbumKeyboard,
+                                child: SvgPicture.asset(
+                                  isShowAlbumKeyboard ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
+                                  width: 30,
+                                  height: 30,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 16),
-                          InkWell(
-                            onTap: showAlbumKeyboard,
-                            child: SvgPicture.asset(
-                              isShowAlbumKeyboard ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
-                              width: 30,
-                              height: 30,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      if (isShowAlbumKeyboard)
+                        SoftKeyMenuView(
+                          height: keyboardSize - 50,
+                          pictureCallback: (imageArr) {
+                            if (imageArr.isNotEmpty) {
+                              if (isUpLoadImg) {
+                                showToast(msg: "正在发送图片,请耐心等待");
+                                return;
+                              }
+                              _sendTextMessage(imageInfo: imageArr.first);
+                            }
+                          },
+                        ),
+                    ],
                   ),
-                  if (isShowAlbumKeyboard)
-                    SoftKeyMenuView(
-                      height: keyboardSize - 50,
-                      pictureCallback: (imageArr) {
-                        if (imageArr.isNotEmpty) {
-                          if (isUpLoadImg) {
-                            showToast(msg: "正在发送图片,请耐心等待");
-                            return;
-                          }
-                          _sendTextMessage(imageInfo: imageArr.first);
-                        }
+                  if (isShowMenu)
+                    LongPressMenu(
+                      dx: menuDx,
+                      dy: menuDy,
+                      callback: (index) {
+                        isShowMenu = false;
+                        setState(() {});
                       },
                     ),
                 ],

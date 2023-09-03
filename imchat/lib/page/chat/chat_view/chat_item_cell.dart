@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:imchat/alert/long_press_menu.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
+import 'package:imchat/utils/screen.dart';
 
 import '../../../api/im_api.dart';
 import '../../../tool/image/custom_new_image.dart';
@@ -12,8 +14,8 @@ import '../model/chat_record_model.dart';
 
 class ChatItemCell extends StatefulWidget {
   final ChatRecordModel? model;
-
-  const ChatItemCell({super.key, this.model});
+  final Function(double, double)? callback;
+  const ChatItemCell({super.key, this.model, this.callback,});
 
   @override
   State<StatefulWidget> createState() {
@@ -89,11 +91,15 @@ class _ChatItemCellState extends State<ChatItemCell> {
 
   @override
   Widget build(BuildContext context) {
-    if (isMe) {
-      return _buildRightStyle();
-    } else {
-      return _buildLeftStyle();
-    }
+    return GestureDetector(
+      onLongPressStart: (details) {
+
+          double dx =  details.globalPosition.dx;
+          double dy =  details.globalPosition.dy;
+          widget.callback?.call(dx, dy);
+      },
+      child: isMe ? _buildRightStyle() : _buildLeftStyle(),
+    );
   }
 
   Widget _buildLeftStyle() {
