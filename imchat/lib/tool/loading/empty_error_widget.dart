@@ -23,11 +23,11 @@ class EmptyErrorWidgetState extends State<EmptyErrorWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Image(
-              image: AssetImage("assets/images/no_data.png"),
+              image: AssetImage("assets/images/ic_no_data.png"),
               width: 200,
               height: 200,
             ),
-           // Text(widget.errorMsg ?? "", style: const TextStyle(color: Colors.grey)),
+            Text(widget.errorMsg ?? "", style: const TextStyle(color: Colors.grey)),
             (widget.errorMsg2 != null
                 ? Text(widget.errorMsg2 ?? "", style: const TextStyle(color: Colors.grey))
                 : Container()),

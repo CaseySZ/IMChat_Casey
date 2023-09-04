@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
+import 'package:imchat/page/contact/new_friend_page.dart';
 import 'package:imchat/page/contact/view/contact_cell_view.dart';
 import 'package:imchat/protobuf/model/base.pb.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
@@ -8,6 +10,7 @@ import 'package:imchat/web_socket/web_socket_model.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
 
 import '../../model/friend_item_info.dart';
+import '../add_friend/add_friend_page.dart';
 
 class ContactMainPage extends StatefulWidget {
   const ContactMainPage({super.key});
@@ -52,8 +55,8 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
         children: [
           _buildSearch(),
           const SizedBox(height: 8),
-          _buildHeadItem("assets/images/Mi.png", "新的好友", true),
-          _buildHeadItem("assets/images/Uu1.png", "我的群聊", false),
+          _buildHeadItem(0, "assets/images/Mi.png", "新的好友".localize, true),
+          _buildHeadItem(1, "assets/images/Uu1.png", "我的群聊".localize, false),
           Expanded(
             child: Container(
               color: const Color(0xfff6f7fb),
@@ -97,7 +100,11 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
 //Mi.png Uu1.png
   Widget _buildSearch() {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context){
+          return const AddFriendPage();
+        }));
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -123,9 +130,13 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
     );
   }
 
-  Widget _buildHeadItem(String imagePath, String title, bool showLine) {
+  Widget _buildHeadItem(int index, String imagePath, String title, bool showLine) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context){
+          return const NewFriendPage();
+        }));
+      },
       child: Container(
         color: Colors.white,
         padding: const EdgeInsets.fromLTRB(16, 5, 0, 5),

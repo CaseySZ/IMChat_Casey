@@ -62,7 +62,7 @@ class HomeMenuAlert extends StatelessWidget {
       },
       child: Container(
         height: 40,
-        width: 12,
+        width: 120,
         padding: const EdgeInsets.only(left: 6),
         child: Row(
           children: [

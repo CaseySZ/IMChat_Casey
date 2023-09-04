@@ -64,19 +64,16 @@ class IMApi {
   }
 
   // 添加好友
-  static Future<String?> addFriend(String friendNo, String applyContent) async {
+  static Future<Response?> addFriend(String friendNo, String applyContent) async {
     try {
       Response? response = await DioBase.instance.post(
         "/api/friendApply/add",
         {"friendNo": friendNo, "applyContent": applyContent},
       );
-      if (response?.isSuccess == true) {
-      } else {
-        return response?.tips;
-      }
+      return response;
     } catch (e) {
       debugLog(e);
-      return e.toString();
+      return null;
     }
     return null;
   }
