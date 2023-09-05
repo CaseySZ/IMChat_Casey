@@ -1,9 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_pickers/image_pickers.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+import '../../../alert/no_permission_dialog.dart';
+import '../../../tool/network/dio_base.dart';
 import '../../../utils/toast_util.dart';
 
 class AlbumPickerView extends StatefulWidget {
@@ -32,8 +38,35 @@ class _AlbumPickerViewState extends State<AlbumPickerView> {
     super.initState();
   }
 
+  Future<PermissionStatus> canReadStorage() async{
+    AndroidDeviceInfo androidDeviceInfo = await  DeviceInfoPlugin().androidInfo;
+    String androidVersion = androidDeviceInfo.version.release;
+    late PermissionStatus status;
+    if(int.parse(androidVersion) <= 12){
+      status = await Permission.storage.request();
+    }else {
+      status = await Permission.photos.request();
+    }
+    return status;
+  }
+
+  Future _checkPermissionAlways() async {
+    if (!Platform.isAndroid) return;
+    var status = await canReadStorage();
+    if (status.isGranted) return;
+    // 展示无权限，去设置的对话框
+    var val = await NoPermissionDialog.show(context);
+    if (val == true) {
+      // 跳转到应用配置界面
+      var isCanOpen =  await openAppSettings();
+      debugLog("isCanOpen: $isCanOpen");
+    }else {
+      return await _checkPermissionAlways();
+    }
+  }
 
   void _pickerEvent() async {
+    await _checkPermissionAlways();
     List<Media> listMedia = await ImagePickers.pickerPaths(
       uiConfig: UIConfig(uiThemeColor: const Color(0xfff21313)),
       galleryMode: widget.isVideo ? GalleryMode.video : GalleryMode.image,

@@ -136,11 +136,11 @@ class _MinePageState extends State<MinePage> {
             const SizedBox(width: 12),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    userInfo?.nickName ?? "",
+                    "昵称：${userInfo?.nickName}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -148,11 +148,17 @@ class _MinePageState extends State<MinePage> {
                       color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 10),
                   Text(
-                    "账号：${userInfo?.memberNo}" ?? "",
+                    "账号：${userInfo?.loginName}",
                     style: const TextStyle(
                       fontSize: 14,
+                      color: Color(0xff999999),
+                    ),
+                  ),
+                  Text(
+                    "ID：${userInfo?.memberNo}",
+                    style: const TextStyle(
+                      fontSize: 12,
                       color: Color(0xff999999),
                     ),
                   ),

@@ -97,7 +97,7 @@ class IMApi {
   }
 
   //获取好友申请 我的分页
-  static Future<Response?> addMyFriendList(int applyStatus, String id) async {
+  static Future<Response?> getAddMyFriendList() async {
     try {
       Response? response = await DioBase.instance.post(
         "/api/friendApply/friendApplyPage",
@@ -117,7 +117,7 @@ class IMApi {
   }
 
   //获取我申请的好友分页
-  static Future<Response?> myAddFriendList(int applyStatus, String id) async {
+  static Future<Response?> getMyAddFriendList() async {
     try {
       Response? response = await DioBase.instance.post(
         "/api/friendApply/myApplyPage",

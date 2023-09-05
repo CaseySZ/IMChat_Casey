@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/page/contact/my_group_page.dart';
 import 'package:imchat/page/contact/new_friend_page.dart';
 import 'package:imchat/page/contact/view/contact_cell_view.dart';
 import 'package:imchat/protobuf/model/base.pb.dart';
@@ -26,15 +27,31 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
   @override
   bool get wantKeepAlive => true;
 
+  int friendApplyMessageTotal = 0;
+  int groupApplyMessageTotal = 0;
+  int msgCount(int index){
+    if(index == 0) {
+      return friendApplyMessageTotal;
+    }else if(index == 1){
+      return groupApplyMessageTotal;
+    }else {
+      return 0;
+    }
+  }
   @override
   void initState() {
     super.initState();
     WebSocketModel.addListener(messageListen);
   }
 
-  void messageListen(Protocol data) {
-    if (data.cmd == MessageType.friendList) {
-      FriendItemInfo.parse(data.data);
+  void messageListen(Protocol protocol) {
+    if (protocol.cmd == MessageType.friendList) {
+      FriendItemInfo.parse(protocol.data);
+      setState(() {});
+    }
+    if (protocol.cmd == MessageType.messageTotal.responseName && protocol.isSuccess == true) {
+      friendApplyMessageTotal = protocol.data?["friendApplyMessageTotal"] ?? 0;
+      groupApplyMessageTotal = protocol.data?["groupApplyMessageTotal"] ?? 0;
       setState(() {});
     }
   }
@@ -133,9 +150,15 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
   Widget _buildHeadItem(int index, String imagePath, String title, bool showLine) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context){
-          return const NewFriendPage();
-        }));
+        if(index == 0) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const NewFriendPage();
+          }));
+        }else {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const MyGroupPage();
+          }));
+        }
       },
       child: Container(
         color: Colors.white,
@@ -153,16 +176,39 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    height: 42,
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
+                  Row(
+                    children: [
+                      Container(
+                        height: 42,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
-                    ),
+                      const Spacer(),
+                      if(msgCount(index) > 0)
+                        Container(
+                          width: 16,
+                          height: 16,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            "${msgCount(index)}",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 8,
+                            ),
+                          ),
+                        ),
+                      const SizedBox(width: 16),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   if (showLine) buildLineWidget(),
@@ -173,5 +219,11 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    WebSocketModel.removeListener(messageListen);
+    super.dispose();
   }
 }

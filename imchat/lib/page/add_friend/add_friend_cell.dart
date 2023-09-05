@@ -77,10 +77,20 @@ class _AddFriendCellState extends State<AddFriendCell> {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    "${widget.model?.nickName} (${widget.model?.memberNo})",
-                    style: const TextStyle(fontSize: 16, color: Colors.black),
-                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.model?.nickName ?? "",
+                        style: const TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.model?.loginName ?? "",
+                        style: const TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                    ],
+                  )
                 ),
                 const SizedBox(width: 8),
                 _buildAddButton(),

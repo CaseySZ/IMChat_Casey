@@ -28,6 +28,7 @@ class EmptyErrorWidgetState extends State<EmptyErrorWidget> {
               height: 200,
             ),
             Text(widget.errorMsg ?? "", style: const TextStyle(color: Colors.grey)),
+            const SizedBox(height: 6),
             (widget.errorMsg2 != null
                 ? Text(widget.errorMsg2 ?? "", style: const TextStyle(color: Colors.grey))
                 : Container()),

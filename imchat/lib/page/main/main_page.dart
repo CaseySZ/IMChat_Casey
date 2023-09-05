@@ -4,7 +4,9 @@ import 'package:imchat/tool/loading/empty_error_widget.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
+import '../../api/im_api.dart';
 import '../../protobuf/model/base.pb.dart';
+import '../../utils/local_store.dart';
 import '../../utils/screen.dart';
 import '../../utils/toast_util.dart';
 import '../chat/chat_main_page.dart';
@@ -24,7 +26,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-  late bool mainPageInited;
+  bool mainPageInited = false;
 
   List<String> titleArr = [
     '消息',
@@ -48,20 +50,32 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     WebSocketModel.addListener(_receiveMessage);
-    _checkStatus();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _loadData();
+      _loginEvent();
     });
-
   }
 
-  void _checkStatus() {
-    Future.delayed(const Duration(seconds: 2), (){
-      if(WebSocketModel.isConnectSocketSuccess == true){
-        setState(() {});
+
+  void _loginEvent() async{
+    String? userName= await LocalStore.getLoginName();
+    String? pwd = await  LocalStore.getPassword();
+    if(userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
+      String? errorDesc =  await IMApi.login(userName!, pwd!);
+      if(errorDesc?.isNotEmpty == true) {
+        showToast(msg: errorDesc!);
+        return;
       }
-    });
+      errorDesc =  await IMApi.appInfo();
+      if(errorDesc?.isNotEmpty == true) {
+        showToast(msg: errorDesc!);
+        return;
+      }
+      mainPageInited = true;
+      setState(() {});
+    }
   }
+
+
   void _receiveMessage(Protocol protocol){
     if(protocol.cmd == MessageType.login.responseName){
       if(protocol.isSuccess){
@@ -73,7 +87,6 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  void _loadData() async {}
 
   DateTime? lastPopTime;
 
@@ -122,7 +135,7 @@ class _MainPageState extends State<MainPage> {
 
 
   Widget _buildLoadingStatus() {
-    if(WebSocketModel.isConnectSocketSuccess == null){
+    if(WebSocketModel.isConnectSocketSuccess == null || mainPageInited == false){
       return  InkWell(
         onTap: (){
 

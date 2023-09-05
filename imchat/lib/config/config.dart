@@ -1,3 +1,4 @@
+import '../model/group_item_model.dart';
 import '../model/user_info.dart';
 
 class IMConfig {
@@ -8,4 +9,9 @@ class IMConfig {
   static String? fileServerUrl;
   static UserInfo? userInfo;
   static String appVersion = "1.0.0";
+
+}
+
+class GlobalData {
+  static List<GroupItemInfo> groupList = [];
 }

@@ -48,17 +48,6 @@ class _SplashPageState extends State<SplashPage> {
     String? userName= await LocalStore.getLoginName();
     String? pwd = await  LocalStore.getPassword();
     if(userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
-      String? errorDesc =  await IMApi.login(userName!, pwd!);
-      if(errorDesc?.isNotEmpty == true) {
-        showToast(msg: errorDesc!);
-        Navigator.pushReplacementNamed(context, AppRoutes.login);
-        return;
-      }
-      errorDesc =  await IMApi.appInfo();
-      if(errorDesc?.isNotEmpty == true) {
-        showToast(msg: errorDesc!);
-        return;
-      }
       Navigator.pushReplacementNamed(context, AppRoutes.main);
     }else {
       Future.delayed(const Duration(seconds: 1), () {
