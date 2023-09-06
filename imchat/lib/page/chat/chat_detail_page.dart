@@ -211,7 +211,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     } else {
       WebSocketSend.sendCloseGroupBox(friendNo);
     }
-    Navigator.pop(context, chatArr?.first);
+    if(chatArr?.isNotEmpty == true) {
+      Navigator.pop(context, chatArr?.first);
+    }else {
+      Navigator.pop(context);
+    }
   }
 
   @override
