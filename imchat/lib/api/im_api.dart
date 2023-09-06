@@ -261,7 +261,7 @@ class IMApi {
   }
 
   // 群成员新增
-  static Future<String?> groupAddMember(String groupNo, List<String> listMemberNo) async {
+  static Future<String> groupAddMember(String groupNo, List<String> listMemberNo) async {
     try {
       Response? response = await DioBase.instance.post(
         "/api/group/find",
@@ -270,7 +270,7 @@ class IMApi {
       if (response?.isSuccess == true) {
         return "";
       } else {
-        return response?.tips;
+        return response?.tips ?? defaultErrorMsg;
       }
     } catch (e) {
       debugLog(e);
@@ -384,7 +384,7 @@ class IMApi {
     try {
       Response? response = await DioBase.instance.post(
         "/api/groupChatRecord/page",
-        {"groupNo": groupNo, startChatRecordId: startChatRecordId ?? ""},
+        {"groupNo": groupNo, "startChatRecordId": startChatRecordId ?? ""},
       );
       return response;
     } catch (e) {
@@ -419,7 +419,7 @@ class IMApi {
   }
 
   //向群发送信息
-  static Future<String?> sendGroupMsg(String groupNo, String content, String contentType) async {
+  static Future<String?> sendGroupMsg(String groupNo, String content, int contentType) async {
     try {
       Response? response = await DioBase.instance.post(
         "/api/groupChatRecord/send",

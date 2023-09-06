@@ -82,7 +82,7 @@ class ChatRecordModel {
     isTop = json["isTop"];
     messageNum = json["messageNum"];
     personalitySign = json["personalitySign"];
-   // targetNo = json["targetNo"];
+
   }
 
   Map<String, dynamic> toJson() {

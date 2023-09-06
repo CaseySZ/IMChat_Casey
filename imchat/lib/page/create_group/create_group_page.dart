@@ -51,20 +51,22 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
       if(headImage?.isNotEmpty == true) {
         LoadingAlertWidget.showExchangeTitle("正在更新数据...");
         String? ret = await IMApi.groupCreate(headImage ?? "", titleController.text, descController.text);
+        LoadingAlertWidget.cancel(context);
         if(ret?.isNotEmpty == true){
           showToast(msg: "群创建失败");
         }else {
           showToast(msg: "群创建成功");
+          Navigator.pop(context);
         }
       }else {
+        LoadingAlertWidget.cancel(context);
         showToast(msg: "头像上传失败");
       }
     }catch(e){
+      LoadingAlertWidget.cancel(context);
       showToast(msg: "群创建失败");
       debugLog(e);
     }
-    LoadingAlertWidget.cancel(context);
-
 
   }
 

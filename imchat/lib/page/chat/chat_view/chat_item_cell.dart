@@ -15,7 +15,12 @@ import '../model/chat_record_model.dart';
 class ChatItemCell extends StatefulWidget {
   final ChatRecordModel? model;
   final Function(double, double)? callback;
-  const ChatItemCell({super.key, this.model, this.callback,});
+
+  const ChatItemCell({
+    super.key,
+    this.model,
+    this.callback,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -93,13 +98,33 @@ class _ChatItemCellState extends State<ChatItemCell> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPressStart: (details) {
-
-          double dx =  details.globalPosition.dx;
-          double dy =  details.globalPosition.dy;
-          widget.callback?.call(dx, dy);
+        double dx = details.globalPosition.dx;
+        double dy = details.globalPosition.dy;
+        widget.callback?.call(dx, dy);
       },
-      child: isMe ? _buildRightStyle() : _buildLeftStyle(),
+      child: _buildChatContent(),
     );
+  }
+
+  Widget _buildChatContent() {
+    if ((widget.model?.contentType ?? 0) > 6) {
+      return Container(
+        padding: const EdgeInsets.only(bottom: 16),
+        alignment: Alignment.center,
+        child: Text(
+          chatContent,
+          style: const TextStyle(
+            color: Color(0xff999999),
+            fontSize: 12,
+          ),
+        ),
+      );
+    }
+    if (isMe) {
+      return _buildRightStyle();
+    } else {
+      return _buildLeftStyle();
+    }
   }
 
   Widget _buildLeftStyle() {

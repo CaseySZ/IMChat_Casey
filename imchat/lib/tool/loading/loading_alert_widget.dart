@@ -7,9 +7,10 @@ class LoadingAlertWidget extends StatefulWidget {
   const LoadingAlertWidget({super.key, this.title, this.canCancel = false});
 
   static GlobalKey<_LoadingAlertWidgetState>? _globalKey;
-
+  static int showCount = 0;
   static show(BuildContext context, {String? title, bool canCancel = false}) {
     _globalKey = GlobalKey<_LoadingAlertWidgetState>();
+    showCount++;
     showDialog(
         context: context,
         builder: (context) {
@@ -24,7 +25,10 @@ class LoadingAlertWidget extends StatefulWidget {
 
   static cancel(BuildContext context) {
     _globalKey = null;
-    Navigator.of(context).pop();
+    if(showCount > 0) {
+      Navigator.of(context).pop();
+      showCount--;
+    }
   }
 
   @override

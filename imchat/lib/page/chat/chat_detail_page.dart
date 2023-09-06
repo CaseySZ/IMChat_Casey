@@ -9,7 +9,9 @@ import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/page/chat/chat_view/soft_key_menu_view.dart';
+import 'package:imchat/page/chat/group_detail_page.dart';
 import 'package:imchat/page/chat/model/chat_record_model.dart';
+import 'package:imchat/page/chat/person_detail_page.dart';
 import 'package:imchat/protobuf/model/base.pb.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
@@ -28,12 +30,10 @@ import 'chat_view/group_text_filed.dart';
 
 class ChatDetailPage extends StatefulWidget {
   final FriendItemInfo? model;
-  final int chatType; // 0 好友聊天， 1 群聊
 
   const ChatDetailPage({
     super.key,
     this.model,
-    this.chatType = 0,
   });
 
   @override
@@ -47,7 +47,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   RefreshController refreshController = RefreshController();
 
   UserInfo? get userInfo => IMConfig.userInfo;
-
+  int get chatType => widget.model?.targetType ?? 0; // 1 群聊
   String get friendNo => widget.model?.friendNo ?? widget.model?.targetNo ?? "";
   ChatRecordResponse? chatResponse;
   List<ChatRecordModel>? chatArr;
@@ -63,8 +63,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    if (widget.chatType == 0) {
+    if (chatType == 0) {
       WebSocketSend.sendOpenFriendBox(friendNo);
+    }else{
+      WebSocketSend.sendOpenGroupBox(friendNo);
     }
     WebSocketModel.addListener(webSocketLister);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -90,7 +92,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
 
   void _loadData({String? startChatRecordId}) async {
     try {
-      Response? response = await IMApi.getChatHistory(friendNo, startChatRecordId: startChatRecordId);
+      Response? response;
+      if(chatType == 0) {
+        response = await IMApi.getChatHistory(friendNo, startChatRecordId: startChatRecordId);
+      }else {
+        response = await IMApi.groupChatHistory(friendNo, startChatRecordId);
+      }
       chatArr ??= [];
       if (response?.isSuccess == true) {
         if (startChatRecordId == null) {
@@ -195,7 +202,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         return;
       }
     }
-    String? errorDesc = await IMApi.sendMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
+    String? errorDesc;
+    if(chatType == 0) {
+      errorDesc = await IMApi.sendMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
+    }else {
+      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
+    }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
       showToast(msg: errorDesc ?? defaultErrorMsg);
@@ -206,7 +218,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   }
 
   void _backEvent() {
-    if (widget.chatType == 0) {
+    if (chatType == 0) {
       WebSocketSend.sendCloseFriendBox(friendNo);
     } else {
       WebSocketSend.sendCloseGroupBox(friendNo);
@@ -215,6 +227,18 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       Navigator.pop(context, chatArr?.first);
     }else {
       Navigator.pop(context);
+    }
+  }
+
+  void _detailEvent() {
+    if(chatType == 0){
+      Navigator.push(context, MaterialPageRoute(builder: (context){
+        return PersonDetailPage();
+      }));
+    }else {
+      Navigator.push(context, MaterialPageRoute(builder: (context){
+        return GroupDetailPage();
+      }));
     }
   }
 
@@ -229,6 +253,16 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         appBar: BaseAppBar(
           title: widget.model?.nickName ?? "",
           onBack: _backEvent,
+          elevation: 0.2,
+          actions: [
+            InkWell(
+              onTap: _detailEvent,
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(12, 6, 16, 6),
+                child: const Icon(Icons.more_horiz, size: 30, color: Color(0xff666666),),
+              ),
+            ),
+          ],
         ),
         body: chatArr == null
             ? const LoadingCenterWidget()

@@ -4,6 +4,7 @@ import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/page/chat/view/msg_box_cell.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
+import 'package:imchat/tool/network/dio_base.dart';
 
 import '../../protobuf/model/base.pb.dart';
 import '../../web_socket/web_message_type.dart';

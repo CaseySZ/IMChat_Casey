@@ -54,6 +54,7 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
         itemModel.friendNo = model?.targetNo;
         itemModel.contentType = model?.contentType;
         itemModel.nickName = model?.nickName;
+        itemModel.targetType = model?.targetType;
         var result = await Navigator.pushNamed(context, AppRoutes.chat_detail, arguments: itemModel);
         if (result is ChatRecordModel) {
           model?.contentType = result.contentType;
