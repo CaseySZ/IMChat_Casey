@@ -265,7 +265,7 @@ class IMApi {
     try {
       Response? response = await DioBase.instance.post(
         "/api/group/find",
-        {"groupNo": groupNo, listMemberNo: listMemberNo},
+        {"groupNo": groupNo, "listMemberNo": listMemberNo},
       );
       if (response?.isSuccess == true) {
         return "";
@@ -325,7 +325,7 @@ class IMApi {
         "/api/group/member/remove",
         {
           "groupNo": groupNo,
-          listMemberNo: listMemberNo,
+          "listMemberNo": listMemberNo,
         },
       );
       if (response?.isSuccess == true) {

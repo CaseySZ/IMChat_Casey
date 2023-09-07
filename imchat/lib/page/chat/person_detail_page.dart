@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 
 class PersonDetailPage extends StatefulWidget {
-
-  const PersonDetailPage({super.key});
+  final String friendNo;
+  const PersonDetailPage({super.key, required this.friendNo,});
 
   @override
   State<StatefulWidget> createState() {

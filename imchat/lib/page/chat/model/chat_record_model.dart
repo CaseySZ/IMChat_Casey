@@ -27,6 +27,7 @@ class ChatRecordModel {
   int? sendType;
   String? chatCode;
   String? content;
+  String? groupNo;
   String get chatContent {
     if (content?.isNotEmpty == true) {
       int length = content?.length ?? 0;
@@ -59,6 +60,7 @@ class ChatRecordModel {
   ChatRecordModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     sendNo = json["sendNo"];
+    groupNo = json['groupNo'];
     targetNo = json["targetNo"];
     nickName = json['nickName'];
     targetType = json['targetType'];

@@ -29,7 +29,7 @@ extension JsonProto on Protocol {
     return null;
   }
 
-  Map? get dataMap {
+  Map<String, dynamic>? get dataMap {
     if(mapInfo["data"] is Map){
       return mapInfo["data"];
     }

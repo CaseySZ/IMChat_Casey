@@ -129,13 +129,20 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   }
 
   void webSocketLister(Protocol protocol) {
-    if (protocol.cmd == MessageType.chatBoxMessage.responseName && protocol.isSuccess == true) {
-      List<ChatRecordModel> list = protocol.dataArr?.map((e) => ChatRecordModel.fromJson(e)).toList() ?? [];
-      var myMessageList = list.where((element) => element.targetNo == widget.model?.friendNo && element.targetType == 0).toList();
-      for (int i = 0; i < myMessageList.length; i++) {
-        myMessageList[i].receiveNo = userInfo?.memberNo;
+    if(chatType == 0) {
+      if (protocol.cmd == MessageType.chatHistory.responseName && protocol.isSuccess == true) {
+        ChatRecordModel model = ChatRecordModel.fromJson(protocol.dataMap ?? {});
+        if(model.receiveNo == widget.model?.friendNo){
+          handleChatMessage(list: [model]);
+        }
       }
-      handleChatMessage(list: myMessageList);
+    }else {
+      if (protocol.cmd == MessageType.chatGroupHistory.responseName && protocol.isSuccess == true) {
+        ChatRecordModel model = ChatRecordModel.fromJson(protocol.dataMap ?? {});
+        if(model.groupNo == widget.model?.friendNo){
+          handleChatMessage(list: [model]);
+        }
+      }
     }
   }
 
@@ -157,6 +164,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       }
       preModel = model;
     }
+    chatArr?.removeWhere((element) => element.sendStatus == 0);
     setState(() {});
   }
 
@@ -211,8 +219,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
       showToast(msg: errorDesc ?? defaultErrorMsg);
-    } else {
-      model.sendStatus = 2;
     }
     setState(() {});
   }
@@ -233,11 +239,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   void _detailEvent() {
     if(chatType == 0){
       Navigator.push(context, MaterialPageRoute(builder: (context){
-        return PersonDetailPage();
+        return PersonDetailPage(friendNo: widget.model?.friendNo ?? "",);
       }));
     }else {
       Navigator.push(context, MaterialPageRoute(builder: (context){
-        return GroupDetailPage();
+        return GroupDetailPage(groupNo: widget.model?.friendNo ?? "",);
       }));
     }
   }

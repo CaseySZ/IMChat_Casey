@@ -33,7 +33,16 @@ class _ChatItemCellState extends State<ChatItemCell> {
 
   bool get isImg => widget.model?.contentType == 1;
 
-  bool get isMe => useInfo?.memberNo != widget.model?.receiveNo;
+  bool get isMe{
+    if(widget.model?.groupNo?.isNotEmpty == true){
+      if(widget.model?.sendNo == useInfo?.memberNo){
+        return true;
+      }else {
+        return false;
+      }
+    }
+    return useInfo?.memberNo != widget.model?.receiveNo;
+  }
 
   String get chatContent {
     if (widget.model?.content?.isNotEmpty == true) {
