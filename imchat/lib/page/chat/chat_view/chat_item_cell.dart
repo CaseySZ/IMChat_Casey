@@ -45,6 +45,9 @@ class _ChatItemCellState extends State<ChatItemCell> {
   }
 
   String get chatContent {
+    if(widget.model?.contentType == 6){
+      return "消息撤回";
+    }
     if (widget.model?.content?.isNotEmpty == true) {
       int length = widget.model?.content?.length ?? 0;
       if (widget.model!.content!.substring(length - 1, length) == "\n") {
@@ -116,7 +119,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
   }
 
   Widget _buildChatContent() {
-    if ((widget.model?.contentType ?? 0) > 6) {
+    if ((widget.model?.contentType ?? 0) >= 6) {
       return Container(
         padding: const EdgeInsets.only(bottom: 16),
         alignment: Alignment.center,

@@ -7,6 +7,7 @@ import 'package:imchat/alert/long_press_menu.dart';
 import 'package:imchat/api/file_api.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/page/chat/chat_view/soft_key_menu_view.dart';
 import 'package:imchat/page/chat/group_detail_page.dart';
@@ -43,7 +44,7 @@ class ChatDetailPage extends StatefulWidget {
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObserver {
-  TextEditingController controller = TextEditingController();
+  TextEditingController eidtController = TextEditingController();
   RefreshController refreshController = RefreshController();
 
   UserInfo? get userInfo => IMConfig.userInfo;
@@ -56,6 +57,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   FocusNode focusNode = FocusNode();
   bool isShowAlbumKeyboard = false;
   bool isShowMenu = false;
+  ChatRecordModel? menuChatModel;
   double menuDx = 0;
   double menuDy = 0;
 
@@ -132,7 +134,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     if(chatType == 0) {
       if (protocol.cmd == MessageType.chatHistory.responseName && protocol.isSuccess == true) {
         ChatRecordModel model = ChatRecordModel.fromJson(protocol.dataMap ?? {});
-        if(model.receiveNo == widget.model?.friendNo){
+        if(model.receiveNo == widget.model?.friendNo || model.sendNo ==widget.model?.friendNo  ){
           handleChatMessage(list: [model]);
         }
       }
@@ -141,6 +143,26 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         ChatRecordModel model = ChatRecordModel.fromJson(protocol.dataMap ?? {});
         if(model.groupNo == widget.model?.friendNo){
           handleChatMessage(list: [model]);
+        }
+      }
+    }
+    if(protocol.isSuccess == true && protocol.cmd == MessageType.chatRemove.responseName){
+      String? memberChatRecordId = protocol.dataMap?["memberChatRecordId"];
+      for(ChatRecordModel item in (chatArr ?? [])){
+        if(item.id == memberChatRecordId){
+          chatArr?.remove(item);
+          setState(() {});
+          break;
+        }
+      }
+    }
+    if(protocol.isSuccess == true && protocol.cmd == MessageType.groupMessageDelete.responseName){
+      String? memberChatRecordId = protocol.dataMap?["groupChatRecordId"];
+      for(ChatRecordModel item in (chatArr ?? [])){
+        if(item.id == memberChatRecordId){
+          chatArr?.remove(item);
+          setState(() {});
+          break;
         }
       }
     }
@@ -184,12 +206,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   bool isUpLoadImg = false;
 
   void _sendTextMessage({Media? imageInfo}) async {
-    if (controller.text.isEmpty && imageInfo == null) {
+    if (eidtController.text.isEmpty && imageInfo == null) {
       showToast(msg: "请输入内容");
       return;
     }
-    String contentText = controller.text;
-    controller.text = "";
+    String contentText = eidtController.text;
+    eidtController.text = "";
     ChatRecordModel model = ChatRecordModel();
     if (imageInfo != null) {
       model.localImgPath = imageInfo.path ?? "";
@@ -295,6 +317,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                 model: chatArr![index],
                                 callback: (dx, dy) {
                                   isShowMenu = true;
+                                  menuChatModel = chatArr![index];
                                   menuDx = dx;
                                   menuDy = dy;
                                   setState(() {});
@@ -328,11 +351,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                       Expanded(
                                         child: GroupTextFiled(
                                           bgColor: Colors.transparent,
-                                          controller: controller,
+                                          controller: eidtController,
                                           textInputAction: TextInputAction.send,
                                           focusNode: focusNode,
                                           placeholder: "请输入消息",
-                                          maxLines: 1,
                                           onSubmitted: (text) {
                                             _sendTextMessage();
                                           },
@@ -375,9 +397,15 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                     LongPressMenu(
                       dx: menuDx,
                       dy: menuDy,
-                      callback: (index) {
+                      model: menuChatModel,
+                      callback: (value) {
                         isShowMenu = false;
                         setState(() {});
+                        if(value == "回复".localize){
+                          String relpyContent = "${menuChatModel?.sendNickName}：\"${menuChatModel?.chatContent} \"\n回复：";
+                          eidtController.text = relpyContent;
+                        }
+                        menuChatModel = null;
                       },
                     ),
                 ],
