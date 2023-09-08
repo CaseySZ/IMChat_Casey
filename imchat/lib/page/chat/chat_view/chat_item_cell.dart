@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:imchat/alert/long_press_menu.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
+import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
 import 'package:imchat/utils/screen.dart';
 
@@ -184,12 +185,9 @@ class _ChatItemCellState extends State<ChatItemCell> {
                           topRight: Radius.circular(8),
                         ),
                       ),
-                      child: Text(
-                        chatContent,
-                        style: const TextStyle(
-                          color: Color(0xff262424),
-                          fontSize: 14,
-                        ),
+                      child: RichTextWidget(
+                        model: widget.model,
+                        isMe: false,
                       ),
                     ),
                   ),
@@ -274,12 +272,9 @@ class _ChatItemCellState extends State<ChatItemCell> {
                                 topLeft: Radius.circular(8),
                               ),
                             ),
-                            child: Text(
-                              chatContent,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
+                            child: RichTextWidget(
+                              model: widget.model,
+                              isMe: true,
                             ),
                           ),
                         ),

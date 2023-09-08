@@ -1,3 +1,5 @@
+import '../../../tool/network/dio_base.dart';
+
 class ChatRecordResponse {
   List<ChatRecordModel>? data;
   int? total;
@@ -55,7 +57,37 @@ class ChatRecordModel {
   String? personalitySign;
   int? sendStatus; // 0 发送中， 1发送失败, 其他正常
   String? lastContent;
+  List<RichTitle>? richTitleArr;
   ChatRecordModel();
+
+  void parserChatTitle() {
+    String originTitle = chatContent;
+    List<String> linkArr = originTitle.split("[/");
+    richTitleArr = [];
+    try {
+      if (linkArr.length == 1) {
+        richTitleArr!.add(RichTitle(originTitle, false));
+      } else {
+        richTitleArr!.add(RichTitle(linkArr.first, false));
+        for (int i = 1; i < linkArr.length; i++) {
+          String nextStr = linkArr[i];
+          if (nextStr.contains("]")) {
+            List<String> subLinkArr = nextStr.split("]");
+            String emoStr = "[/${subLinkArr.first}]";
+            richTitleArr!.add(RichTitle(emoStr, true));
+            richTitleArr!.add(RichTitle(subLinkArr.last, false));
+          } else {
+            richTitleArr!.last.content =
+            "${richTitleArr!.last.content}[/$nextStr";
+          }
+        }
+      }
+    } catch (e) {
+      richTitleArr!.clear();
+      richTitleArr!.add(RichTitle(originTitle, false));
+      debugLog("解析错误：$e");
+    }
+  }
 
   ChatRecordModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -84,7 +116,9 @@ class ChatRecordModel {
     isTop = json["isTop"];
     messageNum = json["messageNum"];
     personalitySign = json["personalitySign"];
-
+    if(contentType == 0){
+      parserChatTitle();
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -93,3 +127,9 @@ class ChatRecordModel {
   }
 }
 
+
+class RichTitle {
+  String content = "";
+  bool isImg = false;
+  RichTitle(this.content, this.isImg);
+}

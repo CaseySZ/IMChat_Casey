@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imchat/model/friend_item_info.dart';
+import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 import 'package:imchat/tool/image/custom_new_image.dart';
 
 import '../../../routers/router_map.dart';
@@ -97,14 +98,22 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
                     Row(
                       children: [
                         Expanded(
-                          child: Text(
-                            chatContent,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Color(0xff666666),
-                              fontSize: 13,
-                            ),
-                          ),
+                          child: model?.contentType == 0
+                              ? RichTextWidget(
+                                  model: model,
+                                  textStyle: const TextStyle(
+                                    color: Color(0xff666666),
+                                    fontSize: 13,
+                                  ),
+                                )
+                              : Text(
+                                  chatContent,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: Color(0xff666666),
+                                    fontSize: 13,
+                                  ),
+                                ),
                         ),
                         const SizedBox(width: 4),
                         if ((model?.messageNum ?? 0) > 0)

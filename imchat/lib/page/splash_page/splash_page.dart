@@ -4,6 +4,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:imchat/api/emo_data.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/routers/router_map.dart';
@@ -54,10 +55,17 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.pushReplacementNamed(context, AppRoutes.login);
       });
     }
-
+    preLoadData();
 
   }
-  
+
+  void preLoadData() async {
+    getEmojiMap.clear();
+    for(Map<String, String> item in getEmojiList){
+      getEmojiMap[item["name"]!] = item["base64"]!;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     screen.configData(context);
