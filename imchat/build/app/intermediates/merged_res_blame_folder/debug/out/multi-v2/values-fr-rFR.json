@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.imchat.app-mergeDebugResources-25:/values-fr-rFR/values-fr-rFR.xml",
+            "outputFile": "com.example.imchat.app-mergeDebugResources-29:/values-fr-rFR/values-fr-rFR.xml",
             "map": [
                 {
                     "source": "/Users/sy/.gradle/caches/transforms-3/db461a13caecbfcac6fa756860be37c8/transformed/jetified-ucrop-v3.10.9/res/values-fr-rFR/values-fr-rFR.xml",

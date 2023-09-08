@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.imchat.app-mergeDebugResources-25:/values-es-rES/values-es-rES.xml",
+            "outputFile": "com.example.imchat.app-mergeDebugResources-29:/values-es-rES/values-es-rES.xml",
             "map": [
                 {
                     "source": "/Users/sy/.gradle/caches/transforms-3/cf9957f794e7f0b361d3019a799b60b4/transformed/jetified-pictureselector-v3.10.9/res/values-es-rES/values-es-rES.xml",

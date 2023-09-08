@@ -34,6 +34,7 @@
     <string msgid="6107532579223922871" name="call_notification_incoming_text">"Chamada recebida"</string>
     <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Chamada em curso"</string>
     <string msgid="59049573811482460" name="call_notification_screening_text">"A filtrar uma chamada recebida…"</string>
+    <string msgid="7213672915724563695" name="default_notification_channel_name">"A reproduzir"</string>
     <string name="exo_download_completed">Transferência concluída</string>
     <string name="exo_download_description">Transferir</string>
     <string name="exo_download_downloading">A transferir…</string>
@@ -43,6 +44,8 @@
     <string name="exo_download_paused_for_network">Transferências a aguardar uma rede</string>
     <string name="exo_download_paused_for_wifi">Transferências a aguardar Wi-Fi</string>
     <string name="exo_download_removing">A remover as transferências…</string>
+    <string msgid="3510124037191104584" name="pause_button_content_description">"Colocar em pausa"</string>
+    <string msgid="963503759453979404" name="play_button_content_description">"Reproduzir"</string>
     <string name="ps_all_audio">Todos os áudios</string>
     <string name="ps_audio">Acesso ao sistema de gravação negado</string>
     <string name="ps_audio_empty">Você pode gravar o áudio usando o sistema de gravação</string>
@@ -120,6 +123,8 @@
     <string name="ps_warning">Não há documentos！</string>
     <string name="ps_webp_tag">webp</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Pesquisar"</string>
+    <string msgid="6034072145387511457" name="skip_to_next_item_button_content_description">"Ir para o item seguinte"</string>
+    <string msgid="4352480799561670760" name="skip_to_previous_item_button_content_description">"Ir para o item anterior"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
     <string name="ucrop_crop">Recorte</string>
     <string name="ucrop_gif_tag">Gif</string>
