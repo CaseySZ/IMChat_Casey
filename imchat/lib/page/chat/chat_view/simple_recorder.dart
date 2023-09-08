@@ -8,6 +8,7 @@ import 'package:imchat/config/language.dart';
 import 'package:imchat/page/chat/chat_view/images_animation.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/network/dio_base.dart';
+import 'package:imchat/utils/toast_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 /*
@@ -39,7 +40,9 @@ const theSource = AudioSource.microphone;
 
 /// Example app.
 class SimpleRecorder extends StatefulWidget {
-  const SimpleRecorder({super.key});
+
+  final Function(String, bool)? callback;
+  const SimpleRecorder({super.key, this.callback});
 
   @override
   State<StatefulWidget> createState() {
@@ -82,6 +85,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
       timerCount++;
       if(timerCount > 60){
         timer.cancel();
+        widget.callback?.call(_mPath, false);
       }
       setState(() {});
     });
@@ -196,122 +200,114 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope( onWillPop: () async{
+      widget.callback?.call("", false);
+      return false;
+    }, child: Scaffold(
       backgroundColor: Colors.black.withOpacity(0.3),
       appBar: BaseAppBar(
-          titleWidget: Container(
-        margin: const EdgeInsets.all(3),
-        padding: const EdgeInsets.all(3),
-        width: double.infinity,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Color(0xFFFAF0E6),
-          border: Border.all(
-            color: Colors.indigo,
-            width: 3,
-          ),
-        ),
-        child: Row(children: [
-          ElevatedButton(
-            onPressed: getPlaybackFn(),
-            //color: Colors.white,
-            //disabledColor: Colors.grey,
-            child: Text(_mPlayer!.isPlaying ? 'Stop' : 'Play'),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Text(_mPlayer!.isPlaying ? 'Playback in progress' : 'Player is stopped'),
-        ]),
-      )),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          InkWell(
-            onTap: (){
-              stopRecorder();
-              timer?.cancel();
-            },
-            child: SizedBox(
-                width: 100,
-                height: 100,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    const SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+        titleWidget: ElevatedButton(
+          onPressed: getPlaybackFn(),
+          //color: Colors.white,
+          //disabledColor: Colors.grey,
+          child: Text(_mPlayer!.isPlaying ? 'Stop' : 'Play'),
+        ),),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: (){
+                stopRecorder();
+                timer?.cancel();
+                if(timerCount < 2){
+                  showToast(msg: "语音时间太短, 发送已被取消");
+                  widget.callback?.call("", false);
+                }else {
+                  widget.callback?.call(_mPath, true);
+                }
+              },
+              child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      const SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: const Color(0xffb74124),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ImagesAnimation(
-                            w: 24,
-                            h: 24,
-                            entry: ImagesAnimationEntry(0, 2),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            "点此发送".localize,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
+                      Container(
+                        margin: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: const Color(0xffb74124),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ImagesAnimation(
+                              w: 24,
+                              h: 24,
+                              entry: ImagesAnimationEntry(0, 2),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 8),
+                            Text(
+                              "点此发送".localize,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                )),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            timerDesc,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
+                    ],
+                  )),
             ),
-          ),
-          const SizedBox(height: 8),
-          InkWell(
-            onTap: (){
-              stopRecorder();
-              timer?.cancel();
-              Navigator.pop(context);
-            },
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFFFAF0E6),
-                    Color(0xFFaaaaaa),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+            const SizedBox(height: 12),
+            Text(
+              timerDesc,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 8),
+            InkWell(
+              onTap: (){
+                stopRecorder();
+                timer?.cancel();
+                widget.callback?.call("", false);
+              },
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xFFFAF0E6),
+                      Color(0xFFaaaaaa),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  border: Border.all(color: Colors.black),
                 ),
-                border: Border.all(color: Colors.black),
+                child: const Text(
+                  "取消录制",
+                  style: TextStyle(color: Color(0xff666666), fontSize: 14),
+                ),
               ),
-              child: const Text(
-                "取消录制",
-                style: TextStyle(color: Color(0xff666666), fontSize: 14),
-              ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
-    );
+    ),);
   }
 
 }
