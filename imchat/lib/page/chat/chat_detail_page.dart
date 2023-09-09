@@ -214,7 +214,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     eidtController.text = "";
     ChatRecordModel model = ChatRecordModel();
     if (imageInfo != null) {
-      model.localImgPath = imageInfo.path ?? "";
+      model.localPath = imageInfo.path ?? "";
     } else {
       model.content = contentText;
     }
@@ -237,6 +237,35 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       errorDesc = await IMApi.sendMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
     }else {
       errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
+    }
+    if (errorDesc?.isNotEmpty == true) {
+      model.sendStatus = 1;
+      showToast(msg: errorDesc ?? defaultErrorMsg);
+    }
+    setState(() {});
+  }
+
+  void _sendAudioMessage(String audioPath) async{
+    ChatRecordModel model = ChatRecordModel();
+    model.content = audioPath;
+    model.localPath = audioPath;
+    model.contentType = 2;
+    model.sendStatus = 0;
+    model.sendNo = widget.model?.friendNo;
+    model.sendHeadImage = userInfo?.headImage;
+    chatArr?.insert(0, model);
+    setState(() {});
+    String contentText = await FileAPi.updateFile(audioPath) ?? "";
+    if (contentText.isNotEmpty != true) {
+      model.sendStatus = 1;
+      setState(() {});
+      return;
+    }
+    String? errorDesc;
+    if(chatType == 0) {
+      errorDesc = await IMApi.sendMsg(friendNo, contentText, 2);
+    }else {
+      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, 2);
     }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
@@ -390,6 +419,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                               _sendTextMessage(imageInfo: imageArr.first);
                             }
                           },
+                          audioCallback: _sendAudioMessage,
                         ),
                     ],
                   ),

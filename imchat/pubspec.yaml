@@ -59,7 +59,7 @@ dependencies:
   protoc_plugin: ^21.1.1
   flutter_sound: ^9.2.13
   audio_session: ^0.1.16
-
+#  flutter_audio_recorder
 dev_dependencies:
   flutter_test:
     sdk: flutter

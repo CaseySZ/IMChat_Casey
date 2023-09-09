@@ -7,11 +7,13 @@ import 'album_picker_view.dart';
 class SoftKeyMenuView extends StatefulWidget {
   final double height;
   final Function(List<Media>)? pictureCallback;
+  final Function(String)? audioCallback;
 
   const SoftKeyMenuView({
     super.key,
     required this.height,
     this.pictureCallback,
+    this.audioCallback,
   });
 
   @override
@@ -38,9 +40,7 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
             child: _buildItem("相册", "assets/images/album_key.png"),
           ),
           AudioPickerView(
-            callback: (){
-
-            },
+            callback: widget.audioCallback,
             child: _buildItem("语音", "assets/images/5S.png"),
           ),
         ],

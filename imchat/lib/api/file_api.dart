@@ -68,9 +68,8 @@ class FileAPi {
       var extent = getNameSuffix(filePath);
       var name = '${DateTime.now().toIso8601String()}_${Random().nextInt(1024)}.$extent';
       Uint8List fileData = File(filePath).readAsBytesSync();
-      Uint8List compressFileData = await compressImageList(fileData, maxSize: maxImageSize, compressCount:3);
       FormData args = FormData.fromMap({
-        'file': MultipartFile.fromBytes(compressFileData, filename: name),
+        'file': MultipartFile.fromBytes(fileData, filename: name),
       });
       //  DioBase dioBase = DioBase()..init(IMConfig.fileServerUrl ?? "");
       Response? response = await DioBase.instance.post("/api/upload/file", args);

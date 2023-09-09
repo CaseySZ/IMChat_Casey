@@ -32,6 +32,13 @@ class _InState extends State<ImagesAnimation> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    _controller.stop();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animation,
@@ -46,6 +53,8 @@ class _InState extends State<ImagesAnimation> with TickerProviderStateMixin {
       },
     );
   }
+
+
 }
 
 class ImagesAnimationEntry {

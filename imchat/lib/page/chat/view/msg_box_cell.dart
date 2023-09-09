@@ -25,7 +25,7 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
       return "【图片】";
     }
     if (model?.contentType == 2) {
-      return "【语言】";
+      return "【语音】";
     }
     if (model?.contentType == 3) {
       return "【文件】";

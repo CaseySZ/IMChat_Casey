@@ -40,8 +40,8 @@ class ChatRecordModel {
     }
     return "";
   }
-  String? localImgPath;
-  int? contentType; //0文字，1图片，2语言，3文件，4红包，5转账，6消息回撤
+  String? localPath;
+  int? contentType; //0文字，1图片，2语音，3文件，4红包，5转账，6消息回撤
 
   int? readStatus; // 0 未读， 1 已读
   String? createTime;

@@ -5,7 +5,7 @@ import 'package:imchat/page/chat/chat_view/simple_recorder.dart';
 
 class AudioPickerView extends StatefulWidget {
   final Widget child;
-  final Function()? callback;
+  final Function(String)? callback;
 
   const AudioPickerView({
     super.key,
@@ -25,7 +25,9 @@ class _AudioPickerViewState extends State<AudioPickerView> {
     super.initState();
   }
 
-  void sendAudioMsg(String filePath) async {}
+  void sendAudioMsg(String filePath) async {
+    widget.callback?.call(filePath);
+  }
 
   void _pickerEvent() async {
     showDialog(
@@ -33,12 +35,12 @@ class _AudioPickerViewState extends State<AudioPickerView> {
         builder: (context) {
           return SimpleRecorder(
             callback: (filePath, isSend) {
-              Navigator.pop(context);
-              if (isSend == false && filePath.isNotEmpty) {
-                _showAlert(filePath);
-              } else if (filePath.isNotEmpty) {
-                sendAudioMsg(filePath);
-              }
+              // Navigator.pop(context);
+              // if (isSend == false && filePath.isNotEmpty) {
+              //   _showAlert(filePath);
+              // } else if (filePath.isNotEmpty) {
+              //   sendAudioMsg(filePath);
+              // }
             },
           );
         });
