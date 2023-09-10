@@ -55,7 +55,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   int currentPage = 1;
 
   FocusNode focusNode = FocusNode();
-  bool isShowAlbumKeyboard = false;
+  bool isShowSoftKeyboard= false;
+  int softKeyType = -1; // 0 表情， 1 菜单
   bool isShowMenu = false;
   ChatRecordModel? menuChatModel;
   double menuDx = 0;
@@ -73,6 +74,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     WebSocketModel.addListener(webSocketLister);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loadData();
+    });
+    focusNode.addListener(() {
+      if(focusNode.hasFocus && isShowSoftKeyboard){
+        isShowSoftKeyboard = false;
+        softKeyType = -1;
+        setState(() {});
+      }
     });
   }
 
@@ -190,21 +198,31 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     setState(() {});
   }
 
-  void showAlbumKeyboard() {
-    if (isShowAlbumKeyboard) {
-      isShowAlbumKeyboard = false;
+  void showSoftKeyboard(int type) {
+    if(softKeyType != type && type >= 0 && isShowSoftKeyboard){
+      softKeyType = type;
+      setState(() {});
+      return;
+    }
+    if(softKeyType == 0 && type == 0){
+      return;
+    }
+    if (isShowSoftKeyboard) {
+      isShowSoftKeyboard = false;
       focusNode.requestFocus();
+      softKeyType = -1;
     } else {
       focusNode.unfocus();
       Future.delayed(const Duration(milliseconds: 250), () {
-        isShowAlbumKeyboard = true;
+        isShowSoftKeyboard = true;
+        softKeyType = type;
         setState(() {});
       });
     }
   }
 
-  bool isUpLoadImg = false;
 
+  bool isUpLoadImg = false;
   void _sendTextMessage({Media? imageInfo}) async {
     if (eidtController.text.isEmpty && imageInfo == null) {
       showToast(msg: "请输入内容");
@@ -357,7 +375,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.fromLTRB(20, 8, 10, 22),
+                        padding: const EdgeInsets.fromLTRB(20, 8, 10, 16),
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           border: Border(
@@ -396,9 +414,16 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                               ),
                               const SizedBox(width: 16),
                               InkWell(
-                                onTap: showAlbumKeyboard,
+                                onTap: () => showSoftKeyboard(0),
+                                child: Container(
+                                  padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                                  child: const Icon(Icons.emoji_emotions_outlined, size: 32,),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => showSoftKeyboard(1),
                                 child: SvgPicture.asset(
-                                  isShowAlbumKeyboard ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
+                                  softKeyType == 1  ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
                                   width: 30,
                                   height: 30,
                                 ),
@@ -407,9 +432,14 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                           ),
                         ),
                       ),
-                      if (isShowAlbumKeyboard)
+                      if (isShowSoftKeyboard)
                         SoftKeyMenuView(
                           height: keyboardSize - 50,
+                          isEmoji: softKeyType == 0,
+                          audioCallback: _sendAudioMessage,
+                          emojiCallback: (value){
+                            eidtController.text = eidtController.text + value;
+                          },
                           pictureCallback: (imageArr) {
                             if (imageArr.isNotEmpty) {
                               if (isUpLoadImg) {
@@ -419,7 +449,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                               _sendTextMessage(imageInfo: imageArr.first);
                             }
                           },
-                          audioCallback: _sendAudioMessage,
+
                         ),
                     ],
                   ),
