@@ -55,7 +55,9 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
       groupNo: groupModel?.groupNo,
       name: isTitle ? content : null,
       personalitySign: isTitle ? null : content,
+      authInfo: groupModel?.groupAuth,
     );
+    LoadingAlertWidget.cancel(context);
     if (retStr?.isNotEmpty == true) {
       showToast(msg: retStr!);
     } else {
@@ -64,8 +66,9 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
       } else {
         groupModel?.personalitySign = content;
       }
+      Navigator.pop(context);
     }
-    LoadingAlertWidget.cancel(context);
+
   }
 
   @override

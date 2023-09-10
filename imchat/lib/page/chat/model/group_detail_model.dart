@@ -7,6 +7,7 @@ class GroupDetailModel {
   String? name;
   String? personalitySign;
   GroupAuthModel? groupAuth;
+  String? localPath;
   GroupDetailModel();
 
   GroupDetailModel.fromJson(Map<String, dynamic> json) {

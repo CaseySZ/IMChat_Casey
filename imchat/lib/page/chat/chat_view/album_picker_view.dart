@@ -12,6 +12,34 @@ import '../../../alert/no_permission_dialog.dart';
 import '../../../tool/network/dio_base.dart';
 import '../../../utils/toast_util.dart';
 
+Future<PermissionStatus> canReadStorage() async{
+  AndroidDeviceInfo androidDeviceInfo = await  DeviceInfoPlugin().androidInfo;
+  String androidVersion = androidDeviceInfo.version.release;
+  late PermissionStatus status;
+  if(int.parse(androidVersion) <= 12){
+    status = await Permission.storage.request();
+  }else {
+    status = await Permission.photos.request();
+  }
+  return status;
+}
+
+Future checkPermissionAlways(BuildContext context) async {
+  if (!Platform.isAndroid) return;
+  var status = await canReadStorage();
+  if (status.isGranted) return;
+  // 展示无权限，去设置的对话框
+  var val = await NoPermissionDialog.show(context);
+  if (val == true) {
+    // 跳转到应用配置界面
+    var isCanOpen =  await openAppSettings();
+    debugLog("isCanOpen: $isCanOpen");
+  }else {
+    return await checkPermissionAlways(context);
+  }
+}
+
+
 class AlbumPickerView extends StatefulWidget {
   final Widget child;
   final bool isVideo;
@@ -38,35 +66,9 @@ class _AlbumPickerViewState extends State<AlbumPickerView> {
     super.initState();
   }
 
-  Future<PermissionStatus> canReadStorage() async{
-    AndroidDeviceInfo androidDeviceInfo = await  DeviceInfoPlugin().androidInfo;
-    String androidVersion = androidDeviceInfo.version.release;
-    late PermissionStatus status;
-    if(int.parse(androidVersion) <= 12){
-      status = await Permission.storage.request();
-    }else {
-      status = await Permission.photos.request();
-    }
-    return status;
-  }
-
-  Future _checkPermissionAlways() async {
-    if (!Platform.isAndroid) return;
-    var status = await canReadStorage();
-    if (status.isGranted) return;
-    // 展示无权限，去设置的对话框
-    var val = await NoPermissionDialog.show(context);
-    if (val == true) {
-      // 跳转到应用配置界面
-      var isCanOpen =  await openAppSettings();
-      debugLog("isCanOpen: $isCanOpen");
-    }else {
-      return await _checkPermissionAlways();
-    }
-  }
 
   void _pickerEvent() async {
-    await _checkPermissionAlways();
+    await checkPermissionAlways(context);
     List<Media> listMedia = await ImagePickers.pickerPaths(
       uiConfig: UIConfig(uiThemeColor: const Color(0xfff21313)),
       galleryMode: widget.isVideo ? GalleryMode.video : GalleryMode.image,

@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/api/im_api.dart';
@@ -12,9 +9,9 @@ import '../../../api/group_auth_info.dart';
 import '../model/group_detail_model.dart';
 
 class GroupSettingItem extends StatefulWidget {
-
   final GroupDetailModel? groupModel;
   final String? title;
+
   const GroupSettingItem({super.key, this.title, this.groupModel});
 
   @override
@@ -24,20 +21,20 @@ class GroupSettingItem extends StatefulWidget {
 }
 
 class _GroupSettingItemState extends State<GroupSettingItem> {
-
   GroupDetailModel? get groupModel => widget.groupModel;
+
   String get title => widget.title ?? "";
 
   bool get switchValue {
-    if(title == "允许全体发言"){
+    if (title == "允许全体发言") {
       return groupModel?.groupAuth?.allowAllSendMessage == 0;
-    }else if(title == "允许添加好友"){
+    } else if (title == "允许添加好友") {
       return groupModel?.groupAuth?.allowGroupMemberAdd == 0;
-    }else if(title == "允许成员退群"){
+    } else if (title == "允许成员退群") {
       return groupModel?.groupAuth?.allowGroupMemberExit == 0;
-    }else if(title == "显示群全成员"){
+    } else if (title == "显示群全成员") {
       return groupModel?.groupAuth?.showGroupMemberList == 0;
-    }else {
+    } else {
       return true;
     }
   }
@@ -48,46 +45,45 @@ class _GroupSettingItemState extends State<GroupSettingItem> {
   }
 
   bool _isLoading = false;
-  void _loadData(bool value) async {
-    if(_isLoading)return;
-    _isLoading = true;
-    if(title == "允许全体发言"){
-      groupModel?.groupAuth?.allowAllSendMessage = value ? 0 : 1;
-    }else if(title == "允许添加好友"){
-      groupModel?.groupAuth?.allowGroupMemberAdd = value ? 0 : 1;
-    }else if(title == "允许成员退群"){
-      groupModel?.groupAuth?.allowGroupMemberExit = value ? 0 : 1;
-    }else if(title == "显示群全成员"){
-      groupModel?.groupAuth?.showGroupMemberList = value ? 0 : 1;
-    }else {
 
-    }
+  void _loadData(bool value) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    if (title == "允许全体发言") {
+      groupModel?.groupAuth?.allowAllSendMessage = value ? 0 : 1;
+    } else if (title == "允许添加好友") {
+      groupModel?.groupAuth?.allowGroupMemberAdd = value ? 0 : 1;
+    } else if (title == "允许成员退群") {
+      groupModel?.groupAuth?.allowGroupMemberExit = value ? 0 : 1;
+    } else if (title == "显示群全成员") {
+      groupModel?.groupAuth?.showGroupMemberList = value ? 0 : 1;
+    } else {}
 
     setState(() {});
-   String? retStr =  await IMApi.groupEdit(groupNo: groupModel?.groupNo, authInfo: groupModel?.groupAuth);
-    if(retStr?.isNotEmpty == true){
-      if(title == "允许全体发言"){
+    String? retStr = await IMApi.groupEdit(
+      groupNo: groupModel?.groupNo,
+      name: groupModel?.name,
+      personalitySign: groupModel?.personalitySign,
+      authInfo: groupModel?.groupAuth,
+    );
+    if (retStr?.isNotEmpty == true) {
+      if (title == "允许全体发言") {
         groupModel?.groupAuth?.allowAllSendMessage = value ? 1 : 0;
-      }else if(title == "允许添加好友"){
+      } else if (title == "允许添加好友") {
         groupModel?.groupAuth?.allowGroupMemberAdd = value ? 1 : 0;
-      }else if(title == "允许成员退群"){
+      } else if (title == "允许成员退群") {
         groupModel?.groupAuth?.allowGroupMemberExit = value ? 1 : 0;
-      }else if(title == "显示群全成员"){
+      } else if (title == "显示群全成员") {
         groupModel?.groupAuth?.showGroupMemberList = value ? 1 : 0;
-      }else {
-
-      }
+      } else {}
       showToast(msg: retStr!);
-    }else {
-
-    }
+    } else {}
     _isLoading = false;
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: 50,
       decoration: const BoxDecoration(
@@ -105,7 +101,7 @@ class _GroupSettingItemState extends State<GroupSettingItem> {
             ),
           ),
           const Spacer(),
-          if(_isLoading)
+          if (_isLoading)
             Container(
               padding: const EdgeInsets.only(right: 2),
               child: const CupertinoActivityIndicator(

@@ -1,16 +1,27 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_pickers/image_pickers.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/page/chat/group_edit_txt_page.dart';
 import 'package:imchat/page/chat/model/group_detail_model.dart';
 import 'package:imchat/page/chat/view/group_setting_item.dart';
 import 'package:imchat/page/create_group/group_add_friend_page.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
+import 'package:imchat/tool/image/custom_new_image.dart';
 import 'package:imchat/tool/loading/empty_error_widget.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/utils/toast_util.dart';
+
+import '../../api/file_api.dart';
+import '../../tool/loading/loading_alert_widget.dart';
+import '../../tool/network/dio_base.dart';
+import 'chat_view/album_picker_view.dart';
 
 class GroupDetailPage extends StatefulWidget {
   final String groupNo;
@@ -47,7 +58,46 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
     setState(() {});
   }
 
-  void _functionEvent(String title, bool isValue) {}
+  void setHeadImageEvent() async {
+    await checkPermissionAlways(context);
+    List<Media> listMedia = await ImagePickers.pickerPaths(
+      uiConfig: UIConfig(uiThemeColor: const Color(0xfff21313)),
+      galleryMode: GalleryMode.image,
+      selectCount: 1,
+      showCamera: true,
+    );
+    if (listMedia.isEmpty) {
+      return;
+    }
+    LoadingAlertWidget.show(context);
+    try {
+      LoadingAlertWidget.showExchangeTitle("正在上传头像");
+      String? headImage = await FileAPi.updateImg(listMedia.first.path ?? "");
+      if (headImage?.isNotEmpty == true) {
+        LoadingAlertWidget.showExchangeTitle("正在更新数据...");
+        String? retStr = await IMApi.groupEdit(
+          groupNo: groupModel?.groupNo,
+          name: groupModel?.name,
+          headImage: headImage,
+          personalitySign: groupModel?.personalitySign,
+          authInfo: groupModel?.groupAuth,
+        );
+        if (retStr?.isNotEmpty == true) {
+          showToast(msg: retStr!);
+        } else {
+          groupModel?.localPath = listMedia.first.path;
+          setState(() {});
+        }
+      } else {
+        showToast(msg: "头像上传失败");
+      }
+      LoadingAlertWidget.cancel(context);
+    } catch (e) {
+      LoadingAlertWidget.cancel(context);
+      showToast(msg: "更新头像失败");
+      debugLog(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +126,26 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
           child: Column(
             children: [
+              InkWell(
+                onTap: () {
+                  if (isAdmin) {
+                    setHeadImageEvent();
+                  }
+                },
+                child: groupModel?.localPath?.isNotEmpty == true
+                    ? Image.file(
+                        File(groupModel!.localPath!),
+                        width: 80,
+                        height: 80,
+                  fit: BoxFit.cover,
+                      )
+                    : CustomNewImage(
+                        imageUrl: groupModel?.headImage,
+                        width: 80,
+                        height: 80,
+                      ),
+              ),
+              const SizedBox(height: 16),
               InkWell(
                 onTap: () async {
                   if (isAdmin) {
@@ -179,7 +249,9 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                   fontSize: 12,
                 ),
               ),
-            ),
+            )
+          else
+            const Spacer(),
           if (isAdmin)
             const Icon(
               Icons.arrow_forward_ios,

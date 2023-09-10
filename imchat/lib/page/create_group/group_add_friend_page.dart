@@ -71,17 +71,19 @@ class _GroupAddFriendPageState extends State<GroupAddFriendPage> {
     }
     LoadingAlertWidget.show(context);
     List<String> listMemberNo = selectItemArr.map((e) => e.memberNo ?? "").toList();
-    var ret;
+    String? ret;
     if(widget.isDelete){
       ret = await IMApi.groupDeleteMember(widget.groupNo, listMemberNo);
     }else {
+     var existNo = friendList?.where((element) =>  element.isSelected == 0).toList().map((e) => e.memberNo ?? "").toList();
+      listMemberNo.addAll(existNo ?? []);
       ret = await IMApi.groupAddMember(widget.groupNo, listMemberNo);
     }
     LoadingAlertWidget.cancel(context);
-    if (ret.isNotEmpty == true) {
-      showToast(msg: ret);
+    if (ret?.isNotEmpty == true) {
+      showToast(msg: ret!);
     } else {
-      showToast(msg: "添加成功");
+      showToast(msg: widget.isDelete ?  "删除成功" : "添加成功");
       Navigator.pop(context, true);
     }
   }

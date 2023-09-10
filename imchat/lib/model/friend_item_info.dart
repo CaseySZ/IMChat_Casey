@@ -77,7 +77,7 @@ class FriendItemGroupInfo {
   String? memberNickName;
   String? memberHeadImage;
   String? memberPersonalitySign;
-  int? isSelected;
+  int? isSelected; // (0-选中，1-未选)
 
   FriendItemGroupInfo.fromJson(Map<String, dynamic> json) {
     memberNo = json['memberNo'];

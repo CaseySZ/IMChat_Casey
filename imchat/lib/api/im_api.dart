@@ -274,7 +274,7 @@ class IMApi {
   static Future<String> groupAddMember(String groupNo, List<String> listMemberNo) async {
     try {
       Response? response = await DioBase.instance.post(
-        "/api/group/find",
+        "/api/group/member/edit",//"/api/group/find",
         {"groupNo": groupNo, "listMemberNo": listMemberNo},
       );
       if (response?.isSuccess == true) {
