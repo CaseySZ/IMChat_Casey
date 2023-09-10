@@ -5,10 +5,13 @@ import 'package:imchat/model/group_item_model.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/loading/empty_error_widget.dart';
 
+import '../../model/friend_item_info.dart';
 import '../../protobuf/model/base.pb.dart';
+import '../../routers/router_map.dart';
 import '../../tool/image/custom_new_image.dart';
 import '../../web_socket/web_message_type.dart';
 import '../../web_socket/web_socket_model.dart';
+import '../chat/model/chat_record_model.dart';
 
 class MyGroupPage extends StatefulWidget {
   const MyGroupPage({super.key});
@@ -20,9 +23,7 @@ class MyGroupPage extends StatefulWidget {
 }
 
 class _MyGroupPageState extends State<MyGroupPage> {
-  List<GroupItemInfo> get chatArr => GlobalData.groupList;
-
-  String get chatContent => "";
+  List<GroupItemInfo> get groupArr => GlobalData.groupList;
 
   @override
   void initState() {
@@ -44,13 +45,13 @@ class _MyGroupPageState extends State<MyGroupPage> {
         title: "群组".localize,
         elevation: 0.3,
       ),
-      body: chatArr.isEmpty
-          ? const EmptyErrorWidget(errorMsg: "暂未加入群聊哦!",)
+      body: groupArr.isEmpty
+          ? EmptyErrorWidget(errorMsg: "暂未加入群聊哦!".localize,)
           : ListView.builder(
-              itemCount: chatArr.length,
+              itemCount: groupArr.length,
               itemBuilder: (context, index) {
                 return _buildItem(
-                  chatArr[index],
+                  groupArr[index],
                 );
               },
             ),
@@ -60,16 +61,14 @@ class _MyGroupPageState extends State<MyGroupPage> {
   Widget _buildItem(GroupItemInfo model) {
     return InkWell(
       onTap: () async {
-        // FriendItemInfo itemModel = FriendItemInfo.fromJson({});
-        // itemModel.friendNo = model?.targetNo;
-        // itemModel.contentType = model?.contentType;
-        // itemModel.nickName = model?.nickName;
-        // var result = await Navigator.pushNamed(context, AppRoutes.chat_detail, arguments: itemModel);
-        // if (result is ChatRecordModel) {
-        //   model?.contentType = result.contentType;
-        //   model?.content = result.content;
-        //   setState(() {});
-        // }
+        FriendItemInfo itemModel = FriendItemInfo.fromJson({});
+        itemModel.friendNo = model.groupNo;
+        itemModel.targetType = 1;
+        itemModel.nickName = model.name;
+        var result = await Navigator.pushNamed(context, AppRoutes.chat_detail, arguments: itemModel);
+        if (result is ChatRecordModel) {
+          setState(() {});
+        }
       },
       child: Container(
         height: 56,
@@ -107,7 +106,7 @@ class _MyGroupPageState extends State<MyGroupPage> {
                       children: [
                         Expanded(
                           child: Text(
-                            chatContent,
+                            "公告：${model.personalitySign ?? ""}",
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               color: Color(0xff666666),

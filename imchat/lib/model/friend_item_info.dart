@@ -48,7 +48,7 @@ class FriendItemInfo {
   int? messageNum;
   String? personalitySign;
   String? targetNo;
-  int? targetType;
+  int? targetType; // 0 , 1 群聊
 
   FriendItemInfo.fromJson(Map<String, dynamic> json) {
     friendNo = json['friendNo'];

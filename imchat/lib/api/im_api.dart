@@ -9,6 +9,7 @@ import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
+import '../page/chat/model/group_detail_model.dart';
 import '../tool/network/dio_base.dart';
 
 class IMApi {
@@ -132,7 +133,7 @@ class IMApi {
     }
   }
 
-  // (contentType 0文字，1图片，2语言，3文件)
+  // (contentType 0文字，1图片，2语音，3文件)
   static Future<String?> sendMsg(String friendNo, String content, int contentType) async {
     try {
       Response? response = await DioBase.instance.post(
@@ -211,23 +212,32 @@ class IMApi {
   }
 
   // 群编辑
-  static Future<String?> groupEdit(
-    String groupNo,
-    String headImage,
-    String name,
-    String personalitySign,
-    GroupAuthInfo authInfo,
-  ) async {
+  static Future<String?> groupEdit({
+    String? groupNo,
+    String? headImage,
+    String? name,
+    String? personalitySign,
+    GroupAuthModel? authInfo,
+  }) async {
     try {
       Map<String, dynamic> groupAuth = {
-        "allowAllSendMessage": authInfo.allowAllSendMessage,
-        "allowGroupMemberAdd": authInfo.allowGroupMemberAdd,
-        "allowGroupMemberExit": authInfo.allowGroupMemberExit,
-        "showGroupMemberList": authInfo.showGroupMemberList,
+        "allowAllSendMessage": authInfo?.allowAllSendMessage,
+        "allowGroupMemberAdd": authInfo?.allowGroupMemberAdd,
+        "allowGroupMemberExit": authInfo?.allowGroupMemberExit,
+        "showGroupMemberList": authInfo?.showGroupMemberList,
       };
+      groupAuth.removeWhere((k, v) => v == null);
+      Map<String, dynamic> param = {
+        'groupNo': groupNo,
+        "headImage": headImage,
+        "name": name,
+        "personalitySign": personalitySign,
+        "groupAuth": groupAuth.isNotEmpty ? groupAuth : null,
+      };
+      param.removeWhere((k, v) => v == null);
       Response? response = await DioBase.instance.post(
         "/api/group/edit",
-        {"headImage": headImage, "name": name, "personalitySign": personalitySign, groupAuth: groupAuth},
+        param,
       );
       if (response?.isSuccess == true) {
         return "";
@@ -454,7 +464,8 @@ class IMApi {
       };
       param.removeWhere((key, value) => value == null);
       Response? response = await DioBase.instance.post(
-        "/api/member/edit", param,
+        "/api/member/edit",
+        param,
       );
       if (response?.isSuccess == true) {
         return "";
@@ -470,9 +481,7 @@ class IMApi {
   //会员个人信息
   static Future<Response?> getUserInfo() async {
     try {
-      Response? response = await DioBase.instance.post(
-        "/api/member/info",{}
-      );
+      Response? response = await DioBase.instance.post("/api/member/info", {});
       return response;
     } catch (e) {
       debugLog(e);
@@ -487,9 +496,7 @@ class IMApi {
   // 搜索 会员分页
   static Future<Response?> searchUser(String searchContent) async {
     try {
-      Response? response = await DioBase.instance.post(
-        "/api/member/page",{"searchContent": searchContent}
-      );
+      Response? response = await DioBase.instance.post("/api/member/page", {"searchContent": searchContent});
       return response;
     } catch (e) {
       debugLog(e);
@@ -504,9 +511,7 @@ class IMApi {
   // 删除消息
   static Future<String?> chatMsgDelete(String memberChatRecordId) async {
     try {
-      Response? response = await DioBase.instance.post(
-          "/api/memberChatRecord/remove",{"memberChatRecordId": memberChatRecordId}
-      );
+      Response? response = await DioBase.instance.post("/api/memberChatRecord/remove", {"memberChatRecordId": memberChatRecordId});
       if (response?.isSuccess == true) {
         return "";
       } else {
@@ -519,11 +524,10 @@ class IMApi {
   }
 
   // 好友昵称备注
-  static Future<String?> setFriendNickName(String friendNo,String nickNameRemark) async {
+  static Future<String?> setFriendNickName(String friendNo, String nickNameRemark) async {
     try {
-      Response? response = await DioBase.instance.post(
-          "/api/memberFriend/friendRemark",{"friendNo": friendNo, "nickNameRemark": nickNameRemark}
-      );
+      Response? response =
+          await DioBase.instance.post("/api/memberFriend/friendRemark", {"friendNo": friendNo, "nickNameRemark": nickNameRemark});
       if (response?.isSuccess == true) {
         return "";
       } else {
@@ -534,5 +538,4 @@ class IMApi {
       return e.toString();
     }
   }
-
 }

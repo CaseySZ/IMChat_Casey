@@ -86,7 +86,11 @@ class WebSocketModel {
   }
 
   static _parseMessage(Protocol protocol){
-    debugLog("webSocket:${protocol.cmd}, code: ${protocol.code}, data: ${protocol.data}");
+    if(protocol.cmd == MessageType.heart.responseName){
+
+    }else {
+      debugLog("webSocket:${protocol.cmd}, code: ${protocol.code}, data: ${protocol.data}");
+    }
     if(protocol.cmd == MessageType.login.responseName){
       if(protocol.isSuccess){
         WebSocketModel.isConnectSocketSuccess = true;

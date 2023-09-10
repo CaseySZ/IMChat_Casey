@@ -3,6 +3,7 @@ import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 
 import '../../../tool/image/custom_new_image.dart';
 import '../model/chat_record_model.dart';
+import 'chat_item_audio_widget.dart';
 
 class ChatItemLeftWidget extends StatelessWidget {
   final ChatRecordModel? model;
@@ -53,7 +54,9 @@ class ChatItemLeftWidget extends StatelessWidget {
           height: 96,
         ),
       );
-    } else {
+    } else if (model?.contentType == 2 || model?.contentType == 3) {
+      return ChatItemAudioWidget(model: model, isLeftStyle: true,);
+    }else {
       return Flexible(
         child: Container(
           padding: const EdgeInsets.symmetric(

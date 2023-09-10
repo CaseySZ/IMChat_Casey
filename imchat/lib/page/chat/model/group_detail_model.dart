@@ -19,7 +19,13 @@ class GroupDetailModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = {
+      "groupNo":groupNo,
+      "headImage":headImage,
+      "name": name,
+      "personalitySign": personalitySign,
+      "groupAuth": groupAuth?.toJson,
+    };
     return data;
   }
 }
@@ -41,7 +47,12 @@ class GroupAuthModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = {
+      "allowAllSendMessage": allowAllSendMessage,
+      "allowGroupMemberAdd": allowGroupMemberAdd,
+      "allowGroupMemberExit": allowGroupMemberExit,
+      "showGroupMemberList": showGroupMemberList,
+    };
     return data;
   }
 }

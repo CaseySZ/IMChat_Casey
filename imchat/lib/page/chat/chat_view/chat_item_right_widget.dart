@@ -96,9 +96,9 @@ class ChatItemRightWidget extends StatelessWidget {
                 height: 96,
               ),
       );
-    } if(model?.contentType == 2) {
+    } else if (model?.contentType == 2 || model?.contentType == 3) {
       return ChatItemAudioWidget(model: model);
-  } else {
+    } else {
       return Flexible(
         child: Container(
           padding: const EdgeInsets.symmetric(

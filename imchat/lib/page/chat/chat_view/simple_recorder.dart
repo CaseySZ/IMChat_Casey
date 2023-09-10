@@ -63,11 +63,8 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
 
   Codec _codec = Codec.aacMP4;
   String _mPath = 'tau_file.mp4';
-  FlutterSoundPlayer? _mPlayer = FlutterSoundPlayer();
   FlutterSoundRecorder? _mRecorder = FlutterSoundRecorder();
-  bool _mPlayerIsInited = false;
   bool _mRecorderIsInited = false;
-  bool _mplaybackReady = false;
   Timer? timer;
 
   String get audioRealPath {
@@ -78,7 +75,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
   void initState() {
     _mPath = '${DateTime.now().millisecondsSinceEpoch}tau_file.mp4';
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      statusInit();
+       //statusInit();
     });
     super.initState();
   }
@@ -108,21 +105,8 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
       setState(() {});
     });
     setState(() {});
-    _mPlayer!.openPlayer().then((value) {
-      setState(() {
-        _mPlayerIsInited = true;
-      });
-    });
   }
 
-  @override
-  void dispose() {
-    _mPlayer!.closePlayer();
-    _mPlayer = null;
-    _mRecorder!.closeRecorder();
-    _mRecorder = null;
-    super.dispose();
-  }
 
   Future<void> openTheRecorder() async {
     if (!kIsWeb) {
@@ -159,63 +143,22 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
     _mRecorderIsInited = true;
   }
 
-  // ----------------------  Here is the code for recording and playback -------
-
   void recordEvent() async{
-    _mRecorder!
+    await _mRecorder!
         .startRecorder(
       toFile: audioRealPath,
       codec: _codec,
       audioSource: theSource,
-    )
-        .then((value) {
-      setState(() {});
-    });
+    );
   }
 
-  void stopRecorder() async {
+  Future stopRecorder() async {
     var url =  await _mRecorder!.stopRecorder();
-    _mplaybackReady = true;
-    debugLog(url);
-    setState(() {});
+    debugLog("finish recorder: $url");
   }
 
-  void play() {
-    _mPath = "https://pking.s3.ap-east-1.amazonaws.com/1688137351215321088.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230909T155613Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Credential=AKIA4TG4XTMLKOHIWMNR%2F20230909%2Fap-east-1%2Fs3%2Faws4_request&X-Amz-Signature=5f2c0347ce224023cd11e42905c040b1ee1022e7fd3ee94528cc3c341a5ba94f";
-    assert(_mPlayerIsInited && _mplaybackReady && _mRecorder!.isStopped && _mPlayer!.isStopped);
-    _mPlayer!
-        .startPlayer(
-            fromURI: _mPath,
-            codec: kIsWeb ? Codec.opusWebM : Codec.aacADTS,
-            whenFinished: () {
-              setState(() {});
-            })
-        .then((value) {
-      setState(() {});
-    });
-  }
 
-  void stopPlayer() {
-    _mPlayer!.stopPlayer().then((value) {
-      setState(() {});
-    });
-  }
 
-// ----------------------------- UI --------------------------------------------
-
-  _Fn? getRecorderFn() {
-    if (!_mRecorderIsInited || !_mPlayer!.isStopped) {
-      return null;
-    }
-    return _mRecorder!.isStopped ? recordEvent : stopRecorder;
-  }
-
-  _Fn? getPlaybackFn() {
-    if (!_mPlayerIsInited || !_mplaybackReady || !_mRecorder!.isStopped) {
-      return null;
-    }
-    return _mPlayer!.isStopped ? play : stopPlayer;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -226,26 +169,19 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
       },
       child: Scaffold(
         backgroundColor: Colors.black.withOpacity(0.3),
-        appBar: BaseAppBar(
-          titleWidget: ElevatedButton(
-            onPressed: getPlaybackFn(),
-            //color: Colors.white,
-            //disabledColor: Colors.grey,
-            child: Text(_mPlayer!.isPlaying ? 'Stop' : 'Play'),
-          ),
-        ),
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               InkWell(
-                onTap: () {
-                  stopRecorder();
+                onTap: ()  async{
                   timer?.cancel();
+                  await stopRecorder();
                   if (timerCount < 2) {
                     showToast(msg: "语音时间太短, 发送已被取消");
                     widget.callback?.call("", false);
                   } else {
+
                     widget.callback?.call(audioRealPath, true);
                   }
                 },
@@ -305,7 +241,8 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
                 onTap: () {
                   stopRecorder();
                   timer?.cancel();
-                  widget.callback?.call("", false);
+                  widget.callback?.call("/sdcard/audioIM/1694318993249tau_file.mp4", true);
+                 // widget.callback?.call("", false);
                 },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -332,5 +269,12 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _mRecorder!.closeRecorder();
+    _mRecorder = null;
+    super.dispose();
   }
 }

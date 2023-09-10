@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:14:5-47:19
+INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:22:5-55:19
 MERGED from [:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-14:19
 MERGED from [:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-14:19
 MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:33:5-66:19
@@ -30,11 +30,11 @@ MERGED from [com.github.bumptech.glide:gifdecoder:4.13.2] /Users/sy/.gradle/cach
 	android:name
 		INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml
 manifest
-ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-48:12
-INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-48:12
-INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-48:12
-INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-48:12
-MERGED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-48:12
+ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-56:12
+INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-56:12
+INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-56:12
+INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-56:12
+MERGED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-56:12
 MERGED from [:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-16:12
 MERGED from [:path_provider_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:flutter_native_splash] /Users/sy/Documents/GitHub/IMChat/imchat/build/flutter_native_splash/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
@@ -104,15 +104,15 @@ INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/debug/And
 INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 	package
 		INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-48:12
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-56:12
 		INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/debug/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-48:12
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-56:12
 		INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-48:12
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:1-56:12
 		INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:1:11-69
@@ -170,6 +170,42 @@ MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/imag
 MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-71
 	android:name
 		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:10:22-68
+uses-permission#android.permission.MODIFY_AUDIO_SETTINGS
+ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:12:5-80
+MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:13:5-80
+MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:13:5-80
+	android:name
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:12:22-77
+uses-permission#android.permission.BLUETOOTH
+ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:13:5-68
+MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:11:5-68
+MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:11:5-68
+	android:name
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:13:22-65
+uses-permission#Manifest.permission.CAPTURE_AUDIO_OUTPUT
+ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:14:5-80
+	android:name
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:14:22-77
+uses-permission#android.permission.KILL_BACKGROUND_PROCESSES
+ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:15:5-84
+	android:name
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:15:22-81
+uses-permission#android.permission.READ_MEDIA_IMAGES
+ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:17:5-76
+MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:18:5-76
+MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:18:5-76
+	android:name
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:17:22-73
+uses-permission#android.permission.READ_MEDIA_AUDIO
+ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:18:5-75
+	android:name
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:18:22-72
+uses-permission#android.permission.READ_MEDIA_VIDEO
+ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:19:5-75
+MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:19:5-75
+MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:19:5-75
+	android:name
+		ADDED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:19:22-72
 uses-sdk
 INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml
@@ -320,14 +356,6 @@ ADDED from [:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/buil
 		ADDED from [:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
 	android:name
 		ADDED from [:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
-uses-permission#android.permission.READ_MEDIA_IMAGES
-ADDED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:18:5-76
-	android:name
-		ADDED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:18:22-73
-uses-permission#android.permission.READ_MEDIA_VIDEO
-ADDED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:19:5-75
-	android:name
-		ADDED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:19:22-72
 queries
 ADDED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:22:5-31:15
 MERGED from [androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/87f7f74cb21e8c4406a8ec1bece2d0ee/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:24:5-34:15
@@ -398,18 +426,10 @@ ADDED from [androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transf
 		ADDED from [androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/cbf0e98437bff11c0ba1af5b4c9b587a/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
 	android:name
 		ADDED from [androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/cbf0e98437bff11c0ba1af5b4c9b587a/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-uses-permission#android.permission.BLUETOOTH
-ADDED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:11:5-68
-	android:name
-		ADDED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:11:22-65
 uses-permission#android.permission.WAKE_LOCK
 ADDED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:12:5-68
 	android:name
 		ADDED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:12:22-65
-uses-permission#android.permission.MODIFY_AUDIO_SETTINGS
-ADDED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:13:5-80
-	android:name
-		ADDED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/ad1a4c243868ae0701bdffe77bca44c8/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:13:22-77
 intent#action:name:android.media.browse.MediaBrowserService
 ADDED from [androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/87f7f74cb21e8c4406a8ec1bece2d0ee/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:25:9-27:18
 action#android.media.browse.MediaBrowserService

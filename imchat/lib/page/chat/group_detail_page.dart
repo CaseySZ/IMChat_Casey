@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/api/im_api.dart';
+import 'package:imchat/page/chat/group_edit_txt_page.dart';
 import 'package:imchat/page/chat/model/group_detail_model.dart';
+import 'package:imchat/page/chat/view/group_setting_item.dart';
 import 'package:imchat/page/create_group/group_add_friend_page.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/loading/empty_error_widget.dart';
@@ -24,6 +26,8 @@ class GroupDetailPage extends StatefulWidget {
 class _GroupDetailPageState extends State<GroupDetailPage> {
   GroupDetailModel? groupModel;
 
+  bool get isAdmin => groupModel?.isAdmin == 0;
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +46,8 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
     groupModel ??= GroupDetailModel();
     setState(() {});
   }
+
+  void _functionEvent(String title, bool isValue) {}
 
   @override
   Widget build(BuildContext context) {
@@ -70,29 +76,74 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
           child: Column(
             children: [
-              _buldItem("群聊名称", rightTitle: groupModel?.name),
-              _buldItem("群公告", rightTitle: groupModel?.personalitySign),
               InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return GroupAddFriendPage(groupNo: widget.groupNo);
-                  }));
+                onTap: () async {
+                  if (isAdmin) {
+                    await Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return GroupEditTxtPage(
+                        groupModel: groupModel,
+                        title: "群聊名称",
+                      );
+                    }));
+                    setState(() {});
+                  }
                 },
-                child: _buldItem("群成员添加", rightTitle: ""),
+                child: _buldItem("群聊名称", rightTitle: groupModel?.name),
               ),
               InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return GroupAddFriendPage(groupNo: widget.groupNo, isDelete: true,);
-                  }));
+                onTap: () async {
+                  if (isAdmin) {
+                    await Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return GroupEditTxtPage(
+                        groupModel: groupModel,
+                        title: "群公告",
+                      );
+                    }));
+                    setState(() {});
+                  }
                 },
-                child: _buldItem("群成员删除", rightTitle: ""),
+                child: _buldItem(
+                  "群公告",
+                  rightTitle: groupModel?.personalitySign,
+                ),
               ),
-              _buldItem("禁止全体发言", isSwicth: true),
-              _buldItem("允许添加好友", isSwicth: true),
-              _buldItem("允许成员退群", isSwicth: true),
-              _buldItem("显示群全成员", isSwicth: true),
-
+              if (isAdmin) ...[
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return GroupAddFriendPage(groupNo: widget.groupNo);
+                    }));
+                  },
+                  child: _buldItem("群成员添加", rightTitle: ""),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return GroupAddFriendPage(
+                        groupNo: widget.groupNo,
+                        isDelete: true,
+                      );
+                    }));
+                  },
+                  child: _buldItem("群成员删除", rightTitle: ""),
+                ),
+                GroupSettingItem(
+                  groupModel: groupModel,
+                  title: "允许全体发言",
+                ),
+                GroupSettingItem(
+                  groupModel: groupModel,
+                  title: "允许添加好友",
+                ),
+                GroupSettingItem(
+                  groupModel: groupModel,
+                  title: "允许成员退群",
+                ),
+                GroupSettingItem(
+                  groupModel: groupModel,
+                  title: "显示群全成员",
+                ),
+              ],
             ],
           ),
         ),
@@ -100,9 +151,9 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
     }
   }
 
-  Widget _buldItem(String title, {String? rightTitle, bool isSwicth = false}) {
+  Widget _buldItem(String title, {String? rightTitle}) {
     return Container(
-      height: 50,
+      padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Color(0xfff1f1f1)),
@@ -117,24 +168,24 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
               fontSize: 14,
             ),
           ),
-          const Spacer(),
-          if(rightTitle?.isNotEmpty == true)
-            Text(
-              rightTitle ?? "",
-              style: const TextStyle(
-                color: Color(0xff999999),
-                fontSize: 12,
+          const SizedBox(width: 16),
+          if (rightTitle?.isNotEmpty == true)
+            Expanded(
+              child: Text(
+                rightTitle ?? "",
+                textAlign: TextAlign.end,
+                style: const TextStyle(
+                  color: Color(0xff999999),
+                  fontSize: 12,
+                ),
               ),
             ),
-          if(isSwicth)
-            Switch(
-              value: false,
-              onChanged: (value){
-
-              },
-            ),
-          if(isSwicth == false)
-          const Icon(Icons.arrow_forward_ios, color: Color(0xffcccccc), size: 16,)
+          if (isAdmin)
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Color(0xffcccccc),
+              size: 16,
+            )
         ],
       ),
     );

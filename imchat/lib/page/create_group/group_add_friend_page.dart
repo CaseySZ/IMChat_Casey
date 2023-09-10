@@ -90,7 +90,6 @@ class _GroupAddFriendPageState extends State<GroupAddFriendPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        leading: const SizedBox(),
         title: "群成员".localize,
         actions: [
           InkWell(

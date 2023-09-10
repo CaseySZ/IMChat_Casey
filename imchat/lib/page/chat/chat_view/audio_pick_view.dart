@@ -35,12 +35,12 @@ class _AudioPickerViewState extends State<AudioPickerView> {
         builder: (context) {
           return SimpleRecorder(
             callback: (filePath, isSend) {
-              // Navigator.pop(context);
-              // if (isSend == false && filePath.isNotEmpty) {
-              //   _showAlert(filePath);
-              // } else if (filePath.isNotEmpty) {
-              //   sendAudioMsg(filePath);
-              // }
+              Navigator.pop(context);
+              if (isSend == false && filePath.isNotEmpty) {
+                _showAlert(filePath);
+              } else if (filePath.isNotEmpty) {
+                sendAudioMsg(filePath);
+              }
             },
           );
         });
