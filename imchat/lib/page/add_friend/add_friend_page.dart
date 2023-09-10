@@ -71,7 +71,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: "搜索好友",
+        title: "搜索好友".localize,
       ),
       body: Container(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),

@@ -142,7 +142,7 @@ class _MinePageState extends State<MinePage> {
       },
       child: Container(
         margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-        height: 56,
+        height: 60,
         child: Row(
           children: [
             CustomNewImage(

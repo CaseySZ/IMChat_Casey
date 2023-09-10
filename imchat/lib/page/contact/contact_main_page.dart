@@ -126,17 +126,17 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
         margin: const EdgeInsets.symmetric(horizontal: 10),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(color: const Color(0xfff6f7fb), borderRadius: BorderRadius.circular(30)),
-        child: const Row(
+        child:  Row(
           children: [
-            Icon(
+            const  Icon(
               Icons.search,
               size: 16,
               color: Color(0xff999999),
             ),
-            SizedBox(width: 8),
+            const  SizedBox(width: 8),
             Text(
-              "搜索好友",
-              style: TextStyle(
+              "搜索好友".localize,
+              style: const TextStyle(
                 fontSize: 14,
                 color: Color(0xff999999),
               ),

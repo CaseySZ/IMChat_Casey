@@ -63,7 +63,7 @@ class _AddFriendCellState extends State<AddFriendCell> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: 54,
+            height: 60,
             color: Colors.white,
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
             child: Row(

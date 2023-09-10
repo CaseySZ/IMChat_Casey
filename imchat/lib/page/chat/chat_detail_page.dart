@@ -95,7 +95,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         if (MediaQuery.of(context).viewInsets.bottom == 0) {
           // 关闭键盘
         } else {
-          keyboardSize = MediaQuery.of(context).viewInsets.bottom;
+          double height = MediaQuery.of(context).viewInsets.bottom;
+          if(height > keyboardSize){
+            keyboardSize = height;
+          }
         }
       }
     });

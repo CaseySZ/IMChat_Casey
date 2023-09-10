@@ -66,9 +66,18 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
   FlutterSoundRecorder? _mRecorder = FlutterSoundRecorder();
   bool _mRecorderIsInited = false;
   Timer? timer;
+  String _iosBasePath = "";
+  String get basePah {
+    if(Platform.isIOS){
+      return _iosBasePath;
+    }else {
+      return "/sdcard/audioIM";
+    }
+
+  }
 
   String get audioRealPath {
-    return "/sdcard/audioIM/$fileName";
+    return "$basePah/$fileName";
   }
 
   @override
@@ -81,13 +90,17 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
   }
 
   void statusInit() async {
+    if(Platform.isIOS) {
+      Directory directory = await getTemporaryDirectory();
+      _iosBasePath = directory.path;
+    }
     bool isAgree = await Permission.storage.request().isGranted;
     if(!isAgree){
       showToast(msg: "请打开存储权限");
       await openAppSettings();
       return;
     }
-    String saveDir = "/sdcard/audioIM";
+    String saveDir = basePah;
     Directory root = Directory(saveDir);
 
     if (!root.existsSync()) {
