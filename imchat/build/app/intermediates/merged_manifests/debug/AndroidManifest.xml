@@ -68,7 +68,7 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="imchat"
+        android:label="IMChat"
         android:networkSecurityConfig="@xml/net_sec"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true" >

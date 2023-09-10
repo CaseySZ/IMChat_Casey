@@ -131,7 +131,7 @@
 68-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/4acfdeb2adf0fe3e0971430d521282ce/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
 69        android:debuggable="true"
 70        android:icon="@mipmap/ic_launcher"
-71        android:label="imchat"
+71        android:label="IMChat"
 72        android:networkSecurityConfig="@xml/net_sec"
 72-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/debug/AndroidManifest.xml:34:9-53
 73        android:requestLegacyExternalStorage="true"

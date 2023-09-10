@@ -34,6 +34,7 @@
     <string msgid="6107532579223922871" name="call_notification_incoming_text">"來電"</string>
     <string msgid="8623827134497363134" name="call_notification_ongoing_text">"通話中"</string>
     <string msgid="59049573811482460" name="call_notification_screening_text">"正在過濾來電"</string>
+    <string msgid="7213672915724563695" name="default_notification_channel_name">"現正播放"</string>
     <string name="exo_download_completed">下載完成</string>
     <string name="exo_download_description">下載</string>
     <string name="exo_download_downloading">下載中</string>
@@ -43,6 +44,8 @@
     <string name="exo_download_paused_for_network">系統會等到連上網路後再開始下載</string>
     <string name="exo_download_paused_for_wifi">系統會等到連上 Wi-Fi 後再開始下載</string>
     <string name="exo_download_removing">正在移除下載內容</string>
+    <string msgid="3510124037191104584" name="pause_button_content_description">"暫停"</string>
+    <string msgid="963503759453979404" name="play_button_content_description">"播放"</string>
     <string name="ps_all_audio">所有音頻</string>
     <string name="ps_audio">獲取系統錄音權限被拒絕</string>
     <string name="ps_audio_empty">妳可以使用系統錄音錄制音頻</string>
@@ -120,6 +123,8 @@
     <string name="ps_warning">暫無媒體文件！</string>
     <string name="ps_webp_tag">webp</string>
     <string msgid="6264217191555673260" name="search_menu_title">"搜尋"</string>
+    <string msgid="6034072145387511457" name="skip_to_next_item_button_content_description">"跳到下一個項目"</string>
+    <string msgid="4352480799561670760" name="skip_to_previous_item_button_content_description">"跳到上一個項目"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
     <string name="ucrop_gif_tag">動圖</string>
     <string name="ucrop_label_edit_photo">裁切</string>

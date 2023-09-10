@@ -1098,6 +1098,7 @@ drawable ic_skip_next_on
 drawable ic_skip_prev_off
 drawable ic_skip_prev_on
 drawable launch_background
+drawable launch_bg
 drawable loading_bg
 drawable media_session_service_notification_ic_music_note
 drawable media_session_service_notification_ic_pause
@@ -1754,6 +1755,7 @@ layout ucrop_layout_scale_wheel
 layout ucrop_view
 menu ucrop_menu_activity
 mipmap ic_launcher
+mipmap ic_splash
 raw ps_click_music
 raw warner_tautz_off_broadway
 string abc_action_bar_home_description

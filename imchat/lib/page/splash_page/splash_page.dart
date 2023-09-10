@@ -33,10 +33,16 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    FlutterNativeSplash.remove();
+    _launchImageKeepDelay();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) { 
       _loadData();
     });
+  }
+
+  void _launchImageKeepDelay() async {
+    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
+    FlutterNativeSplash.remove();
   }
 
   void _loadData() async{
@@ -70,9 +76,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     screen.configData(context);
     return Scaffold(
-      body: Container(
-        color: Colors.red,
-      ),
+      body: Image.asset("assets/images/ic_splash.png", fit: BoxFit.fill,),
     );
 
   }
