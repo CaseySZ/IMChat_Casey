@@ -9,7 +9,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  WebSocketModel.init();
   runApp(RefreshConfiguration(
     headerBuilder: () => WaterDropHeader(
       complete: Text(

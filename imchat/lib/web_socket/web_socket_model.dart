@@ -77,7 +77,7 @@ class WebSocketModel {
     });
   }
 
-  static _retryConnect() {
+  static retryConnect() {
     channel =  IOWebSocketChannel.connect('ws://8.217.117.185:9090');
     channel?.stream.listen((message) {
       Protocol protocol = Protocol.fromBuffer(message);
@@ -108,7 +108,7 @@ class WebSocketModel {
 
     if(protocol.cmd == MessageType.exit.responseName){
       WebSocketModel.isConnectSocketSuccess = false;
-      _retryConnect();
+     // retryConnect();
     }
     notifyListeners(protocol);
   }

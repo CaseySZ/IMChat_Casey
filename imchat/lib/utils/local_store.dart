@@ -14,6 +14,12 @@ class LocalStore {
     return preferences.getString(_pwdKey);
   }
 
+  static Future<String?>  removePassword() async {
+    SharedPreferences preferences =  await SharedPreferences.getInstance();
+    preferences.remove(_pwdKey);
+  }
+
+
   static saveUserAndPwd(String? userName, String? pwd) async{
     SharedPreferences preferences =  await SharedPreferences.getInstance();
     if(userName == null) {

@@ -46,6 +46,10 @@ class ChatRecordModel {
   int? readStatus; // 0 未读， 1 已读
   String? createTime;
 
+  String? get showNickName {
+    return sendNickNameRemark ?? nickName;
+  }
+
   String? sendNickNameRemark;
   String? sendNickName;
   String? sendHeadImage;

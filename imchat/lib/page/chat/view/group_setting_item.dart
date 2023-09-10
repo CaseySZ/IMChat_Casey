@@ -6,13 +6,15 @@ import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/utils/toast_util.dart';
 
 import '../../../api/group_auth_info.dart';
+import '../../../model/friend_item_info.dart';
 import '../model/group_detail_model.dart';
 
 class GroupSettingItem extends StatefulWidget {
   final GroupDetailModel? groupModel;
+  final FriendItemInfo? model;
   final String? title;
 
-  const GroupSettingItem({super.key, this.title, this.groupModel});
+  const GroupSettingItem({super.key, this.title, this.groupModel, this.model});
 
   @override
   State<StatefulWidget> createState() {
@@ -26,6 +28,9 @@ class _GroupSettingItemState extends State<GroupSettingItem> {
   String get title => widget.title ?? "";
 
   bool get switchValue {
+    if(title == "聊天置顶" && widget.model != null){
+      return widget.model?.isTop == 1;
+    }
     if (title == "允许全体发言") {
       return groupModel?.groupAuth?.allowAllSendMessage == 0;
     } else if (title == "允许添加好友") {
@@ -47,8 +52,10 @@ class _GroupSettingItemState extends State<GroupSettingItem> {
   bool _isLoading = false;
 
   void _loadData(bool value) async {
+
     if (_isLoading) return;
     _isLoading = true;
+
     if (title == "允许全体发言") {
       groupModel?.groupAuth?.allowAllSendMessage = value ? 0 : 1;
     } else if (title == "允许添加好友") {
@@ -57,15 +64,26 @@ class _GroupSettingItemState extends State<GroupSettingItem> {
       groupModel?.groupAuth?.allowGroupMemberExit = value ? 0 : 1;
     } else if (title == "显示群全成员") {
       groupModel?.groupAuth?.showGroupMemberList = value ? 0 : 1;
-    } else {}
+    } else if(title == "聊天置顶"){
+      widget.model?.isTop = value ? 1 : 0;
+    }else {}
 
     setState(() {});
-    String? retStr = await IMApi.groupEdit(
-      groupNo: groupModel?.groupNo,
-      name: groupModel?.name,
-      personalitySign: groupModel?.personalitySign,
-      authInfo: groupModel?.groupAuth,
-    );
+    String? retStr;
+    if(title == "聊天置顶"){
+      retStr = await IMApi.chatMsgIsTop(
+          value ? 1 : 0,
+          groupModel?.groupNo ?? widget.model?.friendNo,
+          (groupModel != null) ? 1 : 0
+      );
+    }else {
+      retStr = await IMApi.groupEdit(
+        groupNo: groupModel?.groupNo,
+        name: groupModel?.name,
+        personalitySign: groupModel?.personalitySign,
+        authInfo: groupModel?.groupAuth,
+      );
+    }
     if (retStr?.isNotEmpty == true) {
       if (title == "允许全体发言") {
         groupModel?.groupAuth?.allowAllSendMessage = value ? 1 : 0;
@@ -75,12 +93,18 @@ class _GroupSettingItemState extends State<GroupSettingItem> {
         groupModel?.groupAuth?.allowGroupMemberExit = value ? 1 : 0;
       } else if (title == "显示群全成员") {
         groupModel?.groupAuth?.showGroupMemberList = value ? 1 : 0;
-      } else {}
+      }else if(title == "聊天置顶"){
+        widget.model?.isTop = value ? 0 : 1;
+      }else {
+
+      }
       showToast(msg: retStr!);
     } else {}
     _isLoading = false;
     setState(() {});
   }
+
+
 
   @override
   Widget build(BuildContext context) {

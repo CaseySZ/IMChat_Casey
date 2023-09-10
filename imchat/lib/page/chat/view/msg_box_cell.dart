@@ -56,6 +56,9 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
         itemModel.contentType = model?.contentType;
         itemModel.nickName = model?.nickName;
         itemModel.targetType = model?.targetType;
+        itemModel.isTop = model?.isTop;
+        itemModel.headImage = model?.sendHeadImage;
+        itemModel.personalitySign = model?.personalitySign;
         var result = await Navigator.pushNamed(context, AppRoutes.chat_detail, arguments: itemModel);
         if (result is ChatRecordModel) {
           model?.contentType = result.contentType;
@@ -90,7 +93,7 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
                     Row(
                       children: [
                         Text(
-                          model?.nickName ?? "",
+                          model?.showNickName ?? "",
                           style: const TextStyle(color: Colors.black, fontSize: 16),
                         ),
                       ],

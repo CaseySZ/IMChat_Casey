@@ -11,6 +11,7 @@ import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
 import '../page/chat/model/group_detail_model.dart';
 import '../tool/network/dio_base.dart';
+import '../web_socket/web_socket_model.dart';
 
 class IMApi {
   static Future<String?> appInfo() async {
@@ -37,8 +38,8 @@ class IMApi {
         {"loginName": name, "password": pwd},
       );
       if (response?.isSuccess == true) {
+        WebSocketModel.init();
         IMConfig.token = response?.respData;
-        WebSocketSend.login();
       } else {
         return response?.tips;
       }
@@ -49,7 +50,7 @@ class IMApi {
     return null;
   }
 
-  static Future<String?> logout(String name, String pwd) async {
+  static Future<String?> logout() async {
     try {
       Response? response = await DioBase.instance.post("/api/logout", {});
       if (response?.isSuccess == true) {
@@ -172,7 +173,7 @@ class IMApi {
   }
 
   //聊天对象置顶是否
-  static Future<Response?> chatMsgIsTop(int isTop, String targetNo, int targetType) async {
+  static Future<String?> chatMsgIsTop(int isTop, String? targetNo, int targetType) async {
     try {
       Response? response = await DioBase.instance.post(
         "/api/charTarget/isTop",
@@ -182,14 +183,15 @@ class IMApi {
           "targetType": targetType,
         },
       );
-      return response;
+      if (response?.isSuccess == true) {
+        return "";
+      } else {
+        return response?.tips;
+      }
+
     } catch (e) {
       debugLog(e);
-      return Response(
-        requestOptions: RequestOptions(),
-        statusCode: 404,
-        statusMessage: e.toString(),
-      );
+      return defaultErrorMsg;
     }
   }
 

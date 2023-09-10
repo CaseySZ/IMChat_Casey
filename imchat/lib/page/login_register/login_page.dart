@@ -9,6 +9,7 @@ import 'package:imchat/utils/toast_util.dart';
 
 import '../../tool/loading/loading_alert_widget.dart';
 import '../../utils/local_store.dart';
+import '../../web_socket/web_socket_model.dart';
 import '../chat/chat_view/group_text_filed.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loadData() async {
-    nameController.text = (await LocalStore.getPassword()) ?? "";
+    nameController.text = (await LocalStore.getLoginName()) ?? "";
     psdController.text = (await LocalStore.getPassword()) ?? "";
   }
 
@@ -82,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   const SizedBox(height: 96),
                   Text(
-                    "IM演示版".localize,
+                    "IM聊天".localize,
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.black,

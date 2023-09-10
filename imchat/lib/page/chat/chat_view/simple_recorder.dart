@@ -62,20 +62,20 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
   }
 
   Codec _codec = Codec.aacMP4;
-  String _mPath = 'tau_file.mp4';
+  String fileName = 'tau_file.mp4';
   FlutterSoundRecorder? _mRecorder = FlutterSoundRecorder();
   bool _mRecorderIsInited = false;
   Timer? timer;
 
   String get audioRealPath {
-    return "/sdcard/audioIM/$_mPath";
+    return "/sdcard/audioIM/$fileName";
   }
 
   @override
   void initState() {
-    _mPath = '${DateTime.now().millisecondsSinceEpoch}tau_file.mp4';
+    fileName = '${DateTime.now().millisecondsSinceEpoch}tau_file.mp4';
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-       //statusInit();
+       statusInit();
     });
     super.initState();
   }
@@ -118,7 +118,6 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
     await _mRecorder!.openRecorder();
     if (!await _mRecorder!.isEncoderSupported(_codec) && kIsWeb) {
       _codec = Codec.opusWebM;
-      _mPath = 'tau_file.webm';
       if (!await _mRecorder!.isEncoderSupported(_codec) && kIsWeb) {
         _mRecorderIsInited = true;
         return;
@@ -238,11 +237,10 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
               ),
               const SizedBox(height: 8),
               InkWell(
-                onTap: () {
-                  stopRecorder();
+                onTap: () async{
+                  await stopRecorder();
                   timer?.cancel();
-                  widget.callback?.call("/sdcard/audioIM/1694318993249tau_file.mp4", true);
-                 // widget.callback?.call("", false);
+                  widget.callback?.call(audioRealPath, true);
                 },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),

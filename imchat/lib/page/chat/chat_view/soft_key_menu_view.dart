@@ -10,6 +10,7 @@ class SoftKeyMenuView extends StatefulWidget {
   final double height;
   final bool isEmoji;
   final Function(List<Media>)? pictureCallback;
+  final Function(Media)? videoCallback;
   final Function(String)? audioCallback;
   final Function(String)? emojiCallback;
 
@@ -20,6 +21,7 @@ class SoftKeyMenuView extends StatefulWidget {
     this.pictureCallback,
     this.audioCallback,
     this.emojiCallback,
+    this.videoCallback,
   });
 
   @override
@@ -54,8 +56,10 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
           children: [
             AlbumPickerView(
               callback: (imageArr) {
-                if (widget.pictureCallback != null) {
-                  widget.pictureCallback!(imageArr);
+                if(imageArr.isNotEmpty) {
+                  if (widget.pictureCallback != null) {
+                    widget.pictureCallback!(imageArr);
+                  }
                 }
               },
               child: _buildItem("相册", "assets/images/album_key.png"),
@@ -63,6 +67,17 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
             AudioPickerView(
               callback: widget.audioCallback,
               child: _buildItem("语音", "assets/images/5S.png"),
+            ),
+            AlbumPickerView(
+              isVideo: true,
+              callback: (imageArr) {
+                if(imageArr.isNotEmpty) {
+                  if (widget.videoCallback != null) {
+                    widget.videoCallback!(imageArr.first);
+                  }
+                }
+              },
+              child: _buildItem("视频", "assets/images/album_icon.png"),
             ),
           ],
         ),
@@ -96,7 +111,7 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
     );
   }
 
-  Widget _buildItem(String title, String imagePath) {
+  Widget _buildItem(String title, String imagePath,) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(

@@ -8,13 +8,15 @@ import 'package:imchat/tool/loading/loading_alert_widget.dart';
 import 'package:imchat/utils/toast_util.dart';
 
 import '../../api/im_api.dart';
+import '../../model/friend_item_info.dart';
 import 'model/group_detail_model.dart';
 
 class GroupEditTxtPage extends StatefulWidget {
   final GroupDetailModel? groupModel;
+  final FriendItemInfo? model;
   final String? title;
 
-  const GroupEditTxtPage({super.key, this.title, this.groupModel});
+  const GroupEditTxtPage({super.key, this.title, this.groupModel, this.model,});
 
   @override
   State<StatefulWidget> createState() {
@@ -26,7 +28,7 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
   TextEditingController controller = TextEditingController();
   FocusNode focusNode = FocusNode();
 
-  bool get isTitle => widget.title == "群聊名称".localize;
+  bool get isTitle => widget.title == "群聊名称".localize || widget.title == "修改备注".localize;
 
   GroupDetailModel? get groupModel => widget.groupModel;
 
@@ -34,7 +36,7 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
   void initState() {
     super.initState();
     if (isTitle) {
-      controller.text = widget.groupModel?.name ?? "";
+      controller.text = widget.groupModel?.name ?? widget.model?.nickName ?? "";
     } else {
       controller.text = widget.groupModel?.personalitySign ?? "";
     }
@@ -45,24 +47,30 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
 
   void _loadData() async {
     if (controller.text.isEmpty) {
-      showToast(msg: "请输入内容");
+      showToast(msg: "请输入内容".localize);
       return;
     }
     focusNode.unfocus();
     LoadingAlertWidget.show(context);
     String content = controller.text;
-    String? retStr = await IMApi.groupEdit(
-      groupNo: groupModel?.groupNo,
-      name: isTitle ? content : null,
-      personalitySign: isTitle ? null : content,
-      authInfo: groupModel?.groupAuth,
-    );
+    String? retStr;
+    if(widget.title == "修改备注".localize) {
+      retStr = await IMApi.setFriendNickName(widget.model?.friendNo ?? "", content);
+    }else {
+      retStr = await IMApi.groupEdit(
+        groupNo: groupModel?.groupNo,
+        name: isTitle ? content : null,
+        personalitySign: isTitle ? null : content,
+        authInfo: groupModel?.groupAuth,
+      );
+    }
     LoadingAlertWidget.cancel(context);
     if (retStr?.isNotEmpty == true) {
       showToast(msg: retStr!);
     } else {
       if (isTitle) {
         groupModel?.name = content;
+        widget.model?.nickName = content;
       } else {
         groupModel?.personalitySign = content;
       }

@@ -5,10 +5,12 @@ import 'package:imchat/tool/loading/loading_center_widget.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
 import '../../api/im_api.dart';
+import '../../config/config.dart';
 import '../../protobuf/model/base.pb.dart';
 import '../../utils/local_store.dart';
 import '../../utils/screen.dart';
 import '../../utils/toast_util.dart';
+import '../../web_socket/web_socket_send.dart';
 import '../chat/chat_main_page.dart';
 import '../contact/contact_main_page.dart';
 import '../find/find_page.dart';
@@ -57,14 +59,19 @@ class _MainPageState extends State<MainPage> {
 
 
   void _loginEvent() async{
+
     String? userName= await LocalStore.getLoginName();
     String? pwd = await  LocalStore.getPassword();
     if(userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
-      String? errorDesc =  await IMApi.login(userName!, pwd!);
-      if(errorDesc?.isNotEmpty == true) {
-        showToast(msg: errorDesc!);
-        return;
+      String? errorDesc;
+      if(IMConfig.token == null) {
+        errorDesc = await IMApi.login(userName!, pwd!);
+        if (errorDesc?.isNotEmpty == true) {
+          showToast(msg: errorDesc!);
+          return;
+        }
       }
+      await WebSocketSend.login();
       errorDesc =  await IMApi.appInfo();
       if(errorDesc?.isNotEmpty == true) {
         showToast(msg: errorDesc!);

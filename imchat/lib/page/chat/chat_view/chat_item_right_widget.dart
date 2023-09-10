@@ -97,7 +97,7 @@ class ChatItemRightWidget extends StatelessWidget {
               ),
       );
     } else if (model?.contentType == 2 || model?.contentType == 3) {
-      return ChatItemAudioWidget(model: model);
+      return ChatItemAudioWidget(key: ValueKey("${model?.content}${model?.id}${model?.contentType}"), model: model);
     } else {
       return Flexible(
         child: Container(

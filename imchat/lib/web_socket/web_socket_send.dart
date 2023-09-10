@@ -6,10 +6,17 @@ import 'package:imchat/config/config.dart';
 import 'package:imchat/protobuf/model/base.pb.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WebSocketSend {
+  static Future logout () async{
+    WebSocketModel.removeAll();
+    WebSocketModel.isConnectSocketSuccess = false;
+    await WebSocketModel.channel?.innerWebSocket?.close();
+   // await WebSocketModel.channel?.sink.close();
+  }
 
-  static login() async{
+  static Future login() async{
     String deviceType = "2"; // 1:andoid 2:ios 3:andoid_h5 4. ios_h5 5:pc
     String deviceBrand = "";
     String deviceCode = "";

@@ -1,12 +1,20 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/page/login_register/login_page.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/image/custom_new_image.dart';
+import 'package:imchat/tool/loading/loading_alert_widget.dart';
+import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/utils/screen.dart';
+import 'package:imchat/web_socket/web_socket_send.dart';
 
 import '../../model/user_info.dart';
+import '../../utils/local_store.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({super.key});
@@ -25,8 +33,22 @@ class _MinePageState extends State<MinePage> {
     super.initState();
   }
 
-  void _exitLoginEvent(){
-
+  void _exitLoginEvent() async {
+    LoadingAlertWidget.show(context);
+    try {
+      LocalStore.removePassword();
+      await IMApi.logout();
+      IMConfig.token = null;
+      await WebSocketSend.logout();
+      LoadingAlertWidget.cancel(context);
+    } catch (e) {
+      LoadingAlertWidget.cancel(context);
+      IMConfig.token = null;
+      debugLog(e);
+    }
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+      return const LoginPage();
+    }), (route) => false);
   }
 
   @override
@@ -53,15 +75,14 @@ class _MinePageState extends State<MinePage> {
           InkWell(
             onTap: _exitLoginEvent,
             child: Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 16),
-                child: const Text(
-                  "退出登录",
-                  style: TextStyle(
-                    color: Colors.redAccent,
-                    fontSize: 16,
-                  ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: const Text(
+                "退出登录",
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 16,
                 ),
+              ),
             ),
           ),
           buildLineWidget(height: 8),
@@ -70,12 +91,9 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _buildItem(String title, String imagePath, String? content,
-      {bool showArrow = true}) {
+  Widget _buildItem(String title, String imagePath, String? content, {bool showArrow = true}) {
     return InkWell(
-      onTap: () {
-
-      },
+      onTap: () {},
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Row(
