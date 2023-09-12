@@ -116,7 +116,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: GroupTextFiled(
                             controller: nameController,
                             placeholder: "请输入用户名".localize,
-                            keyboardType: TextInputType.number,
                             maxLines: 1,
                           ),
                         ),

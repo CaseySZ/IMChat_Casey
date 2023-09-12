@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_pickers/image_pickers.dart';
 import 'package:imchat/alert/long_press_menu.dart';
+import 'package:imchat/alert/normal_alert.dart';
 import 'package:imchat/api/file_api.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
@@ -25,9 +26,9 @@ import '../../tool/loading/loading_center_widget.dart';
 import '../../tool/network/dio_base.dart';
 import '../../tool/refresh/pull_refresh.dart';
 import '../../utils/toast_util.dart';
-import 'chat_view/album_picker_view.dart';
 import 'chat_view/chat_item_cell.dart';
 import 'chat_view/group_text_filed.dart';
+import 'model/group_detail_model.dart';
 
 class ChatDetailPage extends StatefulWidget {
   final FriendItemInfo? model;
@@ -46,7 +47,7 @@ class ChatDetailPage extends StatefulWidget {
 class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObserver {
   TextEditingController eidtController = TextEditingController();
   RefreshController refreshController = RefreshController();
-
+  GroupDetailModel? groupModel;
   UserInfo? get userInfo => IMConfig.userInfo;
 
   int get chatType => widget.model?.targetType ?? 0; // 1 群聊
@@ -96,7 +97,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
           // 关闭键盘
         } else {
           double height = MediaQuery.of(context).viewInsets.bottom;
-          if(height > keyboardSize){
+          if (height > keyboardSize) {
             keyboardSize = height;
           }
         }
@@ -111,6 +112,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         response = await IMApi.getChatHistory(friendNo, startChatRecordId: startChatRecordId);
       } else {
         response = await IMApi.groupChatHistory(friendNo, startChatRecordId);
+        _loadGroupData();
       }
       chatArr ??= [];
       if (response?.isSuccess == true) {
@@ -140,6 +142,17 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     if (mounted) {
       setState(() {});
     }
+  }
+
+  void _loadGroupData() async {
+    Response? response = await IMApi.groupInfo(friendNo);
+    if (response?.isSuccess == true) {
+       groupModel = GroupDetailModel.fromJson(response?.respData ?? {});
+    } else {
+      showToast(msg: response?.tips ?? defaultErrorMsg);
+    }
+    groupModel ??= GroupDetailModel();
+    setState(() {});
   }
 
   void webSocketLister(Protocol protocol) {
@@ -267,7 +280,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     setState(() {});
   }
 
-
   void _sendAudioMessage(String audioPath, {bool isVideo = false}) async {
     ChatRecordModel model = ChatRecordModel();
     model.content = audioPath;
@@ -278,9 +290,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     model.sendHeadImage = userInfo?.headImage;
     chatArr?.insert(0, model);
     setState(() {});
-    if(!isVideo){
+    if (!isVideo) {
       // 语音文件可能还在生成中
-     await Future.delayed(const Duration(milliseconds: 1500));
+      await Future.delayed(const Duration(milliseconds: 1500));
     }
     String contentText = await FileAPi.updateFile(audioPath) ?? "";
     if (contentText.isNotEmpty != true) {
@@ -292,7 +304,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     if (chatType == 0) {
       errorDesc = await IMApi.sendMsg(friendNo, contentText, isVideo ? 3 : 2);
     } else {
-      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, isVideo ? 3 :2);
+      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, isVideo ? 3 : 2);
     }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
@@ -489,6 +501,31 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         }
                         menuChatModel = null;
                       },
+                    ),
+                  if (chatType == 1 && groupModel?.personalitySign?.isNotEmpty == true)
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      child: InkWell(
+                        onTap: (){
+                          NormalAlert.show(context, title: "公告", content: groupModel?.personalitySign);
+                        },
+                        child: Container(
+                          height: 30,
+                          padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
+                          color: Colors.black.withOpacity(0.2),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "公告：${groupModel?.personalitySign}",
+                            maxLines: 1,
+
+                            style: const TextStyle(
+                              color: Color(0xff666666),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                 ],
               ),

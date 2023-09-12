@@ -92,6 +92,15 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
                   children: [
                     Row(
                       children: [
+                        if (model?.targetType == 1)
+                          Container(
+                            padding: const EdgeInsets.only(right: 6),
+                            child: const Icon(
+                              Icons.group,
+                              color: Color(0xff999999),
+                              size: 18,
+                            ),
+                          ),
                         Text(
                           model?.showNickName ?? "",
                           style: const TextStyle(color: Colors.black, fontSize: 16),
