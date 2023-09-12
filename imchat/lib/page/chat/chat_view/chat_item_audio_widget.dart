@@ -32,6 +32,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   bool isPlaying = false;
   bool _mPlayerIsInited = false;
   String errorStr = "";
+
   bool get isVideoType {
     if (model?.contentType == 3 && errorStr.isEmpty && _mPlayerIsInited) {
       return true;
@@ -40,11 +41,11 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   }
 
   bool get isFile {
-    if(model?.contentType == 3){
-      if(model?.content?.contains(".zip") == true){
+    if (model?.contentType == 3) {
+      if (model?.content?.contains(".zip") == true) {
         return true;
       }
-      if(model?.content?.contains(".rar") == true){
+      if (model?.content?.contains(".rar") == true) {
         return true;
       }
     }
@@ -54,7 +55,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   @override
   void initState() {
     super.initState();
-    if(!isFile) {
+    if (!isFile) {
       initController();
     }
   }
@@ -67,6 +68,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
         setState(() {});
       }
       await controller?.initialize();
+      controller?.addListener(_lister);
       audioDuration = controller?.value.duration.inSeconds;
       _mPlayerIsInited = true;
     } catch (e) {
@@ -77,11 +79,37 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
     setState(() {});
   }
 
+
+  void _lister() {
+    if(controller != null && controller?.value.isInitialized == true){
+      int position = controller?.value.position.inSeconds ?? 0;
+      if((audioDuration ?? 0) > 0){
+        if(controller?.value.isPlaying != true && controller?.value.isBuffering != true){
+          if(isPlaying) {
+            isPlaying = false;
+            controller?.pause();
+            controller?.seekTo(Duration.zero);
+            setState(() {});
+          }
+        }
+        if(position == audioDuration) {
+          if(isPlaying) {
+            isPlaying = false;
+            controller?.pause();
+            controller?.seekTo(Duration.zero);
+            setState(() {});
+          }
+        }
+      }
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if(isFile){
+        if (isFile) {
           return;
         }
         if (isVideoType) {
@@ -97,7 +125,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
           } else {
             controller?.play();
           }
-          isPlaying != isPlaying;
+          isPlaying = !isPlaying;
           setState(() {});
         }
       },
@@ -108,9 +136,13 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   Widget _buildContent() {
     if (model?.contentType == 2) {
       return _buildAudioItem();
-    } else if(isFile){
-      return Image.asset("assets/images/zip.png", width: 74, height: 68,);
-  } else {
+    } else if (isFile) {
+      return Image.asset(
+        "assets/images/zip.png",
+        width: 74,
+        height: 68,
+      );
+    } else {
       return _buildFileItem();
     }
   }
@@ -226,11 +258,16 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
     );
   }
 
-
   Widget _buildAudioPlayAnimation() {
-    if(isPlaying) {
-      return ImagesAnimation(isLeftStyle: widget.isLeftStyle, w: 12, h: 16, entry: ImagesAnimationEntry(0, 2),);
-    }else {
+    if (isPlaying) {
+      return ImagesAnimation(
+        isLeftStyle: widget.isLeftStyle,
+        w: 12,
+        h: 16,
+        durationSeconds: 1,
+        entry: ImagesAnimationEntry(0, 2),
+      );
+    } else {
       return Transform.rotate(
         //旋转90度
         angle: widget.isLeftStyle ? 0 : pi,
@@ -247,6 +284,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
 
   @override
   void dispose() {
+    controller?.removeListener(_lister);
     controller?.dispose();
     super.dispose();
   }
