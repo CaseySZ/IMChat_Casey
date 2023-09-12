@@ -43,6 +43,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="/Users/sy/Documents/GitHub/IMChat/imchat/android@@:webview_flutter_android::release"
+      jars="/Users/sy/Documents/GitHub/IMChat/imchat/build/webview_flutter_android/.transforms/eac16f3654f1fe81c675eb895cf59a9a/transformed/out/jars/classes.jar"
+      resolved="io.flutter.plugins.webviewflutter:webview_flutter_android:unspecified"
+      folder="/Users/sy/Documents/GitHub/IMChat/imchat/build/webview_flutter_android/.transforms/eac16f3654f1fe81c675eb895cf59a9a/transformed/out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="/Users/sy/Documents/GitHub/IMChat/imchat/android@@:shared_preferences_android::release"
       jars="/Users/sy/Documents/GitHub/IMChat/imchat/build/shared_preferences_android/.transforms/17a67a6a570564671d041e884c8bd58b/transformed/out/jars/classes.jar"
       resolved="io.flutter.plugins.sharedpreferences:shared_preferences_android:unspecified"
@@ -475,6 +488,19 @@
       jars="/Users/sy/.gradle/caches/transforms-3/8652a4ecb169c5dd93ec4f71f8834598/transformed/jetified-tracing-1.0.0/jars/classes.jar"
       resolved="androidx.tracing:tracing:1.0.0"
       folder="/Users/sy/.gradle/caches/transforms-3/8652a4ecb169c5dd93ec4f71f8834598/transformed/jetified-tracing-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.webkit:webkit:1.7.0@aar"
+      jars="/Users/sy/.gradle/caches/transforms-3/95e6c05a3c08270441bc96c26a0c4afa/transformed/webkit-1.7.0/jars/classes.jar"
+      resolved="androidx.webkit:webkit:1.7.0"
+      folder="/Users/sy/.gradle/caches/transforms-3/95e6c05a3c08270441bc96c26a0c4afa/transformed/webkit-1.7.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

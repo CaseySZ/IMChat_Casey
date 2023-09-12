@@ -48,6 +48,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   TextEditingController eidtController = TextEditingController();
   RefreshController refreshController = RefreshController();
   GroupDetailModel? groupModel;
+
   UserInfo? get userInfo => IMConfig.userInfo;
 
   int get chatType => widget.model?.targetType ?? 0; // 1 群聊
@@ -83,6 +84,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         softKeyType = -1;
         setState(() {});
       }
+    });
+    eidtController.addListener(() {
+      setState(() {});
     });
   }
 
@@ -147,7 +151,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   void _loadGroupData() async {
     Response? response = await IMApi.groupInfo(friendNo);
     if (response?.isSuccess == true) {
-       groupModel = GroupDetailModel.fromJson(response?.respData ?? {});
+      groupModel = GroupDetailModel.fromJson(response?.respData ?? {});
     } else {
       showToast(msg: response?.tips ?? defaultErrorMsg);
     }
@@ -428,12 +432,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                         child: GroupTextFiled(
                                           bgColor: Colors.transparent,
                                           controller: eidtController,
-                                          textInputAction: TextInputAction.send,
                                           focusNode: focusNode,
                                           placeholder: "请输入消息",
-                                          onSubmitted: (text) {
-                                            _sendTextMessage();
-                                          },
+                                          onSubmitted: (text) {},
                                         ),
                                       ),
                                       const SizedBox(width: 8),
@@ -452,14 +453,35 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                   ),
                                 ),
                               ),
-                              InkWell(
-                                onTap: () => showSoftKeyboard(1),
-                                child: SvgPicture.asset(
-                                  softKeyType == 1 ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
-                                  width: 30,
-                                  height: 30,
+                              if (eidtController.text.isNotEmpty)
+                                InkWell(
+                                  onTap: _sendTextMessage,
+                                  child: Container(
+                                    height: 30,
+                                    width: 50,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blueAccent,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      "发送".localize,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              else
+                                InkWell(
+                                  onTap: () => showSoftKeyboard(1),
+                                  child: SvgPicture.asset(
+                                    "assets/svg/add_red.svg",  //softKeyType == 1 ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
+                                    width: 30,
+                                    height: 30,
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                         ),
@@ -507,7 +529,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                       left: 0,
                       right: 0,
                       child: InkWell(
-                        onTap: (){
+                        onTap: () {
                           NormalAlert.show(context, title: "公告", content: groupModel?.personalitySign);
                         },
                         child: Container(
@@ -518,7 +540,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                           child: Text(
                             "公告：${groupModel?.personalitySign}",
                             maxLines: 1,
-
                             style: const TextStyle(
                               color: Color(0xff666666),
                               fontSize: 12,

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.imchat.app-mergeReleaseResources-29:/values-w820dp-v13/values-w820dp-v13.xml",
+            "outputFile": "com.example.imchat.app-mergeReleaseResources-30:/values-w820dp-v13/values-w820dp-v13.xml",
             "map": [
                 {
                     "source": "/Users/sy/.gradle/caches/transforms-3/f2b4b3ffc3066bcc3ba9455b926485c1/transformed/jetified-flutter_sound_core-9.2.13/res/values-w820dp-v13/values-w820dp-v13.xml",

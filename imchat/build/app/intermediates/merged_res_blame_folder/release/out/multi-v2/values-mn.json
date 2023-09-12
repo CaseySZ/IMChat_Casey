@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.imchat.app-mergeReleaseResources-29:/values-mn/values-mn.xml",
+            "outputFile": "com.example.imchat.app-mergeReleaseResources-30:/values-mn/values-mn.xml",
             "map": [
                 {
                     "source": "/Users/sy/.gradle/caches/transforms-3/931d539a6977212e4317b55c2bf61342/transformed/appcompat-1.3.1/res/values-mn/values-mn.xml",

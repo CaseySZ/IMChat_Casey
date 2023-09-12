@@ -46,6 +46,7 @@ INJECTED from /Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/Andr
 MERGED from [:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-16:12
 MERGED from [:path_provider_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/path_provider_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [:flutter_native_splash] /Users/sy/Documents/GitHub/IMChat/imchat/build/flutter_native_splash/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
+MERGED from [:webview_flutter_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/webview_flutter_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [:shared_preferences_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/shared_preferences_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-68:12
 MERGED from [:permission_handler_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/permission_handler_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
@@ -59,6 +60,7 @@ MERGED from [:flutter_sound] /Users/sy/Documents/GitHub/IMChat/imchat/build/flut
 MERGED from [:video_player_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/video_player_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/baf45cf83f0084aec86da9929524f913/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.webkit:webkit:1.7.0] /Users/sy/.gradle/caches/transforms-3/95e6c05a3c08270441bc96c26a0c4afa/transformed/webkit-1.7.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/f2b4b3ffc3066bcc3ba9455b926485c1/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:2:1-18:12
 MERGED from [androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:17:1-36:12
 MERGED from [androidx.media2:media2-common:1.2.1] /Users/sy/.gradle/caches/transforms-3/add3fdc324bb1b3f4156bd19e92007c5/transformed/jetified-media2-common-1.2.1/AndroidManifest.xml:17:1-24:12
@@ -222,6 +224,8 @@ MERGED from [:path_provider_android] /Users/sy/Documents/GitHub/IMChat/imchat/bu
 MERGED from [:path_provider_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/path_provider_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_native_splash] /Users/sy/Documents/GitHub/IMChat/imchat/build/flutter_native_splash/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_native_splash] /Users/sy/Documents/GitHub/IMChat/imchat/build/flutter_native_splash/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:webview_flutter_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/webview_flutter_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:webview_flutter_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/webview_flutter_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:shared_preferences_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/shared_preferences_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:shared_preferences_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/shared_preferences_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
@@ -248,6 +252,8 @@ MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/sy/.gradle/caches/
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/baf45cf83f0084aec86da9929524f913/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.webkit:webkit:1.7.0] /Users/sy/.gradle/caches/transforms-3/95e6c05a3c08270441bc96c26a0c4afa/transformed/webkit-1.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.7.0] /Users/sy/.gradle/caches/transforms-3/95e6c05a3c08270441bc96c26a0c4afa/transformed/webkit-1.7.0/AndroidManifest.xml:20:5-44
 MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/f2b4b3ffc3066bcc3ba9455b926485c1/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:7:5-9:41
 MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/f2b4b3ffc3066bcc3ba9455b926485c1/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:20:5-22:41

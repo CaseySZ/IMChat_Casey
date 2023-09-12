@@ -55,7 +55,7 @@ class ChatItemLeftWidget extends StatelessWidget {
         ),
       );
     } else if (model?.contentType == 2 || model?.contentType == 3) {
-      return ChatItemAudioWidget(model: model, isLeftStyle: true,);
+      return ChatItemAudioWidget(key: ValueKey("${model?.content}${model?.id}${model?.contentType}"), model: model, isLeftStyle: true,);
     }else {
       return Flexible(
         child: Container(
