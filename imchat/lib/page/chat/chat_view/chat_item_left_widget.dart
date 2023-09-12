@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 
 import '../../../tool/image/custom_new_image.dart';
+import '../../../utils/screen.dart';
 import '../model/chat_record_model.dart';
 import 'chat_item_audio_widget.dart';
 
@@ -50,8 +51,7 @@ class ChatItemLeftWidget extends StatelessWidget {
         },
         child: CustomNewImage(
           imageUrl: model?.content ?? "",
-          width: 173,
-          height: 96,
+          width: 120,
         ),
       );
     } else if (model?.contentType == 2 || model?.contentType == 3) {

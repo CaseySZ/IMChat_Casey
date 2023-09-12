@@ -22,11 +22,12 @@ import '../../api/file_api.dart';
 import '../../tool/loading/loading_alert_widget.dart';
 import '../../tool/network/dio_base.dart';
 import 'chat_view/album_picker_view.dart';
+import 'model/group_member_model.dart';
 
 class GroupDetailPage extends StatefulWidget {
   final String groupNo;
-
-  const GroupDetailPage({super.key, required this.groupNo});
+  final List<GroupMemberModel>? groupMemberArr;
+  const GroupDetailPage({super.key, required this.groupNo, this.groupMemberArr,});
 
   @override
   State<StatefulWidget> createState() {

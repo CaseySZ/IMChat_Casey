@@ -6,6 +6,8 @@ import 'package:imchat/page/chat/view/msg_box_cell.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/network/dio_base.dart';
 
+import '../../alert/long_press_box_menu.dart';
+import '../../alert/long_press_menu.dart';
 import '../../protobuf/model/base.pb.dart';
 import '../../web_socket/web_message_type.dart';
 import '../../web_socket/web_socket_model.dart';
@@ -22,6 +24,12 @@ class ChatMainPage extends StatefulWidget {
 
 class _ChatMainPageState extends State<ChatMainPage> with AutomaticKeepAliveClientMixin {
   List<ChatRecordModel>? chatArr;
+
+  bool isShowMenu = false;
+  ChatRecordModel? menuChatModel;
+  double menuDx = 0;
+  double menuDy = 0;
+
   @override
   bool get wantKeepAlive => true;
 
@@ -71,14 +79,37 @@ class _ChatMainPageState extends State<ChatMainPage> with AutomaticKeepAliveClie
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: chatArr?.length ?? 0,
-        itemBuilder: (context, index) {
-          return MsgBoxCell(model: chatArr![index],);
-        },
-      ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          ListView.builder(
+            itemCount: chatArr?.length ?? 0,
+            itemBuilder: (context, index) {
+              return MsgBoxCell(
+                model: chatArr![index],
+                callback: (dx, dy) {
+                  isShowMenu = true;
+                  menuChatModel = chatArr![index];
+                  menuDx = dx;
+                  menuDy = dy;
+                  setState(() {});
+                },
+              );
+            },
+          ),
+          if (isShowMenu)
+            LongPressBoxMenu(
+              dx: menuDx,
+              dy: menuDy,
+              model: menuChatModel,
+              callback: (value) {
+                isShowMenu = false;
+                setState(() {});
+                menuChatModel = null;
+              },
+            ),
+        ],
+      )
     );
   }
-
-
 }

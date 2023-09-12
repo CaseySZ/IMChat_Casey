@@ -10,7 +10,8 @@ class RichTextWidget extends StatelessWidget {
   final ChatRecordModel? model;
   final bool isMe;
   final TextStyle? textStyle;
-  const RichTextWidget({super.key, this.model, this.isMe = true, this.textStyle,});
+  final int? maxLines;
+  const RichTextWidget({super.key, this.model, this.isMe = true, this.textStyle,this.maxLines});
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +56,12 @@ class RichTextWidget extends StatelessWidget {
           style: style,
           children: textSpan,
         ),
+        maxLines: maxLines,
       );
     } else {
       return Text(
         model?.chatContent ?? "",
+        maxLines: maxLines,
         style: style,
       );
     }

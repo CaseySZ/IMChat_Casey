@@ -29,6 +29,7 @@ import '../../utils/toast_util.dart';
 import 'chat_view/chat_item_cell.dart';
 import 'chat_view/group_text_filed.dart';
 import 'model/group_detail_model.dart';
+import 'model/group_member_model.dart';
 
 class ChatDetailPage extends StatefulWidget {
   final FriendItemInfo? model;
@@ -55,6 +56,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   String get friendNo => widget.model?.friendNo ?? widget.model?.targetNo ?? "";
   ChatRecordResponse? chatResponse;
   List<ChatRecordModel>? chatArr;
+  List<GroupMemberModel>? groupMemberArr;
   int currentPage = 1;
 
   FocusNode focusNode = FocusNode();
@@ -195,6 +197,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         }
       }
     }
+    if (protocol.isSuccess == true && protocol.cmd == MessageType.groupMember.responseName) {
+      if(protocol.dataArr is List){
+        groupMemberArr = protocol.dataArr?.map((e) => GroupMemberModel.fromJson(e)).toList();
+      }
+    }
+
   }
 
   void handleChatMessage({List<ChatRecordModel>? list}) {
@@ -341,6 +349,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return GroupDetailPage(
           groupNo: widget.model?.friendNo ?? "",
+          groupMemberArr: groupMemberArr,
         );
       }));
     }

@@ -178,9 +178,9 @@ class IMApi {
       Response? response = await DioBase.instance.post(
         "/api/charTarget/isTop",
         {
-          "isTop": isTop,
-          "targetNo": targetNo,
-          "targetType": targetType,
+          "isTop": isTop, // 置顶(0-否，1-是)
+          "targetNo": targetNo, // 对象号码
+          "targetType": targetType, // 对象类型(0好友，1群)
         },
       );
       if (response?.isSuccess == true) {
