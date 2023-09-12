@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/model/user_info.dart';
 import 'package:imchat/page/chat/chat_view/group_text_filed.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/loading/loading_alert_widget.dart';
@@ -14,9 +15,16 @@ import 'model/group_detail_model.dart';
 class GroupEditTxtPage extends StatefulWidget {
   final GroupDetailModel? groupModel;
   final FriendItemInfo? model;
+  final UserInfo? userInfo;
   final String? title;
 
-  const GroupEditTxtPage({super.key, this.title, this.groupModel, this.model,});
+  const GroupEditTxtPage({
+    super.key,
+    this.title,
+    this.groupModel,
+    this.model,
+    this.userInfo,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -28,14 +36,23 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
   TextEditingController controller = TextEditingController();
   FocusNode focusNode = FocusNode();
 
-  bool get isTitle => widget.title == "群聊名称".localize || widget.title == "修改备注".localize;
+  bool get isTitle {
+    return widget.title == "群聊名称".localize || widget.title == "修改备注".localize || widget.title == "修改昵称".localize;
+  }
 
   GroupDetailModel? get groupModel => widget.groupModel;
+
 
   @override
   void initState() {
     super.initState();
-    if (isTitle) {
+    if (widget.userInfo != null) {
+      if (widget.title == "修改昵称".localize) {
+        controller.text = widget.userInfo?.nickName ?? "";
+      } else if (widget.title == "个性签名".localize) {
+        controller.text = widget.userInfo?.personalitySign ?? "";
+      } else {}
+    }else if (isTitle) {
       controller.text = widget.groupModel?.name ?? widget.model?.nickName ?? "";
     } else {
       controller.text = widget.groupModel?.personalitySign ?? "";
@@ -54,9 +71,15 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
     LoadingAlertWidget.show(context);
     String content = controller.text;
     String? retStr;
-    if(widget.title == "修改备注".localize) {
+    if (widget.userInfo != null) {
+      if (widget.title == "修改昵称".localize) {
+        retStr = await IMApi.userInfoSet(nickName: content);
+      } else if (widget.title == "个性签名".localize) {
+        retStr = await IMApi.userInfoSet(personalitySign: content);
+      } else {}
+    } else if (widget.title == "修改备注".localize) {
       retStr = await IMApi.setFriendNickName(widget.model?.friendNo ?? "", content);
-    }else {
+    } else {
       retStr = await IMApi.groupEdit(
         groupNo: groupModel?.groupNo,
         name: isTitle ? content : null,
@@ -68,7 +91,13 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
     if (retStr?.isNotEmpty == true) {
       showToast(msg: retStr!);
     } else {
-      if (isTitle) {
+      if (widget.userInfo != null) {
+        if (widget.title == "修改昵称".localize) {
+          widget.userInfo?.nickName = content;
+        } else if (widget.title == "个性签名".localize) {
+          widget.userInfo?.personalitySign = content;
+        } else {}
+      } else if (isTitle) {
         groupModel?.name = content;
         widget.model?.nickName = content;
       } else {
@@ -76,7 +105,6 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
       }
       Navigator.pop(context);
     }
-
   }
 
   @override
@@ -100,7 +128,7 @@ class _GroupEditTxtPageState extends State<GroupEditTxtPage> {
                   child: GroupTextFiled(
                     alignment: isTitle ? Alignment.centerLeft : Alignment.topLeft,
                     controller: controller,
-                    placeholder: "请入输入内容".localize,
+                    placeholder: "请输入内容".localize,
                     focusNode: focusNode,
                   ),
                 ),

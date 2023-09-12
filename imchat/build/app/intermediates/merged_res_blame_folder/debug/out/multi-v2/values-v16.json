@@ -1,10 +1,20 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.imchat.app-mergeDebugResources-29:/values-v16/values-v16.xml",
+            "outputFile": "com.example.imchat.app-mergeDebugResources-30:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/sy/.gradle/caches/transforms-3/37e4a243b4eae487dd086a9adaaab4e2/transformed/appcompat-1.3.1/res/values-v16/values-v16.xml",
+                    "source": "/Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/Users/sy/.gradle/caches/transforms-3/931d539a6977212e4317b55c2bf61342/transformed/appcompat-1.3.1/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "/Users/sy/.gradle/caches/transforms-3/4acfdeb2adf0fe3e0971430d521282ce/transformed/core-1.10.1/res/values-v16/values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]

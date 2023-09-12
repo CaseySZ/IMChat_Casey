@@ -36,7 +36,7 @@ class FileAPi {
     }
   }
 
-  static Future<String?> updateImg(String imagePath) async {
+  static Future<String?> updateImg(String imagePath, {Function(String?)? callback,}) async {
     try {
       debugLog("开始上传----", imagePath);
       int  maxImageSize = 200*1024;
@@ -50,6 +50,7 @@ class FileAPi {
     //  DioBase dioBase = DioBase()..init(IMConfig.fileServerUrl ?? "");
       Response? response = await DioBase.instance.post("/api/upload/image", args);
       if(response?.isSuccess == true){
+        callback?.call(response?.respData["url"]);
         return response?.respData["path"];
       } else {
         showToast(msg: response?.tips ?? defaultErrorMsg);

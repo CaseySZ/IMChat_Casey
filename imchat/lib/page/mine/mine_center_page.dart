@@ -1,6 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:imchat/api/file_api.dart';
+import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/page/chat/chat_view/album_picker_view.dart';
+import 'package:imchat/page/chat/group_edit_txt_page.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
+import 'package:imchat/tool/loading/loading_alert_widget.dart';
+import 'package:imchat/tool/network/response_status.dart';
+import 'package:imchat/utils/toast_util.dart';
 
 import '../../config/config.dart';
 import '../../model/user_info.dart';
@@ -24,22 +33,43 @@ class _MineCenterPageState extends State<MineCenterPage> {
     super.initState();
   }
 
-  void _loadData() async {}
+  void _headImageEvent(String filePath) async {
+    if(filePath.isEmpty) return;
+
+    LoadingAlertWidget.show(context);
+    String? headUrl;
+    String? retString = await FileAPi.updateImg(filePath, callback: (url){
+      headUrl = url;
+    });
+    if(retString?.isNotEmpty == true){
+      retString =  await IMApi.userInfoSet(headImage: retString);
+      if(retString?.isEmpty == true){
+        userInfo?.headImage = headUrl;
+        setState(() {});
+        showToast(msg: "头像修改成功".localize);
+      }else {
+        showToast(msg: retString ?? defaultErrorMsg);
+      }
+    }
+    LoadingAlertWidget.cancel(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(title: "修改资料"),
+      appBar: BaseAppBar(title: "修改资料".localize),
       body: Column(
         children: [
           buildLineWidget(height: 8),
           _buildHeadView(),
           buildLineWidget(height: 8),
-          _buildItem("用户名", "", userInfo?.memberNo, showArrow: false),
+          _buildItem("用户ID".localize, "", userInfo?.memberNo, showArrow: false),
           buildLineWidget(height: 8),
-          _buildItem("昵称", "", userInfo?.nickName),
+          _buildItem("用户名".localize, "", userInfo?.loginName, showArrow: false),
           buildLineWidget(height: 8),
-          _buildItem("个性签名", "", userInfo?.personalitySign),
+          _buildItem("昵称".localize, "", userInfo?.nickName),
+          buildLineWidget(height: 8),
+          _buildItem("个性签名".localize, "", userInfo?.personalitySign),
           buildLineWidget(height: 8),
         ],
       ),
@@ -49,8 +79,20 @@ class _MineCenterPageState extends State<MineCenterPage> {
   Widget _buildItem(String title, String imagePath, String? content,
       {bool showArrow = true}) {
     return InkWell(
-      onTap: (){
+      onTap: () async{
+        if(title == "昵称".localize) {
+          await Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return GroupEditTxtPage(title: "修改昵称".localize, userInfo: userInfo,);
+          }));
+          setState(() {});
+        }else if(title == "个性签名".localize) {
+          await Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return GroupEditTxtPage(title: "个性签名".localize, userInfo: userInfo,);
+          }));
+          setState(() {});
+        }else {
 
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -93,8 +135,10 @@ class _MineCenterPageState extends State<MineCenterPage> {
   }
 
   Widget _buildHeadView() {
-    return InkWell(
-      onTap: () async {},
+    return AlbumPickerView(
+      callback: (value) async {
+        _headImageEvent(value.first.path ?? "");
+      },
       child: Container(
         margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
         height: 56,
