@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_sound/public/tau.dart';
+import 'package:imchat/page/chat/chat_view/images_animation.dart';
 import 'package:imchat/page/chat/movie_play_page.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
 import 'package:imchat/tool/network/dio_base.dart';
@@ -31,7 +32,6 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   bool isPlaying = false;
   bool _mPlayerIsInited = false;
   String errorStr = "";
-
   bool get isVideoType {
     if (model?.contentType == 3 && errorStr.isEmpty && _mPlayerIsInited) {
       return true;
@@ -98,6 +98,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
             controller?.play();
           }
           isPlaying != isPlaying;
+          setState(() {});
         }
       },
       child: _buildContent(),
@@ -200,15 +201,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
                             style: const TextStyle(fontSize: 14, color: Colors.white),
                           ),
                       ],
-                      Transform.rotate(
-                        //旋转90度
-                        angle: widget.isLeftStyle ? 0 : pi,
-                        child: const Icon(
-                          Icons.volume_up,
-                          size: 18,
-                          color: Colors.white,
-                        ),
-                      ),
+                      _buildAudioPlayAnimation(),
                       if (widget.isLeftStyle) ...[
                         if (audioDuration != null)
                           Text(
@@ -231,6 +224,25 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
         ],
       ),
     );
+  }
+
+
+  Widget _buildAudioPlayAnimation() {
+    if(isPlaying) {
+      return ImagesAnimation(isLeftStyle: widget.isLeftStyle, w: 12, h: 16, entry: ImagesAnimationEntry(0, 2),);
+    }else {
+      return Transform.rotate(
+        //旋转90度
+        angle: widget.isLeftStyle ? 0 : pi,
+        child: Image.asset(
+          "assets/images/cI2.png",
+          gaplessPlayback: true, //避免图片闪烁
+          width: 12,
+          height: 16,
+          fit: BoxFit.cover,
+        ),
+      );
+    }
   }
 
   @override

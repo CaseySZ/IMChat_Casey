@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
-import 'package:imchat/utils/screen.dart';
 
 import '../../../tool/image/custom_new_image.dart';
 import '../model/chat_record_model.dart';
@@ -88,11 +87,17 @@ class ChatItemRightWidget extends StatelessWidget {
         child: (model?.localPath?.isNotEmpty == true)
             ? Image.file(
                 File(model!.localPath!),
-                width: 120,
+                width: 173,
+                height: 96,
               )
             : CustomNewImage(
                 imageUrl: model?.content,
-                width: 120,
+                width: 173,
+                placeholder: Container(
+                  width: 173,
+                  height: 90,
+                  color: const Color(0xff666666).withOpacity(0.2),
+                ),
               ),
       );
     } else if (model?.contentType == 2 || model?.contentType == 3) {

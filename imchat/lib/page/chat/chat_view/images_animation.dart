@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ImagesAnimation extends StatefulWidget {
   final double w;
   final double h;
+  final bool isLeftStyle;
   final ImagesAnimationEntry? entry;
   final int durationSeconds;
 
@@ -12,6 +15,7 @@ class ImagesAnimation extends StatefulWidget {
     this.h = 80,
     this.entry,
     this.durationSeconds = 3,
+    this.isLeftStyle = false,
   }) : super(key: key);
 
   @override
@@ -44,11 +48,15 @@ class _InState extends State<ImagesAnimation> with TickerProviderStateMixin {
       animation: _animation,
       builder: (BuildContext context, Widget? child) {
         String frame = _animation.value.toString();
-        return Image.asset(
-          "assets/images/cI$frame.png",
-          gaplessPlayback: true, //避免图片闪烁
-          width: widget.w,
-          height: widget.h,
+        return Transform.rotate(
+          //旋转90度
+          angle: widget.isLeftStyle ? 0 : pi,
+          child: Image.asset(
+            "assets/images/cI$frame.png",
+            gaplessPlayback: true, //避免图片闪烁
+            width: widget.w,
+            height: widget.h,
+          ),
         );
       },
     );

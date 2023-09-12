@@ -51,7 +51,12 @@ class ChatItemLeftWidget extends StatelessWidget {
         },
         child: CustomNewImage(
           imageUrl: model?.content ?? "",
-          width: 120,
+          width: 173,
+          placeholder: Container(
+            width: 173,
+            height: 90,
+            color: const Color(0xff666666).withOpacity(0.2),
+          ),
         ),
       );
     } else if (model?.contentType == 2 || model?.contentType == 3) {
