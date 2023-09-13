@@ -66,16 +66,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   ChatRecordModel? menuChatModel;
   double menuDx = 0;
   double menuDy = 0;
+  double keyboardSize = 277;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    if (chatType == 0) {
-      WebSocketSend.sendOpenFriendBox(friendNo);
-    } else {
-      WebSocketSend.sendOpenGroupBox(friendNo);
-    }
+    sendOpenBoxMsg();
     WebSocketModel.addListener(webSocketLister);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loadData();
@@ -92,7 +89,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     });
   }
 
-  double keyboardSize = 277;
 
   @override
   void didChangeMetrics() {
@@ -111,6 +107,14 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     });
   }
 
+  void sendOpenBoxMsg() {
+    if (chatType == 0) {
+      WebSocketSend.sendOpenFriendBox(friendNo);
+    } else {
+      WebSocketSend.sendOpenGroupBox(friendNo);
+    }
+  }
+
   void _loadData({String? startChatRecordId}) async {
     try {
       Response? response;
@@ -121,6 +125,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         _loadGroupData();
       }
       chatArr ??= [];
+      if(startChatRecordId == null){
+        chatArr?.clear();
+      }
       if (response?.isSuccess == true) {
         if (startChatRecordId == null) {
           chatArr?.clear();
@@ -162,6 +169,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   }
 
   void webSocketLister(Protocol protocol) {
+    if (protocol.isSuccess == true && protocol.cmd == MessageType.login.responseName) {
+      Future.delayed(const Duration(seconds: 1), (){
+        sendOpenBoxMsg();
+        _loadData();
+      });
+    }
     if (chatType == 0) {
       if (protocol.cmd == MessageType.chatHistory.responseName && protocol.isSuccess == true) {
         ChatRecordModel model = ChatRecordModel.fromJson(protocol.dataMap ?? {});

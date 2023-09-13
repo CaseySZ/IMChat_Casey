@@ -54,10 +54,14 @@ class WebSocketSend {
   }
 
   static int preSendHeatTime = 0;
-  static sendHeartBeat() {
+  static sendHeartBeat() async{
     if(WebSocketModel.isConnectSocketSuccess == true) {
-
-      int gap =  DateTime.now().millisecondsSinceEpoch - preSendHeatTime;
+      int currentEpoch = DateTime.now().millisecondsSinceEpoch;
+      int gap =  currentEpoch- preSendHeatTime;
+      int receiveGap = currentEpoch - WebSocketModel.preReceiveHeaderTimer;
+      if(receiveGap > 6000){
+        await WebSocketModel.retryConnect();
+      }
       if(gap > 4000){
         Map<String, dynamic> params = {
           "token": IMConfig.token,
@@ -68,7 +72,7 @@ class WebSocketSend {
         WebSocketModel.send(protocol);
         preSendHeatTime = DateTime.now().millisecondsSinceEpoch;
       }
-      Future.delayed(const Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 4), () {
         sendHeartBeat();
       });
     }
@@ -85,9 +89,6 @@ class WebSocketSend {
       Protocol protocol = Protocol(
           token: IMConfig.token, cmd: MessageType.friendBox, params: jsonParams);
       WebSocketModel.send(protocol);
-      Future.delayed(const Duration(seconds: 5), () {
-        sendHeartBeat();
-      });
     }
   }
 
@@ -102,9 +103,6 @@ class WebSocketSend {
       Protocol protocol = Protocol(
           token: IMConfig.token, cmd: MessageType.closeFriendBox, params: jsonParams);
       WebSocketModel.send(protocol);
-      Future.delayed(const Duration(seconds: 5), () {
-        sendHeartBeat();
-      });
     }
   }
 
@@ -119,9 +117,7 @@ class WebSocketSend {
       Protocol protocol = Protocol(
           token: IMConfig.token, cmd: MessageType.groupBox, params: jsonParams);
       WebSocketModel.send(protocol);
-      Future.delayed(const Duration(seconds: 5), () {
-        sendHeartBeat();
-      });
+
     }
   }
 
@@ -136,9 +132,6 @@ class WebSocketSend {
       Protocol protocol = Protocol(
           token: IMConfig.token, cmd: MessageType.closeGroupBox, params: jsonParams);
       WebSocketModel.send(protocol);
-      Future.delayed(const Duration(seconds: 5), () {
-        sendHeartBeat();
-      });
     }
   }
 
@@ -153,9 +146,7 @@ class WebSocketSend {
       Protocol protocol = Protocol(
           token: IMConfig.token, cmd: MessageType.editText, params: jsonParams);
       WebSocketModel.send(protocol);
-      Future.delayed(const Duration(seconds: 5), () {
-        sendHeartBeat();
-      });
+
     }
   }
   // 退出文本编辑指令发送
@@ -169,9 +160,6 @@ class WebSocketSend {
       Protocol protocol = Protocol(
           token: IMConfig.token, cmd: MessageType.stopEditText, params: jsonParams);
       WebSocketModel.send(protocol);
-      Future.delayed(const Duration(seconds: 5), () {
-        sendHeartBeat();
-      });
     }
   }
 
@@ -195,9 +183,6 @@ class WebSocketSend {
       Protocol protocol = Protocol(
           token: IMConfig.token, cmd: MessageType.exitGroup, params: jsonParams);
       WebSocketModel.send(protocol);
-      Future.delayed(const Duration(seconds: 5), () {
-        sendHeartBeat();
-      });
     }
   }
 

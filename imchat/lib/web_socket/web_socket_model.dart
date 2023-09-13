@@ -77,17 +77,21 @@ class WebSocketModel {
     });
   }
 
-  static retryConnect() {
+  static Future retryConnect() async{
     channel =  IOWebSocketChannel.connect('ws://8.217.117.185:9090');
     channel?.stream.listen((message) {
       Protocol protocol = Protocol.fromBuffer(message);
       _parseMessage(protocol);
     });
+    await WebSocketSend.login();
   }
+
+  static int preReceiveHeaderTimer = 0;
 
   static _parseMessage(Protocol protocol){
     if(protocol.cmd == MessageType.heart.responseName){
-
+      preReceiveHeaderTimer = DateTime.now().millisecondsSinceEpoch;
+      debugLog("webSocket:${protocol.cmd}, code: ${protocol.code}, data: ${protocol.data}, $preReceiveHeaderTimer");
     }else {
       debugLog("webSocket:${protocol.cmd}, code: ${protocol.code}, data: ${protocol.data}");
     }
@@ -114,11 +118,20 @@ class WebSocketModel {
   }
 
   static send(Protocol protocol){
-    channel?.sink.add(protocol.writeToBuffer());
+    try {
+      channel?.sink.add(protocol.writeToBuffer());
+    }catch(e){
+      debugLog("发送socket消息失败：$e");
+    }
   }
 
   static close() {
-    channel?.sink.close(status.goingAway);
+    try {
+      channel?.sink.close(status.goingAway);
+    }catch(e){
+      debugLog("关闭socket消息失败：$e");
+    }
+
   }
 
 }

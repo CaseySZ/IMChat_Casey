@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/tool/loading/empty_error_widget.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
+import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
 import '../../api/im_api.dart';
@@ -26,7 +27,7 @@ class MainPage extends StatefulWidget {
   }
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   bool mainPageInited = false;
 
@@ -51,12 +52,41 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     WebSocketModel.addListener(_receiveMessage);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loginEvent();
     });
   }
 
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.inactive:
+        debugLog("AppLifecycleState.inactive");
+        break;
+      case AppLifecycleState.resumed:
+        _appResumed();
+        debugLog("AppLifecycleState.resumed");
+        break;
+      case AppLifecycleState.paused:
+        debugLog("AppLifecycleState.paused");
+        break;
+      case AppLifecycleState.detached:
+        debugLog("AppLifecycleState.detached");
+        break;
+    }
+  }
+
+
+  void _appResumed() {
+    int current = DateTime.now().millisecondsSinceEpoch;
+    if(current - WebSocketModel.preReceiveHeaderTimer > 6000){
+      WebSocketModel.retryConnect();
+    }
+  }
 
   void _loginEvent() async{
 
@@ -163,6 +193,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     WebSocketModel.removeListener(_receiveMessage);
     super.dispose();
   }
