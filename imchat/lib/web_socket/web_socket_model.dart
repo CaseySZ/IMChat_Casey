@@ -78,12 +78,14 @@ class WebSocketModel {
   }
 
   static Future retryConnect() async{
+    preReceiveHeaderTimer = DateTime.now().millisecondsSinceEpoch;
     channel =  IOWebSocketChannel.connect('ws://8.217.117.185:9090');
     channel?.stream.listen((message) {
       Protocol protocol = Protocol.fromBuffer(message);
       _parseMessage(protocol);
     });
     await WebSocketSend.login();
+    WebSocketSend.sendHeartBeat();
   }
 
   static int preReceiveHeaderTimer = 0;

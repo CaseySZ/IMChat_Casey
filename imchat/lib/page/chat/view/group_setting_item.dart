@@ -13,8 +13,8 @@ class GroupSettingItem extends StatefulWidget {
   final GroupDetailModel? groupModel;
   final FriendItemInfo? model;
   final String? title;
-
-  const GroupSettingItem({super.key, this.title, this.groupModel, this.model});
+  final Function? callback;
+  const GroupSettingItem({super.key, this.title, this.groupModel, this.model, this.callback,});
 
   @override
   State<StatefulWidget> createState() {
@@ -99,7 +99,9 @@ class _GroupSettingItemState extends State<GroupSettingItem> {
 
       }
       showToast(msg: retStr!);
-    } else {}
+    } else {
+      widget.callback?.call();
+    }
     _isLoading = false;
     setState(() {});
   }

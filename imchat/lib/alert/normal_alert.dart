@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 
 class NormalAlert extends StatelessWidget {
 
-  static show(BuildContext context, {String? title, String? content}) {
+  static show(BuildContext context, {String? title, String? buttonTitle, String? content}) {
     showDialog(
         context: context,
         builder: (context) {
-          return  NormalAlert(title: title, content: content,);
+          return  NormalAlert(title: title, content: content, leftButtonTitle: buttonTitle,);
         });
   }
 
   final String? title;
   final String? content;
-
-  const NormalAlert({super.key, this.title, this.content});
+  final String? leftButtonTitle;
+  const NormalAlert({super.key, this.title, this.content, this.leftButtonTitle,});
 
   @override
   Widget build(BuildContext context) {
@@ -57,30 +57,66 @@ class NormalAlert extends StatelessWidget {
                       ),
                     ),
                   const SizedBox(height: 24),
-                  InkWell(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(32, 10, 32, 10),
-                      decoration: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const  Text(
-                        "确认",
-                        style:  TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+                  if(leftButtonTitle?.isNotEmpty == true)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildCancelButton(context),
+                        const SizedBox(width: 16),
+                        _buildSureButton(context),
+                      ],
+                    )
+                  else
+                    _buildSureButton(context),
+
                 ],
               ),
             ),
           ),
         )
+      ),
+    );
+  }
+  Widget _buildCancelButton(BuildContext context) {
+    return   InkWell(
+      onTap: (){
+        Navigator.pop(context);
+      },
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(32, 10, 32, 10),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child:   Text(
+          leftButtonTitle!,
+          style:  const TextStyle(
+            fontSize: 14,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSureButton(BuildContext context) {
+    return   InkWell(
+      onTap: (){
+        Navigator.pop(context, true);
+      },
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(32, 10, 32, 10),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: const  Text(
+          "确认",
+          style:  TextStyle(
+            fontSize: 14,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }

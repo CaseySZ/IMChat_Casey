@@ -297,8 +297,8 @@ class IMApi {
         "/api/group/member/allowSendMessage",
         {
           "groupNo": groupNo,
-          memberNo: memberNo,
-          allowSendMessage: allowSendMessage,
+          "memberNo": memberNo,
+          "allowSendMessage": allowSendMessage,
         },
       );
       if (response?.isSuccess == true) {

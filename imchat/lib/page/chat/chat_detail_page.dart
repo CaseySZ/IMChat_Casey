@@ -56,7 +56,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   String get friendNo => widget.model?.friendNo ?? widget.model?.targetNo ?? "";
   ChatRecordResponse? chatResponse;
   List<ChatRecordModel>? chatArr;
-  List<GroupMemberModel>? groupMemberArr;
+  List<GroupMemberModel> groupMemberArr = [];
   int currentPage = 1;
 
   FocusNode focusNode = FocusNode();
@@ -212,7 +212,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     }
     if (protocol.isSuccess == true && protocol.cmd == MessageType.groupMember.responseName) {
       if(protocol.dataArr is List){
-        groupMemberArr = protocol.dataArr?.map((e) => GroupMemberModel.fromJson(e)).toList();
+        var memberArr = protocol.dataArr?.map((e) => GroupMemberModel.fromJson(e)).toList();
+        groupMemberArr.clear();
+        groupMemberArr.addAll(memberArr ?? []);
       }
     }
 

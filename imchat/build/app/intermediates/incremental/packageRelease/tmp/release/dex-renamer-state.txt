@@ -1,4 +1,0 @@
-#Tue Sep 12 21:47:27 CST 2023
-base.0=/Users/sy/Documents/GitHub/IMChat/imchat/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
-renamed.0=classes.dex
-path.0=classes.dex

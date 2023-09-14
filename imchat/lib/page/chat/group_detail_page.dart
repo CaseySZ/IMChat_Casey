@@ -6,7 +6,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_pickers/image_pickers.dart';
+import 'package:imchat/alert/normal_alert.dart';
 import 'package:imchat/api/im_api.dart';
+import 'package:imchat/config/config.dart';
 import 'package:imchat/page/chat/group_edit_txt_page.dart';
 import 'package:imchat/page/chat/model/group_detail_model.dart';
 import 'package:imchat/page/chat/view/group_setting_item.dart';
@@ -22,12 +24,18 @@ import '../../api/file_api.dart';
 import '../../tool/loading/loading_alert_widget.dart';
 import '../../tool/network/dio_base.dart';
 import 'chat_view/album_picker_view.dart';
+import 'group_member_list_page.dart';
 import 'model/group_member_model.dart';
 
 class GroupDetailPage extends StatefulWidget {
   final String groupNo;
   final List<GroupMemberModel>? groupMemberArr;
-  const GroupDetailPage({super.key, required this.groupNo, this.groupMemberArr,});
+
+  const GroupDetailPage({
+    super.key,
+    required this.groupNo,
+    this.groupMemberArr,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -38,7 +46,18 @@ class GroupDetailPage extends StatefulWidget {
 class _GroupDetailPageState extends State<GroupDetailPage> {
   GroupDetailModel? groupModel;
 
+  List<GroupMemberModel> get groupMemberArr => widget.groupMemberArr ?? [];
+
   bool get isAdmin => groupModel?.isAdmin == 0;
+
+  bool get isCreater {
+    if (groupMemberArr.isNotEmpty && groupMemberArr.first.memberNo == IMConfig.userInfo?.memberNo) {
+      return true;
+    }
+    return false;
+  }
+
+  GroupAuthModel? get groupAuth => groupModel?.groupAuth;
 
   @override
   void initState() {
@@ -57,6 +76,23 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
     }
     groupModel ??= GroupDetailModel();
     setState(() {});
+  }
+
+  void deleteEvent() async {
+
+    bool ret = await NormalAlert.show(context, content: isCreater ? "你确认要解散群吗?" : "你确认要退出群吗?" , buttonTitle: "取消");
+    if(ret != true) return;
+    LoadingAlertWidget.show(context);
+    String? errorStr = await IMApi.groupRemove(groupModel?.groupNo ?? "");
+    LoadingAlertWidget.cancel(context);
+    if (errorStr?.isEmpty == true) {
+      showToast(msg: isCreater ? "已解散" : "已退出");
+    } else {
+      showToast(msg: errorStr ?? defaultErrorMsg);
+    }
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
+
   }
 
   void setHeadImageEvent() async {
@@ -138,7 +174,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                         File(groupModel!.localPath!),
                         width: 80,
                         height: 80,
-                  fit: BoxFit.cover,
+                        fit: BoxFit.cover,
                       )
                     : CustomNewImage(
                         imageUrl: groupModel?.headImage,
@@ -178,6 +214,24 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                   rightTitle: groupModel?.personalitySign,
                 ),
               ),
+              //if (isAdmin || groupAuth?.showGroupMemberList == 0)
+              InkWell(
+                onTap: () async {
+                  await Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return GroupMemberListPage(
+                      groupMemberArr: groupMemberArr,
+                      isAdmin: isAdmin,
+                      isAllowAddFriend: groupModel?.groupAuth?.allowGroupMemberAdd == 0,
+                    );
+                  }));
+                  setState(() {});
+                },
+                child: _buldItem(
+                  isAdmin ? "群成员管理" : "群成员",
+                  rightTitle: groupMemberArr.length.toString(),
+                  isShowArrow: true,
+                ),
+              ),
               if (isAdmin) ...[
                 InkWell(
                   onTap: () {
@@ -209,12 +263,36 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                 GroupSettingItem(
                   groupModel: groupModel,
                   title: "允许成员退群",
+                  callback: (){
+                    setState(() {});
+                  },
                 ),
                 GroupSettingItem(
                   groupModel: groupModel,
                   title: "显示群全成员",
                 ),
               ],
+              if (isCreater || groupAuth?.allowGroupMemberExit == 0)
+                Container(
+                  padding: const EdgeInsets.fromLTRB(16, 32, 16, 24),
+                  child: InkWell(
+                      onTap: deleteEvent,
+                      child: Container(
+                        height: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child:  Text(
+                          isCreater ? "删除群" : "退出群",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      )),
+                ),
             ],
           ),
         ),
@@ -222,7 +300,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
     }
   }
 
-  Widget _buldItem(String title, {String? rightTitle}) {
+  Widget _buldItem(String title, {String? rightTitle, bool isShowArrow = false}) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: const BoxDecoration(
@@ -253,7 +331,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
             )
           else
             const Spacer(),
-          if (isAdmin)
+          if (isAdmin || isShowArrow)
             const Icon(
               Icons.arrow_forward_ios,
               color: Color(0xffcccccc),
