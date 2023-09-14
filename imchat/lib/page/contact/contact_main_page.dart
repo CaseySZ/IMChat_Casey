@@ -69,6 +69,7 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
       ),
       body: Column(
         children: [
+          const SizedBox(height: 6),
           _buildSearch(),
           const SizedBox(height: 8),
           _buildHeadItem(0, "assets/images/Mi.png", "新的好友".localize, true),
