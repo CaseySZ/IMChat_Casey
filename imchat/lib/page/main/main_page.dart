@@ -209,6 +209,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   @override
   void dispose() {
+    controller.dispose();
     WidgetsBinding.instance.removeObserver(this);
     WebSocketModel.removeListener(_receiveMessage);
     super.dispose();
