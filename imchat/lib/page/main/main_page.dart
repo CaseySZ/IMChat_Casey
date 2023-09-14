@@ -5,6 +5,7 @@ import 'package:imchat/tool/loading/loading_center_widget.dart';
 import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
+import 'package:video_player/video_player.dart';
 import '../../api/im_api.dart';
 import '../../config/config.dart';
 import '../../protobuf/model/base.pb.dart';
@@ -28,9 +29,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
-
   bool mainPageInited = false;
-
+  late VideoPlayerController controller;
   List<String> titleArr = [
     '消息',
     '通讯录',
@@ -48,17 +48,21 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   PageController pageController = PageController(initialPage: 0);
   int currentIndex = 0;
 
-
   @override
   void initState() {
     super.initState();
+    controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
+    try {
+      controller.initialize();
+    } catch (e) {
+      debugLog("声音初始化失败$e");
+    }
     WidgetsBinding.instance.addObserver(this);
     WebSocketModel.addListener(_receiveMessage);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loginEvent();
     });
   }
-
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -80,21 +84,30 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     }
   }
 
+  int prePlayTime = 0;
+
+  void _playAudio() async {
+    int curTime = DateTime.now().millisecondsSinceEpoch;
+    if (curTime - prePlayTime > 2000) {
+      prePlayTime = curTime;
+      await controller.seekTo(Duration.zero);
+      controller.play();
+    }
+  }
 
   void _appResumed() {
     int current = DateTime.now().millisecondsSinceEpoch;
-    if(current - WebSocketModel.preReceiveHeaderTimer > 6000){
+    if (current - WebSocketModel.preReceiveHeaderTimer > 6000) {
       WebSocketModel.retryConnect();
     }
   }
 
-  void _loginEvent() async{
-
-    String? userName= await LocalStore.getLoginName();
-    String? pwd = await  LocalStore.getPassword();
-    if(userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
+  void _loginEvent() async {
+    String? userName = await LocalStore.getLoginName();
+    String? pwd = await LocalStore.getPassword();
+    if (userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
       String? errorDesc;
-      if(IMConfig.token == null) {
+      if (IMConfig.token == null) {
         errorDesc = await IMApi.login(userName!, pwd!);
         if (errorDesc?.isNotEmpty == true) {
           showToast(msg: errorDesc!);
@@ -102,8 +115,8 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         }
       }
       await WebSocketSend.login();
-      errorDesc =  await IMApi.appInfo();
-      if(errorDesc?.isNotEmpty == true) {
+      errorDesc = await IMApi.appInfo();
+      if (errorDesc?.isNotEmpty == true) {
         showToast(msg: errorDesc!);
         return;
       }
@@ -112,18 +125,24 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     }
   }
 
+  void _receiveMessage(Protocol protocol) {
 
-  void _receiveMessage(Protocol protocol){
-    if(protocol.cmd == MessageType.login.responseName){
-      if(protocol.isSuccess){
+    if (protocol.cmd == MessageType.messageTotal ||
+        protocol.cmd == MessageType.friendChatMessage ||
+        protocol.cmd == MessageType.chatBoxMessage ||
+        protocol.cmd == MessageType.chatHistory ||
+        protocol.cmd == MessageType.chatGroupHistory) {
+      _playAudio();
+    }
+    if (protocol.cmd == MessageType.login.responseName) {
+      if (protocol.isSuccess) {
         WebSocketModel.isConnectSocketSuccess = true;
-      }else {
+      } else {
         WebSocketModel.isConnectSocketSuccess = false;
       }
       setState(() {});
     }
   }
-
 
   DateTime? lastPopTime;
 
@@ -131,9 +150,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (lastPopTime == null ||
-            DateTime.now().difference(lastPopTime!) <
-                const Duration(seconds: 1)) {
+        if (lastPopTime == null || DateTime.now().difference(lastPopTime!) < const Duration(seconds: 1)) {
           lastPopTime = DateTime.now();
           showToast(msg: '再次点击退出'.localize);
           return false;
@@ -144,9 +161,13 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         body: Stack(
           fit: StackFit.expand,
           children: [
+            Positioned(
+              left: 20,
+              top: 20,
+              child: SizedBox(width: 10, height: 10, child: VideoPlayer(controller)),
+            ),
             Container(
-              padding: EdgeInsets.only(
-                  bottom: kBottomNavigationBarHeight + screen.paddingBottom),
+              padding: EdgeInsets.only(bottom: kBottomNavigationBarHeight + screen.paddingBottom),
               child: PageView.builder(
                 itemBuilder: (context, index) {
                   return pageViewArr[index];
@@ -170,23 +191,18 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     );
   }
 
-
   Widget _buildLoadingStatus() {
-    if(WebSocketModel.isConnectSocketSuccess == null || mainPageInited == false){
-      return  InkWell(
-        onTap: (){
-
-        },
-        child:const LoadingCenterWidget(),
+    if (WebSocketModel.isConnectSocketSuccess == null || mainPageInited == false) {
+      return InkWell(
+        onTap: () {},
+        child: const LoadingCenterWidget(),
       );
-    }else if(WebSocketModel.isConnectSocketSuccess == false){
+    } else if (WebSocketModel.isConnectSocketSuccess == false) {
       return EmptyErrorWidget(
         errorMsg: "IM服务器连接失败",
-        retryOnTap: () {
-
-        },
+        retryOnTap: () {},
       );
-    }else {
+    } else {
       return const SizedBox();
     }
   }
