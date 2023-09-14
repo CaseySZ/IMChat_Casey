@@ -6,6 +6,7 @@ import '../../utils/screen.dart';
 import '../../web_socket/web_message_type.dart';
 import '../../web_socket/web_socket_model.dart';
 
+
 class MainBottomBarView extends StatefulWidget {
   final List<String> titleArr;
   final PageController? pageController;
@@ -28,8 +29,6 @@ class _MainBottomBarViewState extends State<MainBottomBarView> {
   }
 
   int chatTargetMessageTotal = 0;
-  int friendApplyMessageTotal = 0;
-  int groupApplyMessageTotal = 0;
   int messageTotal = 0;
 
   int msgCount(int index){

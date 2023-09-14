@@ -42,7 +42,7 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
       return "【转账】";
     }
     if (model?.contentType == 6) {
-      return "【消息回撤】";
+      return  "";//"【消息回撤】";
     }
     return model?.chatContent ?? "";
   }

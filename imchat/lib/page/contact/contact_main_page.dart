@@ -10,6 +10,7 @@ import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
 
+import '../../config/config.dart';
 import '../../model/friend_item_info.dart';
 import '../add_friend/add_friend_page.dart';
 
@@ -27,8 +28,6 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
   @override
   bool get wantKeepAlive => true;
 
-  int friendApplyMessageTotal = 0;
-  int groupApplyMessageTotal = 0;
   int msgCount(int index){
     if(index == 0) {
       return friendApplyMessageTotal;

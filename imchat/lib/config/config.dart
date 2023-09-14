@@ -1,6 +1,9 @@
 import '../model/group_item_model.dart';
 import '../model/user_info.dart';
 
+int friendApplyMessageTotal = 0;
+int groupApplyMessageTotal = 0;
+
 class IMConfig {
   static String? token;
   static int memberRegisterCodeRequiredSwitch = 1; // 邀请码必填(0-开 1-关)

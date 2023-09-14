@@ -118,6 +118,9 @@ class _ChatItemCellState extends State<ChatItemCell> {
 
   Widget _buildChatContent() {
     if ((widget.model?.contentType ?? 0) >= 6) {
+      if(chatContent == "消息撤回"){
+        return const SizedBox();
+      }
       return Container(
         padding: const EdgeInsets.only(bottom: 16),
         alignment: Alignment.center,
