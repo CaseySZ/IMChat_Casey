@@ -562,8 +562,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         isShowMenu = false;
                         setState(() {});
                         if (value == "回复".localize) {
-                          String relpyContent = "${menuChatModel?.sendNickName}：\"${menuChatModel?.chatContent} \"\n回复：";
-                          eidtController.text = relpyContent;
+                          if(menuChatModel?.contentType == 0) {
+                            String relpyContent = "${menuChatModel?.sendNickName}：\"${menuChatModel?.chatContent} \"\n回复：";
+                            eidtController.text = relpyContent;
+                          }else {
+                            String relpyContent = "${menuChatModel?.sendNickName}：\"【${menuChatModel?.contentTypeDesc}】\"\n回复：";
+                            eidtController.text = relpyContent;
+                          }
                         }
                         menuChatModel = null;
                       },

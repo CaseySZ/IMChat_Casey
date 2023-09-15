@@ -5,20 +5,25 @@ class ChatRecordResponse {
   int? total;
   int? pageNum;
   int? pageSize;
-  ChatRecordResponse({this.data, this.total, this.pageSize, this.pageNum,});
+
+  ChatRecordResponse({
+    this.data,
+    this.total,
+    this.pageSize,
+    this.pageNum,
+  });
 
   ChatRecordResponse.fromJson(Map<String, dynamic>? json) {
-    if(json == null){
+    if (json == null) {
       return;
     }
-    if(json["data"] is List) {
+    if (json["data"] is List) {
       data = (json["data"] as List).map((e) => ChatRecordModel.fromJson(e)).toList();
     }
     total = json["total"];
     pageNum = json["pageNum"];
     pageSize = json["pageSize"];
   }
-
 }
 
 class ChatRecordModel {
@@ -30,6 +35,7 @@ class ChatRecordModel {
   String? chatCode;
   String? content;
   String? groupNo;
+
   String get chatContent {
     if (content?.isNotEmpty == true) {
       int length = content?.length ?? 0;
@@ -40,8 +46,21 @@ class ChatRecordModel {
     }
     return "";
   }
+
   String? localPath;
   int? contentType; //0文字，1图片，2语音，3文件，4红包，5转账，6消息回撤
+  String get contentTypeDesc {
+    if (contentType == 1) {
+      return "图片";
+    }
+    if (contentType == 2) {
+      return "2语音";
+    }
+    if (contentType == 3) {
+      return "文件";
+    }
+    return "";
+  }
 
   int? readStatus; // 0 未读， 1 已读
   String? createTime;
@@ -62,6 +81,7 @@ class ChatRecordModel {
   int? sendStatus; // 0 发送中， 1发送失败,  -1 移除消息， 其他正常
   String? lastContent;
   List<RichTitle>? richTitleArr;
+
   ChatRecordModel();
 
   void parserChatTitle() {
@@ -81,8 +101,7 @@ class ChatRecordModel {
             richTitleArr!.add(RichTitle(emoStr, true));
             richTitleArr!.add(RichTitle(subLinkArr.last, false));
           } else {
-            richTitleArr!.last.content =
-            "${richTitleArr!.last.content}[/$nextStr";
+            richTitleArr!.last.content = "${richTitleArr!.last.content}[/$nextStr";
           }
         }
       }
@@ -102,7 +121,7 @@ class ChatRecordModel {
     targetType = json['targetType'];
     sendType = json["sendType"];
     content = json["content"];
-    if(json["lastContent"] != null){
+    if (json["lastContent"] != null) {
       content = json["lastContent"];
       lastContent = json["lastContent"];
     }
@@ -113,14 +132,14 @@ class ChatRecordModel {
     sendNickNameRemark = json["sendNickNameRemark"];
     sendNickName = json["sendNickName"];
     sendHeadImage = json["sendHeadImage"];
-    if(json["headImage"] != null){
+    if (json["headImage"] != null) {
       sendHeadImage = json["headImage"];
     }
     receiveNo = json["receiveNo"];
     isTop = json["isTop"];
     messageNum = json["messageNum"];
     personalitySign = json["personalitySign"];
-    if(contentType == 0){
+    if (contentType == 0) {
       parserChatTitle();
     }
   }
@@ -131,9 +150,9 @@ class ChatRecordModel {
   }
 }
 
-
 class RichTitle {
   String content = "";
   bool isImg = false;
+
   RichTitle(this.content, this.isImg);
 }

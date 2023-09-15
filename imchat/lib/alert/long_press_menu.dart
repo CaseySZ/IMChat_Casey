@@ -18,17 +18,30 @@ class LongPressMenu extends StatelessWidget {
   final ChatRecordModel? model;
 
   List<IconData> get iconArr => [
-    Icons.copy,
-    Icons.keyboard_return_rounded,
-    Icons.keyboard_return_rounded,
-    Icons.delete_outline,
-  ];
+        Icons.copy,
+        Icons.keyboard_return_rounded,
+        Icons.keyboard_return_rounded,
+        Icons.delete_outline,
+      ];
 
   const LongPressMenu({super.key, required this.dx, required this.dy, this.model, this.callback});
 
+  bool get isTextType => model?.contentType == 0;
 
-  double get height{
-    return isMy ? 40*3 : 40*2;
+  double get height {
+    if (isMy) {
+      if (isTextType) {
+        return 40 * 3;
+      } else {
+        return 40*2;
+      }
+    } else {
+      if (isTextType) {
+        return 40 * 2;
+      } else {
+        return 40;
+      }
+    }
   }
 
   bool get isMy {
@@ -95,7 +108,7 @@ class LongPressMenu extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildItem(0, "复制内容".localize, ""),
+                      if (isTextType) _buildItem(0, "复制内容".localize, ""),
                       //_buildItem(1, "转发", ""),
                       _buildItem(2, "回复".localize, ""),
                       if (isMy) _buildItem(3, "撤回消息".localize, ""),
@@ -110,8 +123,6 @@ class LongPressMenu extends StatelessWidget {
     );
   }
 
-
-
   Widget _buildItem(int index, String title, String imagePath) {
     return InkWell(
       onTap: () {
@@ -122,7 +133,7 @@ class LongPressMenu extends StatelessWidget {
         } else if (title == "撤回消息".localize) {
           _deleteMsg();
           callback?.call(null);
-        }else if(title == "回复".localize){
+        } else if (title == "回复".localize) {
           callback?.call("回复".localize);
         }
       },
