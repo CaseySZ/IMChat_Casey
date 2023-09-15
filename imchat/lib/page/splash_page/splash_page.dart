@@ -1,12 +1,15 @@
 
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:imchat/api/emo_data.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
+import 'package:imchat/model/version_model.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/utils/local_store.dart';
@@ -51,6 +54,19 @@ class _SplashPageState extends State<SplashPage> {
     if(response?.isSuccess == true){
       IMConfig.memberRegisterCodeRequiredSwitch = response?.respData["memberRegisterCodeRequiredSwitch"] ?? 1;
       IMConfig.memberRegisterCodeSwitch = response?.respData["memberRegisterCodeSwitch"] ?? 1;
+    }
+    bool isIos = true;
+    if(Platform.isAndroid){
+      isIos = false;
+    }
+    Response? versionResp = await IMApi.getAppVersion(isIos: isIos);
+    VersionModel? model;
+    if(versionResp?.isSuccess == true){
+      try {
+        model = VersionModel.fromJson(versionResp?.respData);
+      }catch(e){
+        debugLog(e);
+      }
     }
     String? userName= await LocalStore.getLoginName();
     String? pwd = await  LocalStore.getPassword();

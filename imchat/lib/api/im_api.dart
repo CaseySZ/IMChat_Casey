@@ -559,4 +559,15 @@ class IMApi {
       return e.toString();
     }
   }
+
+  static Future<Response?> getAppVersion({bool isIos = false}) async {
+    try {
+      Response? response =
+      await DioBase.instance.post(isIos ? "/api/findNowVersion/ios" : "/api/findNowVersion/android", {});
+      return response;
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
 }

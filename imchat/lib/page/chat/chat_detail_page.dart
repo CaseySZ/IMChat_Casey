@@ -21,6 +21,7 @@ import 'package:imchat/web_socket/web_socket_model.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../model/friend_item_info.dart';
+import '../../model/group_item_model.dart';
 import '../../tool/appbar/base_app_bar.dart';
 import '../../tool/loading/loading_center_widget.dart';
 import '../../tool/network/dio_base.dart';
@@ -218,7 +219,20 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         groupMemberArr.addAll(memberArr ?? []);
       }
     }
-
+    if (protocol.cmd == MessageType.groupList.responseName && protocol.isSuccess == true && chatType == 1) {
+      List<GroupItemInfo> groupList  = protocol.dataArr?.map((e) => GroupItemInfo.fromJson(e)).toList() ?? [];
+      bool isExist = false;
+      for(var item in groupList){
+        if(item.groupNo == groupModel?.groupNo) {
+          isExist = true;
+        }
+      }
+      if(!isExist){
+        Navigator.popUntil(context, (route) => route.isFirst);
+      }
+    }
+  
+    
   }
 
   void handleChatMessage({List<ChatRecordModel>? list}) {
