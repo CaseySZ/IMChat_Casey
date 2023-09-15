@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/tool/loading/empty_error_widget.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
 import 'package:imchat/tool/network/dio_base.dart';
@@ -14,6 +15,7 @@ import '../../utils/screen.dart';
 import '../../utils/toast_util.dart';
 import '../../web_socket/web_socket_send.dart';
 import '../chat/chat_main_page.dart';
+import '../chat/chat_view/chat_item_audio_widget.dart';
 import '../contact/contact_main_page.dart';
 import '../find/find_page.dart';
 import '../mine/mine_page.dart';
@@ -51,8 +53,8 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
     try {
+      controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
       controller.initialize();
     } catch (e) {
       debugLog("声音初始化失败$e");
@@ -88,7 +90,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   void _playAudio() async {
     int curTime = DateTime.now().millisecondsSinceEpoch;
-    if (curTime - prePlayTime > 2000) {
+    if (curTime - prePlayTime > 2000 && !isPlayingMedia) {
       prePlayTime = curTime;
       await controller.seekTo(Duration.zero);
       controller.play();
@@ -96,6 +98,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   void _appResumed() {
+    setState(() {});
     int current = DateTime.now().millisecondsSinceEpoch;
     if (current - WebSocketModel.preReceiveHeaderTimer > 6000) {
       WebSocketModel.retryConnect();
@@ -103,25 +106,40 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   void _loginEvent() async {
-    String? userName = await LocalStore.getLoginName();
-    String? pwd = await LocalStore.getPassword();
-    if (userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
-      String? errorDesc;
-      if (IMConfig.token == null) {
-        errorDesc = await IMApi.login(userName!, pwd!);
+    if(IMConfig.isOneKeyLogin){
+      if (IMConfig.token != null) {
+        await WebSocketSend.login();
+        String? errorDesc = await IMApi.appInfo();
         if (errorDesc?.isNotEmpty == true) {
           showToast(msg: errorDesc!);
           return;
         }
+        mainPageInited = true;
+        setState(() {});
+      }else {
+        Navigator.pushNamed(context, AppRoutes.login);
       }
-      await WebSocketSend.login();
-      errorDesc = await IMApi.appInfo();
-      if (errorDesc?.isNotEmpty == true) {
-        showToast(msg: errorDesc!);
-        return;
+    }else {
+      String? userName = await LocalStore.getLoginName();
+      String? pwd = await LocalStore.getPassword();
+      if (userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
+        String? errorDesc;
+        if (IMConfig.token == null) {
+          errorDesc = await IMApi.login(userName!, pwd!);
+          if (errorDesc?.isNotEmpty == true) {
+            showToast(msg: errorDesc!);
+            return;
+          }
+        }
+        await WebSocketSend.login();
+        errorDesc = await IMApi.appInfo();
+        if (errorDesc?.isNotEmpty == true) {
+          showToast(msg: errorDesc!);
+          return;
+        }
+        mainPageInited = true;
+        setState(() {});
       }
-      mainPageInited = true;
-      setState(() {});
     }
   }
 

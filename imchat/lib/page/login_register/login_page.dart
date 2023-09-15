@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:imchat/api/im_api.dart';
+import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/utils/toast_util.dart';
@@ -46,26 +47,40 @@ class _LoginPageState extends State<LoginPage> {
     return "";
   }
 
-  void _loginEvent() async {
-    String errorStr = checkData();
-    if (errorStr.isNotEmpty) {
-      showToast(msg: errorStr);
-      return;
-    }
-    FocusScope.of(context).unfocus();
-    LoadingAlertWidget.show(context);
-    String userName = nameController.text;
-    String pwd = psdController.text;
-    //{"loginName": "casey11", "password": "123456"}
-    String? errorDesc = await IMApi.login(userName, pwd);
-    LoadingAlertWidget.cancel(context);
-    if(errorDesc?.isNotEmpty == true){
-      showToast(msg: errorDesc!);
-    }else {
-      LocalStore.saveUserAndPwd(userName, pwd);
-      Navigator.pushReplacementNamed(context, AppRoutes.main);
-    }
+  void _loginEvent({bool isKeyLogin = false}) async {
 
+    if(isKeyLogin){
+      FocusScope.of(context).unfocus();
+      LoadingAlertWidget.show(context);
+      String? errorDesc = await IMApi.autoLogin();
+      LoadingAlertWidget.cancel(context);
+      if (errorDesc?.isNotEmpty == true) {
+        showToast(msg: errorDesc!);
+      } else {
+        IMConfig.isOneKeyLogin = true;
+        Navigator.pushReplacementNamed(context, AppRoutes.main);
+      }
+    }else {
+      String errorStr = checkData();
+      if (errorStr.isNotEmpty) {
+        showToast(msg: errorStr);
+        return;
+      }
+      FocusScope.of(context).unfocus();
+      LoadingAlertWidget.show(context);
+      String userName = nameController.text;
+      String pwd = psdController.text;
+      //{"loginName": "casey11", "password": "123456"}
+      String? errorDesc = await IMApi.login(userName, pwd);
+      LoadingAlertWidget.cancel(context);
+      if (errorDesc?.isNotEmpty == true) {
+        showToast(msg: errorDesc!);
+      } else {
+        IMConfig.isOneKeyLogin = false;
+        LocalStore.saveUserAndPwd(userName, pwd);
+        Navigator.pushReplacementNamed(context, AppRoutes.main);
+      }
+    }
   }
 
   @override
@@ -181,9 +196,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         InkWell(
                           onTap: () {},
-                          child: Text(
-                            "忘记密码?".localize,
-                            style: const TextStyle(
+                          child: const Text(
+                            "",// "忘记密码?".localize,
+                            style:  TextStyle(
                               color: Colors.blue,
                               fontSize: 14,
                             ),
@@ -214,14 +229,22 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 32),
-                  Text(
-                    "一键登录".localize,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                  ),
+                  const SizedBox(height: 20),
+                 InkWell(
+                   onTap: (){
+                     _loginEvent(isKeyLogin: true);
+                   },
+                   child:  Container(
+                     padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                     child:  Text(
+                       "一键登录".localize,
+                       style: const TextStyle(
+                         color: Colors.black,
+                         fontSize: 14,
+                       ),
+                     ),
+                   ),
+                 )
                 ],
               ),
             ),

@@ -232,15 +232,15 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                   isShowArrow: true,
                 ),
               ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return GroupAddFriendPage(groupNo: widget.groupNo);
+                  }));
+                },
+                child: _buldItem("群成员添加", rightTitle: ""),
+              ),
               if (isAdmin) ...[
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return GroupAddFriendPage(groupNo: widget.groupNo);
-                    }));
-                  },
-                  child: _buldItem("群成员添加", rightTitle: ""),
-                ),
                 InkWell(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) {

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_pickers/image_pickers.dart';
 import 'package:imchat/api/emo_data.dart';
 import 'package:imchat/page/chat/chat_view/audio_pick_view.dart';
+import 'package:imchat/page/red_packet/red_packet_page.dart';
+import 'package:imchat/utils/screen.dart';
+import 'package:imchat/utils/toast_util.dart';
 
 import 'album_picker_view.dart';
 
@@ -50,39 +53,103 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
     } else {
       return Container(
         height: widget.height,
-        padding: const EdgeInsets.only(left: 12),
         alignment: Alignment.topLeft,
-        child: Row(
+        child: Column(
           children: [
-            AlbumPickerView(
-              callback: (imageArr) {
-                if(imageArr.isNotEmpty) {
-                  if (widget.pictureCallback != null) {
-                    widget.pictureCallback!(imageArr);
-                  }
-                }
-              },
-              child: _buildItem("相册", "assets/images/album_key.png"),
-            ),
-            AudioPickerView(
-              callback: widget.audioCallback,
-              child: _buildItem("语音", "assets/images/5S.png"),
-            ),
-            AlbumPickerView(
-              isVideo: true,
-              callback: (imageArr) {
-                if(imageArr.isNotEmpty) {
-                  if (widget.videoCallback != null) {
-                    widget.videoCallback!(imageArr.first);
-                  }
-                }
-              },
-              child: _buildItem("视频", "assets/images/album_icon.png"),
-            ),
+            _bulidOneMenu(),
+            const SizedBox(height: 24),
+            _bulidTwoMenu(),
           ],
-        ),
+        )
       );
     }
+  }
+
+
+  Widget _bulidOneMenu() {
+    return  Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        AlbumPickerView(
+          callback: (imageArr) {
+            if(imageArr.isNotEmpty) {
+              if (widget.pictureCallback != null) {
+                widget.pictureCallback!(imageArr);
+              }
+            }
+          },
+          child: _buildItem("相册", "assets/images/album_key.png"),
+        ),
+        AudioPickerView(
+          callback: widget.audioCallback,
+          child: _buildItem("语音", "assets/images/5S.png"),
+        ),
+        AlbumPickerView(
+          isVideo: true,
+          callback: (imageArr) {
+            if(imageArr.isNotEmpty) {
+              if (widget.videoCallback != null) {
+                widget.videoCallback!(imageArr.first);
+              }
+            }
+          },
+          child: _buildItem("视频", "assets/images/album_icon.png"),
+        ),
+        AlbumPickerView(
+          fctType: 1,
+          callback: (imageArr) {
+            if(imageArr.isNotEmpty) {
+              if (widget.pictureCallback != null) {
+                widget.pictureCallback!(imageArr);
+              }
+            }
+          },
+          child: _buildItem("拍照", "assets/images/8O.png"),
+        ),
+      ],
+    );
+  }
+
+  Widget _bulidTwoMenu() {
+    return  Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        AlbumPickerView(
+          isVideo: true,
+          fctType: 1,
+          callback: (imageArr) {
+            if(imageArr.isNotEmpty) {
+              if (widget.videoCallback != null) {
+                widget.videoCallback!(imageArr.first);
+              }
+            }
+          },
+          child: _buildItem("拍视频", "assets/images/76.png"),
+        ),
+
+        InkWell(
+          onTap: () {
+            showToast(msg: "暂未开放");
+           // Navigator.push(context, MaterialPageRoute(builder: (context){
+           //   return  const RedPacketPage();
+           // }));
+          },
+          child: _buildItem("红包", "assets/images/redpackge.jpeg"),
+        ),
+        InkWell(
+          onTap: () {
+            showToast(msg: "暂未开放");
+          },
+          child: _buildItem("语音聊天", "assets/images/5N.png"),
+        ),
+        InkWell(
+          onTap: () {
+            showToast(msg: "暂未开放");
+          },
+          child: _buildItem("视频聊天", "assets/images/6_.png"),
+        ),
+      ],
+    );
   }
 
   List<Widget> _buildEmojiItemList() {
@@ -112,8 +179,8 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
   }
 
   Widget _buildItem(String title, String imagePath,) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+    return SizedBox(
+      width: screen.screenWidth/4,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

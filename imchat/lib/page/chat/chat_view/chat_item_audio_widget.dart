@@ -13,6 +13,8 @@ import 'package:video_player/video_player.dart';
 
 import '../model/chat_record_model.dart';
 
+bool isPlayingMedia = false;
+
 class ChatItemAudioWidget extends StatefulWidget {
   final ChatRecordModel? model;
   final bool isLeftStyle;
@@ -55,7 +57,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   @override
   void initState() {
     super.initState();
-    if (!isFile) {
+    if (!isFile && model?.sendStatus == 0) {
       initController();
     }
   }
@@ -90,6 +92,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
             controller?.pause();
             controller?.seekTo(Duration.zero);
             setState(() {});
+            isPlayingMedia = false;
           }
         }
         if(position == audioDuration) {
@@ -98,6 +101,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
             controller?.pause();
             controller?.seekTo(Duration.zero);
             setState(() {});
+            isPlayingMedia = false;
           }
         }
       }
@@ -109,7 +113,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (isFile) {
+        if (isFile || model?.sendStatus == 0) {
           return;
         }
         if (isVideoType) {
@@ -117,13 +121,16 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
             return MoviePlayPage(controller: controller!);
           }));
           controller?.pause();
+          isPlayingMedia = false;
           return;
         }
         if (_mPlayerIsInited && errorStr.isEmpty) {
           if (isPlaying) {
             controller?.pause();
+            isPlayingMedia = false;
           } else {
             controller?.play();
+            isPlayingMedia = true;
           }
           isPlaying = !isPlaying;
           setState(() {});
@@ -148,6 +155,13 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   }
 
   Widget _buildFileItem() {
+    if(model?.sendStatus == 0){
+      return Container(
+        width: 200,
+        height: 200,
+        color: const Color(0xff999999),
+      );
+    }
     double videoHeight = 120;
     if ((controller?.value.aspectRatio ?? 0) > 0) {
       videoHeight = 200 / controller!.value.aspectRatio;

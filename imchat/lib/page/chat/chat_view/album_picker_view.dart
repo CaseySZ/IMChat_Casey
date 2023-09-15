@@ -12,13 +12,13 @@ import '../../../alert/no_permission_dialog.dart';
 import '../../../tool/network/dio_base.dart';
 import '../../../utils/toast_util.dart';
 
-Future<PermissionStatus> canReadStorage() async{
-  AndroidDeviceInfo androidDeviceInfo = await  DeviceInfoPlugin().androidInfo;
+Future<PermissionStatus> canReadStorage() async {
+  AndroidDeviceInfo androidDeviceInfo = await DeviceInfoPlugin().androidInfo;
   String androidVersion = androidDeviceInfo.version.release;
   late PermissionStatus status;
-  if(int.parse(androidVersion) <= 12){
+  if (int.parse(androidVersion) <= 12) {
     status = await Permission.storage.request();
-  }else {
+  } else {
     status = await Permission.photos.request();
   }
   return status;
@@ -32,25 +32,26 @@ Future checkPermissionAlways(BuildContext context) async {
   var val = await NoPermissionDialog.show(context);
   if (val == true) {
     // 跳转到应用配置界面
-    var isCanOpen =  await openAppSettings();
+    var isCanOpen = await openAppSettings();
     debugLog("isCanOpen: $isCanOpen");
-  }else {
+  } else {
     return await checkPermissionAlways(context);
   }
 }
-
 
 class AlbumPickerView extends StatefulWidget {
   final Widget child;
   final bool isVideo;
   final int maxCount;
   final Function(List<Media>)? callback;
+  final int fctType; // 0 打开相册， 1 打开摄像头
   const AlbumPickerView({
     super.key,
     required this.child,
     this.isVideo = false,
     this.maxCount = 1,
     this.callback,
+    this.fctType = 0,
   });
 
   @override
@@ -60,22 +61,30 @@ class AlbumPickerView extends StatefulWidget {
 }
 
 class _AlbumPickerViewState extends State<AlbumPickerView> {
-
   @override
   void initState() {
     super.initState();
   }
 
-
   void _pickerEvent() async {
     await checkPermissionAlways(context);
-    List<Media> listMedia = await ImagePickers.pickerPaths(
-      uiConfig: UIConfig(uiThemeColor: const Color(0xfff21313)),
-      galleryMode: widget.isVideo ? GalleryMode.video : GalleryMode.image,
-      selectCount: widget.maxCount,
-      showCamera: true,
-    );
-    if(widget.isVideo == true && listMedia.isNotEmpty){
+    List<Media> listMedia = [];
+    if (widget.fctType == 1) {
+      var media = await ImagePickers.openCamera(
+          cameraMimeType: widget.isVideo ? CameraMimeType.video : CameraMimeType.photo,
+      );
+      if(media != null){
+        listMedia.add(media);
+      }
+    } else {
+      listMedia = await ImagePickers.pickerPaths(
+        uiConfig: UIConfig(uiThemeColor: const Color(0xfff21313)),
+        galleryMode: widget.isVideo ? GalleryMode.video : GalleryMode.image,
+        selectCount: widget.maxCount,
+        showCamera: true,
+      );
+    }
+    if (widget.isVideo == true && listMedia.isNotEmpty) {
       String videoPath = listMedia.first.path ?? "";
       File videoFile = File(videoPath);
       int fileSize = videoFile.lengthSync();
@@ -85,21 +94,21 @@ class _AlbumPickerViewState extends State<AlbumPickerView> {
         return;
       }
     }
-    if(listMedia.isEmpty){
-      showToast(msg: widget.isVideo ?  "请选择视频" : "请选择图片");
+    if (listMedia.isEmpty) {
+      showToast(msg: widget.isVideo ? "请选择视频" : "请选择图片");
       return;
     }
-    if(widget.callback != null){
+    if (widget.callback != null) {
       widget.callback!(listMedia);
     }
   }
+
   ///获取视频时长
   Future<int> getVideoDuration(String localPath) async {
-    const platform =  MethodChannel("com.yinse/device");
+    const platform = MethodChannel("com.yinse/device");
     int duration = 0;
     try {
-      duration = await platform
-          .invokeMethod("getVideoDuration", {'filePath': localPath});
+      duration = await platform.invokeMethod("getVideoDuration", {'filePath': localPath});
     } on PlatformException {
       return duration;
     }
@@ -107,12 +116,11 @@ class _AlbumPickerViewState extends State<AlbumPickerView> {
   }
 
   ///获取视频宽高比
-   Future<String> getVideoRatio(String localPath) async {
-    const platform =  MethodChannel("com.yinse/device");
+  Future<String> getVideoRatio(String localPath) async {
+    const platform = MethodChannel("com.yinse/device");
     String ratioStr = '';
     try {
-      ratioStr =
-      await platform.invokeMethod("getVideoRatio", {'filePath': localPath});
+      ratioStr = await platform.invokeMethod("getVideoRatio", {'filePath': localPath});
     } on PlatformException {
       return '';
     }
@@ -126,5 +134,4 @@ class _AlbumPickerViewState extends State<AlbumPickerView> {
       child: widget.child,
     );
   }
-
 }

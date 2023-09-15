@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:imchat/alert/normal_alert.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
@@ -38,16 +39,24 @@ class _MinePageState extends State<MinePage> {
   }
 
   void _exitLoginEvent() async {
+
+
+    var ret = await NormalAlert.show(context,  content: "您确定要退出账号吗?", buttonTitle: "取消");
+    if(ret != true) return;
     LoadingAlertWidget.show(context);
     try {
       LocalStore.removePassword();
       await IMApi.logout();
       IMConfig.token = null;
+      IMConfig.memberRegisterCodeRequiredSwitch = 0;
+      IMConfig.memberRegisterCodeSwitch = 0;
       await WebSocketSend.logout();
       LoadingAlertWidget.cancel(context);
     } catch (e) {
       LoadingAlertWidget.cancel(context);
       IMConfig.token = null;
+      IMConfig.memberRegisterCodeRequiredSwitch = 0;
+      IMConfig.memberRegisterCodeSwitch = 0;
       debugLog(e);
     }
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
@@ -107,7 +116,7 @@ class _MinePageState extends State<MinePage> {
           InkWell(
             onTap: _exitLoginEvent,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
               child: const Text(
                 "退出登录",
                 style: TextStyle(

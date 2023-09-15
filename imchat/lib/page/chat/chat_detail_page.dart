@@ -26,6 +26,7 @@ import '../../tool/loading/loading_center_widget.dart';
 import '../../tool/network/dio_base.dart';
 import '../../tool/refresh/pull_refresh.dart';
 import '../../utils/toast_util.dart';
+import 'chat_view/chat_item_audio_widget.dart';
 import 'chat_view/chat_item_cell.dart';
 import 'chat_view/group_text_filed.dart';
 import 'model/group_detail_model.dart';
@@ -289,10 +290,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     if (imageInfo != null) {
       contentText = await FileAPi.updateImg(imageInfo.path ?? "") ?? "";
       if (contentText.isNotEmpty != true) {
-        model.sendStatus = 1;
+        model.sendStatus = -1;
+        chatArr?.remove(model);
         setState(() {});
         return;
       }
+      model.content = contentText;
     }
     String? errorDesc;
     if (chatType == 0) {
@@ -309,7 +312,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
 
   void _sendAudioMessage(String audioPath, {bool isVideo = false}) async {
     ChatRecordModel model = ChatRecordModel();
-    model.content = audioPath;
     model.localPath = audioPath;
     model.contentType = isVideo ? 3 : 2;
     model.sendStatus = 0;
@@ -323,10 +325,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     }
     String contentText = await FileAPi.updateFile(audioPath) ?? "";
     if (contentText.isNotEmpty != true) {
-      model.sendStatus = 1;
+      model.sendStatus = -1;
+      chatArr?.remove(model);
       setState(() {});
       return;
     }
+    model.content = contentText;
     String? errorDesc;
     if (chatType == 0) {
       errorDesc = await IMApi.sendMsg(friendNo, contentText, isVideo ? 3 : 2);
@@ -341,6 +345,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   }
 
   void _backEvent() {
+    isPlayingMedia = false;
     if (chatType == 0) {
       WebSocketSend.sendCloseFriendBox(friendNo);
     } else {
@@ -419,6 +424,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                             itemBuilder: (context, index) {
                               return ChatItemCell(
                                 model: chatArr![index],
+                                isGroup: chatType == 1,
                                 callback: (dx, dy) {
                                   isShowMenu = true;
                                   menuChatModel = chatArr![index];

@@ -4,6 +4,8 @@ import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
 import 'package:video_player/video_player.dart';
 
+import 'chat_view/chat_item_audio_widget.dart';
+
 class MoviePlayPage extends StatefulWidget {
   final VideoPlayerController controller;
 
@@ -29,6 +31,7 @@ class _MoviePlayPageState extends State<MoviePlayPage> {
   void statusInit() async {
     await controller.seekTo(Duration.zero);
     controller.play();
+    isPlayingMedia = true;
   }
 
   @override
@@ -38,6 +41,7 @@ class _MoviePlayPageState extends State<MoviePlayPage> {
       body: InkWell(
         onTap: (){
           controller.play();
+          isPlayingMedia = true;
         },
         child: Stack(
           fit: StackFit.expand,

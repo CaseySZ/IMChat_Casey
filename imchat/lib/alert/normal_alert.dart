@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class NormalAlert extends StatelessWidget {
 
   static show(BuildContext context, {String? title, String? buttonTitle, String? content}) {
-    showDialog(
+   return  showDialog(
         context: context,
         builder: (context) {
           return  NormalAlert(title: title, content: content, leftButtonTitle: buttonTitle,);

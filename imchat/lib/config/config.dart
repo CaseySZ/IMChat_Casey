@@ -12,7 +12,7 @@ class IMConfig {
   static String? fileServerUrl;
   static UserInfo? userInfo;
   static String appVersion = "1.0.0";
-
+  static bool isOneKeyLogin = false; // 一键登录
 }
 
 class GlobalData {

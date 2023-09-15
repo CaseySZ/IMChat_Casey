@@ -50,6 +50,25 @@ class IMApi {
     return null;
   }
 
+  // 一键登录
+  static Future<String?> autoLogin() async {
+    try {
+      Response? response = await DioBase.instance.post(
+        "/api/autoRegisterLogin", {},
+      );
+      if (response?.isSuccess == true) {
+        WebSocketModel.init();
+        IMConfig.token = response?.respData;
+      } else {
+        return response?.tips;
+      }
+    } catch (e) {
+      debugLog(e);
+      return e.toString();
+    }
+    return null;
+  }
+
   static Future<String?> logout() async {
     try {
       Response? response = await DioBase.instance.post("/api/logout", {});

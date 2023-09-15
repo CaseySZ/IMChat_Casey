@@ -59,7 +59,7 @@ class ChatRecordModel {
   bool? isShowTime = false;
   int? messageNum;
   String? personalitySign;
-  int? sendStatus; // 0 发送中， 1发送失败, 其他正常
+  int? sendStatus; // 0 发送中， 1发送失败,  -1 移除消息， 其他正常
   String? lastContent;
   List<RichTitle>? richTitleArr;
   ChatRecordModel();
