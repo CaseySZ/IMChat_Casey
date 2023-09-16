@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:image_pickers/image_pickers.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -68,6 +69,7 @@ class _AlbumPickerViewState extends State<AlbumPickerView> {
 
   void _pickerEvent() async {
     await checkPermissionAlways(context);
+    XFile? movieFile;
     List<Media> listMedia = [];
     if (widget.fctType == 1) {
       var media = await ImagePickers.openCamera(
@@ -77,12 +79,21 @@ class _AlbumPickerViewState extends State<AlbumPickerView> {
         listMedia.add(media);
       }
     } else {
-      listMedia = await ImagePickers.pickerPaths(
-        uiConfig: UIConfig(uiThemeColor: const Color(0xfff21313)),
-        galleryMode: widget.isVideo ? GalleryMode.video : GalleryMode.image,
-        selectCount: widget.maxCount,
-        showCamera: true,
-      );
+      if(widget.isVideo){
+        movieFile = await ImagePicker().pickVideo(source: ImageSource.gallery);
+        Media media = Media();
+        if(movieFile?.path.isNotEmpty == true){
+          media.path = movieFile?.path;
+          listMedia.add(media);
+        }
+      }else {
+        listMedia = await ImagePickers.pickerPaths(
+          uiConfig: UIConfig(uiThemeColor: const Color(0xfff21313)),
+          galleryMode: widget.isVideo ? GalleryMode.video : GalleryMode.image,
+          selectCount: widget.maxCount,
+          showCamera: true,
+        );
+      }
     }
     if (widget.isVideo == true && listMedia.isNotEmpty) {
       String videoPath = listMedia.first.path ?? "";

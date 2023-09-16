@@ -4,6 +4,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:imchat/config/config.dart';
+import 'package:imchat/tool/network/response_status.dart';
 
 debugLog(Object? message, [Object? message2]) {
   if (kDebugMode) {
@@ -48,6 +49,15 @@ debugLog(Object? message, [Object? message2]) {
 }
 
 class DioBase {
+
+  static List<Function> callbackArr = [];
+  static addLister(Function callback) {
+    callbackArr.add(callback);
+  }
+  static removeLister(Function callback) {
+    callbackArr.remove(callback);
+  }
+
   static String address = "http://8.217.117.185:9002";
   static const CONTENT_TYPE_JSON = "application/json";
   static DioBase? _instance;
@@ -61,7 +71,7 @@ class DioBase {
   void init(String host) {
     final defaultOptions = BaseOptions(
       connectTimeout: const Duration(milliseconds: 15000),
-      receiveTimeout: const Duration(milliseconds: 15000),
+      receiveTimeout: const Duration(milliseconds: 30000),
       validateStatus: (int? status) => status! < 600,
     );
     baseUrl = host;
@@ -86,6 +96,11 @@ class DioBase {
       debugLog("url:" +  (baseUrl ?? address) + path);
       debugLog(params.toString());
       debugLog(response);
+      if(response?.tips == "令牌超时"){
+        for (var element in callbackArr) {
+          element.call();
+        }
+      }
       return response;
     }catch(e){
       debugLog("url:" +  (baseUrl ?? address) + path);

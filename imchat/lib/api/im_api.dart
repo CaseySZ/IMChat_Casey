@@ -13,7 +13,9 @@ import '../page/chat/model/group_detail_model.dart';
 import '../tool/network/dio_base.dart';
 import '../web_socket/web_socket_model.dart';
 
+
 class IMApi {
+
   static Future<String?> appInfo() async {
     try {
       Response? response = await DioBase.instance.post("/api/index", {});

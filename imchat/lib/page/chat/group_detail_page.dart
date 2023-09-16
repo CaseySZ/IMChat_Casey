@@ -84,14 +84,13 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
     if(ret != true) return;
     LoadingAlertWidget.show(context);
     String? errorStr = await IMApi.groupRemove(groupModel?.groupNo ?? "");
-    LoadingAlertWidget.cancel(context);
+    // 外面收到消息，进行pop操作
+   // LoadingAlertWidget.cancel(context);
     if (errorStr?.isEmpty == true) {
       showToast(msg: isCreater ? "已解散" : "已退出");
     } else {
       showToast(msg: errorStr ?? defaultErrorMsg);
     }
-    Navigator.of(context).pop();
-    Navigator.of(context).pop();
 
   }
 
@@ -238,7 +237,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                     return GroupAddFriendPage(groupNo: widget.groupNo);
                   }));
                 },
-                child: _buldItem("群成员添加", rightTitle: ""),
+                child: _buldItem("群成员添加", rightTitle: "", isShowArrow: true),
               ),
               if (isAdmin) ...[
                 InkWell(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/page/login_register/login_page.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/tool/loading/empty_error_widget.dart';
 import 'package:imchat/tool/loading/loading_center_widget.dart';
@@ -32,7 +33,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   bool mainPageInited = false;
-  late VideoPlayerController controller;
+  VideoPlayerController? controller;
   List<String> titleArr = [
     '消息',
     '通讯录',
@@ -53,17 +54,21 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    try {
-      controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
-      controller.initialize();
-    } catch (e) {
-      debugLog("声音初始化失败$e");
-    }
+    // try {
+    //   controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
+    //   setState(() {});
+    //   controller?.initialize();
+    // } catch (e) {
+    //   controller = null;
+    //   setState(() {});
+    //   debugLog("声音初始化失败$e");
+    // }
     WidgetsBinding.instance.addObserver(this);
     WebSocketModel.addListener(_receiveMessage);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _loginEvent();
     });
+    DioBase.addLister(_reLogin);
   }
 
   @override
@@ -88,14 +93,25 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     }
   }
 
-  int prePlayTime = 0;
+  void _reLogin() {
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+      return const LoginPage();
+    }), (route) => false);
+  }
 
+  int prePlayTime = 0;
   void _playAudio() async {
-    int curTime = DateTime.now().millisecondsSinceEpoch;
-    if (curTime - prePlayTime > 2000 && !isPlayingMedia && !IMConfig.isBackground) {
-      prePlayTime = curTime;
-      await controller.seekTo(Duration.zero);
-      controller.play();
+    try {
+      int curTime = DateTime.now().millisecondsSinceEpoch;
+      if (curTime - prePlayTime > 2000 && !isPlayingMedia && !IMConfig.isBackground) {
+        prePlayTime = curTime;
+        await controller?.seekTo(Duration.zero);
+        controller?.play();
+      }
+    } catch (e) {
+      controller = null;
+      setState(() {});
+      debugLog(e);
     }
   }
 
@@ -108,7 +124,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   void _loginEvent() async {
-    if(IMConfig.isOneKeyLogin){
+    if (IMConfig.isOneKeyLogin) {
       if (IMConfig.token != null) {
         await WebSocketSend.login();
         String? errorDesc = await IMApi.appInfo();
@@ -118,10 +134,10 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         }
         mainPageInited = true;
         setState(() {});
-      }else {
+      } else {
         Navigator.pushNamed(context, AppRoutes.login);
       }
-    }else {
+    } else {
       String? userName = await LocalStore.getLoginName();
       String? pwd = await LocalStore.getPassword();
       if (userName?.isNotEmpty == true && pwd?.isNotEmpty == true) {
@@ -146,7 +162,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   void _receiveMessage(Protocol protocol) {
-
     if (protocol.cmd == MessageType.messageTotal ||
         protocol.cmd == MessageType.friendChatMessage ||
         protocol.cmd == MessageType.chatBoxMessage ||
@@ -181,11 +196,12 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         body: Stack(
           fit: StackFit.expand,
           children: [
-            Positioned(
-              left: 20,
-              top: 20,
-              child: SizedBox(width: 10, height: 10, child: VideoPlayer(controller)),
-            ),
+            if (controller != null)
+              Positioned(
+                left: 20,
+                top: 20,
+                child: SizedBox(width: 10, height: 10, child: VideoPlayer(controller!)),
+              ),
             Container(
               padding: EdgeInsets.only(bottom: kBottomNavigationBarHeight + screen.paddingBottom),
               child: PageView.builder(
@@ -218,9 +234,16 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         child: const LoadingCenterWidget(),
       );
     } else if (WebSocketModel.isConnectSocketSuccess == false) {
-      return EmptyErrorWidget(
-        errorMsg: "IM服务器连接失败",
-        retryOnTap: () {},
+      return Container(
+        color: Colors.white,
+        child: EmptyErrorWidget(
+          errorMsg: "IM服务器连接失败",
+          retryOnTap: () {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+              return const LoginPage();
+            }), (route) => false);
+          },
+        ),
       );
     } else {
       return const SizedBox();
@@ -229,7 +252,8 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    controller.dispose();
+    DioBase.removeLister(_reLogin);
+    controller?.dispose();
     WidgetsBinding.instance.removeObserver(this);
     WebSocketModel.removeListener(_receiveMessage);
     super.dispose();
