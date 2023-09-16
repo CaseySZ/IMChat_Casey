@@ -3,9 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
-import 'package:imchat/model/user_info.dart';
-import 'package:imchat/page/add_friend/add_friend_page.dart';
-import 'package:imchat/page/create_group/create_group_page.dart';
 import 'package:imchat/utils/screen.dart';
 
 import '../page/chat/model/chat_record_model.dart';
@@ -22,21 +19,24 @@ class LongPressMenu extends StatelessWidget {
         Icons.keyboard_return_rounded,
         Icons.keyboard_return_rounded,
         Icons.delete_outline,
+        Icons.collections_sharp,
       ];
 
-  const LongPressMenu({super.key, required this.dx, required this.dy, this.model, this.callback});
+  LongPressMenu({super.key, required this.dx, required this.dy, this.model, this.callback, this.isCollectNetIng = false});
 
   bool get isTextType => model?.contentType == 0;
 
+  bool get isImgType => model?.contentType == 1;
+
   double get height {
     if (isMy) {
-      if (isTextType) {
+      if (isTextType || isImgType) {
         return 40 * 3;
       } else {
-        return 40*2;
+        return 40 * 2;
       }
     } else {
-      if (isTextType) {
+      if (isTextType || isImgType) {
         return 40 * 2;
       } else {
         return 40;
@@ -76,6 +76,26 @@ class LongPressMenu extends StatelessWidget {
     }
   }
 
+  bool isCollectNetIng = false;
+
+  void _collectMsg(BuildContext context) async {
+    if (isCollectNetIng) return;
+    callback?.call(null);
+    isCollectNetIng = true;
+    String? errorStr;
+    if (model?.groupNo?.isNotEmpty == true) {
+      errorStr = await IMApi.collectAdd(chatRecordId:model?.id, chatRecordType: 1);
+    } else {
+      errorStr = await IMApi.collectAdd(chatRecordId:model?.id, chatRecordType: 0);
+    }
+    if (errorStr?.isNotEmpty == true) {
+      showToast(msg: errorStr!);
+    } else {
+      showToast(msg: "收藏成功");
+    }
+    isCollectNetIng = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -108,10 +128,11 @@ class LongPressMenu extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (isTextType) _buildItem(0, "复制内容".localize, ""),
+                      if (isTextType) _buildItem(context, 0, "复制内容".localize, ""),
                       //_buildItem(1, "转发", ""),
-                      _buildItem(2, "回复".localize, ""),
-                      if (isMy) _buildItem(3, "撤回消息".localize, ""),
+                      _buildItem(context, 2, "回复".localize, ""),
+                      if (isMy) _buildItem(context, 3, "撤回消息".localize, ""),
+                      if (isImgType) _buildItem(context, 4, "收藏".localize, ""),
                     ],
                   ),
                 ),
@@ -123,7 +144,7 @@ class LongPressMenu extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(int index, String title, String imagePath) {
+  Widget _buildItem(BuildContext context, int index, String title, String imagePath) {
     return InkWell(
       onTap: () {
         if (index == 0) {
@@ -135,6 +156,8 @@ class LongPressMenu extends StatelessWidget {
           callback?.call(null);
         } else if (title == "回复".localize) {
           callback?.call("回复".localize);
+        } else if (index == 4) {
+          _collectMsg(context);
         }
       },
       child: Container(

@@ -20,6 +20,7 @@ import 'package:imchat/web_socket/web_socket_send.dart';
 
 import '../../model/user_info.dart';
 import '../../utils/local_store.dart';
+import 'my_collect_page.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({super.key});
@@ -74,6 +75,15 @@ class _MinePageState extends State<MinePage> {
       body: Column(
         children: [
           _buildHeadView(),
+          buildLineWidget(height: 8),
+          InkWell(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return const MyCollectPage();
+              }));
+            },
+            child: _buildItem("我的收藏".localize, "", ""),
+          ),
           buildLineWidget(height: 8),
           InkWell(
             onTap: (){

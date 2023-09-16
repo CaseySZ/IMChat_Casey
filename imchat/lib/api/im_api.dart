@@ -570,4 +570,51 @@ class IMApi {
       return null;
     }
   }
+
+  //chatRecordType (0_好友聊天,1_群聊天)
+  static Future<String?> collectAdd({String? chatRecordId, int? chatRecordType}) async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/memberImageCollect/add", {
+        "chatRecordId": chatRecordId,
+        "chatRecordType": chatRecordType,
+      },);
+      if (response?.isSuccess == true) {
+        return "";
+      } else {
+        return response?.tips;
+      }
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
+  static Future<String?> collectDelete({List<String>? listId}) async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/memberImageCollect/remove", {
+        "listId": listId,
+      },);
+      if (response?.isSuccess == true) {
+        return "";
+      } else {
+        return response?.tips;
+      }
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
+  static Future<Response?> getCollect() async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/memberImageCollect/list", {},);
+      return response;
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
 }

@@ -7,10 +7,11 @@ import '../../../model/friend_item_info.dart';
 
 class ContactCellView extends StatefulWidget {
   final FriendItemInfo? model;
-
+  final Function? callback;
   const ContactCellView({
     super.key,
     this.model,
+    this.callback,
   });
 
   @override
@@ -30,7 +31,11 @@ class _ContactCellViewState extends State<ContactCellView> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, AppRoutes.chat_detail, arguments: widget.model);
+        if(widget.callback != null){
+          widget.callback?.call();
+        }else {
+          Navigator.pushNamed(context, AppRoutes.chat_detail, arguments: widget.model);
+        }
       },
       child: Container(
         height: 54,
