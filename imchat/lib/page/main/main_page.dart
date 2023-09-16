@@ -75,9 +75,11 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         break;
       case AppLifecycleState.resumed:
         _appResumed();
+        IMConfig.isBackground = false;
         debugLog("AppLifecycleState.resumed");
         break;
       case AppLifecycleState.paused:
+        IMConfig.isBackground = true;
         debugLog("AppLifecycleState.paused");
         break;
       case AppLifecycleState.detached:
@@ -90,7 +92,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   void _playAudio() async {
     int curTime = DateTime.now().millisecondsSinceEpoch;
-    if (curTime - prePlayTime > 2000 && !isPlayingMedia) {
+    if (curTime - prePlayTime > 2000 && !isPlayingMedia && !IMConfig.isBackground) {
       prePlayTime = curTime;
       await controller.seekTo(Duration.zero);
       controller.play();

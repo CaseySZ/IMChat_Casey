@@ -13,6 +13,7 @@ class IMConfig {
   static UserInfo? userInfo;
   static String appVersion = "1.0.0";
   static bool isOneKeyLogin = false; // 一键登录
+  static bool isBackground = false;
 }
 
 class GlobalData {

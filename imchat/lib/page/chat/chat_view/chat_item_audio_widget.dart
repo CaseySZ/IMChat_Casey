@@ -36,7 +36,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   String errorStr = "";
 
   bool get isVideoType {
-    if (model?.contentType == 3 && errorStr.isEmpty && _mPlayerIsInited) {
+    if (model?.contentType == 3 && !isFile) {
       return true;
     }
     return false;
@@ -57,7 +57,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
   @override
   void initState() {
     super.initState();
-    if (!isFile && model?.sendStatus == 0) {
+    if (!isFile && model?.sendStatus == null) {
       initController();
     }
   }
