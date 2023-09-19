@@ -54,15 +54,15 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    // try {
-    //   controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
-    //   setState(() {});
-    //   controller?.initialize();
-    // } catch (e) {
-    //   controller = null;
-    //   setState(() {});
-    //   debugLog("声音初始化失败$e");
-    // }
+    try {
+      controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
+      setState(() {});
+      controller?.initialize();
+    } catch (e) {
+      controller = null;
+      setState(() {});
+      debugLog("声音初始化失败$e");
+    }
     WidgetsBinding.instance.addObserver(this);
     WebSocketModel.addListener(_receiveMessage);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

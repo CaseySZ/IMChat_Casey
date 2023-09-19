@@ -14,12 +14,15 @@ import 'package:imchat/page/chat/chat_view/soft_key_menu_view.dart';
 import 'package:imchat/page/chat/group_detail_page.dart';
 import 'package:imchat/page/chat/model/chat_record_model.dart';
 import 'package:imchat/page/chat/person_detail_page.dart';
+import 'package:imchat/page/chat/view/marquee/marquee_tile.dart';
 import 'package:imchat/protobuf/model/base.pb.dart';
 import 'package:imchat/tool/network/response_status.dart';
+import 'package:imchat/utils/screen.dart';
 import 'package:imchat/web_socket/web_message_type.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../../model/collect_model.dart';
 import '../../model/friend_item_info.dart';
 import '../../model/group_item_model.dart';
 import '../../tool/appbar/base_app_bar.dart';
@@ -27,6 +30,7 @@ import '../../tool/loading/loading_center_widget.dart';
 import '../../tool/network/dio_base.dart';
 import '../../tool/refresh/pull_refresh.dart';
 import '../../utils/toast_util.dart';
+import '../mine/my_collect_page.dart';
 import 'chat_view/chat_item_audio_widget.dart';
 import 'chat_view/chat_item_cell.dart';
 import 'chat_view/group_text_filed.dart';
@@ -73,6 +77,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   @override
   void initState() {
     super.initState();
+    isPlayingMedia = false;
     WidgetsBinding.instance.addObserver(this);
     sendOpenBoxMsg();
     WebSocketModel.addListener(webSocketLister);
@@ -90,7 +95,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       setState(() {});
     });
   }
-
 
   @override
   void didChangeMetrics() {
@@ -127,7 +131,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         _loadGroupData();
       }
       chatArr ??= [];
-      if(startChatRecordId == null){
+      if (startChatRecordId == null) {
         chatArr?.clear();
       }
       if (response?.isSuccess == true) {
@@ -172,7 +176,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
 
   void webSocketLister(Protocol protocol) {
     if (protocol.isSuccess == true && protocol.cmd == MessageType.login.responseName) {
-      Future.delayed(const Duration(seconds: 1), (){
+      Future.delayed(const Duration(seconds: 1), () {
         sendOpenBoxMsg();
         _loadData();
       });
@@ -213,26 +217,24 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       }
     }
     if (protocol.isSuccess == true && protocol.cmd == MessageType.groupMember.responseName) {
-      if(protocol.dataArr is List){
+      if (protocol.dataArr is List) {
         var memberArr = protocol.dataArr?.map((e) => GroupMemberModel.fromJson(e)).toList();
         groupMemberArr.clear();
         groupMemberArr.addAll(memberArr ?? []);
       }
     }
     if (protocol.cmd == MessageType.groupList.responseName && protocol.isSuccess == true && chatType == 1) {
-      List<GroupItemInfo> groupList  = protocol.dataArr?.map((e) => GroupItemInfo.fromJson(e)).toList() ?? [];
+      List<GroupItemInfo> groupList = protocol.dataArr?.map((e) => GroupItemInfo.fromJson(e)).toList() ?? [];
       bool isExist = false;
-      for(var item in groupList){
-        if(item.groupNo == groupModel?.groupNo) {
+      for (var item in groupList) {
+        if (item.groupNo == groupModel?.groupNo) {
           isExist = true;
         }
       }
-      if(!isExist){
+      if (!isExist) {
         Navigator.popUntil(context, (route) => route.isFirst);
       }
     }
-  
-    
   }
 
   void handleChatMessage({List<ChatRecordModel>? list}) {
@@ -324,6 +326,28 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     setState(() {});
   }
 
+  void _sendCollectMsg(CollectModel collectModel) async {
+    ChatRecordModel model = ChatRecordModel();
+    model.content = collectModel.imageUrl;
+    model.sendStatus = 0;
+    model.sendNo = widget.model?.friendNo;
+    model.sendHeadImage = userInfo?.headImage;
+    model.contentType = 1;
+    chatArr?.insert(0, model);
+    setState(() {});
+    String? errorDesc;
+    if (chatType == 0) {
+      errorDesc = await IMApi.sendMsg(friendNo, collectModel.imagePath ?? "", 1);
+    } else {
+      errorDesc = await IMApi.sendGroupMsg(friendNo, collectModel.imagePath ?? "", 1);
+    }
+    if (errorDesc?.isNotEmpty == true) {
+      model.sendStatus = 1;
+      showToast(msg: errorDesc ?? defaultErrorMsg);
+    }
+    setState(() {});
+  }
+
   void _sendAudioMessage(String audioPath, {bool isVideo = false}) async {
     ChatRecordModel model = ChatRecordModel();
     model.localPath = audioPath;
@@ -359,12 +383,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   }
 
   void _backEvent() {
-    isPlayingMedia = false;
-    if (chatType == 0) {
-      WebSocketSend.sendCloseFriendBox(friendNo);
-    } else {
-      WebSocketSend.sendCloseGroupBox(friendNo);
-    }
     if (chatArr?.isNotEmpty == true) {
       Navigator.pop(context, chatArr?.first);
     } else {
@@ -452,7 +470,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.fromLTRB(20, 8, 10, 16),
+                        padding: const EdgeInsets.fromLTRB(0, 8, 10, 16),
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           border: Border(
@@ -463,6 +481,23 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                           height: 36,
                           child: Row(
                             children: [
+                              InkWell(
+                                onTap: () async {
+                                  var ret = await Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    return const MyCollectPage(fromChat: true);
+                                  }));
+                                  if (ret is CollectModel) {
+                                    _sendCollectMsg(ret);
+                                  }
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
+                                  child: const Icon(
+                                    Icons.collections,
+                                    color: Color(0xff666666),
+                                  ),
+                                ),
+                              ),
                               Expanded(
                                 child: Container(
                                   height: 36,
@@ -521,7 +556,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                 InkWell(
                                   onTap: () => showSoftKeyboard(1),
                                   child: SvgPicture.asset(
-                                    "assets/svg/add_red.svg",  //softKeyType == 1 ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
+                                    "assets/svg/add_red.svg", //softKeyType == 1 ? "assets/svg/close_btn.svg" : "assets/svg/add_red.svg",
                                     width: 30,
                                     height: 30,
                                   ),
@@ -562,10 +597,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         isShowMenu = false;
                         setState(() {});
                         if (value == "回复".localize) {
-                          if(menuChatModel?.contentType == 0) {
+                          if (menuChatModel?.contentType == 0) {
                             String relpyContent = "${menuChatModel?.sendNickName}：\"${menuChatModel?.chatContent} \"\n回复：";
                             eidtController.text = relpyContent;
-                          }else {
+                          } else {
                             String relpyContent = "${menuChatModel?.sendNickName}：\"【${menuChatModel?.contentTypeDesc}】\"\n回复：";
                             eidtController.text = relpyContent;
                           }
@@ -581,20 +616,25 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         onTap: () {
                           NormalAlert.show(context, title: "公告", content: groupModel?.personalitySign);
                         },
-                        child: Container(
-                          height: 30,
-                          padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
-                          color: Colors.black.withOpacity(0.2),
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "公告：${groupModel?.personalitySign}",
-                            maxLines: 1,
-                            style: const TextStyle(
-                              color: Color(0xff666666),
-                              fontSize: 12,
-                            ),
+                        child:Container(
+                            height: 30,
+                            padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
+                            color: Colors.black.withOpacity(0.2),
+                            alignment: Alignment.centerLeft,
+                          child:  MarqueeTile(
+                            widgets: [
+                              SizedBox(width: screen.screenWidth),
+                              Text(
+                                "公告：${groupModel?.personalitySign}      ",
+                                maxLines: 1,
+                                style: const TextStyle(
+                                  color: Color(0xff666666),
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
+                        )
                       ),
                     ),
                 ],
@@ -605,6 +645,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
 
   @override
   void dispose() {
+    isPlayingMedia = false;
+    if (chatType == 0) {
+      WebSocketSend.sendCloseFriendBox(friendNo);
+    } else {
+      WebSocketSend.sendCloseGroupBox(friendNo);
+    }
     WebSocketModel.removeListener(webSocketLister);
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();

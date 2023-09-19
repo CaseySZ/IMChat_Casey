@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.imchat.app-mergeDebugResources-30:/values-sl/values-sl.xml",
+            "outputFile": "com.example.imchat.app-mergeDebugResources-37:/values-sl/values-sl.xml",
             "map": [
                 {
                     "source": "/Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/res/values-sl/values-sl.xml",

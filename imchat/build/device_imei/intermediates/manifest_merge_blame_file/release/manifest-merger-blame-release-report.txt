@@ -1,0 +1,15 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.vai.device_imei" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="16"
+6-->/Users/sy/.pub-cache/hosted/pub.dev/device_imei-0.0.4+1/android/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="16" />
+7-->/Users/sy/.pub-cache/hosted/pub.dev/device_imei-0.0.4+1/android/src/main/AndroidManifest.xml
+8
+9    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+9-->/Users/sy/.pub-cache/hosted/pub.dev/device_imei-0.0.4+1/android/src/main/AndroidManifest.xml:4:5-86
+9-->/Users/sy/.pub-cache/hosted/pub.dev/device_imei-0.0.4+1/android/src/main/AndroidManifest.xml:4:22-83
+10
+11</manifest>

@@ -10,27 +10,35 @@ import '../../../utils/toast_util.dart';
 class CollectCellView extends StatelessWidget {
   final CollectModel model;
   final Function? callback;
+  final bool fromChat;
   bool isCollectNetIng;
-  CollectCellView({super.key, required this.model, this.callback, this.isCollectNetIng = false});
 
-  void deleteEvent() async{
+  CollectCellView({
+    super.key,
+    required this.model,
+    this.callback,
+    this.isCollectNetIng = false,
+    this.fromChat = false,
+  });
+
+  void deleteEvent() async {
     if (isCollectNetIng) return;
 
     isCollectNetIng = true;
-    String? errorStr = await IMApi.collectDelete(listId:[model.id ?? ""]);
+    String? errorStr = await IMApi.collectDelete(listId: [model.id ?? ""]);
     if (errorStr?.isNotEmpty == true) {
       showToast(msg: errorStr!);
-    }else {
+    } else {
       callback?.call();
     }
     isCollectNetIng = false;
   }
 
-
-  void senderMsg (BuildContext context) async {
-
-    Navigator.push(context, MaterialPageRoute(builder: (context){
-      return ContactMsgForwardPage(model: model,);
+  void senderMsg(BuildContext context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ContactMsgForwardPage(
+        model: model,
+      );
     }));
   }
 
@@ -49,37 +57,60 @@ class CollectCellView extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        InkWell(
-          onTap: deleteEvent,
-          child: Container(
-            margin: const EdgeInsets.only(top: 10),
-            decoration: BoxDecoration(
-              color: Colors.redAccent,
-              borderRadius: BorderRadius.circular(6),
+        if(fromChat)
+          ...[
+            InkWell(
+              onTap: (){
+                callback?.call();
+              },
+              child: Container(
+                margin: const EdgeInsets.only(top: 10, right: 8),
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                child: const Text(
+                  "发送",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
             ),
-            padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-            child:const Text(
-              "删除",
-              style: TextStyle(color: Colors.white, fontSize: 14),
+          ]
+        else
+          ...[
+            InkWell(
+              onTap: deleteEvent,
+              child: Container(
+                margin: const EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                child: const Text(
+                  "删除",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
             ),
-          ),
-        ),
-        const SizedBox(width: 10),
-        InkWell(
-          onTap: () => senderMsg(context),
-          child: Container(
-            margin: const EdgeInsets.only(top: 10, right: 8),
-            decoration: BoxDecoration(
-              color: Colors.blueAccent,
-              borderRadius: BorderRadius.circular(6),
+            const SizedBox(width: 10),
+            InkWell(
+              onTap: () => senderMsg(context),
+              child: Container(
+                margin: const EdgeInsets.only(top: 10, right: 8),
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                child: const Text(
+                  "转发",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
             ),
-            padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-            child:const Text(
-              "转发",
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-          ),
-        ),
+          ],
       ],
     );
   }

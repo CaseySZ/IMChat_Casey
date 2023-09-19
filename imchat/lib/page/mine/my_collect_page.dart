@@ -15,7 +15,10 @@ import '../../utils/toast_util.dart';
 import '../chat/model/chat_record_model.dart';
 
 class MyCollectPage extends StatefulWidget {
-  const MyCollectPage({super.key});
+
+  final bool fromChat;
+
+  const MyCollectPage({super.key, this.fromChat = false});
 
   @override
   State<StatefulWidget> createState() {
@@ -88,9 +91,14 @@ class _MyCollectPageState extends State<MyCollectPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: CollectCellView(
                   model: model,
+                  fromChat: widget.fromChat,
                   callback: () {
-                    modelArr?.remove(model);
-                    setState(() {});
+                    if(widget.fromChat){
+                      Navigator.pop(context, model);
+                    }else {
+                      modelArr?.remove(model);
+                      setState(() {});
+                    }
                   },
                 ),
               ),

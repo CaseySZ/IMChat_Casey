@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.imchat.app-mergeDebugResources-30:/values-es-rES/values-es-rES.xml",
+            "outputFile": "com.example.imchat.app-mergeDebugResources-37:/values-es-rES/values-es-rES.xml",
             "map": [
                 {
                     "source": "/Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/res/values-es-rES/values-es-rES.xml",

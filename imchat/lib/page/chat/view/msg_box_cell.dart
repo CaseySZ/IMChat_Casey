@@ -42,7 +42,7 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
       return "【转账】";
     }
     if (model?.contentType == 6) {
-      return  "";//"【消息回撤】";
+      return ""; //"【消息回撤】";
     }
     return model?.chatContent ?? "";
   }
@@ -121,12 +121,17 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
                             ),
                           ),
                           const SizedBox(width: 12),
-                          if(model?.isTop == 1)
-                            const Icon(
-                              Icons.vertical_align_top_outlined,
-                              color: Color(0xff999999),
-                              size: 16,
+                          if ((model?.messageNum ?? 0) == 0)
+                            Container(
+                              padding: const EdgeInsets.only(right: 8, bottom: 2),
+                              child: const Icon(Icons.check, color: Colors.greenAccent,size: 14,),
                             ),
+                          const Text(
+                            "--",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
                         ],
                       ),
                       Row(
@@ -156,7 +161,7 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
                               height: 20,
                               width: 20,
                               alignment: Alignment.center,
-                              decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(10)),
+                              decoration: BoxDecoration(color: const Color(0xff999999).withOpacity(0.8), borderRadius: BorderRadius.circular(10)),
                               child: Text(
                                 model?.messageNum?.toString() ?? "",
                                 style: const TextStyle(
@@ -165,6 +170,14 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
                                 ),
                               ),
                             )
+                          else if (model?.isTop == 1)
+                            const Icon(
+                              Icons.vertical_align_top_outlined,
+                              color: Color(0xff999999),
+                              size: 16,
+                            )
+                          else
+                            const SizedBox(),
                         ],
                       ),
                     ],

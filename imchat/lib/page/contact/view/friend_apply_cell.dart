@@ -29,6 +29,13 @@ class _FriendApplyCellState extends State<FriendApplyCell> {
     return model?.applyContent ?? "";
   }
 
+  String? get friendDesc {
+    if(model?.friendNickName?.isNotEmpty == true){
+      return model?.friendNickName;
+    }
+    return model?.friendNo;
+  }
+
   String get status {
     //（0申请中，1同意，2拒绝）
     if (model?.applyStatus == 0) {
@@ -109,7 +116,7 @@ class _FriendApplyCellState extends State<FriendApplyCell> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            isMyApply ? "${model?.friendNo ?? ""} " : "${model?.memberNickName ?? ""} ",
+                            isMyApply ? "${friendDesc ?? ""} " : "${model?.memberNickName ?? ""} ",
                             style: const TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           Row(

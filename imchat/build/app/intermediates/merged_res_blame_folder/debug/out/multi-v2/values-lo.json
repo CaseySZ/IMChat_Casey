@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.imchat.app-mergeDebugResources-30:/values-lo/values-lo.xml",
+            "outputFile": "com.example.imchat.app-mergeDebugResources-37:/values-lo/values-lo.xml",
             "map": [
                 {
                     "source": "/Users/sy/.gradle/caches/transforms-3/e190d82979624fe1cfbdb4e674bc1794/transformed/jetified-exoplayer-core-2.18.7/res/values-lo/values-lo.xml",
