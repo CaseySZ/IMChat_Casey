@@ -31,6 +31,7 @@ import '../../tool/network/dio_base.dart';
 import '../../tool/refresh/pull_refresh.dart';
 import '../../utils/toast_util.dart';
 import '../mine/my_collect_page.dart';
+import 'chat_view/audio_pick_view.dart';
 import 'chat_view/chat_item_audio_widget.dart';
 import 'chat_view/chat_item_cell.dart';
 import 'chat_view/group_text_filed.dart';
@@ -481,20 +482,14 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                           height: 36,
                           child: Row(
                             children: [
-                              InkWell(
-                                onTap: () async {
-                                  var ret = await Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                    return const MyCollectPage(fromChat: true);
-                                  }));
-                                  if (ret is CollectModel) {
-                                    _sendCollectMsg(ret);
-                                  }
-                                },
+                              AudioPickerView(
+                                callback: _sendAudioMessage,
                                 child: Container(
-                                  padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
-                                  child: const Icon(
-                                    Icons.collections,
-                                    color: Color(0xff666666),
+                                  padding: constsw EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                  child: Image.asset(
+                                    "assets/images/5S.png",
+                                    width: 24,
+                                    height: 24,
                                   ),
                                 ),
                               ),
@@ -569,7 +564,14 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         SoftKeyMenuView(
                           height: keyboardSize - 50,
                           isEmoji: softKeyType == 0,
-                          audioCallback: _sendAudioMessage,
+                          collectCallback: () async{
+                            var ret = await Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return const MyCollectPage(fromChat: true);
+                            }));
+                            if (ret is CollectModel) {
+                              _sendCollectMsg(ret);
+                            }
+                          },
                           emojiCallback: (value) {
                             eidtController.text = eidtController.text + value;
                           },

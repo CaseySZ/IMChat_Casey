@@ -14,7 +14,7 @@ class SoftKeyMenuView extends StatefulWidget {
   final bool isEmoji;
   final Function(List<Media>)? pictureCallback;
   final Function(Media)? videoCallback;
-  final Function(String)? audioCallback;
+  final Function? collectCallback;
   final Function(String)? emojiCallback;
 
   const SoftKeyMenuView({
@@ -22,7 +22,7 @@ class SoftKeyMenuView extends StatefulWidget {
     required this.height,
     this.isEmoji = false,
     this.pictureCallback,
-    this.audioCallback,
+    this.collectCallback,
     this.emojiCallback,
     this.videoCallback,
   });
@@ -80,9 +80,11 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
           },
           child: _buildItem("相册", "assets/images/album_key.png"),
         ),
-        AudioPickerView(
-          callback: widget.audioCallback,
-          child: _buildItem("语音", "assets/images/5S.png"),
+        InkWell(
+          onTap: (){
+            widget.collectCallback?.call();
+          },
+          child: _buildItem("收藏", "assets/images/9p.png"),
         ),
         AlbumPickerView(
           isVideo: true,

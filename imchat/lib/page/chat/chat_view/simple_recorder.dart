@@ -66,12 +66,12 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
   FlutterSoundRecorder? _mRecorder = FlutterSoundRecorder();
   bool _mRecorderIsInited = false;
   Timer? timer;
-  String _iosBasePath = "";
+  String _basePath = "";
   String get basePah {
     if(Platform.isIOS){
-      return _iosBasePath;
+      return _basePath;
     }else {
-      return "/sdcard/audioIM";
+      return _basePath;
     }
 
   }
@@ -92,7 +92,10 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
   void statusInit() async {
     if(Platform.isIOS) {
       Directory directory = await getTemporaryDirectory();
-      _iosBasePath = directory.path;
+      _basePath = directory.path;
+    }else {
+      final directory = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
+      _basePath = '${directory!.path}/audioIM';
     }
     bool isAgree = await Permission.storage.request().isGranted;
     if(!isAgree){
@@ -253,7 +256,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
                 onTap: () async{
                   await stopRecorder();
                   timer?.cancel();
-                  widget.callback?.call(audioRealPath, true);
+                  widget.callback?.call("", false);
                 },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),

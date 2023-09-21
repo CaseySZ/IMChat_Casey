@@ -19,7 +19,7 @@ class MessageType {
   static String friendBox = "IM_FRIEND_BOX_JOIN_REQUEST";
 
   //关闭好友对话框发送指令
-  static String closeFriendBox = "IM_FRIEND_BOX_JOIN_REQUEST";
+  static String closeFriendBox = "IM_FRIEND_BOX_LEAVE_REQUEST";
 
   // 编辑打字状态通知好友
   static String editText = "IM_FRIEND_BOX_WRITE_START_REQUEST";
