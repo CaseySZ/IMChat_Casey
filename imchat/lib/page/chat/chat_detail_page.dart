@@ -485,7 +485,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                               AudioPickerView(
                                 callback: _sendAudioMessage,
                                 child: Container(
-                                  padding: constsw EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                   child: Image.asset(
                                     "assets/images/5S.png",
                                     width: 24,
