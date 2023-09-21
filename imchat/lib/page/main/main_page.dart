@@ -80,10 +80,12 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         break;
       case AppLifecycleState.resumed:
         _appResumed();
+        setBadgeCount(0);
         IMConfig.isBackground = false;
         debugLog("AppLifecycleState.resumed");
         break;
       case AppLifecycleState.paused:
+
         IMConfig.isBackground = true;
         debugLog("AppLifecycleState.paused");
         break;
@@ -103,7 +105,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   void _playAudio() async {
     try {
       int curTime = DateTime.now().millisecondsSinceEpoch;
-      if (curTime - prePlayTime > 2000 && !isPlayingMedia && !IMConfig.isBackground) {
+      if (curTime - prePlayTime > 2000 && !isPlayingMedia) {
         prePlayTime = curTime;
         await controller?.seekTo(Duration.zero);
         controller?.play();
@@ -162,12 +164,11 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   void _receiveMessage(Protocol protocol) {
-    if (protocol.cmd == MessageType.messageTotal ||
-        protocol.cmd == MessageType.friendChatMessage ||
-        protocol.cmd == MessageType.chatBoxMessage ||
-        protocol.cmd == MessageType.chatHistory ||
-        protocol.cmd == MessageType.chatGroupHistory) {
-      _playAudio();
+    if (protocol.cmd == MessageType.messageTotal) {
+      int messageTotal = protocol.data?["messageTotal"] ?? 0;
+      if(messageTotal > 0) {
+        _playAudio();
+      }
     }
     if (protocol.cmd == MessageType.login.responseName) {
       if (protocol.isSuccess) {

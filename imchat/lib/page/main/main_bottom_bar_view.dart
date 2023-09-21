@@ -1,10 +1,45 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/model/group_item_model.dart';
+import 'package:xiaomi_badger/model/brand.dart';
+import 'package:xiaomi_badger/xiaomi_badger.dart';
 import '../../protobuf/model/base.pb.dart';
 import '../../utils/screen.dart';
 import '../../web_socket/web_message_type.dart';
 import '../../web_socket/web_socket_model.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
+
+
+void setBadgeCount(int count) async{
+  bool isSupported =  await FlutterAppBadger.isAppBadgeSupported();
+  if(!isSupported) return;
+  if(count <= 0){
+    if(Platform.isAndroid){
+      XiaomiBadger.remove();
+      //FlutterAppBadger.removeBadge();
+    }else {
+      FlutterAppBadger.updateBadgeCount(-1);
+    }
+  }else {
+    if(IMConfig.isBackground){
+      if(Platform.isAndroid) {
+        PhoneBrand brand = await XiaomiBadger.getSystenBrandName();
+        if(brand == PhoneBrand.vivo) {
+          XiaomiBadger.setBagWithVivo(count);
+        }else if(brand == PhoneBrand.oppo) {
+          XiaomiBadger.setBagWithOppo(count);
+        }else {
+          XiaomiBadger.setBag(count);
+        }
+      }else {
+         FlutterAppBadger.updateBadgeCount(count);
+      }
+    }
+  }
+
+}
 
 
 class MainBottomBarView extends StatefulWidget {
@@ -41,6 +76,7 @@ class _MainBottomBarViewState extends State<MainBottomBarView> {
     }
   }
 
+
   void webSocketLister(Protocol protocol) {
     if (protocol.cmd == MessageType.messageTotal.responseName && protocol.isSuccess == true) {
       chatTargetMessageTotal = protocol.data?["chatTargetMessageTotal"] ?? 0;
@@ -48,6 +84,7 @@ class _MainBottomBarViewState extends State<MainBottomBarView> {
       groupApplyMessageTotal = protocol.data?["groupApplyMessageTotal"] ?? 0;
       messageTotal = protocol.data?["messageTotal"] ?? 0;
       setState(() {});
+      setBadgeCount(messageTotal);
     }
     if (protocol.cmd == MessageType.groupList.responseName && protocol.isSuccess == true) {
       GlobalData.groupList = protocol.dataArr?.map((e) => GroupItemInfo.fromJson(e)).toList() ?? [];
