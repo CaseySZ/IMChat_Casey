@@ -305,7 +305,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     chatArr?.insert(0, model);
     setState(() {});
     if (imageInfo != null) {
-      contentText = await FileAPi.updateImg(imageInfo.path ?? "") ?? "";
+      contentText = await FileAPi.updateImgEncry(imageInfo.path ?? "") ?? "";
       if (contentText.isNotEmpty != true) {
         model.sendStatus = -1;
         chatArr?.remove(model);
@@ -362,7 +362,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       // 语音文件可能还在生成中
       await Future.delayed(const Duration(milliseconds: 1500));
     }
-    String contentText = await FileAPi.updateFile(audioPath) ?? "";
+    String contentText = await FileAPi.updateFileEncry(audioPath) ?? "";
     if (contentText.isNotEmpty != true) {
       model.sendStatus = -1;
       chatArr?.remove(model);

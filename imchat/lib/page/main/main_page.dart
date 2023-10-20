@@ -55,12 +55,12 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     try {
-      controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
-      setState(() {});
+      //controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
+
       controller?.initialize();
     } catch (e) {
       controller = null;
-      setState(() {});
+
       debugLog("声音初始化失败$e");
     }
     WidgetsBinding.instance.addObserver(this);
@@ -229,7 +229,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   Widget _buildLoadingStatus() {
-    if (WebSocketModel.isConnectSocketSuccess == null || mainPageInited == false) {
+    if (false && WebSocketModel.isConnectSocketSuccess == null || mainPageInited == false) {
       return InkWell(
         onTap: () {},
         child: const LoadingCenterWidget(),

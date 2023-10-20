@@ -156,11 +156,15 @@ class IMApi {
   }
 
   // (contentType 0文字，1图片，2语音，3文件)
-  static Future<String?> sendMsg(String friendNo, String content, int contentType) async {
+  static Future<String?> sendMsg(String friendNo, String content, int contentType,{String? relationId}) async {
     try {
+      var param = {"friendNo": friendNo, "content": content, "contentType": contentType};
+      if(relationId?.isNotEmpty == true){
+        param["relationId"] = relationId!;
+      }
       Response? response = await DioBase.instance.post(
         "/api/memberChatRecord/send",
-        {"friendNo": friendNo, "content": content, "contentType": contentType},
+        param,
       );
       if (response?.isSuccess == true) {
         return "";
@@ -452,11 +456,15 @@ class IMApi {
   }
 
   //向群发送信息
-  static Future<String?> sendGroupMsg(String groupNo, String content, int contentType) async {
+  static Future<String?> sendGroupMsg(String groupNo, String content, int contentType,{String? relationId}) async {
     try {
+      var param = {"content": content, "groupNo": groupNo, "contentType": contentType};
+      if(relationId?.isNotEmpty == true){
+        param["relationId"] = relationId!;
+      }
       Response? response = await DioBase.instance.post(
         "/api/groupChatRecord/send",
-        {"content": content, "groupNo": groupNo, "contentType": contentType},
+        param,
       );
       if (response?.isSuccess == true) {
         return "";
@@ -613,6 +621,19 @@ class IMApi {
     try {
       Response? response =
       await DioBase.instance.post("/api/memberImageCollect/list", {},);
+      return response;
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
+  static Future<Response?> clearChatHistory(String friendNo) async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/groupChatRecord/clearChatHistory", {
+        "friendNo": friendNo,
+      },);
       return response;
     } catch (e) {
       debugLog(e);

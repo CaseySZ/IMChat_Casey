@@ -62,6 +62,32 @@ class FileAPi {
     return null;
   }
 
+  static Future<String?> updateImgEncry(String imagePath, {Function(String?)? callback,}) async {
+    try {
+      debugLog("开始上传----", imagePath);
+      int  maxImageSize = 200*1024;
+      var extent = getNameSuffix(imagePath);
+      var name = '${DateTime.now().toIso8601String()}_${Random().nextInt(1024)}.$extent';
+      Uint8List fileData = File(imagePath).readAsBytesSync();
+      Uint8List compressFileData = await compressImageList(fileData, maxSize: maxImageSize, compressCount:3);
+      FormData args = FormData.fromMap({
+        'file': MultipartFile.fromBytes(compressFileData, filename: name),
+      });
+      //  DioBase dioBase = DioBase()..init(IMConfig.fileServerUrl ?? "");
+      Response? response = await DioBase.instance.post("/api/upload/image/encryption", args);
+      if(response?.isSuccess == true){
+        callback?.call(response?.respData["url"]);
+        return response?.respData["path"];
+      } else {
+        showToast(msg: response?.tips ?? defaultErrorMsg);
+      }
+    } catch (e) {
+      debugLog(e);
+      showToast(msg: e.toString());
+    }
+    return null;
+  }
+
   static Future<String?> updateFile(String filePath) async {
     try {
       debugLog("开始上传----", filePath);
@@ -74,6 +100,30 @@ class FileAPi {
       });
       //  DioBase dioBase = DioBase()..init(IMConfig.fileServerUrl ?? "");
       Response? response = await DioBase.instance.post("/api/upload/file", args);
+      if(response?.isSuccess == true){
+        return response?.respData["path"];
+      } else {
+        showToast(msg: response?.tips ?? defaultErrorMsg);
+      }
+    } catch (e) {
+      debugLog(e);
+      showToast(msg: e.toString());
+    }
+    return null;
+  }
+
+  static Future<String?> updateFileEncry(String filePath) async {
+    try {
+      debugLog("开始上传----", filePath);
+      int  maxImageSize = 200*1024;
+      var extent = getNameSuffix(filePath);
+      var name = '${DateTime.now().toIso8601String()}_${Random().nextInt(1024)}.$extent';
+      Uint8List fileData = File(filePath).readAsBytesSync();
+      FormData args = FormData.fromMap({
+        'file': MultipartFile.fromBytes(fileData, filename: name),
+      });
+      //  DioBase dioBase = DioBase()..init(IMConfig.fileServerUrl ?? "");
+      Response? response = await DioBase.instance.post("/api/upload/file/encryption", args);
       if(response?.isSuccess == true){
         return response?.respData["path"];
       } else {

@@ -75,4 +75,10 @@ class MessageType {
   //群聊天记录消息撤销通知
   static String groupMessageDelete =  "IM_GROUPCHATMESSAGE_REMOVE_RESPONSE";
 
+  //会员聊天记录清空
+  static String friendMsgClear =  "IM_FRIENDCHATMESSAGE_CLEAR_RESPONSE";
+
+  //群聊天记录清空
+  static String groupMsgClear =  "IM_GROUPCHATMESSAGE_CLEAR_RESPONSE";
+
 }

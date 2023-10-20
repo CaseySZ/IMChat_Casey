@@ -81,7 +81,9 @@ class ChatRecordModel {
   int? sendStatus; // 0 发送中， 1发送失败,  -1 移除消息， 其他正常
   String? lastContent;
   List<RichTitle>? richTitleArr;
-
+  String? relationId;
+  RelationChatRecord? relationChatRecord;
+  
   ChatRecordModel();
 
   void parserChatTitle() {
@@ -114,6 +116,7 @@ class ChatRecordModel {
 
   ChatRecordModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
+    relationId = json["relationId"];
     sendNo = json["sendNo"];
     groupNo = json['groupNo'];
     targetNo = json["targetNo"];
@@ -142,11 +145,48 @@ class ChatRecordModel {
     if (contentType == 0) {
       parserChatTitle();
     }
+    if(json["relationChatRecord"] is Map){
+      relationChatRecord = RelationChatRecord.fromJson(json["relationChatRecord"]);
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     return data;
+  }
+}
+
+class RelationChatRecord{
+  String? chatCode;
+  String? content;
+  int? contentType;
+  String? createTime;
+  String? id;
+  int? readStatus;
+  String? receiveNo;
+  String? relationId;
+  String? sendHeadImage;
+  String? sendNickName;
+  String? sendNo;
+  int? sendType;
+  RelationChatRecord? relationChatRecord;
+
+  RelationChatRecord.fromJson(Map<String, dynamic> json) {
+    chatCode = json["chatCode"];
+    content = json["content"];
+    contentType = json["contentType"];
+    createTime = json["createTime"];
+    id = json["id"];
+    readStatus = json["readStatus"];
+    receiveNo = json["receiveNo"];
+    relationId = json["relationId"];
+    sendHeadImage = json["sendHeadImage"];
+    sendNickName = json["sendNickName"];
+    sendNo = json["sendNo"];
+    sendType = json["sendType"];
+    if(json["relationChatRecord"] is Map){
+      relationChatRecord = RelationChatRecord.fromJson(json["relationChatRecord"]);
+    }
   }
 }
 
