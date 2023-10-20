@@ -6,6 +6,7 @@ Rap
 app_flutter
 Folk
 mhm1
+me.leolin.shortcutbadger.BADGE_COUNT_...
 AUDIO
 BrightnessValue
 time.android.com
@@ -45,12 +46,13 @@ bottomRight
 H
 blueviolet
 C6602
+upgradeNumber
 C6603
 result
 gold
 S
-.xsit
 SystemUiMode.immersiveSticky
+.xsit
 flutter/platform_views
 W
 X
@@ -133,6 +135,7 @@ darkgoldenrod
 provider
 mediumspringgreen
 android.permission.WRITE_CONTACTS
+com.miui.miuihome
 android.os.Build
 Age
 DefaultHlsPlaylistTracker:MediaPlaylist
@@ -181,14 +184,14 @@ conscrypt
 dev.flutter.pigeon.webview_flutter_an...
 XResolution
 onBackInvoked
-creditCardNumber
 resizeUp
+creditCardNumber
 burlywood
 :Item
 omx.sec.
 doAfterTextChanged
-SAFE_BROWSING_HIT
 TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SH...
+SAFE_BROWSING_HIT
 bluetoothHFP
 Warning
 pink
@@ -248,6 +251,7 @@ HapticFeedback.vibrate
 repeatCount
 COMPRESS_SIZE
 Luban
+com.htc.launcher.action.SET_NOTIFICATION
 flutter/restoration
 wvtt
 cpu
@@ -264,6 +268,7 @@ PHONE
 systemNavigationBarColor
 PlatformPlugin
 CIPVorbisDecoder
+android.intent.action.BADGE_COUNT_UPDATE
 displayCutout
 com.bumptech.glide.load.resource.gif....
 TLS_ECDH_anon_WITH_AES_256_CBC_SHA
@@ -273,14 +278,15 @@ dev.flutter.pigeon.webview_flutter_an...
 times
 getConfiguration
 RepresentationID
-direction
 TLS_PSK_WITH_AES_256_CBC_SHA
+direction
 android.intent.action.SEARCH
 android.permission.WRITE_CALL_LOG
 TrackGroupArray
 .java
 SUBTITLES
 newConfig
+android.intent.action.MAIN
 Array
 activities
 setValue
@@ -296,14 +302,14 @@ quic
 android.provider.action.PICK_IMAGES
 OMX.MTK.AUDIO.DECODER.AAC
 centerColor
-CONNECT_ERROR
 styling
 ms01
+CONNECT_ERROR
 audio/wav
 NO_TARGET
 state
-element
 cv1
+element
 StreamIndex
 cv3
 ConstraintLayoutStates
@@ -313,8 +319,8 @@ ACTION_SCROLL_DOWN
 android.view.ViewRootImpl
 com.luck.picture.lib.current_page
 .class
-com.google.android.exoplayer2.decoder...
 cacheResponse
+com.google.android.exoplayer2.decoder...
 InteroperabilityIndex
 F3311
 FocalPlaneYResolution
@@ -344,8 +350,8 @@ PREFER_RGB_565
 android.permission.BODY_SENSORS_BACKG...
 .html
 Motion
-WhitePoint
 NO_ACTIVITY
+WhitePoint
 languages
 android.permission.READ_MEDIA_IMAGES
 forbidden
@@ -398,6 +404,7 @@ _isTerminated
 .amr
 cze
 skipVideoBuffer
+com.vivo.launcher
 CREATED
 DIFFERENCE
 bootloader
@@ -406,8 +413,8 @@ Bandwidth
 TLSv1.3
 TLSv1.2
 VIDEO_SELECT_MIN_SECOND
-android.media.extra.SCO_AUDIO_STATE
 TLSv1.1
+android.media.extra.SCO_AUDIO_STATE
 ghostwhite
 SubfileType
 SeekBar
@@ -421,17 +428,17 @@ getLayoutDirection
 aacADTS
 V_MPEGH/ISO/HEVC
 PASTE
-gravity
 watson
+gravity
 short
 startY
 OMX.MTK.AUDIO.DECODER.RAW
 openPlayer
 startX
 IS_FOCUSABLE
+TLS_DHE_RSA_WITH_AES_128_CBC_SHA256
 android.widget.RadioButton
 textCapitalization
-TLS_DHE_RSA_WITH_AES_128_CBC_SHA256
 mDisplayListeners
 bg_black
 CODENAME
@@ -452,13 +459,13 @@ hardware
 TEXTURE_WITH_HYBRID_FALLBACK
 CheckedTextView
 ExoPlayer:MediaCodecQueueingThread:
-POSTURE_HALF_OPENED
 SERVICE_WORKER_CONTENT_ACCESS
+POSTURE_HALF_OPENED
 POSTAL_ADDRESS
 priority
 MediaSessionCompat
-viewFocused
 com.yalantis.ucrop.UcropToolbarTitleText
+viewFocused
 X264
 strokeLineJoin
 .apk
@@ -468,8 +475,8 @@ android.media.metadata.MEDIA_ID
 CONTINUATION
 primary
 currentDtvCcPacket
-content://
 log
+content://
 $splitsWithActivity
 SystemSound.play
 className
@@ -495,8 +502,8 @@ Type
 DIAGNOSTIC_CURRENT_PROFILE_EXISTS
 flutter_image_picker_max_height
 .immediate
-isSink
 TextInputAction.unspecified
+isSink
 woods_f
 TAG
 /index.html
@@ -518,6 +525,7 @@ android.intent.action.GET_CONTENT
 inputType
 REMOTE
 Oldies
+change_badge
 GPSLongitudeRef
 L30
 navigation_bar_width
@@ -554,6 +562,7 @@ ISOSpeedLatitudezzz
 %s%d:%02d:%02d
 ITUNESGAPLESS
 Date
+badgecount
 .avi
 resumePlayerCompleted
 dev.flutter.pigeon.webview_flutter_an...
@@ -563,8 +572,8 @@ CLIP_PATH
 Electro
 video/divx
 $splitRule
-TLS_FALLBACK_SCSV
 deb
+TLS_FALLBACK_SCSV
 TLS_DH_anon_WITH_AES_256_CBC_SHA
 java.specification.version
 underline
@@ -579,8 +588,8 @@ ReceiveQueued
 Button
 PARKING
 moccasin
-FOLD
 Space
+FOLD
 bufferForPlaybackAfterRebufferMs
 android:target_req_state
 addObserver
@@ -599,8 +608,8 @@ removeView
 ON_PAUSE
 darkseagreen
 MeteringMode
-domain
 StripByteCounts
+domain
 viewType
 TraceCompat
 invokeSuspend
@@ -653,8 +662,8 @@ div
 secondaryActivityName
 HeifEncoderThread
 hvc1.%s%d.%X.%c%d
-kotlin.Boolean
 com.android.providers.media.documents
+kotlin.Boolean
 androidx.media2.metadata.PLAYABLE
 peachpuff
 setSidecarCallback
@@ -679,6 +688,7 @@ showGif
 TextInputType.name
 installerStore
 AUTOSELECT
+com.quaap.launchtime_official
 com.yalantis.ucrop.AspectRatioSelecte...
 Industrial
 ACTION_SET_SELECTION
@@ -690,9 +700,9 @@ title
 MediaCodecRenderer
 primaryActivity
 secondaryActivity
+SPDY_3
 Sandbox
 mButtonDrawable
-SPDY_3
 kotlin.collections.Map
 omx.google.
 duration
@@ -725,12 +735,14 @@ trimPathStart
 V_MPEG4/ISO/AVC
 extractorOutput
 Expect
+mNotificationManager
 TextEditingDelta
-strokeMiterLimit
 DEFAULT
+strokeMiterLimit
 SensingMethod
 SERVICE_WORKER_CACHE_MODE
 android.permission.WRITE_CALENDAR
+android.app.MiuiNotification
 splitInfoList
 android.media.metadata.USER_RATING
 directionality
@@ -750,8 +762,8 @@ READY
 TextInput.finishAutofillContext
 V_MPEG4/ISO/ASP
 uMVPMatrix
-cookie
 SsaDecoder
+cookie
 primary.prof
 TLS_AES_256_GCM_SHA384
 filepositions
@@ -769,6 +781,7 @@ TP2
 customExtraData
 AccessibilityChannel
 fullStreetAddress
+badge_count
 server
 flutter_image_picker_error_message
 TPOS
@@ -778,6 +791,7 @@ android.media.metadata.AUTHOR
 getStreamVolume
 mac
 com.bumptech.glide.load.resource.bitm...
+com.i.miui.launcher
 ThreadUtils
 THUMB_PATH
 goog.exo.datasource
@@ -798,9 +812,9 @@ VideoPlayerPlugin
 glUseProgram
 com.yalantis.ucrop.ForbidCropGifWebp
 NO_EXCEEDS_CAPABILITIES
-304
 glUniformMatrix4fv
 16a09e667f3bcc908b2fb1366ea957d3e3ade...
+304
 ACTION_HIDE_TOOLTIP
 onSaveInstanceState
 legacy_prepend_all
@@ -860,8 +874,8 @@ CompoundButtonCompat
 featureBounds
 SubjectDistance
 audio/vorbis
-TLS_RSA_WITH_AES_256_GCM_SHA384
 transformer
+TLS_RSA_WITH_AES_256_GCM_SHA384
 AFTSO001
 turquoise
 glDrawArrays
@@ -881,6 +895,7 @@ signingInfo.signingCertificateHistory
 android.support.v4.media.description....
 com.yalantis.ucrop.CropInputOriginal
 com.google.android.exoplayer2.ext.vp9...
+app_badge_count
 dub
 ACCESSIBLE_NAVIGATION
 Trace
@@ -945,8 +960,8 @@ com.google.android.exoplayer2.ext.av1...
 quality
 input_method
 com.google.android.exoplayer2.Timeline
-defaultCreationExtras
 SSL_DH_anon_WITH_RC4_128_MD5
+defaultCreationExtras
 TLS_ECDHE_ECDSA_WITH_NULL_SHA
 com.widevine
 setCurrentState
@@ -964,8 +979,8 @@ long
 TXT
 PlanarConfiguration
 min
-videoUrl
 kotlinx.coroutines.channels.defaultBu...
+videoUrl
 ExoPlayer:WakeLockManager
 supports
 ExoPlayerLib/2.18.7
@@ -1020,16 +1035,17 @@ StartActivityForResult
 hotpink
 Time
 whyred
+binding.activity
 speed
 BRAVIA_ATV3_4K
 downloads
 textservices
 heightPx
+TLS_RSA_WITH_AES_128_CBC_SHA
 Folklore
 dev.flutter.pigeon.webview_flutter_an...
-TLS_RSA_WITH_AES_128_CBC_SHA
-flutter/image_pickers
 TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA
+flutter/image_pickers
 TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA
 registry
 WrappedDrawableApi21
@@ -1043,8 +1059,8 @@ AFTKMST12
 SETUP
 layout
 mp3
-viewModelStoreOwner
 ON_CLOSE_HANDLER_INVOKED
+viewModelStoreOwner
 Speech
 java.lang.Object
 MaxHeight
@@ -1060,13 +1076,14 @@ TextInput.setPlatformViewClient
 androidx.core.view.inputmethod.InputC...
 zoomOut
 state1
-movies
 M04
+movies
 camera_access_denied
 COMM
 video/hevcdv
 RAIJIN
 90
+fr.neamar.kiss
 scancode
 NONE
 TYPE
@@ -1094,6 +1111,7 @@ INITIALIZE
 resizeRow
 .sw.
 CONNECT
+小角标通知
 android.webkit.WebViewFactory
 dev.flutter.pigeon.AndroidVideoPlayer...
 savedStateRegistry
@@ -1126,8 +1144,8 @@ dev.flutter.pigeon.AndroidVideoPlayer...
 msg
 A_DTS/LOSSLESS
 android.widget.Switch
-sound_pcm.caf
 resizeUpRightDownLeft
+sound_pcm.caf
 DBG
 isProjected
 float
@@ -1155,8 +1173,8 @@ com.yalantis.ucrop.AspectRatioX
 unloadSoundEffects
 DATA
 VIDEO_PATH
-androidx.core.view.inputmethod.Editor...
 UTF8
+androidx.core.view.inputmethod.Editor...
 flutter/localization
 indigo
 layout_marginRight
@@ -1167,8 +1185,8 @@ clearCommunicationDevice
 .font
 H263Reader
 antiquewhite
-Brightness.light
 Beat
+Brightness.light
 CodecPrivateData
 android.media.metadata.ALBUM_ART
 LTR
@@ -1210,9 +1228,9 @@ deviceId
 via
 GPSSpeed
 music
+verticalText
 Symphony
 urn:mpeg:dash:utc:direct:2012
-verticalText
 FlutterSharedPreferences
 android.util.LongArray
 stpp
@@ -1223,8 +1241,8 @@ AE
 upgrade
 AF
 AG
-givenName
 _handled
+givenName
 AI
 android.media.action.HDMI_AUDIO_PLUG
 urn:mpeg:dash:utc:direct:2014
@@ -1254,6 +1272,7 @@ goog.exo.core
 TextInputClient.updateEditingStateWit...
 showLog
 BA
+com.miui.mihome
 ENCODE
 BB
 com.google.android.exoplayer2.ext.rtm...
@@ -1278,8 +1297,8 @@ BR
 BS
 com.google.common.base.Strings
 DIRTY
-BT
 http/1.1
+BT
 http/1.0
 BW
 PHYSICAL_DISPLAY_PLATFORM_VIEW
@@ -1369,8 +1388,8 @@ layout_constraintStart_toEndOf
 isStreamMute
 GlideRequest
 phoneCountryCode
-presentationTimeOffset
 warnIfOpen
+presentationTimeOffset
 Camera:MicroVideo
 guideline
 http
@@ -1398,13 +1417,14 @@ end
 GA
 GB
 :Mime
+android.intent.extra.update_applicati...
 GD
 GE
 ACTION_SCROLL_UP
 streamurl
 eng
-GF
 io.flutter.embedding.android.OldGenHe...
+GF
 GG
 GH
 BITMAP_MASKABLE
@@ -1451,6 +1471,7 @@ image_picker
 GPSTimeStamp
 requestPermissions
 HR
+com.sonyericsson.home.action.UPDATE_B...
 HT
 HU
 ACTION_CONTEXT_CLICK
@@ -1501,8 +1522,8 @@ IS_LINK
 android.permission.BIND_CALL_REDIRECT...
 cell
 URI
-protocolSelected
 safeCast
+protocolSelected
 URL
 manufacturer
 fffe
@@ -1520,9 +1541,9 @@ com.yalantis.ucrop.UcropRootViewBackg...
 imageQuality
 KI
 Sony
+_resumed
 KM
 android.settings.APPLICATION_DETAILS_...
-_resumed
 KN
 android.media.metadata.RATING
 uiColor
@@ -1530,6 +1551,7 @@ TextInputType.multiline
 KR
 L3
 GPSHPositioningError
+com.htc.launcher.extra.COMPONENT
 getChildId
 android.permission.RECEIVE_MMS
 gzip
@@ -1579,20 +1601,21 @@ android.media.metadata.TRACK_NUMBER
 MH
 MK
 ML
+removeBadge
 MM
-MN
 noDrop
 HTTP_1_0
+MN
 MO
 SubripDecoder
 flutter/keydata
 MP
-memoryPressure
 MQ
+memoryPressure
 DST
 MR
-MS
 HTTP_1_1
+MS
 MT
 dimgray
 MU
@@ -1731,8 +1754,8 @@ SI
 RMRetriever
 MediaCodecInfo
 SJ
-delimiters
 TLS_ECDH_RSA_WITH_AES_256_CBC_SHA
+delimiters
 SK
 .cmf
 SL
@@ -1789,8 +1812,8 @@ dimen
 TW
 loadSoundEffects
 GPSAltitudeRef
-documents
 java.util.ListIterator
+documents
 TZ
 DecodeJob.encode
 Label
@@ -1801,8 +1824,8 @@ lifecycle
 opusCAF
 UG
 white
-OMX.MS.HEVCDV.Decoder
 allScroll
+OMX.MS.HEVCDV.Decoder
 VideoError
 ViewCompat
 V1
@@ -1822,6 +1845,7 @@ expectedValuesPerKey
 pcm8
 VA
 parentMetrics
+com.quaap.launchtime
 VC
 nno
 VE
@@ -1842,10 +1866,10 @@ getDescriptor
 next
 preferredAudioMimeTypes
 keymap
-string
+FlutterLoader
 color
 PRO7S
-FlutterLoader
+string
 deltaStart
 kotlin.coroutines.jvm.internal.BaseCo...
 TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256
@@ -1860,9 +1884,10 @@ showCamera
 isEncoderSupported
 namePrefix
 external_surround_sound_enabled
-SharedPreferencesPlugin
 bg_lime
 WS
+SharedPreferencesPlugin
+com.teslacoilsw.launcher
 Slate_Pro
 L153
 http://schemas.microsoft.com/DRM/2007...
@@ -1874,6 +1899,7 @@ green
 L156
 SOURCE_CLIPBOARD
 chunked
+com.anddoes.launcher
 OMX.Nvidia.h264.decode.secure
 grey
 com.luck.picture.lib.external_preview...
@@ -1883,6 +1909,7 @@ enableSuggestions
 USAGE_ASSISTANCE_ACCESSIBILITY
 search_results
 android.intent.action.VIEW
+package_name
 WavExtractor
 window
 Cancelling
@@ -1892,6 +1919,8 @@ L186
 container
 MPD
 L183
+org.adw.launcher.counter.SEND
+com.htc.launcher
 YE
 oemFeature
 getBounds
@@ -1901,8 +1930,9 @@ android.media.metadata.COMPILATION
 com.yalantis.ucrop.Error
 android.media.metadata.DISPLAY_ICON
 motion.velocity
-YT
 TextInputAction.search
+YT
+com.miui.miuihome2
 android:showsDialog
 android.permission.ACCESS_BACKGROUND_...
 kotlinx.coroutines.scheduler.core.poo...
@@ -1913,8 +1943,8 @@ ZA
 TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5
 INSTANCE
 com.google.android.exoplayer2.ext.opu...
-RelatedSoundFile
 com.android.browser.headers
+RelatedSoundFile
 org.conscrypt.Conscrypt
 mediumblue
 com.dooboolab.flutter_sound_recorder
@@ -1940,14 +1970,15 @@ MP3Decoder
 onPause
 CHAP
 TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256
+badge_count_package_name
 enabled
 p212
 EBM
 arabic
 TAG_FAKE_STATUS_BAR_VIEW
 com.bumptech.glide.load.resource.bitm...
-TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_...
 LAZY
+TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_...
 isSource
 PlatformViewWrapper
 image/vnd.android.heic
@@ -1968,6 +1999,7 @@ A7020a48
 VP8X
 NalUnitUtil
 width
+com.sonymobile.home.resourceprovider
 _setSpeed
 flutter_image_compress
 board
@@ -1976,16 +2008,16 @@ kotlinx.coroutines.fast.service.loader
 PERMISSIONS
 dev.flutter.pigeon.webview_flutter_an...
 palegreen
-Brightness.dark
 KEY_COMPONENT_ACTIVITY_REGISTERED_RCS
+Brightness.dark
 ThemeUtils
 hashText
 601LV
 windowManager
 configureCodec
 SettingsChannel
-frameRate
 notification
+frameRate
 fontFamily
 .txt
 dodgerblue
@@ -2115,9 +2147,9 @@ cs
 flounder_lte
 android.intent.action.PICK
 cy
-VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu
 defaultSource
 USAGE_ASSISTANCE_NAVIGATION_GUIDANCE
+VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu
 android.support.PARENT_ACTIVITY
 font
 de
@@ -2125,11 +2157,12 @@ MEDIUM_IMPACT
 PlaybackDurationRemaining
 TALB
 dev.flutter.pigeon.SharedPreferencesA...
-dev.flutter.pigeon.UrlLauncherApi.ope...
 language
+dev.flutter.pigeon.UrlLauncherApi.ope...
 DST_ATOP
 TLS_DHE_DSS_WITH_AES_128_GCM_SHA256
 video/wvc1
+com.miui.miuilite
 japanese
 USHORT
 darkturquoise
@@ -2151,9 +2184,9 @@ VOD
 Ballad
 ep
 PODCASTS
-dev.flutter.pigeon.PathProviderApi.ge...
 PATCH
 es
+dev.flutter.pigeon.PathProviderApi.ge...
 CameraMotionRenderer
 eu
 baseOS
@@ -2204,8 +2237,8 @@ spanish
 V23GB
 DISABLE_ANIMATIONS
 com.bumptech.glide.load.resource.bitm...
-FlutterEngineCxnRegstry
 PROPFIND
+FlutterEngineCxnRegstry
 android.hardware.vr.high_performance
 Gothic
 gt
@@ -2215,12 +2248,13 @@ createCodec:
 resizeLeft
 SERVICE_WORKER_BLOCK_NETWORK_LOADS
 he
-getDeviceImei
 WINDOW_UPDATE
+getDeviceImei
 Duet
 resetPlugin
 hr
 A1601
+app_badge_component_name
 authorization
 hy
 context
@@ -2244,8 +2278,8 @@ DiskLruCacheWrapper
 is
 it
 iw
-AppCompatSpinner
 UNDECIDED
+AppCompatSpinner
 announce
 rosybrown
 SET_PRIMARY_NAV
@@ -2259,6 +2293,7 @@ ji
 dac4
 http:
 dac3
+com.asus.launcher
 sienna
 OMX.Exynos.AAC.Decoder
 startBluetoothSco
@@ -2276,10 +2311,11 @@ kotlin.jvm.functions.Function
 DashMediaSource
 GPSLongitude
 overrides
-off
 resizeLeftRight
+off
 platformBrightness
 ReferenceBlackWhite
+com.sonyericsson.home.intent.extra.ba...
 lb
 mH
 ResolutionUnit
@@ -2325,8 +2361,8 @@ Range
 %d%%
 com.yalantis.ucrop.StatusBarColor
 PhotoItemSelectedDialog
-nb
 grabbing
+nb
 NavigationChannel
 nl
 TextInputType.visiblePassword
@@ -2341,6 +2377,7 @@ code
 keys
 nv
 addFontFromBuffer
+badgeCount
 OMX.allwinner.video.decoder.avc
 ON_OFF_SWITCH_LABELS
 head
@@ -2363,14 +2400,15 @@ simulator
 maxBufferMs
 android.app.ActivityThread
 moreInformationURL
+packagename
 currentDisplay
 getIBinder
 GPSDOP
 COROUTINE_SUSPENDED
 FactoryPools
 V_MPEG2
-android.widget.
 flutter/textinput
+android.widget.
 remote_submix
 DCIM
 AutoCompleteTextView
@@ -2400,6 +2438,7 @@ Comedy
 yDpi
 brand
 audio/mp4
+notificationNum
 Cookie
 ACTION_NEXT_HTML_ELEMENT
 drawable
@@ -2440,8 +2479,9 @@ RESOURCE_CACHE
 FHCRC
 android:visibility:screenLocation
 :cea708
-ToolbarWidgetWrapper
 SystemUiMode.immersive
+PNAME
+ToolbarWidgetWrapper
 DELETE
 HALF_OPENED
 DESCRIPTION
@@ -2479,8 +2519,8 @@ darkslategray
 royalblue
 android.speech.action.WEB_SEARCH
 getStreamMaxVolume
-closed
 resizeRight
+closed
 voiceDownlink
 compressed
 v2
@@ -2540,13 +2580,13 @@ CeaUtil
 ExoPlayer:PlaceholderSurface
 TLS_ECDH_ECDSA_WITH_NULL_SHA
 android$support$v4$os$IResultReceiver
-wt
 EMPTY
+wt
 flutter/system
 filters
 View
-Dispatchers.Main.immediate
 onWindowLayoutChangeListenerRemoved
+Dispatchers.Main.immediate
 valueFrom
 pausePlayerCompleted
 WebvttCssParser
@@ -2558,8 +2598,8 @@ splitInfo
 FLOW_CONTROL_ERROR
 xx
 GPSProcessingMethod
-location_mode
 none
+location_mode
 type
 OMX.lge.alac.decoder
 yi
@@ -2575,18 +2615,18 @@ android:changeBounds:clip
 getTextDirectionHeuristic
 HARD_LIGHT
 lightgoldenrodyellow
-android:savedDialogState
 com.android.providers.downloads.docum...
+android:savedDialogState
 wifi
 DeviceOrientation.portraitUp
-method
 _display_name
+method
 config_showMenuShortcutsWhenKeyboardP...
 mGlobal
 ACTION_ARGUMENT_SELECTION_START_INT
 recordingData
-zh
 push
+zh
 SpatialFrequencyResponse
 dev.flutter.pigeon.webview_flutter_an...
 layout_constraintLeft_toRightOf
@@ -2600,12 +2640,13 @@ RESOURCE_DISK_CACHE
 gee
 V_MPEG4/ISO/SP
 android.permission.BODY_SENSORS
-flutter/spellcheck
 .mid
+flutter/spellcheck
 602LV
 IS_TOGGLED
 out
 geo
+i7.a
 com.android.voicemail.permission.ADD_...
 com.sony.dtv.hardware.panel.qfhd
 dev.flutter.pigeon.webview_flutter_an...
@@ -2614,9 +2655,9 @@ get
 cached
 dark
 initialized
-power
 copy
 precise
+power
 java.lang.Number
 suggest_intent_data_id
 android.support.v4.media.session.IMed...
@@ -2659,6 +2700,7 @@ com.yalantis.ucrop.FreeStyleCrop
 dash
 Both
 calling_package
+badgeCount:
 DrawableCompat
 image/jpeg
 kotlin.collections.Map.Entry
@@ -2676,8 +2718,8 @@ DateTimeOriginal
 OMX.qti.audio.decoder.flac
 fa01
 kotlin.collections.Set
-ResourcesFlusher
 TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384
+ResourcesFlusher
 androidx.activity.result.contract.ext...
 getWindowLayoutInfo
 ISIZE
@@ -2762,6 +2804,7 @@ addFontWeightStyle
 TextCapitalization.words
 :Length
 EXTRA_BENCHMARK_OPERATION
+android.intent.category.HOME
 dev.flutter.pigeon.webview_flutter_an...
 SUCCESS
 user_query
@@ -2785,8 +2828,8 @@ standard
 ExoPlayerLib
 androidx.core.view.inputmethod.InputC...
 TSOT
-CAMERA_MIME_TYPE
 POST
+CAMERA_MIME_TYPE
 .msg
 ColorSpace
 TSOP
@@ -2798,6 +2841,7 @@ ACTION_SCROLL_FORWARD
 isMusicActive
 sound.pcm
 OPEN_MULTIPLE
+XiaomiBadgerPlugin
 TSO2
 Emo
 Synthpop
@@ -2819,8 +2863,8 @@ DefaultTrackSelector
 layoutDescription
 saveImageToGallery
 santos
-SystemChrome.setSystemUIOverlayStyle
 ByteBufferEncoder
+SystemChrome.setSystemUIOverlayStyle
 manning
 repeatMode
 enable_state_restoration
@@ -2851,14 +2895,15 @@ args
 SearchView
 Style:
 TextInputType.emailAddress
+setAppUnreadCount
 android.view.View$AttachInfo
 FlutterActivity
 java.lang.Float
 Dispatchers.IO
 SHA1
 Q4260
-WTF
 channel
+WTF
 dev.flutter.pigeon.webview_flutter_an...
 EmptyQueue
 embeddingExtension
@@ -2874,8 +2919,8 @@ SRC_OVER
 fullPackage
 per
 flutter_image_picker_shared_preference
-write
 spdy/3.1
+write
 GPSDestLatitudeRef
 SensorLeftBorder
 DecodeJob.notifyEncodeAndRelease
@@ -2886,8 +2931,8 @@ GPSStatus
 Loader:HlsSampleStreamWrapper
 eia608
 splitRule
-text/xul
 SSL_DHE_RSA_WITH_DES_CBC_SHA
+text/xul
 com.yalantis.ucrop.CropFrameColor
 YCbCrCoefficients
 name:
@@ -2908,8 +2953,8 @@ WIDTH
 com.yalantis.ucrop.MaxBitmapSize
 %s.%sParcelizer
 CHARACTERS
-AppLifecycleState.resumed
 TypefaceCompatApi24Impl
+AppLifecycleState.resumed
 AudioFocusManager
 it.parameterTypes
 mNextServedView
@@ -2924,6 +2969,7 @@ GET_WEB_VIEW_RENDERER
 omx.qcom.video.decoder.hevcswvdec
 %40
 linear
+extraNotification
 dev.flutter.pigeon.webview_flutter_an...
 ADDING
 REQUESTED_WITH_HEADER_ALLOW_LIST
@@ -2931,6 +2977,7 @@ $context
 V_MS/VFW/FOURCC
 Krautrock
 SegmentTemplate
+me.everything.launcher
 framework
 dev.flutter.pigeon.webview_flutter_an...
 ExoPlayerImplInternal
@@ -2967,12 +3014,13 @@ snow
 dropVideoBuffer
 SensitivityType
 _id
-onConfigurationChanged
 basic
+onConfigurationChanged
 kotlin.Throwable
 AACDecoder
 VALUE_FOLLOW_SYSTEM
 ::cue
+setAppBadgeCount
 parkedWorkersStack
 android.permission.GET_ACCOUNTS
 compressWithFile
@@ -3010,8 +3058,8 @@ password
 kotlinx.coroutines.scheduler.keep.ali...
 updateRecorderProgress
 CONTENT_TYPE
-VGhpcyBpcyB0aGUgcHJlZml4IGZvciBEb3VibGUu
 ALGORITHMIC_DARKENING
+VGhpcyBpcyB0aGUgcHJlZml4IGZvciBEb3VibGUu
 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
 CompanionObject
 secondaryActivityStack.activities
@@ -3024,6 +3072,7 @@ BitmapDrawable
 Destroying.
 processor
 GPSImgDirectionRef
+content://com.android.badge/badge
 input
 remoteInputs
 dalvik.system.CloseGuard
@@ -3036,6 +3085,7 @@ DVRWindowLength
 ERR_UNKNOWN
 com.yalantis.ucrop.CircleDimmedLayer
 CLEARED
+com.miui.home
 preferredTextLanguages
 STANDARD
 Psychadelic
@@ -3058,9 +3108,10 @@ j2xlteins
 chars
 lineIn
 Noise
+updateBadgeCount
 ALERT
-secure
 align
+secure
 LocalizationChannel
 pcm16CAF
 Container
@@ -3100,8 +3151,8 @@ video
 peru
 tint
 startPlayer
-LifecycleChannel
 SEALED
+LifecycleChannel
 BitmapImageDecoder
 TLS_KRB5_WITH_RC4_128_MD5
 PermissionHandler.ServiceManager
@@ -3123,33 +3174,35 @@ a70
 TLS_DHE_DSS_WITH_AES_128_CBC_SHA
 CAPT
 IS_HEADER
+COMPLETING_RETRY
 ApertureValue
 MetadataRenderer
-COMPLETING_RETRY
 VISIBLE_PASSWORD
 audio:
 lightslategrey
 USAGE_ASSISTANT
-AppLifecycleState.inactive
 heb
+AppLifecycleState.inactive
 TextInput.clearClient
 A_DTS
-TVSHOWSORT
 TLS_AES_128_CCM_SHA256
+TVSHOWSORT
 SCROLL_RIGHT
 moduleName
 android.widget.ImageView
 ACCESSIBILITY_CLICKABLE_SPAN_ID
 cyan
-put
 ACTION_PAGE_LEFT
+put
 bufferingEnd
 TextInputType.text
-GEOB
 SSL_RSA_WITH_DES_CBC_SHA
+com.sonymobile.home
+GEOB
 embeddingCallback
 in_progress
 FAILED
+com.htc.launcher.extra.COUNT
 font_ttc_index
 SCROLL_LEFT
 com.bumptech.glide.load.resource.bitm...
@@ -3178,6 +3231,7 @@ Breakbeat
 /data/misc/profiles/cur/0/
 OMX.MARVELL.VIDEO.HW.CODA7542DECODER
 FragmentManager:
+launcher.action.CHANGE_APPLICATION_NO...
 androidx.viewpager.widget.ViewPager
 GifEncoder
 P85
@@ -3194,6 +3248,7 @@ WavHeaderReader
 CFAPattern
 SSL_DH_anon_EXPORT_WITH_DES40_CBC_SHA
 ACTION_DRAG_START
+content://com.sonymobile.home.resourc...
 lightpink
 android.support.v4.media.session.TOKEN
 audio/mhm1
@@ -3207,6 +3262,7 @@ application/vobsub
 char
 ConnectivityMonitor
 IMMERSIVE
+activity_name
 audio/webm
 OMX.brcm.audio.mp3.decoder
 before
@@ -3220,6 +3276,7 @@ listen
 Anime
 video/mjpeg
 uimode
+com.miui.mihome2
 KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS
 TextInputAction.commitContent
 SubSecTime
@@ -3232,14 +3289,15 @@ zenlte
 com.bumptech.glide.load.resource.bitm...
 DOCUMENT_START_SCRIPT:1
 audio/flac
-WEB_VIEW_RENDERER_TERMINATE
 io.flutter.embedding.android.EnableIm...
+WEB_VIEW_RENDERER_TERMINATE
 com.microsoft.playready
 bgcolor
 setWindowLayoutType
 TLS_1_3
 TLS_1_2
 USAGE_ASSISTANCE_SONIFICATION
+pakeageName
 audio/3gpp
 android.support.action.showsUserInter...
 setLocale
@@ -3250,6 +3308,7 @@ TLS_1_1
 TLS_1_0
 values
 S_DVBSUB
+setMessageCount
 consumerIndex
 getLatency
 point
@@ -3257,8 +3316,8 @@ previewVideo
 AUD_
 sound.ogg
 slategray
-A7010a48
 alias
+A7010a48
 dev.flutter.pigeon.AndroidVideoPlayer...
 portuguese
 BaseURL
@@ -3285,8 +3344,8 @@ mAttachInfo
 suggestions
 classes.dex
 mResourcesImpl
-sidecarCompat
 resizeColumn
+sidecarCompat
 .mpg4
 plugins
 kotlin.Cloneable
@@ -3327,8 +3386,8 @@ TTML
 XOR
 editingValue
 :path
-getPlatformVersion
 Canceled
+getPlatformVersion
 dev.fluttercommunity.plus/package_info
 WEBP_A
 SidecarCompat
@@ -3353,6 +3412,7 @@ NO_UNSUPPORTED_TYPE
 android.permission.BLUETOOTH
 androidx.core.view.inputmethod.InputC...
 openRecorderCompleted
+VIVO
 android.media.metadata.DATE
 listener
 StreamGifDecoder
@@ -3388,8 +3448,8 @@ TCOM
 GContainer
 android.permission.RECORD_AUDIO
 PhotoViewAttacher
-dev.flutter.pigeon.PathProviderApi.ge...
 hrv
+dev.flutter.pigeon.PathProviderApi.ge...
 Role
 %c%c%c
 SUPPORTED_32_BIT_ABIS
@@ -3457,8 +3517,9 @@ autocorrect
 com.google.android.exoplayer2.decoder...
 COMPRESS_PATHS
 IMAGE
-media_type
+ShortcutBadger
 HapticFeedbackType.selectionClick
+media_type
 GET_WEB_CHROME_CLIENT
 androidx.view.accessibility.Accessibi...
 khaki
@@ -3478,6 +3539,7 @@ FileLoader
 translationY
 arch_disk_io_
 SamplesPerPixel
+%d/%d.
 image/bmp
 ACTION_CLEAR_SELECTION
 .wma
@@ -3486,6 +3548,7 @@ file
 YCbCrSubSampling
 mediaRange
 bg_blue
+com.sec.android.app.twlauncher
 H90
 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
 H93
@@ -3502,14 +3565,14 @@ menu
 addView
 androidx.core.view.inputmethod.InputC...
 releaseOutputBuffer
+TextInputAction.done
 com.bumptech.glide.load.resource.bitm...
 dev.flutter.pigeon.webview_flutter_an...
-TextInputAction.done
 sabrina
 CREATE_WEB_MESSAGE_CHANNEL
 AudioChannelConfiguration
-kotlin.internal.JRE8PlatformImplement...
 TsDurationReader
+kotlin.internal.JRE8PlatformImplement...
 io.flutter.EntrypointUri
 .3gp
 VIRTUAL_DISPLAY_PLATFORM_VIEW
@@ -3522,6 +3585,7 @@ HIGH
 Chorus
 SpellCheckChannel
 KEY_COMPONENT_ACTIVITY_PENDING_RESULT
+com.oppo.launcher
 TransformImageView
 mVisibleInsets
 .flv
@@ -3541,8 +3605,8 @@ textAlign
 personMiddleName
 android.media.MediaCodec
 codec
-BOOTLOADER
 true
+BOOTLOADER
 SAFE_BROWSING_ENABLE
 position
 SSHORT
@@ -3576,6 +3640,7 @@ Clipboard.getData
 application/dvbsubs
 ResourceManagerInternal
 ruby
+com.sonyericsson.home.intent.extra.ba...
 ACTVAutoSizeHelper
 $ServerProvider
 Completed
@@ -3589,9 +3654,9 @@ keyframes
 PNG
 SystemID
 CustomMethod
+TextInput.hide
 FINISHED
 HORIZONTAL_DIMENSION
-TextInput.hide
 primaryActivityStack
 com.yalantis.ucrop.CircleStrokeColor
 CENTER
@@ -3610,8 +3675,8 @@ flutter_native_splash
 channelCounts
 Soundtrack
 oldText
-wss:
 rRU
+wss:
 Clipboard.hasStrings
 dev.flutter.pigeon.webview_flutter_an...
 androidx.media2.metadata.EXTRAS
@@ -3625,6 +3690,7 @@ TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384
 StartIntentSenderForResult
 kotlin.Function
 backBufferDurationMs
+badgenumber
 DOCUMENT_START_SCRIPT
 ItemTouchHelper
 com.bumptech.glide.load.resource.bitm...
@@ -3642,11 +3708,11 @@ clipBounds
 DECODE_DATA
 PREVENT
 systemNavigationBarIconBrightness
-propertyName
 contextMenu
+propertyName
 Android/data/
-PropertySet
 selectProtocol
+PropertySet
 GPSDestDistance
 TLS_DH_anon_WITH_AES_128_GCM_SHA256
 autofill
@@ -3722,8 +3788,8 @@ Title
 panell_dt
 panell_ds
 video/av01
-dev.flutter.pigeon.PathProviderApi.ge...
 PUT
+dev.flutter.pigeon.PathProviderApi.ge...
 boundsOrigin
 1601
 splitRules
@@ -3775,8 +3841,8 @@ ActivityResultRegistry
 CustomSupport
 TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
 usesVirtualDisplay
-pictures
 this.output
+pictures
 adjustStreamVolume
 dev.fluttercommunity.plus/device_info
 c2.android
@@ -3853,6 +3919,7 @@ file_id
 olivedrab
 Software
 HORIZONTAL
+android.intent.extra.update_applicati...
 USAGE_NOTIFICATION_COMMUNICATION_REQUEST
 $onBackInvoked
 Psytrance
@@ -3914,6 +3981,7 @@ RELEASE
 packages
 text/html
 kotlin.jvm.functions.
+content://com.huawei.android.launcher...
 WindowInfoTrackerImpl.kt
 Q350
 doSomeWork
@@ -3921,28 +3989,29 @@ glVertexAttribPointer
 /https
 android.permission.READ_CONTACTS
 tblr
+BadgeIntentService
 indexRange
-kotlin.internal.JRE7PlatformImplement...
 publicsuffixes.gz
+kotlin.internal.JRE7PlatformImplement...
 android.media.metadata.DOWNLOAD_STATUS
 TVSHOW
-PORTRAIT_DOWN
 android.settings.action.MANAGE_OVERLA...
+PORTRAIT_DOWN
 JPEG
 libapp.so
 LookaheadCount
 previewImages
 fillColor
 springgreen
-middleInitial
 RestorationChannel
+middleInitial
 TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
 SCV31
 video/avc
 Goa
 videoRecordMaxSecond
-close
 TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA
+close
 codePoint
 android.media.metadata.ADVERTISEMENT
 displayMetrics
@@ -3957,6 +4026,7 @@ package:
 onMetaData
 seagreen
 isml
+com.sonyericsson.home.intent.extra.ba...
 Loaders:
 onNewIntent
 Reggae
@@ -4007,6 +4077,7 @@ ROOT
 ACTION_CLEAR_FOCUS
 H120
 PixelYDimension
+com.anddoes.launcher.COUNTER_CHANGED
 ACTION_SCROLL_BACKWARD
 H123
 startRecorderCompleted
@@ -4051,8 +4122,11 @@ UNDEFINED
 .xls
 fontsize
 caption
+content://com.android.launcher3.corne...
 OMX.qcom.video.decoder.vp8
+number
 SplitPairRule
+com.huawei.android.launcher
 BYTE
 IS_TEXT_FIELD
 GET_VARIATIONS_HEADER
@@ -4077,6 +4151,7 @@ Variant
 setApplicationProtocols
 android.media.metadata.TITLE
 mediumorchid
+g123k/flutter_app_badger
 silver
 IMG_
 .xml
@@ -4085,8 +4160,8 @@ sampleRate.aCaps
 licenseUrl
 other
 FORCE_DARK_STRATEGY
-org.apache.harmony.xnet.provider.jsse...
 opusOGG
+org.apache.harmony.xnet.provider.jsse...
 cea708
 FLOAT_TYPE
 ASUS_X00AD_2
@@ -4116,8 +4191,8 @@ mListener
 NORMAL
 GPSLatitude
 H180
-SystemChrome.setEnabledSystemUIOverlays
 selectionExtent
+SystemChrome.setEnabledSystemUIOverlays
 referer
 Compression
 MouseCursorChannel
@@ -4138,8 +4213,8 @@ TextInputAction.send
 ContentProtection
 alb
 codecPrivate
-getMode
 buffer
+getMode
 FNumber
 com.yalantis.ucrop.MaxSizeY
 com.yalantis.ucrop.DragSmoothToCenter
@@ -4173,9 +4248,9 @@ WEBVTT
 amp
 aquamarine
 IS_IMAGE
-fromDataBuffer
 COMPLETING_ALREADY
 %2e.
+fromDataBuffer
 TLS_KRB5_WITH_RC4_128_SHA
 java.lang.Iterable
 isMicrophoneMute
@@ -4193,6 +4268,7 @@ YCbCrPositioning
 info.displayFeatures
 synchronizeToNativeViewHierarchy
 slateblue
+content://me.everything.badger/apps
 enableJavaScript
 universal
 c2.
@@ -4225,6 +4301,7 @@ android.permission.READ_PHONE_NUMBERS
 unprocessed
 minSpl
 outlinecolour
+content://com.teslacoilsw.notifier/un...
 SystemChrome.setEnabledSystemUIMode
 permissions_handler
 getRecordURL
@@ -4235,8 +4312,9 @@ SegmentBase
 .m4
 ByteArrayPool
 INCREASE
-english
+isAppBadgeSupported
 QUIC
+english
 setBluetoothScoOn
 ERROR
 jar
@@ -4245,8 +4323,8 @@ NOTHING
 android.media.metadata.DISC_NUMBER
 androidx.appcompat.app.ActionBar$Tab
 deltaText
-setupData.format
 Trailers
+setupData.format
 supplementalData
 Make
 C1505
@@ -4280,8 +4358,8 @@ TextInputClient.updateEditingStateWit...
 XingSeeker
 :status
 IsLive
-PROTECTED
 TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256
+PROTECTED
 arm
 ACTION_SELECT
 santoni
@@ -4307,8 +4385,8 @@ RecyclerView
 m3u8
 flutter/isolate
 animator
-s905x018
 .%2e
+s905x018
 MEIZU_FLAG_DARK_STATUS_BAR_ICON
 TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA
 Constraint
@@ -4326,8 +4404,9 @@ Gangsta
 IDM
 com.bumptech.glide.load.resource.bitm...
 ANMF
-SystemChrome.systemUIChange
 darkolivegreen
+SystemChrome.systemUIChange
+CNAME
 isVolumeFixed
 USAGE_MEDIA
 primaryActivityName
@@ -4352,8 +4431,9 @@ DIAGNOSTIC_REF_PROFILE_DOES_NOT_EXIST
 AFTJMST12
 NestedScrollView
 DartExecutor
-.xyz
 TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+com.sonyericsson.home.intent.extra.ba...
+.xyz
 Bhangra
 disabledTrackTypes
 id3Output
@@ -4388,8 +4468,8 @@ Dispatchers.Main
 boreal
 arraySize
 FlutterSurfaceView
-Cancelled
 QX1
+Cancelled
 RatingBar
 target
 PrimaryChromaticities
@@ -4442,7 +4522,6 @@ SystemChannel
 ViewPager
 flutter_deeplinking_enabled
 INVISIBLE
-h7.a
 HEAVY_IMPACT
 phone
 kotlin.Short
@@ -4450,6 +4529,7 @@ primaryActivityName.packageName
 android.media.metadata.NUM_TRACKS
 bounds
 style
+COUNT
 getDisplayFeatures
 GPSTrack
 BLOCKING
@@ -4468,28 +4548,30 @@ adjustVolume
 mContentInsets
 mToken
 setDirection
+badge_vip_count
 SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA
 java.util.Map$Entry
 TLS_AES_256_CCM_8_SHA256
 mediaCodecInfos
 OMX.rk.video_decoder.avc
-setCommunicationDevice
 display
+setCommunicationDevice
 Grunge
 LensModel
 SpellCheck.initiateSpellCheck
 composingExtent
 %d:%d
-image/
 onBecomingNoisy
+image/
 dev.flutter.pigeon.AndroidVideoPlayer...
 setRingerMode
 birthDateDay
 journal.tmp
 dev.flutter.pigeon.webview_flutter_an...
 MetadataUtil
-EssentialProperty
+com.sonyericsson.home
 libflutter.so
+EssentialProperty
 PORTRAIT_UP
 sailfish
 orchid
@@ -4505,11 +4587,12 @@ AppCompatViewInflater
 selectionBase
 baseContainer
 magnolia
-plainCodePoint
 datetaken
+plainCodePoint
 .pps
-dev.flutter.pigeon.webview_flutter_an...
+android.intent.action.APPLICATION_MES...
 SSL_DH_anon_EXPORT_WITH_RC4_40_MD5
+dev.flutter.pigeon.webview_flutter_an...
 glAttachShader
 _reusableCancellableContinuation
 android.view.View
@@ -4536,6 +4619,7 @@ job
 TextInputClient.requestExistingInputS...
 OMX.lge.ac3.decoder
 INF
+BadgerUtils
 :Semantic
 com.yalantis.ucrop.AllowedGestures
 OMX.MTK.AUDIO.DECODER.DSPAC3
@@ -4568,6 +4652,7 @@ PopupWindowCompatApi21
 ViewUtilsBase
 mIsChildViewEnabled
 MEMORY_CACHE
+badge_count_class_name
 maroon
 layout_constraintEnd_toEndOf
 AssetPathFetcher
@@ -4588,14 +4673,15 @@ bitmap
 CROP_
 getSuppressed
 no_available_camera
+com.sec.android.app.launcher
 sizeAndRate.caps
 DartMessenger
 HlsTrackMetadataEntry
 Q4310
 AAC
 codecs
-httponly
 SOURCE_PROCESS_TEXT
+httponly
 GALLERY
 PLAYER_IS_PAUSED
 ReceiveContent
@@ -4618,6 +4704,7 @@ streamReader
 Camera:MotionPhoto
 icon
 CupcakeGestureDetector
+ZTE
 USAGE_NOTIFICATION_COMMUNICATION_INSTANT
 java.
 resizeUpDown
@@ -4643,6 +4730,7 @@ Neoclassical
 DETACH
 computeFitSystemWindows
 getScaledScrollFactor
+ZUK
 taido_row
 iTunSMPB
 layout_constraintBottom_toBottomOf
@@ -4656,6 +4744,7 @@ OMX.SEC.vp8.dec
 digits
 ADD
 journal.bkp
+messageCount
 setTouchModal
 UI_COLOR
 C2Mp3TimestampTracker
@@ -4669,8 +4758,8 @@ ruleComponent.className
 S_TEXT/WEBVTT
 androidx.view.accessibility.Accessibi...
 android.media.metadata.MEDIA_URI
-okhttp/3.12.13
 france
+okhttp/3.12.13
 imageWidth
 TextInputChannel
 CIPAMRNBDecoder
@@ -4721,8 +4810,8 @@ dvh1
 io.flutter.embedding.android.LeakVM
 pushRouteInformation
 ACTION_MOVE_WINDOW
-TextInputAction.next
 setInitialRoute
+TextInputAction.next
 MATCH_PARENT
 Chillout
 select
@@ -4746,8 +4835,8 @@ android.intent.extra.USE_FRONT_CAMERA
 model
 birthdayYear
 dvhe
-omx.
 isolate_snapshot_data
+omx.
 cbcs
 Indie
 SPELLOUT
@@ -4770,8 +4859,8 @@ E5643
 AFTM
 AFTN
 MULTI_PROCESS_QUERY
-QUALITY
 telephoneNumber
+QUALITY
 SSL_DHE_DSS_WITH_DES_CBC_SHA
 REFERENCE_TYPE
 audio/raw
@@ -4802,9 +4891,9 @@ AFTS
 AFTT
 Transform
 AFTR
-loadingUnitId
 PictureFileUtils
 VIDEO_RECORD_MIN_SECOND
+loadingUnitId
 PictureSpUtils
 TextRenderer
 auto
@@ -4813,6 +4902,7 @@ android.speech.action.RECOGNIZE_SPEECH
 sign
 audio/alac
 VALUE
+org.adw.launcher
 suffix
 _size
 sourceURL
@@ -4828,6 +4918,7 @@ DeviceOrientation.portraitDown
 TOO_LATE_TO_CANCEL
 NULL
 level
+梁典典:
 TLS_DHE_DSS_WITH_AES_256_CBC_SHA
 CompressedBitsPerPixel
 http://dashif.org/guidelines/thumbnai...
@@ -4905,10 +4996,11 @@ palevioletred
 invoker
 .prop
 blockSize
-accept
 ACTION_COLLAPSE
 motion.EndState
+accept
 motion.StartState
+badge
 load:
 Salsa
 textContainer
@@ -4948,8 +5040,9 @@ store
 checkPermissionStatus
 OPEN
 LoadTask
-buf
 SSL_RSA_WITH_NULL_MD5
+buf
+com.zui.launcher
 Dubstep
 kate
 handled
@@ -4967,10 +5060,11 @@ primaryColor
 Metal
 dest
 personGivenName
-dev.flutter.pigeon.PathProviderApi.ge...
 buildNumber
+dev.flutter.pigeon.PathProviderApi.ge...
 pairs
 stopPlayerCompleted
+com.htc.launcher.action.UPDATE_SHORTCUT
 getPlayerState
 DefaultAudioSink
 dynamic
@@ -4984,9 +5078,10 @@ goog.exo.hls
 androidx.media2.session.MediaLibraryS...
 setSpeakerphoneOn
 mediaType
+com.oppo.unsettledevent
 postalAddressExtendedPostalCode
-ffff0000
 once
+ffff0000
 fragment_
 NOT_IN_STACK
 TextInputAction.previous
@@ -5024,8 +5119,8 @@ Jazz
 com.bumptech.glide.load.resource.bitm...
 topLeft
 mha1
-Classical
 REMOVED_TASK
+Classical
 ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY
 Pictures
 avc3
@@ -5058,19 +5153,21 @@ getRingerMode
 .zac
 SHOW_ON_SCREEN
 sensitivity
-notifications
 ACTION_FOCUS
+notifications
 generateAudioSessionId
 application/xml
 android.permission.READ_SMS
 android.support.action.semanticAction
+xiaomi_badger
 java.lang.Double
+org.adwfreak.launcher
 flac
 AppLifecycleState.detached
 Downsampler
-range
-SWITCH_TO_SOURCE_SERVICE
 binding.binaryMessenger
+SWITCH_TO_SOURCE_SERVICE
+range
 dev.flutter.pigeon.webview_flutter_an...
 goog.exo.exoplayer
 feature
@@ -5103,16 +5200,18 @@ isBluetoothScoOn
 HAS_ENABLED_STATE
 downTime
 sound.amr
+OPPO
 ON_RESUME
 TLS_ECDHE_RSA_WITH_NULL_SHA
 getProgress
 greenyellow
-TextCapitalization.characters
 asyncTraceBegin
+TextCapitalization.characters
 JpgFromRaw
 InteroperabilityIFDPointer
 startPlayerFromMic
 TRANSFORM
+tag
 NewSubfileType
 VERTICAL_DIMENSION
 JOC
@@ -6205,6 +6304,19 @@ Marking attr:layout_constraintBaseline_toBaselineOf:2130903308 used because it m
 Marking attr:layout_constraintBaseline_toBaselineOf:2130903308 used because it matches string pool constant layout_constraintBaseline_toBaselineOf
 Marking id:baseline:2131230804 used because it matches string pool constant baseline
 Marking id:baseline:2131230804 used because it matches string pool constant baseline
+Marking id:tag_accessibility_actions:2131231076 used because it matches string pool constant tag
+Marking id:tag_accessibility_clickable_spans:2131231077 used because it matches string pool constant tag
+Marking id:tag_accessibility_heading:2131231078 used because it matches string pool constant tag
+Marking id:tag_accessibility_pane_title:2131231079 used because it matches string pool constant tag
+Marking id:tag_on_apply_window_listener:2131231080 used because it matches string pool constant tag
+Marking id:tag_on_receive_content_listener:2131231081 used because it matches string pool constant tag
+Marking id:tag_on_receive_content_mime_types:2131231082 used because it matches string pool constant tag
+Marking id:tag_screen_reader_focusable:2131231083 used because it matches string pool constant tag
+Marking id:tag_state_description:2131231084 used because it matches string pool constant tag
+Marking id:tag_transition_group:2131231085 used because it matches string pool constant tag
+Marking id:tag_unhandled_key_event_manager:2131231086 used because it matches string pool constant tag
+Marking id:tag_unhandled_key_listeners:2131231087 used because it matches string pool constant tag
+Marking id:tag_window_insets_animation_callback:2131231088 used because it matches string pool constant tag
 Marking anim:fragment_fast_out_extra_slow_in:2130771992 used because it matches string pool constant fragment
 Marking animator:fragment_close_enter:2130837504 used because it matches string pool constant fragment
 Marking animator:fragment_close_exit:2130837505 used because it matches string pool constant fragment
@@ -8105,7 +8217,7 @@ Marking id:fragment_container_view_tag:2131230883 used because it matches string
 @id/tag_on_receive_content_mime_types : reachable=true
 @id/tag_screen_reader_focusable : reachable=true
 @id/tag_state_description : reachable=true
-@id/tag_transition_group : reachable=false
+@id/tag_transition_group : reachable=true
 @id/tag_unhandled_key_event_manager : reachable=true
 @id/tag_unhandled_key_listeners : reachable=true
 @id/tag_window_insets_animation_callback : reachable=true
@@ -11126,6 +11238,7 @@ The root reachable resources are:
  id:tag_on_receive_content_mime_types:2131231082
  id:tag_screen_reader_focusable:2131231083
  id:tag_state_description:2131231084
+ id:tag_transition_group:2131231085
  id:tag_unhandled_key_event_manager:2131231086
  id:tag_unhandled_key_listeners:2131231087
  id:tag_window_insets_animation_callback:2131231088

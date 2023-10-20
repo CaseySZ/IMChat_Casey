@@ -6588,7 +6588,25 @@ androidx.core.R$attr:
     private void <init>()
 androidx.core.R$color
 androidx.core.R$dimen
-androidx.core.R$drawable
+androidx.core.R$drawable:
+    public static final int ic_call_answer
+    public static final int ic_call_answer_low
+    public static final int ic_call_answer_video
+    public static final int ic_call_answer_video_low
+    public static final int ic_call_decline
+    public static final int ic_call_decline_low
+    public static final int notification_action_background
+    public static final int notification_bg_low
+    public static final int notification_bg_low_normal
+    public static final int notification_bg_low_pressed
+    public static final int notification_bg_normal
+    public static final int notification_bg_normal_pressed
+    public static final int notification_icon_background
+    public static final int notification_template_icon_bg
+    public static final int notification_template_icon_low_bg
+    public static final int notification_tile_bg
+    public static final int notify_panel_notification_icon_bg
+    private void <init>()
 androidx.core.R$id:
     public static final int action_container
     public static final int action_divider
@@ -6871,17 +6889,13 @@ androidx.core.app.NotificationCompat$Builder:
     public long getWhenIfShowing()
     private android.graphics.Bitmap reduceLargeIconSize(android.graphics.Bitmap)
     public androidx.core.app.NotificationCompat$Builder setAllowSystemGeneratedContextualActions(boolean)
-    public androidx.core.app.NotificationCompat$Builder setAutoCancel(boolean)
-    public androidx.core.app.NotificationCompat$Builder setBadgeIconType(int)
     public androidx.core.app.NotificationCompat$Builder setBubbleMetadata(androidx.core.app.NotificationCompat$BubbleMetadata)
     public androidx.core.app.NotificationCompat$Builder setCategory(java.lang.String)
-    public androidx.core.app.NotificationCompat$Builder setChannelId(java.lang.String)
     public androidx.core.app.NotificationCompat$Builder setChronometerCountDown(boolean)
     public androidx.core.app.NotificationCompat$Builder setColor(int)
     public androidx.core.app.NotificationCompat$Builder setColorized(boolean)
     public androidx.core.app.NotificationCompat$Builder setContent(android.widget.RemoteViews)
     public androidx.core.app.NotificationCompat$Builder setContentInfo(java.lang.CharSequence)
-    public androidx.core.app.NotificationCompat$Builder setContentIntent(android.app.PendingIntent)
     public androidx.core.app.NotificationCompat$Builder setCustomBigContentView(android.widget.RemoteViews)
     public androidx.core.app.NotificationCompat$Builder setCustomContentView(android.widget.RemoteViews)
     public androidx.core.app.NotificationCompat$Builder setCustomHeadsUpContentView(android.widget.RemoteViews)
@@ -6898,7 +6912,6 @@ androidx.core.app.NotificationCompat$Builder:
     public androidx.core.app.NotificationCompat$Builder setLocalOnly(boolean)
     public androidx.core.app.NotificationCompat$Builder setLocusId(androidx.core.content.LocusIdCompat)
     public androidx.core.app.NotificationCompat$Builder setNotificationSilent()
-    public androidx.core.app.NotificationCompat$Builder setNumber(int)
     public androidx.core.app.NotificationCompat$Builder setOnlyAlertOnce(boolean)
     public androidx.core.app.NotificationCompat$Builder setPriority(int)
     public androidx.core.app.NotificationCompat$Builder setProgress(int,int,boolean)
@@ -28868,6 +28881,20 @@ dev.fluttercommunity.plus.packageinfo.R$string
 dev.fluttercommunity.plus.packageinfo.R$style
 dev.fluttercommunity.plus.packageinfo.R$styleable
 dev.fluttercommunity.plus.packageinfo.R
+fr.g123k.flutterappbadge.flutterappbadger.BuildConfig
+fr.g123k.flutterappbadge.flutterappbadger.R$attr
+fr.g123k.flutterappbadge.flutterappbadger.R$color
+fr.g123k.flutterappbadge.flutterappbadger.R$dimen
+fr.g123k.flutterappbadge.flutterappbadger.R$drawable
+fr.g123k.flutterappbadge.flutterappbadger.R$id
+fr.g123k.flutterappbadge.flutterappbadger.R$integer
+fr.g123k.flutterappbadge.flutterappbadger.R$layout
+fr.g123k.flutterappbadge.flutterappbadger.R$string
+fr.g123k.flutterappbadge.flutterappbadger.R$style
+fr.g123k.flutterappbadge.flutterappbadger.R$styleable
+fr.g123k.flutterappbadge.flutterappbadger.R
+fr.g123k.flutterappbadger.FlutterAppBadgerPlugin:
+    private static final java.lang.String CHANNEL_NAME
 io.flutter.BuildConfig
 io.flutter.FlutterInjector$Builder:
     public io.flutter.FlutterInjector$Builder setDeferredComponentManager(io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager)
@@ -36291,6 +36318,80 @@ kotlinx.coroutines.sync.SemaphoreImpl
 kotlinx.coroutines.sync.SemaphoreKt$withPermit$1
 kotlinx.coroutines.sync.SemaphoreKt
 kotlinx.coroutines.sync.SemaphoreSegment
+me.leolin.shortcutbadger.BuildConfig
+me.leolin.shortcutbadger.R
+me.leolin.shortcutbadger.ShortcutBadger:
+    private static final java.lang.String LOG_TAG
+    private static final int SUPPORTED_CHECK_ATTEMPTS
+    private void <init>()
+    public static void removeCountOrThrow(android.content.Context)
+me.leolin.shortcutbadger.impl.AdwHomeBadger:
+    public static final java.lang.String CLASSNAME
+    public static final java.lang.String COUNT
+    public static final java.lang.String INTENT_UPDATE_COUNTER
+    public static final java.lang.String PACKAGENAME
+me.leolin.shortcutbadger.impl.ApexHomeBadger:
+    private static final java.lang.String CLASS
+    private static final java.lang.String COUNT
+    private static final java.lang.String INTENT_UPDATE_COUNTER
+    private static final java.lang.String PACKAGENAME
+me.leolin.shortcutbadger.impl.AsusHomeBadger:
+    private static final java.lang.String INTENT_ACTION
+    private static final java.lang.String INTENT_EXTRA_ACTIVITY_NAME
+    private static final java.lang.String INTENT_EXTRA_BADGE_COUNT
+    private static final java.lang.String INTENT_EXTRA_PACKAGENAME
+me.leolin.shortcutbadger.impl.DefaultBadger:
+    private static final java.lang.String INTENT_ACTION
+    private static final java.lang.String INTENT_EXTRA_ACTIVITY_NAME
+    private static final java.lang.String INTENT_EXTRA_BADGE_COUNT
+    private static final java.lang.String INTENT_EXTRA_PACKAGENAME
+me.leolin.shortcutbadger.impl.EverythingMeHomeBadger:
+    private static final java.lang.String COLUMN_ACTIVITY_NAME
+    private static final java.lang.String COLUMN_COUNT
+    private static final java.lang.String COLUMN_PACKAGE_NAME
+    private static final java.lang.String CONTENT_URI
+me.leolin.shortcutbadger.impl.IntentConstants
+me.leolin.shortcutbadger.impl.LGHomeBadger
+me.leolin.shortcutbadger.impl.NewHtcHomeBadger:
+    public static final java.lang.String COUNT
+    public static final java.lang.String EXTRA_COMPONENT
+    public static final java.lang.String EXTRA_COUNT
+    public static final java.lang.String INTENT_SET_NOTIFICATION
+    public static final java.lang.String INTENT_UPDATE_SHORTCUT
+    public static final java.lang.String PACKAGENAME
+me.leolin.shortcutbadger.impl.NovaHomeBadger:
+    private static final java.lang.String CONTENT_URI
+    private static final java.lang.String COUNT
+    private static final java.lang.String TAG
+me.leolin.shortcutbadger.impl.OPPOHomeBader:
+    private static final java.lang.String INTENT_ACTION
+    private static final java.lang.String INTENT_EXTRA_BADGEUPGRADE_COUNT
+    private static final java.lang.String INTENT_EXTRA_BADGE_COUNT
+    private static final java.lang.String INTENT_EXTRA_BADGE_UPGRADENUMBER
+    private static final java.lang.String INTENT_EXTRA_PACKAGENAME
+    private static final java.lang.String PROVIDER_CONTENT_URI
+me.leolin.shortcutbadger.impl.SamsungHomeBadger:
+    private static final java.lang.String CONTENT_URI
+me.leolin.shortcutbadger.impl.SonyHomeBadger:
+    private static final java.lang.String INTENT_ACTION
+    private static final java.lang.String INTENT_EXTRA_ACTIVITY_NAME
+    private static final java.lang.String INTENT_EXTRA_MESSAGE
+    private static final java.lang.String INTENT_EXTRA_PACKAGE_NAME
+    private static final java.lang.String INTENT_EXTRA_SHOW_MESSAGE
+    private static final java.lang.String PROVIDER_COLUMNS_ACTIVITY_NAME
+    private static final java.lang.String PROVIDER_COLUMNS_BADGE_COUNT
+    private static final java.lang.String PROVIDER_COLUMNS_PACKAGE_NAME
+    private static final java.lang.String PROVIDER_CONTENT_URI
+    private static final java.lang.String SONY_HOME_PROVIDER_NAME
+me.leolin.shortcutbadger.impl.XiaomiHomeBadger:
+    public static final java.lang.String EXTRA_UPDATE_APP_COMPONENT_NAME
+    public static final java.lang.String EXTRA_UPDATE_APP_MSG_TEXT
+    public static final java.lang.String INTENT_ACTION
+me.leolin.shortcutbadger.util.BroadcastHelper:
+    public void <init>()
+me.leolin.shortcutbadger.util.CloseHelper:
+    public void <init>()
+    public static void closeQuietly(java.io.Closeable)
 net.jonhanson.flutter_native_splash.BuildConfig
 net.jonhanson.flutter_native_splash.R$attr
 net.jonhanson.flutter_native_splash.R$color
@@ -37393,6 +37494,53 @@ org.jetbrains.annotations.NotNull
 org.jetbrains.annotations.Nullable
 org.jetbrains.annotations.PropertyKey
 org.jetbrains.annotations.TestOnly
+shop.itbug.xiaomi_badger.BuildConfig
+shop.itbug.xiaomi_badger.R$attr
+shop.itbug.xiaomi_badger.R$color
+shop.itbug.xiaomi_badger.R$dimen
+shop.itbug.xiaomi_badger.R$drawable
+shop.itbug.xiaomi_badger.R$id
+shop.itbug.xiaomi_badger.R$integer
+shop.itbug.xiaomi_badger.R$layout
+shop.itbug.xiaomi_badger.R$string
+shop.itbug.xiaomi_badger.R$style
+shop.itbug.xiaomi_badger.R$styleable
+shop.itbug.xiaomi_badger.R
+shop.itbug.xiaomi_badger.XiaomiBadgerPlugin:
+    public static final java.lang.String tag
+shop.itbug.xiaomi_badger.service.NotifService:
+    private static final java.lang.String NOTIFICATION_CHANNEL
+shop.itbug.xiaomi_badger.util.BadgerUtils$SonyAsyncQueryHandler
+shop.itbug.xiaomi_badger.util.BadgerUtils:
+    public final int getNotificationId()
+    public final void setHTCBadge(android.content.Context,int)
+    public final boolean setHuaweiBadge(android.content.Context,int)
+    public final void setNotificationId(int)
+    public final void setSamsungBadge(android.content.Context,int)
+    public final void setSonyBadge(android.content.Context,int)
+    public final void setZukBadge(android.content.Context,int)
+shop.itbug.xiaomi_badger.util.OppoBadgeUtil:
+    public void <init>()
+shop.itbug.xiaomi_badger.util.SystemUtil:
+    public static final java.lang.String PHONE_HONOR
+    public static final java.lang.String PHONE_HTC
+    public static final java.lang.String PHONE_HUAWEI
+    public static final java.lang.String PHONE_LENOVO
+    public static final java.lang.String PHONE_LG
+    public static final java.lang.String PHONE_Letv
+    public static final java.lang.String PHONE_MEIZU
+    public static final java.lang.String PHONE_NOVA
+    public static final java.lang.String PHONE_OPPO
+    public static final java.lang.String PHONE_OnePlus
+    public static final java.lang.String PHONE_SAMSUNG
+    public static final java.lang.String PHONE_SMARTISAN
+    public static final java.lang.String PHONE_SONY
+    public static final java.lang.String PHONE_VIVO
+    public static final java.lang.String PHONE_XIAOMI
+    public final java.lang.String getSystemLanguage()
+    public java.util.Locale[] getSystemLanguageList()
+    public final java.lang.String getSystemModel()
+    public final java.lang.String getSystemVersion()
 top.zibin.luban.BuildConfig
 top.zibin.luban.Checker:
     private static final java.lang.String JPG
@@ -38394,6 +38542,8 @@ kotlinx.coroutines.internal.StackTraceRecoveryKt:
     private static final java.lang.Throwable tryCopyAndVerify(java.lang.Throwable)
     public static final java.lang.Throwable unwrapImpl(java.lang.Throwable)
 kotlinx.coroutines.internal.WeakMapCtorCache
+me.leolin.shortcutbadger.impl.OPPOHomeBader:
+    private void executeBadgeByBroadcast(android.content.Context,android.content.ComponentName,int)
 okhttp3.Cache
 okhttp3.ConnectionPool:
     static final synthetic boolean $assertionsDisabled

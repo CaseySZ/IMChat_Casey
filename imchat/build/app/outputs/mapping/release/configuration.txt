@@ -145,6 +145,7 @@
 -keep class com.yalantis.ucrop.UCropMultipleActivity { <init>(); }
 -keep class io.flutter.plugins.imagepicker.ImagePickerFileProvider { <init>(); }
 -keep class io.flutter.plugins.urllauncher.WebViewActivity { <init>(); }
+-keep class shop.itbug.xiaomi_badger.service.NotifService { <init>(); }
 -keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
 
 -keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
@@ -770,6 +771,18 @@
 -keepclassmembernames class com.google.common.base.Function { *; }
 
 # End of content from /Users/sy/.gradle/caches/transforms-3/80cdce6c34126f9dada6e470be8e7927/transformed/jetified-exoplayer-common-2.18.7/proguard.txt
+# The proguard configuration file for the following section is /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/proguard.txt
+#https://github.com/leolin310148/ShortcutBadger/issues/46
+-keep class me.leolin.shortcutbadger.impl.AdwHomeBadger { <init>(...); }
+-keep class me.leolin.shortcutbadger.impl.ApexHomeBadger { <init>(...); }
+-keep class me.leolin.shortcutbadger.impl.AsusHomeLauncher { <init>(...); }
+-keep class me.leolin.shortcutbadger.impl.DefaultBadger { <init>(...); }
+-keep class me.leolin.shortcutbadger.impl.NewHtcHomeBadger { <init>(...); }
+-keep class me.leolin.shortcutbadger.impl.NovaHomeBadger { <init>(...); }
+-keep class me.leolin.shortcutbadger.impl.SolidHomeBadger { <init>(...); }
+-keep class me.leolin.shortcutbadger.impl.SonyHomeBadger { <init>(...); }
+-keep class me.leolin.shortcutbadger.impl.XiaomiHomeBadger { <init>(...); }
+# End of content from /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/proguard.txt
 # The proguard configuration file for the following section is /Users/sy/.gradle/caches/transforms-3/3dec2d17a3dcf78aa689e30375574964/transformed/rules/lib/META-INF/proguard/androidx-annotations.pro
 -keep,allowobfuscation @interface androidx.annotation.Keep
 -keep @androidx.annotation.Keep class * {*;}

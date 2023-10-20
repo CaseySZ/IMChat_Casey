@@ -17,6 +17,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="/Users/sy/Documents/GitHub/IMChat/imchat/android@@:xiaomi_badger::release"
+      jars="/Users/sy/Documents/GitHub/IMChat/imchat/build/xiaomi_badger/.transforms/e2f57c6e7d28a44659beedeea28654d7/transformed/out/jars/classes.jar"
+      resolved="shop.itbug.xiaomi_badger:xiaomi_badger:unspecified"
+      folder="/Users/sy/Documents/GitHub/IMChat/imchat/build/xiaomi_badger/.transforms/e2f57c6e7d28a44659beedeea28654d7/transformed/out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="/Users/sy/Documents/GitHub/IMChat/imchat/android@@:url_launcher_android::release"
       jars="/Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/.transforms/bbcad43c9f86bec7e42eae625c888be8/transformed/out/jars/classes.jar"
       resolved="io.flutter.plugins.urllauncher:url_launcher_android:unspecified"
@@ -99,6 +112,19 @@
       jars="/Users/sy/Documents/GitHub/IMChat/imchat/build/permission_handler_android/.transforms/0f70792c977fa27d2d777bcf58ac85ca/transformed/out/jars/classes.jar"
       resolved="com.baseflow.permissionhandler:permission_handler_android:unspecified"
       folder="/Users/sy/Documents/GitHub/IMChat/imchat/build/permission_handler_android/.transforms/0f70792c977fa27d2d777bcf58ac85ca/transformed/out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="/Users/sy/Documents/GitHub/IMChat/imchat/android@@:flutter_app_badger::release"
+      jars="/Users/sy/Documents/GitHub/IMChat/imchat/build/flutter_app_badger/.transforms/154cc3933a5c29f7fad72d7cd1ff2668/transformed/out/jars/classes.jar"
+      resolved="fr.g123k.flutterappbadge.flutterappbadger:flutter_app_badger:unspecified"
+      folder="/Users/sy/Documents/GitHub/IMChat/imchat/build/flutter_app_badger/.transforms/154cc3933a5c29f7fad72d7cd1ff2668/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -968,6 +994,19 @@
       name="androidx.concurrent:concurrent-futures:1.1.0@jar"
       jars="/Users/sy/.gradle/caches/modules-2/files-2.1/androidx.concurrent/concurrent-futures/1.1.0/50b7fb98350d5f42a4e49704b03278542293ba48/concurrent-futures-1.1.0.jar"
       resolved="androidx.concurrent:concurrent-futures:1.1.0"/>
+  <library
+      name="me.leolin:ShortcutBadger:1.1.22@aar"
+      jars="/Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/jars/classes.jar"
+      resolved="me.leolin:ShortcutBadger:1.1.22"
+      folder="/Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
   <library
       name="io.github.lucksiege:compress:v3.10.9@aar"
       jars="/Users/sy/.gradle/caches/transforms-3/5e11ee32696b4a5876a9fc7ceeef36fc/transformed/jetified-compress-v3.10.9/jars/classes.jar"

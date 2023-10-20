@@ -621,7 +621,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         child:Container(
                             height: 30,
                             padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withOpacity(0.7),
                             alignment: Alignment.centerLeft,
                           child:  MarqueeTile(
                             widgets: [
@@ -630,7 +630,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                 "公告：${groupModel?.personalitySign}      ",
                                 maxLines: 1,
                                 style: const TextStyle(
-                                  color: Color(0xff666666),
+                                  color: Colors.white,
                                   fontSize: 12,
                                 ),
                               ),

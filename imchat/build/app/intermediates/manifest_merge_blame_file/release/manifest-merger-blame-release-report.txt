@@ -67,322 +67,385 @@
 31    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 31-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:19:5-75
 31-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:19:22-72
-32
-33    <queries package="com.example.imchat" >
-33-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:22:5-31:15
-33-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:22:14-40
-34        <intent>
-34-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:23:9-26:18
-35            <action android:name="android.media.action.IMAGE_CAPTURE" >
-35-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:24:13-25:22
-35-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:24:21-70
-36            </action>
-37        </intent>
-38        <intent>
-38-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:27:9-30:18
-39            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" >
-39-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:28:13-29:22
-39-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:28:21-77
-40            </action>
-41        </intent>
-42        <intent>
-42-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:25:9-27:18
-43            <action android:name="android.media.browse.MediaBrowserService" />
-43-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:26:13-79
-43-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:26:21-76
-44        </intent>
-45        <intent>
-45-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:28:9-30:18
-46            <action android:name="androidx.media2.session.MediaSessionService" />
-46-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:29:13-82
-46-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:29:21-79
-47        </intent>
-48        <intent>
-48-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:31:9-33:18
-49            <action android:name="androidx.media2.session.MediaLibraryService" />
-49-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:32:13-82
-49-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:32:21-79
-50        </intent>
-51    </queries>
-52
-53    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
-53-->[:device_imei] /Users/sy/Documents/GitHub/IMChat/imchat/build/device_imei/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-86
-53-->[:device_imei] /Users/sy/Documents/GitHub/IMChat/imchat/build/device_imei/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-83
-54    <uses-permission android:name="android.permission.WAKE_LOCK" />
-54-->[com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/f2b4b3ffc3066bcc3ba9455b926485c1/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:12:5-68
-54-->[com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/f2b4b3ffc3066bcc3ba9455b926485c1/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:12:22-65
-55
-56    <permission
-56-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
-57        android:name="com.example.imchat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-57-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
-58        android:protectionLevel="signature" />
-58-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
-59
-60    <uses-permission android:name="com.example.imchat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-60-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
-60-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
-61
-62    <application
-63        android:name="android.app.Application"
-63-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:24:9-42
-64        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-64-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
-65        android:icon="@mipmap/ic_launcher"
-65-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:25:9-43
-66        android:label="IMChat"
-66-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:23:9-31
-67        android:networkSecurityConfig="@xml/net_sec"
-67-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:34:9-53
-68        android:requestLegacyExternalStorage="true"
-68-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:27:9-52
-69        android:usesCleartextTraffic="true" >
-69-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:26:9-44
-70        <activity
-70-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:28:9-49:20
-71            android:name="com.example.imchat.MainActivity"
-71-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:29:13-41
-72            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-72-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:33:13-163
-73            android:exported="true"
-73-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:30:13-36
-74            android:hardwareAccelerated="true"
-74-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:34:13-47
-75            android:launchMode="singleTop"
-75-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:31:13-43
-76            android:theme="@style/LaunchTheme"
-76-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:32:13-47
-77            android:windowSoftInputMode="adjustResize" >
-77-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:35:13-55
-78
-79            <!--
-80                 Specifies an Android theme to apply to this Activity as soon as
-81                 the Android process has started. This theme is visible to the user
-82                 while the Flutter UI initializes. After that, this theme continues
-83                 to determine the Window background behind the Flutter UI.
-84            -->
-85            <meta-data
-85-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:41:13-44:17
-86                android:name="io.flutter.embedding.android.NormalTheme"
-86-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:42:15-70
-87                android:resource="@style/NormalTheme" />
-87-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:43:15-52
-88
-89            <intent-filter>
-89-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:45:13-48:29
-90                <action android:name="android.intent.action.MAIN" />
-90-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:46:17-68
-90-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:46:25-66
-91
-92                <category android:name="android.intent.category.LAUNCHER" />
-92-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:47:17-76
-92-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:47:27-74
-93            </intent-filter>
-94        </activity>
-95        <!--
-96             Don't delete the meta-data below.
-97             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-98        -->
-99        <meta-data
-99-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:52:9-54:33
-100            android:name="flutterEmbedding"
-100-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:53:13-44
-101            android:value="2" />
-101-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:54:13-30
-102
-103        <provider
-103-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
-104            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-104-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
-105            android:authorities="com.example.imchat.flutter.image_provider"
-105-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
-106            android:exported="false"
-106-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
-107            android:grantUriPermissions="true" >
-107-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
-108            <meta-data
-108-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
-109                android:name="android.support.FILE_PROVIDER_PATHS"
-109-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
-110                android:resource="@xml/flutter_image_picker_file_paths" />
-110-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
-111        </provider>
-112
-113        <activity
-113-->[:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:74
-114            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-114-->[:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-74
-115            android:exported="false"
-115-->[:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-37
-116            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- 适配9.0的系统 -->
-116-->[:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-71
-117        <uses-library
-117-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:38:9-40:40
-118            android:name="org.apache.http.legacy"
-118-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:39:13-50
-119            android:required="false" /> <!-- 适配9.0的系统 -->
-119-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:40:13-37
-120        <activity
-120-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:42:9-44:49
-121            android:name="com.leeson.image_pickers.activitys.PermissionActivity"
-121-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:43:13-81
-122            android:theme="@style/TransTheme" />
-122-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:44:13-46
-123        <activity
-123-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:45:9-47:49
-124            android:name="com.leeson.image_pickers.activitys.SelectPicsActivity"
-124-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:46:13-81
-125            android:theme="@style/TransTheme" />
-125-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:47:13-46
-126        <activity
-126-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:48:9-51:47
-127            android:name="com.leeson.image_pickers.activitys.PhotosActivity"
-127-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:49:13-77
-128            android:configChanges="orientation|screenSize"
-128-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:50:13-59
-129            android:theme="@style/AppTheme" />
-129-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:51:13-44
-130        <activity
-130-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:52:9-55:47
-131            android:name="com.leeson.image_pickers.activitys.VideoActivity"
-131-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:53:13-76
-132            android:configChanges="orientation|screenSize"
-132-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:54:13-59
-133            android:theme="@style/AppTheme" />
-133-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:55:13-44
-134
-135        <provider
-135-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:10:9-18:20
-136            android:name="com.luck.picture.lib.basic.PictureFileProvider"
-136-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:11:13-74
-137            android:authorities="com.example.imchat.luckProvider"
-137-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:12:13-64
-138            android:exported="false"
-138-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:13:13-37
-139            android:grantUriPermissions="true" >
-139-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:14:13-47
-140            <meta-data
-140-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
-141                android:name="android.support.FILE_PROVIDER_PATHS"
-141-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
-142                android:resource="@xml/ps_file_paths" />
-142-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
-143        </provider>
-144
-145        <service
-145-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:20:9-23:56
-146            android:name="com.luck.picture.lib.service.ForegroundService"
-146-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:21:13-74
-147            android:enabled="true"
-147-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:22:13-35
-148            android:foregroundServiceType="location" />
-148-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:23:13-53
-149
-150        <activity
-150-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:25:9-29:20
-151            android:name="com.luck.picture.lib.basic.PictureSelectorSupporterActivity"
-151-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:26:13-87
-152            android:configChanges="orientation|keyboardHidden|screenSize"
-152-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:27:13-74
-153            android:theme="@style/Base.Theme.NoActionBar" >
-153-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:28:13-58
-154        </activity>
-155        <activity
-155-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:30:9-34:20
-156            android:name="com.luck.picture.lib.basic.PictureSelectorTransparentActivity"
-156-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:31:13-89
-157            android:configChanges="orientation|keyboardHidden|screenSize"
-157-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:32:13-74
-158            android:theme="@style/Picture.Theme.Translucent" >
-158-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:33:13-61
-159        </activity>
-160        <activity
-160-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:10:9-14:72
-161            android:name="com.yalantis.ucrop.UCropActivity"
-161-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:11:13-60
-162            android:configChanges="orientation|keyboardHidden|screenSize"
-162-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:12:13-74
-163            android:screenOrientation="portrait"
-163-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:13:13-49
-164            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-164-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:14:13-69
-165        <activity
-165-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:15:9-19:72
-166            android:name="com.yalantis.ucrop.UCropMultipleActivity"
-166-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:16:13-68
-167            android:configChanges="orientation|keyboardHidden|screenSize"
-167-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:17:13-74
-168            android:screenOrientation="portrait"
-168-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:18:13-49
-169            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-169-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:19:13-69
+32    <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
+32-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:20:5-83
+32-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:20:22-80
+33
+34    <queries package="com.example.imchat" >
+34-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:22:5-31:15
+34-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:22:14-40
+35        <intent>
+35-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:23:9-26:18
+36            <action android:name="android.media.action.IMAGE_CAPTURE" >
+36-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:24:13-25:22
+36-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:24:21-70
+37            </action>
+38        </intent>
+39        <intent>
+39-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:27:9-30:18
+40            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" >
+40-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:28:13-29:22
+40-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:28:21-77
+41            </action>
+42        </intent>
+43        <intent>
+43-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:25:9-27:18
+44            <action android:name="android.media.browse.MediaBrowserService" />
+44-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:26:13-79
+44-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:26:21-76
+45        </intent>
+46        <intent>
+46-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:28:9-30:18
+47            <action android:name="androidx.media2.session.MediaSessionService" />
+47-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:29:13-82
+47-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:29:21-79
+48        </intent>
+49        <intent>
+49-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:31:9-33:18
+50            <action android:name="androidx.media2.session.MediaLibraryService" />
+50-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:32:13-82
+50-->[androidx.media2:media2-session:1.2.1] /Users/sy/.gradle/caches/transforms-3/8e55e202d43c619fc2a32ac65aabcd84/transformed/jetified-media2-session-1.2.1/AndroidManifest.xml:32:21-79
+51        </intent>
+52    </queries>
+53
+54    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+54-->[:device_imei] /Users/sy/Documents/GitHub/IMChat/imchat/build/device_imei/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-86
+54-->[:device_imei] /Users/sy/Documents/GitHub/IMChat/imchat/build/device_imei/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-83
+55    <uses-permission android:name="android.permission.WAKE_LOCK" />
+55-->[com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/f2b4b3ffc3066bcc3ba9455b926485c1/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:12:5-68
+55-->[com.github.canardoux:flutter_sound_core:9.2.13] /Users/sy/.gradle/caches/transforms-3/f2b4b3ffc3066bcc3ba9455b926485c1/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:12:22-65
+56
+57    <permission
+57-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
+58        android:name="com.example.imchat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+58-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
+59        android:protectionLevel="signature" />
+59-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
+60
+61    <uses-permission android:name="com.example.imchat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- for android -->
+61-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
+61-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
+62    <!-- <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/> -->
+63    <!-- <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/> -->
+64    <!-- <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> -->
+65    <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" /> -->
+66    <!-- for Samsung -->
+67    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+67-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:19:5-86
+67-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:19:22-83
+68    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" /> <!-- for htc -->
+68-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:20:5-87
+68-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:20:22-84
+69    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+69-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:23:5-81
+69-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:23:22-78
+70    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" /> <!-- for sony -->
+70-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:24:5-83
+70-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:24:22-80
+71    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+71-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:27:5-88
+71-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:27:22-85
+72    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" /> <!-- for apex -->
+72-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:28:5-92
+72-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:28:22-89
+73    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" /> <!-- for solid -->
+73-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:31:5-84
+73-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:31:22-81
+74    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" /> <!-- for huawei -->
+74-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:34:5-83
+74-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:34:22-80
+75    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+75-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:37:5-91
+75-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:37:22-88
+76    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+76-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:38:5-92
+76-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:38:22-89
+77    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" /> <!-- for ZUK -->
+77-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:39:5-93
+77-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:39:22-90
+78    <uses-permission android:name="android.permission.READ_APP_BADGE" /> <!-- for OPPO -->
+78-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:42:5-73
+78-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:42:22-70
+79    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS" />
+79-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:45:5-82
+79-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:45:22-79
+80    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS" /> <!-- for EvMe -->
+80-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:46:5-83
+80-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:46:22-80
+81    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ" />
+81-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:49:5-88
+81-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:49:22-85
+82    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE" />
+82-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:50:5-89
+82-->[me.leolin:ShortcutBadger:1.1.22] /Users/sy/.gradle/caches/transforms-3/44d164b988bfac07ee5abcec658b8c56/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:50:22-86
+83
+84    <application
+85        android:name="android.app.Application"
+85-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:24:9-42
+86        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+86-->[androidx.core:core:1.10.1] /Users/sy/.gradle/caches/transforms-3/b6586166c7839faa117d2dcc36c4b31f/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
+87        android:icon="@mipmap/ic_launcher"
+87-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:25:9-43
+88        android:label="IMChat"
+88-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:23:9-31
+89        android:networkSecurityConfig="@xml/net_sec"
+89-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:34:9-53
+90        android:requestLegacyExternalStorage="true"
+90-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:27:9-52
+91        android:usesCleartextTraffic="true" >
+91-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:26:9-44
+92        <activity
+92-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:28:9-49:20
+93            android:name="com.example.imchat.MainActivity"
+93-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:29:13-41
+94            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+94-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:33:13-163
+95            android:exported="true"
+95-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:30:13-36
+96            android:hardwareAccelerated="true"
+96-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:34:13-47
+97            android:launchMode="singleTop"
+97-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:31:13-43
+98            android:theme="@style/LaunchTheme"
+98-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:32:13-47
+99            android:windowSoftInputMode="adjustResize" >
+99-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:35:13-55
+100
+101            <!--
+102                 Specifies an Android theme to apply to this Activity as soon as
+103                 the Android process has started. This theme is visible to the user
+104                 while the Flutter UI initializes. After that, this theme continues
+105                 to determine the Window background behind the Flutter UI.
+106            -->
+107            <meta-data
+107-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:41:13-44:17
+108                android:name="io.flutter.embedding.android.NormalTheme"
+108-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:42:15-70
+109                android:resource="@style/NormalTheme" />
+109-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:43:15-52
+110
+111            <intent-filter>
+111-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:45:13-48:29
+112                <action android:name="android.intent.action.MAIN" />
+112-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:46:17-68
+112-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:46:25-66
+113
+114                <category android:name="android.intent.category.LAUNCHER" />
+114-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:47:17-76
+114-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:47:27-74
+115            </intent-filter>
+116        </activity>
+117        <!--
+118             Don't delete the meta-data below.
+119             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+120        -->
+121        <meta-data
+121-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:52:9-54:33
+122            android:name="flutterEmbedding"
+122-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:53:13-44
+123            android:value="2" />
+123-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:54:13-30
+124
+125        <service
+125-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:56:9-58:40
+126            android:name="shop.itbug.xiaomi_badger.service.NotifService"
+126-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:57:13-73
+127            android:exported="false" />
+127-->/Users/sy/Documents/GitHub/IMChat/imchat/android/app/src/main/AndroidManifest.xml:58:13-37
+128
+129        <provider
+129-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
+130            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+130-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
+131            android:authorities="com.example.imchat.flutter.image_provider"
+131-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
+132            android:exported="false"
+132-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+133            android:grantUriPermissions="true" >
+133-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
+134            <meta-data
+134-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+135                android:name="android.support.FILE_PROVIDER_PATHS"
+135-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+136                android:resource="@xml/flutter_image_picker_file_paths" />
+136-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+137        </provider>
+138
+139        <activity
+139-->[:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:74
+140            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+140-->[:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-74
+141            android:exported="false"
+141-->[:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-37
+142            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- 适配9.0的系统 -->
+142-->[:url_launcher_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-71
+143        <uses-library
+143-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:38:9-40:40
+144            android:name="org.apache.http.legacy"
+144-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:39:13-50
+145            android:required="false" /> <!-- 适配9.0的系统 -->
+145-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:40:13-37
+146        <activity
+146-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:42:9-44:49
+147            android:name="com.leeson.image_pickers.activitys.PermissionActivity"
+147-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:43:13-81
+148            android:theme="@style/TransTheme" />
+148-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:44:13-46
+149        <activity
+149-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:45:9-47:49
+150            android:name="com.leeson.image_pickers.activitys.SelectPicsActivity"
+150-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:46:13-81
+151            android:theme="@style/TransTheme" />
+151-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:47:13-46
+152        <activity
+152-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:48:9-51:47
+153            android:name="com.leeson.image_pickers.activitys.PhotosActivity"
+153-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:49:13-77
+154            android:configChanges="orientation|screenSize"
+154-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:50:13-59
+155            android:theme="@style/AppTheme" />
+155-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:51:13-44
+156        <activity
+156-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:52:9-55:47
+157            android:name="com.leeson.image_pickers.activitys.VideoActivity"
+157-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:53:13-76
+158            android:configChanges="orientation|screenSize"
+158-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:54:13-59
+159            android:theme="@style/AppTheme" />
+159-->[:image_pickers] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_pickers/intermediates/merged_manifest/release/AndroidManifest.xml:55:13-44
+160
+161        <provider
+161-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:10:9-18:20
+162            android:name="com.luck.picture.lib.basic.PictureFileProvider"
+162-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:11:13-74
+163            android:authorities="com.example.imchat.luckProvider"
+163-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:12:13-64
+164            android:exported="false"
+164-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:13:13-37
+165            android:grantUriPermissions="true" >
+165-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:14:13-47
+166            <meta-data
+166-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+167                android:name="android.support.FILE_PROVIDER_PATHS"
+167-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+168                android:resource="@xml/ps_file_paths" />
+168-->[:image_picker_android] /Users/sy/Documents/GitHub/IMChat/imchat/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+169        </provider>
 170
-171        <uses-library
-171-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
-172            android:name="androidx.window.extensions"
-172-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
-173            android:required="false" />
-173-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
-174        <uses-library
-174-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
-175            android:name="androidx.window.sidecar"
-175-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-176            android:required="false" />
-176-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
-177
-178        <provider
-178-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
-179            android:name="androidx.startup.InitializationProvider"
-179-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:25:13-67
-180            android:authorities="com.example.imchat.androidx-startup"
-180-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:26:13-68
-181            android:exported="false" >
-181-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:27:13-37
-182            <meta-data
-182-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
-183                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-183-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
-184                android:value="androidx.startup" />
-184-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
-185        </provider>
-186
-187        <receiver
-187-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
-188            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-188-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
-189            android:directBootAware="false"
-189-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
-190            android:enabled="true"
-190-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
-191            android:exported="true"
-191-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
-192            android:permission="android.permission.DUMP" >
-192-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
-193            <intent-filter>
-193-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
-194                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-194-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
-194-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
-195            </intent-filter>
-196            <intent-filter>
-196-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
-197                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-197-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
-197-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
-198            </intent-filter>
-199            <intent-filter>
-199-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
-200                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-200-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
-200-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
-201            </intent-filter>
-202            <intent-filter>
-202-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
-203                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-203-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
-203-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
-204            </intent-filter>
-205        </receiver>
-206    </application>
-207
-208</manifest>
+171        <service
+171-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:20:9-23:56
+172            android:name="com.luck.picture.lib.service.ForegroundService"
+172-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:21:13-74
+173            android:enabled="true"
+173-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:22:13-35
+174            android:foregroundServiceType="location" />
+174-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:23:13-53
+175
+176        <activity
+176-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:25:9-29:20
+177            android:name="com.luck.picture.lib.basic.PictureSelectorSupporterActivity"
+177-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:26:13-87
+178            android:configChanges="orientation|keyboardHidden|screenSize"
+178-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:27:13-74
+179            android:theme="@style/Base.Theme.NoActionBar" >
+179-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:28:13-58
+180        </activity>
+181        <activity
+181-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:30:9-34:20
+182            android:name="com.luck.picture.lib.basic.PictureSelectorTransparentActivity"
+182-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:31:13-89
+183            android:configChanges="orientation|keyboardHidden|screenSize"
+183-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:32:13-74
+184            android:theme="@style/Picture.Theme.Translucent" >
+184-->[io.github.lucksiege:pictureselector:v3.10.9] /Users/sy/.gradle/caches/transforms-3/8400d5d859e94336163bc815623ded42/transformed/jetified-pictureselector-v3.10.9/AndroidManifest.xml:33:13-61
+185        </activity>
+186        <activity
+186-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:10:9-14:72
+187            android:name="com.yalantis.ucrop.UCropActivity"
+187-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:11:13-60
+188            android:configChanges="orientation|keyboardHidden|screenSize"
+188-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:12:13-74
+189            android:screenOrientation="portrait"
+189-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:13:13-49
+190            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+190-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:14:13-69
+191        <activity
+191-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:15:9-19:72
+192            android:name="com.yalantis.ucrop.UCropMultipleActivity"
+192-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:16:13-68
+193            android:configChanges="orientation|keyboardHidden|screenSize"
+193-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:17:13-74
+194            android:screenOrientation="portrait"
+194-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:18:13-49
+195            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+195-->[io.github.lucksiege:ucrop:v3.10.9] /Users/sy/.gradle/caches/transforms-3/a1b59d5de2f2c45781570f0cfde552d8/transformed/jetified-ucrop-v3.10.9/AndroidManifest.xml:19:13-69
+196
+197        <uses-library
+197-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+198            android:name="androidx.window.extensions"
+198-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+199            android:required="false" />
+199-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+200        <uses-library
+200-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+201            android:name="androidx.window.sidecar"
+201-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+202            android:required="false" />
+202-->[androidx.window:window:1.0.0-beta04] /Users/sy/.gradle/caches/transforms-3/9fcf1c5adaf78adbe85b02b35afe6610/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+203
+204        <provider
+204-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+205            android:name="androidx.startup.InitializationProvider"
+205-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:25:13-67
+206            android:authorities="com.example.imchat.androidx-startup"
+206-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:26:13-68
+207            android:exported="false" >
+207-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:27:13-37
+208            <meta-data
+208-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+209                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+209-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+210                android:value="androidx.startup" />
+210-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+211        </provider>
+212
+213        <receiver
+213-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+214            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+214-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+215            android:directBootAware="false"
+215-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+216            android:enabled="true"
+216-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+217            android:exported="true"
+217-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+218            android:permission="android.permission.DUMP" >
+218-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+219            <intent-filter>
+219-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+220                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+220-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+220-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+221            </intent-filter>
+222            <intent-filter>
+222-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+223                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+223-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+223-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+224            </intent-filter>
+225            <intent-filter>
+225-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+226                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+226-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+226-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+227            </intent-filter>
+228            <intent-filter>
+228-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+229                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+229-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+229-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/sy/.gradle/caches/transforms-3/18183612688f564b08e654bb6ce8e4e2/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+230            </intent-filter>
+231        </receiver>
+232    </application>
+233
+234</manifest>

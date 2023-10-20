@@ -124,7 +124,7 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
                           if ((model?.messageNum ?? 0) == 0)
                             Container(
                               padding: const EdgeInsets.only(right: 8, bottom: 2),
-                              child: const Icon(Icons.check, color: Colors.greenAccent,size: 14,),
+                              child: Image.asset("assets/images/readed.jpg", width: 12,),
                             ),
                           const Text(
                             "--",
