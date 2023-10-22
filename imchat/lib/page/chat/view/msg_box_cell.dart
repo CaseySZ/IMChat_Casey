@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imchat/model/friend_item_info.dart';
 import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 import 'package:imchat/tool/image/custom_new_image.dart';
+import 'package:imchat/utils/local_store.dart';
 
 import '../../../routers/router_map.dart';
 import '../model/chat_record_model.dart';
@@ -126,11 +127,11 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
                               padding: const EdgeInsets.only(right: 8, bottom: 2),
                               child: Image.asset("assets/images/readed.jpg", width: 12,),
                             ),
-                          const Text(
-                            "--",
+                           Text(
+                             showDateDesc(model?.contentTime) ?? (model?.contentTime ?? ""),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                            style: const TextStyle(color: Colors.black, fontSize: 16),
                           ),
                         ],
                       ),

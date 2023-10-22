@@ -64,7 +64,7 @@ class ChatRecordModel {
 
   int? readStatus; // 0 未读， 1 已读
   String? createTime;
-
+  String? contentTime;
   String? get showNickName {
     return sendNickNameRemark ?? nickName;
   }
@@ -132,6 +132,7 @@ class ChatRecordModel {
     contentType = json["contentType"];
     readStatus = json["readStatus"];
     createTime = json["createTime"];
+    contentTime = json["contentTime"];
     sendNickNameRemark = json["sendNickNameRemark"];
     sendNickName = json["sendNickName"];
     sendHeadImage = json["sendHeadImage"];
