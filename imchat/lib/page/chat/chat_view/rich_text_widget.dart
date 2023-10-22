@@ -11,7 +11,31 @@ class RichTextWidget extends StatelessWidget {
   final bool isMe;
   final TextStyle? textStyle;
   final int? maxLines;
-  const RichTextWidget({super.key, this.model, this.isMe = true, this.textStyle,this.maxLines});
+  final bool? isReplyStyle;
+  const RichTextWidget({super.key, this.model, this.isMe = true, this.isReplyStyle = false,this.textStyle,this.maxLines});
+
+
+  String get contentDesc {
+    if(isReplyStyle == true){
+      //0文字，1图片，2语音，3文件，4红包，5转账，6消息回撤
+      if(model?.contentType == 1){
+        return "【图片】";
+      }
+      if(model?.contentType == 2){
+        return "【语音】";
+      }
+      if(model?.contentType == 3){
+        return "【文件】";
+      }
+      if(model?.contentType == 4){
+        return "【红包】";
+      }
+      if(model?.contentType == 5){
+        return "【转账】";
+      }
+    }
+    return  model?.chatContent ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +54,13 @@ class RichTextWidget extends StatelessWidget {
     }
     if(textStyle != null){
       style = textStyle!;
+    }
+    if(model?.contentType != 0 && isReplyStyle == true){
+      return  Text(
+        contentDesc,
+        maxLines: maxLines,
+        style: style,
+      );
     }
     if (model?.richTitleArr?.isNotEmpty == true) {
       List<InlineSpan> textSpan = [];
@@ -60,10 +91,11 @@ class RichTextWidget extends StatelessWidget {
       );
     } else {
       return Text(
-        model?.chatContent ?? "",
+        contentDesc,
         maxLines: maxLines,
         style: style,
       );
     }
   }
+
 }

@@ -10,6 +10,7 @@ import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/model/user_info.dart';
+import 'package:imchat/page/chat/chat_view/reply_item_widget.dart';
 import 'package:imchat/page/chat/chat_view/soft_key_menu_view.dart';
 import 'package:imchat/page/chat/group_detail_page.dart';
 import 'package:imchat/page/chat/model/chat_record_model.dart';
@@ -63,6 +64,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   String get friendNo => widget.model?.friendNo ?? widget.model?.targetNo ?? "";
   ChatRecordResponse? chatResponse;
   List<ChatRecordModel>? chatArr;
+  ChatRecordModel? replyModel;
   List<GroupMemberModel> groupMemberArr = [];
   int currentPage = 1;
 
@@ -316,14 +318,15 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     }
     String? errorDesc;
     if (chatType == 0) {
-      errorDesc = await IMApi.sendMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
+      errorDesc = await IMApi.sendMsg(friendNo, contentText, imageInfo == null ? 0 : 1, reply: replyModel);
     } else {
-      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, imageInfo == null ? 0 : 1);
+      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, imageInfo == null ? 0 : 1, reply: replyModel);
     }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
       showToast(msg: errorDesc ?? defaultErrorMsg);
     }
+    replyModel = null;
     setState(() {});
   }
 
@@ -338,14 +341,15 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     setState(() {});
     String? errorDesc;
     if (chatType == 0) {
-      errorDesc = await IMApi.sendMsg(friendNo, collectModel.imagePath ?? "", 1);
+      errorDesc = await IMApi.sendMsg(friendNo, collectModel.imagePath ?? "", 1, reply: replyModel);
     } else {
-      errorDesc = await IMApi.sendGroupMsg(friendNo, collectModel.imagePath ?? "", 1);
+      errorDesc = await IMApi.sendGroupMsg(friendNo, collectModel.imagePath ?? "", 1, reply: replyModel);
     }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
       showToast(msg: errorDesc ?? defaultErrorMsg);
     }
+    replyModel = null;
     setState(() {});
   }
 
@@ -372,14 +376,15 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     model.content = contentText;
     String? errorDesc;
     if (chatType == 0) {
-      errorDesc = await IMApi.sendMsg(friendNo, contentText, isVideo ? 3 : 2);
+      errorDesc = await IMApi.sendMsg(friendNo, contentText, isVideo ? 3 : 2, reply: replyModel);
     } else {
-      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, isVideo ? 3 : 2);
+      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, isVideo ? 3 : 2, reply: replyModel);
     }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
       showToast(msg: errorDesc ?? defaultErrorMsg);
     }
+    replyModel = null;
     setState(() {});
   }
 
@@ -476,6 +481,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                           ),
                         ),
                       ),
+                      if(replyModel != null)
+                        ReplyItemWidget(replyModel: replyModel, callback: (){
+                          replyModel = null;
+                          setState(() {});
+                        },),
                       Container(
                         padding: const EdgeInsets.fromLTRB(0, 8, 10, 16),
                         decoration: const BoxDecoration(
@@ -605,13 +615,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         isShowMenu = false;
                         setState(() {});
                         if (value == "回复".localize) {
-                          if (menuChatModel?.contentType == 0) {
-                            String relpyContent = "${menuChatModel?.sendNickName}：\"${menuChatModel?.chatContent} \"\n回复：";
-                            eidtController.text = relpyContent;
-                          } else {
-                            String relpyContent = "${menuChatModel?.sendNickName}：\"【${menuChatModel?.contentTypeDesc}】\"\n回复：";
-                            eidtController.text = relpyContent;
-                          }
+                          replyModel = menuChatModel;
                         }
                         menuChatModel = null;
                       },

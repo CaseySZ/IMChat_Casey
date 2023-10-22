@@ -9,6 +9,7 @@ import 'package:imchat/config/config.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/web_socket/web_socket_send.dart';
+import '../page/chat/model/chat_record_model.dart';
 import '../page/chat/model/group_detail_model.dart';
 import '../tool/network/dio_base.dart';
 import '../web_socket/web_socket_model.dart';
@@ -156,11 +157,11 @@ class IMApi {
   }
 
   // (contentType 0文字，1图片，2语音，3文件)
-  static Future<String?> sendMsg(String friendNo, String content, int contentType,{String? relationId}) async {
+  static Future<String?> sendMsg(String friendNo, String content, int contentType,{ChatRecordModel? reply}) async {
     try {
       var param = {"friendNo": friendNo, "content": content, "contentType": contentType};
-      if(relationId?.isNotEmpty == true){
-        param["relationId"] = relationId!;
+      if(reply?.id?.isNotEmpty == true){
+        param["relationId"] = reply?.id ?? "";
       }
       Response? response = await DioBase.instance.post(
         "/api/memberChatRecord/send",
@@ -456,11 +457,11 @@ class IMApi {
   }
 
   //向群发送信息
-  static Future<String?> sendGroupMsg(String groupNo, String content, int contentType,{String? relationId}) async {
+  static Future<String?> sendGroupMsg(String groupNo, String content, int contentType,{ChatRecordModel? reply}) async {
     try {
       var param = {"content": content, "groupNo": groupNo, "contentType": contentType};
-      if(relationId?.isNotEmpty == true){
-        param["relationId"] = relationId!;
+      if(reply?.id?.isNotEmpty == true){
+        param["relationId"] = reply?.id ?? "";
       }
       Response? response = await DioBase.instance.post(
         "/api/groupChatRecord/send",
