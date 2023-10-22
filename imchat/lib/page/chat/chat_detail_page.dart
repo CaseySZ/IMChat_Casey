@@ -455,9 +455,15 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                             itemCount: chatArr?.length ?? 0,
                             reverse: true,
                             itemBuilder: (context, index) {
+                              int pre = index - 1;
+                              ChatRecordModel? preModel;
+                              if(pre >= 0 && chatType == 1){
+                                preModel = chatArr![index - 1];
+                              }
                               return ChatItemCell(
                                 model: chatArr![index],
                                 isGroup: chatType == 1,
+                                preModel: preModel,
                                 callback: (dx, dy) {
                                   isShowMenu = true;
                                   menuChatModel = chatArr![index];

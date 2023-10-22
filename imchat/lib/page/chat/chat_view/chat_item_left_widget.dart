@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 
 import '../../../tool/image/custom_new_image.dart';
-import '../../../utils/screen.dart';
 import '../model/chat_record_model.dart';
 import 'chat_item_audio_widget.dart';
 
 class ChatItemLeftWidget extends StatelessWidget {
   final ChatRecordModel? model;
+  final ChatRecordModel? preModel;
   final Function(String imageUrl, {bool? isLocalPath})? callback;
 
-  const ChatItemLeftWidget({super.key, this.model, this.callback});
+  const ChatItemLeftWidget({super.key, this.model,  this.preModel ,this.callback});
 
   bool get isImg => model?.contentType == 1;
 
@@ -65,7 +65,7 @@ class ChatItemLeftWidget extends StatelessWidget {
       return Flexible(
         child: Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 20,
+            horizontal: 14,
             vertical: 10,
           ),
           decoration: const BoxDecoration(
@@ -76,9 +76,23 @@ class ChatItemLeftWidget extends StatelessWidget {
               topRight: Radius.circular(8),
             ),
           ),
-          child: RichTextWidget(
-            model: model,
-            isMe: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if(model?.groupNo?.isNotEmpty == true && (preModel?.sendNickName != model?.sendNickName || preModel?.contentType != model?.contentType ))
+                ...[
+                  Text(model?.sendNickName ?? "", style: TextStyle(
+                    color: Colors.blue.withOpacity(0.7),
+                    fontSize: 14,
+                  ),),
+                  const SizedBox(height: 6),
+                ],
+              RichTextWidget(
+                model: model,
+                isMe: false,
+              ),
+            ],
           ),
         ),
       );

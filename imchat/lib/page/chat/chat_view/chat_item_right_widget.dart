@@ -106,7 +106,7 @@ class ChatItemRightWidget extends StatelessWidget {
       return Flexible(
         child: Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 20,
+            horizontal: 14,
             vertical: 10,
           ),
           decoration: const BoxDecoration(

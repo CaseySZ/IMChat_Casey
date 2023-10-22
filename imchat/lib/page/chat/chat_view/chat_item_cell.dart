@@ -13,12 +13,14 @@ import '../model/chat_record_model.dart';
 
 class ChatItemCell extends StatefulWidget {
   final ChatRecordModel? model;
+  final ChatRecordModel? preModel;
   final bool isGroup;
   final Function(double, double)? callback;
 
   const ChatItemCell({
     super.key,
     this.model,
+    this.preModel,
     this.callback,
     this.isGroup = false,
   });
@@ -155,6 +157,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
     } else {
       return ChatItemLeftWidget(
         model: widget.model,
+        preModel: widget.preModel,
         callback: _showImageScan,
       );
     }
