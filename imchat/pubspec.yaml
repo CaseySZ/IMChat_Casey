@@ -63,6 +63,7 @@ dependencies:
   webview_flutter: ^4.2.4
   flutter_app_badger: ^1.5.0
   xiaomi_badger: ^0.1.1
+  jpush_flutter: 2.5.0
 
 dev_dependencies:
   flutter_test:

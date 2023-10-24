@@ -21,6 +21,8 @@ import '../contact/contact_main_page.dart';
 import '../find/find_page.dart';
 import '../mine/mine_page.dart';
 import 'main_bottom_bar_view.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -50,10 +52,13 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   PageController pageController = PageController(initialPage: 0);
   int currentIndex = 0;
+  final JPush jpush = JPush();
+  String? debugLable = 'Unknown';
 
   @override
   void initState() {
     super.initState();
+    initPlatformState();
     try {
       //controller = VideoPlayerController.asset("assets/audio/Gw.ogg");
 
@@ -85,7 +90,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         debugLog("AppLifecycleState.resumed");
         break;
       case AppLifecycleState.paused:
-
         IMConfig.isBackground = true;
         debugLog("AppLifecycleState.paused");
         break;
@@ -95,6 +99,94 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     }
   }
 
+  Future<void> initPlatformState() async {
+    String? platformVersion;
+
+    try {
+      jpush.addEventHandler(
+          onReceiveNotification: (Map<String, dynamic> message) async {
+            debugLog("flutter onReceiveNotification: $message");
+            setState(() {
+              debugLable = "flutter onReceiveNotification: $message";
+            });
+          },
+          onOpenNotification: (Map<String, dynamic> message) async {
+            debugLog("flutter onOpenNotification: $message");
+            setState(() {
+              debugLable = "flutter onOpenNotification: $message";
+            });
+          },
+          onReceiveMessage: (Map<String, dynamic> message) async {
+            debugLog("flutter onReceiveMessage: $message");
+            setState(() {
+              debugLable = "flutter onReceiveMessage: $message";
+            });
+          },
+          onReceiveNotificationAuthorization:
+              (Map<String, dynamic> message) async {
+            debugLog("flutter onReceiveNotificationAuthorization: $message");
+            setState(() {
+              debugLable = "flutter onReceiveNotificationAuthorization: $message";
+            });
+          },
+          onNotifyMessageUnShow: (Map<String, dynamic> message) async {
+            debugLog("flutter onNotifyMessageUnShow: $message");
+            setState(() {
+              debugLable = "flutter onNotifyMessageUnShow: $message";
+            });
+          },
+          onInAppMessageShow: (Map<String, dynamic> message) async {
+            debugLog("flutter onInAppMessageShow: $message");
+            setState(() {
+              debugLable = "flutter onInAppMessageShow: $message";
+            });
+          },
+          onInAppMessageClick: (Map<String, dynamic> message) async {
+            debugLog("flutter onInAppMessageClick: $message");
+            setState(() {
+              debugLable = "flutter onInAppMessageClick: $message";
+            });
+          },
+          onConnected: (Map<String, dynamic> message) async {
+            debugLog("flutter onConnected: $message");
+            setState(() {
+              debugLable = "flutter onConnected: $message";
+            });
+          });
+    } catch (e) {
+      platformVersion = 'Failed to get platform version. $e';
+    }
+
+    jpush.setAuth(enable: true);
+    jpush.setup(
+      appKey: "96c94bf8e1dc88d526a7e363", //你自己应用的 AppKey
+      channel: "theChannel",
+      production: false,
+      debug: true,
+    );
+    jpush.applyPushAuthority(const NotificationSettingsIOS(sound: true, alert: true, badge: true));
+
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    jpush.getRegistrationID().then((rid) {
+      debugLog("flutter get registration id : $rid");
+      setState(() {
+        debugLable = "flutter getRegistrationID: $rid";
+      });
+    });
+
+    // iOS要是使用应用内消息，请在页面进入离开的时候配置pageEnterTo 和  pageLeave 函数，参数为页面名。
+    jpush.pageEnterTo("HomePage"); // 在离开页面的时候请调用 jpush.pageLeave("HomePage");
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      debugLable = platformVersion;
+    });
+  }
+
   void _reLogin() {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
       return const LoginPage();
@@ -102,9 +194,12 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   }
 
   int prePlayTime = 0;
+
   void _playAudio() async {
     try {
-      int curTime = DateTime.now().millisecondsSinceEpoch;
+      int curTime = DateTime
+          .now()
+          .millisecondsSinceEpoch;
       if (curTime - prePlayTime > 2000 && !isPlayingMedia) {
         prePlayTime = curTime;
         await controller?.seekTo(Duration.zero);
@@ -119,7 +214,9 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   void _appResumed() {
     setState(() {});
-    int current = DateTime.now().millisecondsSinceEpoch;
+    int current = DateTime
+        .now()
+        .millisecondsSinceEpoch;
     if (current - WebSocketModel.preReceiveHeaderTimer > 6000) {
       WebSocketModel.retryConnect();
     }
@@ -166,7 +263,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   void _receiveMessage(Protocol protocol) {
     if (protocol.cmd == MessageType.messageTotal) {
       int messageTotal = protocol.data?["messageTotal"] ?? 0;
-      if(messageTotal > 0) {
+      if (messageTotal > 0) {
         _playAudio();
       }
     }
