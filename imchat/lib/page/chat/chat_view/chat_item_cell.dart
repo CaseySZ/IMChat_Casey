@@ -16,13 +16,14 @@ class ChatItemCell extends StatefulWidget {
   final ChatRecordModel? preModel;
   final bool isGroup;
   final Function(double, double)? callback;
-
+  final GestureTapCallback? replyCallback;
   const ChatItemCell({
     super.key,
     this.model,
     this.preModel,
     this.callback,
     this.isGroup = false,
+    this.replyCallback,
   });
 
   @override
@@ -35,7 +36,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
   UserInfo? get useInfo => IMConfig.userInfo;
 
   bool get isImg => widget.model?.contentType == 1;
-
+  GlobalKey globalKey = GlobalKey();
   bool get isMe {
     if (widget.model?.groupNo?.isNotEmpty == true) {
       if (widget.model?.sendNo == useInfo?.memberNo) {
@@ -121,7 +122,11 @@ class _ChatItemCellState extends State<ChatItemCell> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      widget.model?.height = globalKey.currentContext?.size?.height ?? 0;
+    });
     return GestureDetector(
+      key: globalKey,
       onLongPressStart: (details) {
         double dx = details.globalPosition.dx;
         double dy = details.globalPosition.dy;
@@ -153,12 +158,14 @@ class _ChatItemCellState extends State<ChatItemCell> {
         model: widget.model,
         sendCallback: _sendTextMessage,
         callback: _showImageScan,
+        replyCallback: widget.replyCallback,
       );
     } else {
       return ChatItemLeftWidget(
         model: widget.model,
         preModel: widget.preModel,
         callback: _showImageScan,
+        replyCallback:widget.replyCallback,
       );
     }
   }

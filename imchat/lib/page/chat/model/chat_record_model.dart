@@ -35,7 +35,7 @@ class ChatRecordModel {
   String? chatCode;
   String? content;
   String? groupNo;
-
+  double height = 0;
   String get chatContent {
     if (content?.isNotEmpty == true) {
       int length = content?.length ?? 0;

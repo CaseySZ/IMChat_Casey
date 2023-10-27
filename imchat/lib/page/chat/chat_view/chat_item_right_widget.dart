@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:imchat/page/chat/chat_detail_page.dart';
 import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 
 import '../../../tool/image/custom_new_image.dart';
@@ -11,11 +12,21 @@ import 'chat_item_audio_widget.dart';
 class ChatItemRightWidget extends StatelessWidget {
   final ChatRecordModel? model;
   final Function? sendCallback;
+  final GestureTapCallback? replyCallback;
   final Function(String imageUrl, {bool? isLocalPath})? callback;
 
-  const ChatItemRightWidget({super.key, this.model, this.sendCallback, this.callback});
+  const ChatItemRightWidget({super.key, this.model, this.sendCallback, this.callback, this.replyCallback});
 
   bool get isImg => model?.contentType == 1;
+  Color? get bgColor {
+    if(clickReplyModel?.relationId == model?.id && clickReplyModel != null){
+      return  Colors.blue.withOpacity(0.5);
+    }else if(model?.relationId?.isNotEmpty == true || model?.contentType == 0) {
+      return const Color(0xddf51b1b);
+    }else {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +74,7 @@ class ChatItemRightWidget extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration:  BoxDecoration(
-                          color: (model?.relationId?.isNotEmpty == true || model?.contentType == 0) ? const Color(0xddf51b1b) : null,
+                          color: bgColor,
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(8),
                             bottomRight: Radius.circular(8),
@@ -81,8 +92,9 @@ class ChatItemRightWidget extends StatelessWidget {
                               ),
                             _buildContentType(),
                           ],
-                        ),
+                        )
                       ),
+
                     ],
                   ),
                 ),
@@ -140,70 +152,73 @@ class ChatItemRightWidget extends StatelessWidget {
   }
 
   Widget _buildReplyItem() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 2,
-          height: 30,
-          color: Colors.black.withOpacity(0.5),
-        ),
-        const SizedBox(width: 4),
-        if(model?.relationChatRecord?.contentType == 1)
+    return InkWell(
+      onTap: replyCallback,
+      child:  Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
           Container(
-            width: 28,
-            height: 28,
-            margin: const EdgeInsets.only(right: 4),
-            child:  CustomNewImage(
-              imageUrl: model?.relationChatRecord?.content,
+            width: 2,
+            height: 30,
+            color: Colors.black.withOpacity(0.5),
+          ),
+          const SizedBox(width: 4),
+          if(model?.relationChatRecord?.contentType == 1)
+            Container(
               width: 28,
               height: 28,
-              radius: 2,
-            ),
-          )
-        else if( model?.relationChatRecord?.contentType == 3)
-          Container(
-            width: 28,
-            height: 28,
-            margin: const EdgeInsets.only(right: 4),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.6),
-              borderRadius: BorderRadius.circular(2),
-            ),
-            child: Image.asset(
-              "assets/images/play.png",
-              width: 16,
-              height: 16,
-            ),
-          )
-        else
-          const SizedBox(),
+              margin: const EdgeInsets.only(right: 4),
+              child:  CustomNewImage(
+                imageUrl: model?.relationChatRecord?.content,
+                width: 28,
+                height: 28,
+                radius: 2,
+              ),
+            )
+          else if( model?.relationChatRecord?.contentType == 3)
+            Container(
+              width: 28,
+              height: 28,
+              margin: const EdgeInsets.only(right: 4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(2),
+              ),
+              child: Image.asset(
+                "assets/images/play.png",
+                width: 16,
+                height: 16,
+              ),
+            )
+          else
+            const SizedBox(),
 
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              model?.relationChatRecord?.sendNickName ?? "",
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.5),
-                fontSize: 12,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                model?.relationChatRecord?.sendNickName ?? "",
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.5),
+                  fontSize: 12,
+                ),
               ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              model?.relationChatRecord?.contentDesc ?? "",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style:  TextStyle(
-                color: Colors.white.withOpacity(0.8),
-                fontSize: 12,
+              const SizedBox(height: 2),
+              Text(
+                model?.relationChatRecord?.contentDesc ?? "",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style:  TextStyle(
+                  color: Colors.white.withOpacity(0.8),
+                  fontSize: 12,
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 

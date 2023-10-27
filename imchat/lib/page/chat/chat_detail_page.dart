@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +42,8 @@ import 'chat_view/group_text_filed.dart';
 import 'model/group_detail_model.dart';
 import 'model/group_member_model.dart';
 
+ChatRecordModel? clickReplyModel;
+
 class ChatDetailPage extends StatefulWidget {
   final FriendItemInfo? model;
 
@@ -57,6 +61,8 @@ class ChatDetailPage extends StatefulWidget {
 class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObserver {
   TextEditingController eidtController = TextEditingController();
   RefreshController refreshController = RefreshController();
+  ScrollController scrollController = ScrollController();
+  GlobalKey globalKey = GlobalKey();
   GroupDetailModel? groupModel;
 
   UserInfo? get userInfo => IMConfig.userInfo;
@@ -66,6 +72,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   ChatRecordResponse? chatResponse;
   List<ChatRecordModel>? chatArr;
   ChatRecordModel? replyModel;
+
   List<GroupMemberModel> groupMemberArr = [];
   int currentPage = 1;
 
@@ -78,9 +85,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   double menuDy = 0;
   double keyboardSize = 277;
   String inputPreText = "";
+
   @override
   void initState() {
     super.initState();
+    scrollController.addListener(() {
+      debugLog("offset::${scrollController.offset}, ${scrollController.position.maxScrollExtent}");
+    });
     isPlayingMedia = false;
     WidgetsBinding.instance.addObserver(this);
     sendOpenBoxMsg();
@@ -164,6 +175,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     refreshController.refreshCompleted();
     if (mounted) {
       setState(() {});
+    }
+    if(_isRequestReply && clickReplyModel != null){
+      _isRequestReply = false;
+      _replyClickEvent(clickReplyModel!);
     }
   }
 
@@ -414,6 +429,45 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     }
   }
 
+  bool _isRequestReply = false;
+  void _replyClickEvent(ChatRecordModel model) async {
+    String chatId = model.relationId ?? "";
+    double height = 0;
+    int index = -1;
+    clickReplyModel = model;
+    for (int i = 0; i < (chatArr?.length ?? 0); i++) {
+      height += chatArr![i].height;
+      if (chatArr![i].id == chatId) {
+        index = i;
+        break;
+      }
+    }
+    double listHeight = globalKey.currentContext?.size?.height ?? 0;
+    height -= listHeight;
+    height += listHeight / 2;
+    height = max(0, height);
+    debugLog(
+        "reply position: $index, $height, ${scrollController.position.maxScrollExtent}, ${listHeight}");
+    if (height > scrollController.position.maxScrollExtent) {
+      height = scrollController.position.maxScrollExtent;
+    }
+
+    if (index != -1) {
+    //  scrollController.jumpTo(height);
+      await scrollController.animateTo(height, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      setState(() {});
+      Future.delayed(const Duration(milliseconds: 500), () {
+        clickReplyModel = null;
+        if (mounted) {
+          setState(() {});
+        }
+      });
+    }else {
+      _isRequestReply = true;
+      refreshController.requestLoading();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -458,21 +512,26 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                               : null,
                           refreshController: refreshController,
                           child: ListView.builder(
+                            key: globalKey,
                             itemCount: chatArr?.length ?? 0,
                             reverse: true,
+                            controller: scrollController,
+                            cacheExtent: 10000,
                             itemBuilder: (context, index) {
                               int pre = index - 1;
                               ChatRecordModel? preModel;
-                              if(pre >= 0 && chatType == 1){
+                              ChatRecordModel model = chatArr![index];
+                              if (pre >= 0 && chatType == 1) {
                                 preModel = chatArr![index - 1];
                               }
                               return ChatItemCell(
-                                model: chatArr![index],
+                                model: model,
                                 isGroup: chatType == 1,
                                 preModel: preModel,
+                                replyCallback: () => _replyClickEvent(model),
                                 callback: (dx, dy) {
                                   isShowMenu = true;
-                                  menuChatModel = chatArr![index];
+                                  menuChatModel = model;
                                   menuDx = dx;
                                   menuDy = dy;
                                   setState(() {});
@@ -482,11 +541,14 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                           ),
                         ),
                       ),
-                      if(replyModel != null)
-                        ReplyItemWidget(replyModel: replyModel, callback: (){
-                          replyModel = null;
-                          setState(() {});
-                        },),
+                      if (replyModel != null)
+                        ReplyItemWidget(
+                          replyModel: replyModel,
+                          callback: () {
+                            replyModel = null;
+                            setState(() {});
+                          },
+                        ),
                       Container(
                         padding: const EdgeInsets.fromLTRB(0, 8, 10, 16),
                         decoration: const BoxDecoration(
@@ -525,13 +587,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                           controller: eidtController,
                                           focusNode: focusNode,
                                           placeholder: "请输入消息",
-                                          onSubmitted: (text) {
-
-                                          },
-                                          onChange: (text){
-                                            if(chatType == 1 && "$inputPreText@" == text){
-                                              MemberListAlert.show(context, groupMemberArr, callback: (model){
-                                                if(model != null){
+                                          onSubmitted: (text) {},
+                                          onChange: (text) {
+                                            if (chatType == 1 && "$inputPreText@" == text) {
+                                              MemberListAlert.show(context, groupMemberArr, callback: (model) {
+                                                if (model != null) {
                                                   eidtController.text = "${eidtController.text}${model.nickNameRemark ?? ""} ";
                                                   inputPreText = eidtController.text;
                                                 }
@@ -594,7 +654,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                         SoftKeyMenuView(
                           height: keyboardSize - 50,
                           isEmoji: softKeyType == 0,
-                          collectCallback: () async{
+                          collectCallback: () async {
                             var ret = await Navigator.push(context, MaterialPageRoute(builder: (context) {
                               return const MyCollectPage(fromChat: true);
                             }));
@@ -639,29 +699,28 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                       left: 0,
                       right: 0,
                       child: InkWell(
-                        onTap: () {
-                          NormalAlert.show(context, title: "公告", content: groupModel?.personalitySign);
-                        },
-                        child:Container(
+                          onTap: () {
+                            NormalAlert.show(context, title: "公告", content: groupModel?.personalitySign);
+                          },
+                          child: Container(
                             height: 30,
                             padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
                             color: Colors.black.withOpacity(0.7),
                             alignment: Alignment.centerLeft,
-                          child:  MarqueeTile(
-                            widgets: [
-                              SizedBox(width: screen.screenWidth),
-                              Text(
-                                "公告：${groupModel?.personalitySign}      ",
-                                maxLines: 1,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
+                            child: MarqueeTile(
+                              widgets: [
+                                SizedBox(width: screen.screenWidth),
+                                Text(
+                                  "公告：${groupModel?.personalitySign}      ",
+                                  maxLines: 1,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ),
+                              ],
+                            ),
+                          )),
                     ),
                 ],
               ),
@@ -679,6 +738,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     }
     WebSocketModel.removeListener(webSocketLister);
     WidgetsBinding.instance.removeObserver(this);
+    clickReplyModel = null;
     super.dispose();
   }
 }
