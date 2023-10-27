@@ -54,10 +54,10 @@ class ChatRecordModel {
       return "图片";
     }
     if (contentType == 2) {
-      return "2语音";
+      return "语音";
     }
     if (contentType == 3) {
-      return "文件";
+      return "视频";
     }
     return "";
   }
@@ -161,6 +161,34 @@ class RelationChatRecord{
   String? chatCode;
   String? content;
   int? contentType;
+  String get contentDesc {
+    if(contentType == 0){
+      return content ?? "";
+    }
+    if (contentType == 1) {
+      return "【图片】";
+    }
+    if (contentType == 2) {
+      return "【语音】";
+    }
+    if (contentType == 3) {
+      return "【视频】";
+    }
+    return "";
+  }
+  String get contentTypeDesc {
+    if (contentType == 1) {
+      return "图片";
+    }
+    if (contentType == 2) {
+      return "语音";
+    }
+    if (contentType == 3) {
+      return "视频";
+    }
+    return "";
+  }
+
   String? createTime;
   String? id;
   int? readStatus;
