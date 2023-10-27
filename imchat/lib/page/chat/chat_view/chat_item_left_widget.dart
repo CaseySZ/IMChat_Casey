@@ -34,7 +34,41 @@ class ChatItemLeftWidget extends StatelessWidget {
                   radius: 5,
                 ),
                 const SizedBox(width: 12),
-                _buildContentType(),
+                Container(
+                  constraints: const BoxConstraints(minHeight: 40),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration:  BoxDecoration(
+                    color: (model?.relationId?.isNotEmpty == true || model?.contentType == 0) ? const Color(0xfff7f7f7) : null,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                      topLeft: Radius.circular(8),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if(model?.groupNo?.isNotEmpty == true && (preModel?.sendNickName != model?.sendNickName || preModel?.contentType != model?.contentType ))
+                        ...[
+                          Text(model?.sendNickName ?? "", style: TextStyle(
+                            color: Colors.blue.withOpacity(0.7),
+                            fontSize: 14,
+                          ),),
+                          const SizedBox(height: 6),
+                        ],
+                      if(model?.relationId?.isNotEmpty == true)
+                        Container(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: _buildReplyItem(),
+                        ),
+                      _buildContentType(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -63,40 +97,80 @@ class ChatItemLeftWidget extends StatelessWidget {
       return ChatItemAudioWidget(key: ValueKey("${model?.content}${model?.id}${model?.contentType}"), model: model, isLeftStyle: true,);
     }else {
       return Flexible(
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 14,
-            vertical: 10,
-          ),
-          decoration: const BoxDecoration(
-            color: Color(0xfff7f7f7),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(8),
-              bottomRight: Radius.circular(8),
-              topRight: Radius.circular(8),
-            ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if(model?.groupNo?.isNotEmpty == true && (preModel?.sendNickName != model?.sendNickName || preModel?.contentType != model?.contentType ))
-                ...[
-                  Text(model?.sendNickName ?? "", style: TextStyle(
-                    color: Colors.blue.withOpacity(0.7),
-                    fontSize: 14,
-                  ),),
-                  const SizedBox(height: 6),
-                ],
-              RichTextWidget(
-                model: model,
-                isMe: false,
-              ),
-            ],
-          ),
+        child: RichTextWidget(
+          model: model,
+          isMe: false,
         ),
       );
     }
+  }
+
+  Widget _buildReplyItem() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 2,
+          height: 30,
+          color: Colors.black.withOpacity(0.5),
+        ),
+        const SizedBox(width: 4),
+        if(model?.relationChatRecord?.contentType == 1)
+          Container(
+            width: 28,
+            height: 28,
+            margin: const EdgeInsets.only(right: 4),
+            child:  CustomNewImage(
+              imageUrl: model?.relationChatRecord?.content,
+              width: 28,
+              height: 28,
+              radius: 2,
+            ),
+          )
+        else if( model?.relationChatRecord?.contentType == 3)
+          Container(
+            width: 28,
+            height: 28,
+            margin: const EdgeInsets.only(right: 4),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.6),
+              borderRadius: BorderRadius.circular(2),
+            ),
+            child: Image.asset(
+              "assets/images/play.png",
+              width: 16,
+              height: 16,
+            ),
+          )
+        else
+          const SizedBox(),
+
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              model?.relationChatRecord?.sendNickName ?? "",
+              style: TextStyle(
+                color: Colors.black.withOpacity(0.5),
+                fontSize: 12,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              model?.relationChatRecord?.contentDesc ?? "",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style:  TextStyle(
+                color: Colors.black.withOpacity(0.8),
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
   Widget _buildTime() {
