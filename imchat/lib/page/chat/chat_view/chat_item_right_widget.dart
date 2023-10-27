@@ -57,6 +57,7 @@ class ChatItemRightWidget extends StatelessWidget {
                         ),
                       Container(
                         constraints: const BoxConstraints(minHeight: 40),
+                        alignment: Alignment.centerRight,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
                           vertical: 6,

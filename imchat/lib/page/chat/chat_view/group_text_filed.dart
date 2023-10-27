@@ -13,6 +13,7 @@ class GroupTextFiled extends StatefulWidget {
   final Color? bgColor;
   final bool autoFocus;
   final ValueChanged<String>? onSubmitted;
+  final ValueChanged<String>? onChange;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final FocusNode? focusNode;
@@ -42,6 +43,7 @@ class GroupTextFiled extends StatefulWidget {
     this.inputFormatters,
     this.enabled,
     this.obscureText = false,
+    this.onChange,
   });
 
   @override
@@ -87,6 +89,7 @@ class _GroupTextFiledState extends State<GroupTextFiled> {
         onSubmitted: widget.onSubmitted,
         focusNode: widget.focusNode,
         enabled: widget.enabled,
+        onChanged: widget.onChange,
         decoration: InputDecoration(
           hintText: widget.placeholder,
           border: InputBorder.none,

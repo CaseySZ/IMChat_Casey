@@ -16,6 +16,7 @@ import 'package:imchat/page/chat/group_detail_page.dart';
 import 'package:imchat/page/chat/model/chat_record_model.dart';
 import 'package:imchat/page/chat/person_detail_page.dart';
 import 'package:imchat/page/chat/view/marquee/marquee_tile.dart';
+import 'package:imchat/page/chat/view/member_list_alert.dart';
 import 'package:imchat/protobuf/model/base.pb.dart';
 import 'package:imchat/tool/network/response_status.dart';
 import 'package:imchat/utils/screen.dart';
@@ -76,7 +77,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   double menuDx = 0;
   double menuDy = 0;
   double keyboardSize = 277;
-
+  String inputPreText = "";
   @override
   void initState() {
     super.initState();
@@ -524,7 +525,20 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                           controller: eidtController,
                                           focusNode: focusNode,
                                           placeholder: "请输入消息",
-                                          onSubmitted: (text) {},
+                                          onSubmitted: (text) {
+
+                                          },
+                                          onChange: (text){
+                                            if(chatType == 1 && "$inputPreText@" == text){
+                                              MemberListAlert.show(context, groupMemberArr, callback: (model){
+                                                if(model != null){
+                                                  eidtController.text = "${eidtController.text}${model.nickNameRemark ?? ""} ";
+                                                  inputPreText = eidtController.text;
+                                                }
+                                              });
+                                            }
+                                            inputPreText = text;
+                                          },
                                         ),
                                       ),
                                       const SizedBox(width: 8),

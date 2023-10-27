@@ -40,7 +40,6 @@ class _GroupMemberCellState extends State<GroupMemberCell> {
         widget.callback?.call(dx, dy);
       },
       child: InkWell(
-        onTap: () async {},
         child: Container(
           height: 56,
           padding: const EdgeInsets.only(left: 16),
