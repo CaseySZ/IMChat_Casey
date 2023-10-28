@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/model/friend_item_info.dart';
 import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 import 'package:imchat/tool/image/custom_new_image.dart';
@@ -28,19 +29,19 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
 
   String get chatContent {
     if (model?.contentType == 1) {
-      return "【图片】";
+      return "【图片】".localize;
     }
     if (model?.contentType == 2) {
-      return "【语音】";
+      return "【语音】".localize;
     }
     if (model?.contentType == 3) {
-      return "【文件】";
+      return "【文件】".localize;
     }
     if (model?.contentType == 4) {
-      return "【红包】";
+      return "【红包】".localize;
     }
     if (model?.contentType == 5) {
-      return "【转账】";
+      return "【转账】".localize;
     }
     if (model?.contentType == 6) {
       return ""; //"【消息回撤】";

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_pickers/image_pickers.dart';
+import 'package:imchat/config/language.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../alert/no_permission_dialog.dart';
@@ -101,12 +102,12 @@ class _AlbumPickerViewState extends State<AlbumPickerView> {
       int fileSize = videoFile.lengthSync();
       int sizeM = fileSize ~/ (1024 * 1024);
       if (sizeM > 150 || sizeM == 0) {
-        showToast(msg: "请选择150M内的视频");
+        showToast(msg: "请选择150M内的视频".localize);
         return;
       }
     }
     if (listMedia.isEmpty) {
-      showToast(msg: widget.isVideo ? "请选择视频" : "请选择图片");
+      showToast(msg: widget.isVideo ? "请选择视频".localize : "请选择图片".localize);
       return;
     }
     if (widget.callback != null) {

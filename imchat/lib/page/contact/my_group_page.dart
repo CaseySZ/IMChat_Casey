@@ -106,7 +106,7 @@ class _MyGroupPageState extends State<MyGroupPage> {
                       children: [
                         Expanded(
                           child: Text(
-                            "公告：${model.personalitySign ?? ""}",
+                            "${"公告".localize}：${model.personalitySign ?? ""}",
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               color: Color(0xff666666),

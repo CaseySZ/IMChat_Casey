@@ -37,7 +37,7 @@ class _SafeSettingPageState extends State<SafeSettingPage> {
                   return const PasswordPage();
                 }));
               },
-              child: _buldItem("设置密码"),
+              child: _buldItem("设置密码".localize),
             ),
           ],
         ),

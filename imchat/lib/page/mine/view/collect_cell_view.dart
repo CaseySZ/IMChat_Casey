@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/page/contact/contact_msg_forward_page.dart';
 
 import '../../../api/im_api.dart';
@@ -72,9 +73,9 @@ class CollectCellView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                  child: const Text(
-                    "发送",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  child:  Text(
+                    "发送".localize,
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
               ),
@@ -90,9 +91,9 @@ class CollectCellView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                  child: const Text(
-                    "删除",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  child:  Text(
+                    "删除".localize,
+                    style:const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
               ),
@@ -106,9 +107,9 @@ class CollectCellView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                  child: const Text(
-                    "转发",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  child:  Text(
+                    "转发".localize,
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
               ),

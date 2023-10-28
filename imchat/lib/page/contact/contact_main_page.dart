@@ -65,7 +65,7 @@ class _ContactMainPageState extends State<ContactMainPage> with AutomaticKeepAli
     return Scaffold(
       appBar: BaseAppBar(
         leading: const SizedBox(),
-        title: "通讯录",
+        title: "通讯录".localize,
       ),
       body: Column(
         children: [

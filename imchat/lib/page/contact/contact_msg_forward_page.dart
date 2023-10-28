@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/page/contact/view/contact_cell_view.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/loading/empty_error_widget.dart';
@@ -46,7 +47,7 @@ class _ContactMsgForwardPageState extends State<ContactMsgForwardPage> {
     if (errorDesc?.isNotEmpty == true) {
       showToast(msg: errorDesc ?? defaultErrorMsg);
     } else {
-      showToast(msg: "转发成功");
+      showToast(msg: "转发成功".localize);
     }
   }
 
@@ -56,14 +57,14 @@ class _ContactMsgForwardPageState extends State<ContactMsgForwardPage> {
     if (errorDesc?.isNotEmpty == true) {
       showToast(msg: errorDesc ?? defaultErrorMsg);
     } else {
-      showToast(msg: "转发成功");
+      showToast(msg: "转发成功".localize);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(title: "消息转发"),
+      appBar: BaseAppBar(title: "消息转发".localize),
       body: Column(
         children: [
           _buildMenuView(),
@@ -100,7 +101,7 @@ class _ContactMsgForwardPageState extends State<ContactMsgForwardPage> {
             child: Container(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 10),
               child: Text(
-                "好友",
+                "好友".localize,
                 style: TextStyle(
                   color: (currentPage == 0) ? Colors.black : const  Color(0xff999999),
                   fontSize: 16,
@@ -119,7 +120,7 @@ class _ContactMsgForwardPageState extends State<ContactMsgForwardPage> {
             child: Container(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 10),
               child: Text(
-                "群组",
+                "群组".localize,
                 style: TextStyle(
                   color: (currentPage == 1) ? Colors.black : const Color(0xff999999),
                   fontSize: 16,
@@ -237,7 +238,7 @@ class _ContactMsgForwardPageState extends State<ContactMsgForwardPage> {
                       children: [
                         Expanded(
                           child: Text(
-                            "公告：${model.personalitySign ?? ""}",
+                            "${"公告".localize}：${model.personalitySign ?? ""}",
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               color: Color(0xff666666),

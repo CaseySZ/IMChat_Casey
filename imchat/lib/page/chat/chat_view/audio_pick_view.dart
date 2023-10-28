@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/page/chat/chat_view/simple_recorder.dart';
 
 class AudioPickerView extends StatefulWidget {
@@ -63,11 +64,11 @@ class _AudioPickerViewState extends State<AudioPickerView> {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 54),
-                      child: const Text(
-                        "已超过最长录音时间上限，录音已自动停止，需要发送吗",
+                      child:  Text(
+                        "已超过最长录音时间上限，录音已自动停止，需要发送吗".localize,
                         maxLines: 2,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
                           height: 1.5,
@@ -89,9 +90,9 @@ class _AudioPickerViewState extends State<AudioPickerView> {
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white),
                               ),
-                              child: const Text(
-                                "取消",
-                                style: TextStyle(
+                              child:  Text(
+                                "取消".localize,
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                 ),

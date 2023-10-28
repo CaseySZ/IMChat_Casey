@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/config/config.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/model/user_info.dart';
 import 'package:imchat/page/chat/chat_view/chat_item_left_widget.dart';
 import 'package:imchat/page/chat/chat_view/chat_item_right_widget.dart';
@@ -50,7 +51,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
 
   String get chatContent {
     if (widget.model?.contentType == 6) {
-      return "消息撤回";
+      return "消息撤回".localize;
     }
     if (widget.model?.content?.isNotEmpty == true) {
       int length = widget.model?.content?.length ?? 0;
@@ -138,7 +139,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
 
   Widget _buildChatContent() {
     if ((widget.model?.contentType ?? 0) >= 6) {
-      if (chatContent == "消息撤回") {
+      if (chatContent == "消息撤回".localize) {
         return const SizedBox();
       }
       return Container(

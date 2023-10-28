@@ -65,7 +65,7 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
               const SizedBox(height: 16),
               Container(
                 alignment: Alignment.centerLeft,
-                child: Text("个性签名：${model?.personalitySign ?? ""}",),
+                child: Text("${"个性签名".localize}：${model?.personalitySign ?? ""}",),
               ),
               const SizedBox(height: 16),
               InkWell(

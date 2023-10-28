@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_pickers/image_pickers.dart';
 import 'package:imchat/api/emo_data.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/page/chat/chat_view/audio_pick_view.dart';
 import 'package:imchat/page/red_packet/red_packet_page.dart';
 import 'package:imchat/utils/screen.dart';
@@ -78,13 +79,13 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
               }
             }
           },
-          child: _buildItem("相册", "assets/images/album_key.png"),
+          child: _buildItem("相册".localize, "assets/images/album_key.png"),
         ),
         InkWell(
           onTap: (){
             widget.collectCallback?.call();
           },
-          child: _buildItem("收藏", "assets/images/9p.png"),
+          child: _buildItem("收藏".localize, "assets/images/9p.png"),
         ),
         AlbumPickerView(
           isVideo: true,
@@ -95,7 +96,7 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
               }
             }
           },
-          child: _buildItem("视频", "assets/images/album_icon.png"),
+          child: _buildItem("视频".localize, "assets/images/album_icon.png"),
         ),
         AlbumPickerView(
           fctType: 1,
@@ -106,7 +107,7 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
               }
             }
           },
-          child: _buildItem("拍照", "assets/images/8O.png"),
+          child: _buildItem("拍照".localize, "assets/images/8O.png"),
         ),
       ],
     );
@@ -126,29 +127,29 @@ class _SoftKeyMenuViewState extends State<SoftKeyMenuView> {
               }
             }
           },
-          child: _buildItem("拍视频", "assets/images/76.png"),
+          child: _buildItem("拍视频".localize, "assets/images/76.png"),
         ),
 
         InkWell(
           onTap: () {
-            showToast(msg: "暂未开放");
+            showToast(msg: "暂未开放".localize);
            // Navigator.push(context, MaterialPageRoute(builder: (context){
            //   return  const RedPacketPage();
            // }));
           },
-          child: _buildItem("红包", "assets/images/redpackge.jpeg"),
+          child: _buildItem("红包".localize, "assets/images/redpackge.jpeg"),
         ),
         InkWell(
           onTap: () {
-            showToast(msg: "暂未开放");
+            showToast(msg: "暂未开放".localize);
           },
-          child: _buildItem("语音聊天", "assets/images/5N.png"),
+          child: _buildItem("语音聊天".localize, "assets/images/5N.png"),
         ),
         InkWell(
           onTap: () {
-            showToast(msg: "暂未开放");
+            showToast(msg: "暂未开放".localize);
           },
-          child: _buildItem("视频聊天", "assets/images/6_.png"),
+          child: _buildItem("视频聊天".localize, "assets/images/6_.png"),
         ),
       ],
     );

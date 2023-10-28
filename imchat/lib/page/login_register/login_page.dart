@@ -39,10 +39,10 @@ class _LoginPageState extends State<LoginPage> {
 
   String checkData() {
     if (nameController.text.isEmpty) {
-      return "请输入用户名";
+      return "请输入用户名".localize;
     }
     if (psdController.text.isEmpty) {
-      return "请输入密码";
+      return "请输入密码".localize;
     }
     return "";
   }

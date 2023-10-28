@@ -41,14 +41,14 @@ class _AboutUsPageState extends State<AboutUsPage> {
               style: TextStyle(color: Colors.black, fontSize: 16),
             ),
             const SizedBox(height: 8),
-            const Text(
-              "版本：v1.0.0",
-              style: TextStyle(color: Colors.black, fontSize: 12),
+             Text(
+              "${"版本".localize}：v1.0.0",
+              style: const TextStyle(color: Colors.black, fontSize: 12),
             ),
             const Spacer(),
-            const Text(
-              "商务合作 QQ：4124123512",
-              style: TextStyle(color: Colors.black, fontSize: 16),
+             Text(
+              "${"商务合作".localize}QQ：4124123512",
+              style: const TextStyle(color: Colors.black, fontSize: 16),
             ),
           ],
         ),

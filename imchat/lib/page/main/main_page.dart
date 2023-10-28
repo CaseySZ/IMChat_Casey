@@ -36,11 +36,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   bool mainPageInited = false;
   VideoPlayerController? controller;
-  List<String> titleArr = [
-    '消息',
-    '通讯录',
-    "发现",
-    '我的',
+  List<String> get titleArr => [
+    '消息'.localize,
+    '通讯录'.localize,
+    "发现".localize,
+    '我的'.localize,
   ];
 
   List<Widget> pageViewArr = [

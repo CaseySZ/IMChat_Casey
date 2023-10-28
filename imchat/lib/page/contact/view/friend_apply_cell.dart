@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/api/im_api.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/tool/image/custom_new_image.dart';
 import 'package:imchat/tool/loading/loading_alert_widget.dart';
 import 'package:imchat/tool/network/response_status.dart';
@@ -39,13 +40,13 @@ class _FriendApplyCellState extends State<FriendApplyCell> {
   String get status {
     //（0申请中，1同意，2拒绝）
     if (model?.applyStatus == 0) {
-      return "申请中";
+      return "申请中".localize;
     }
     if (model?.applyStatus == 1) {
-      return "同意";
+      return "同意".localize;
     }
     if (model?.applyStatus == 2) {
-      return "拒绝";
+      return "拒绝".localize;
     }
     return "";
   }
@@ -123,7 +124,7 @@ class _FriendApplyCellState extends State<FriendApplyCell> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  "留言：$chatContent",
+                                  "${"留言".localize}：$chatContent",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
@@ -171,7 +172,7 @@ class _FriendApplyCellState extends State<FriendApplyCell> {
                 color: Colors.redAccent,
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const Text("拒绝", style: TextStyle(
+              child:  Text("拒绝".localize, style: const TextStyle(
                 color: Colors.white,
                 fontSize: 13,
               ),),
@@ -186,7 +187,7 @@ class _FriendApplyCellState extends State<FriendApplyCell> {
                 color: Colors.green,
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const Text("同意", style: TextStyle(
+              child:  Text("同意".localize, style: const TextStyle(
                 color: Colors.white,
                 fontSize: 13,
               ),),
@@ -197,7 +198,7 @@ class _FriendApplyCellState extends State<FriendApplyCell> {
       );
     }else if(model?.applyStatus == 1){
      return Text(
-        "已同意",
+        "已同意".localize,
         style: TextStyle(
           color: statusColor,
           fontSize: 12,
@@ -205,7 +206,7 @@ class _FriendApplyCellState extends State<FriendApplyCell> {
       );
     }else {
       return Text(
-        "已拒绝",
+        "已拒绝".localize,
         style: TextStyle(
           color: statusColor,
           fontSize: 12,

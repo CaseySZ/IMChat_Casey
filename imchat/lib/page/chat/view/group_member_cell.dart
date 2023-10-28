@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/model/friend_item_info.dart';
 import 'package:imchat/page/chat/chat_view/rich_text_widget.dart';
 import 'package:imchat/tool/image/custom_new_image.dart';
@@ -88,7 +89,7 @@ class _GroupMemberCellState extends State<GroupMemberCell> {
                               ],
                             ),
                             Text(
-                              "签名：${model?.memberPersonalitySign ?? ""}",
+                              "${"签名".localize}：${model?.memberPersonalitySign ?? ""}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(color: Color(0xff999999), fontSize: 14),
@@ -103,9 +104,9 @@ class _GroupMemberCellState extends State<GroupMemberCell> {
                             color: const Color(0xfff2a73c),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Text(
-                            "群主",
-                            style: TextStyle(color: Colors.white, fontSize: 14),
+                          child:  Text(
+                            "群主".localize,
+                            style:const TextStyle(color: Colors.white, fontSize: 14),
                           ),
                         )
                       else if (model?.memberType == 1)
@@ -115,9 +116,9 @@ class _GroupMemberCellState extends State<GroupMemberCell> {
                             color: const Color(0xfff2a73c),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Text(
-                            "管理员",
-                            style: TextStyle(color: Colors.white, fontSize: 14),
+                          child:  Text(
+                            "管理员".localize,
+                            style:  const TextStyle(color: Colors.white, fontSize: 14),
                           ),
                         )
                       else

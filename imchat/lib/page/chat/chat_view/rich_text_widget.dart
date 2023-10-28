@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/api/emo_data.dart';
+import 'package:imchat/config/language.dart';
 
 import '../model/chat_record_model.dart';
 
@@ -19,16 +20,16 @@ class RichTextWidget extends StatelessWidget {
     if(isReplyStyle == true){
       //0文字，1图片，2语音，3文件，4红包，5转账，6消息回撤
       if(model?.contentType == 1){
-        return "【图片】";
+        return "【图片】".localize;
       }
       if(model?.contentType == 2){
-        return "【语音】";
+        return "【语音】".localize;
       }
       if(model?.contentType == 3){
-        return "【文件】";
+        return "【文件】".localize;
       }
       if(model?.contentType == 4){
-        return "【红包】";
+        return "【红包】".localize;
       }
       if(model?.contentType == 5){
         return "【转账】";

@@ -37,8 +37,8 @@ class _LanguagePageState extends State<LanguagePage> {
 
   List<String> get typeArr {
     return [
-      "中文",
-      "英文",
+      "中文".localize,
+      "英文".localize,
     ];
   }
 

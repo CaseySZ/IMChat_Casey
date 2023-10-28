@@ -36,35 +36,35 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
 
   void _submitEvent() async {
     if (titleController.text.isEmpty) {
-      showToast(msg: "请输入标题");
+      showToast(msg: "请输入标题".localize);
       return;
     }
     if (imageArr.isEmpty) {
-      showToast(msg: "请选择群头像");
+      showToast(msg: "请选择群头像".localize);
       return;
     }
     FocusScope.of(context).unfocus();
     LoadingAlertWidget.show(context);
     try{
-      LoadingAlertWidget.showExchangeTitle("正在上传头像");
+      LoadingAlertWidget.showExchangeTitle("正在上传头像".localize);
       String? headImage = await FileAPi.updateImg(imageArr.first.path ?? "");
       if(headImage?.isNotEmpty == true) {
-        LoadingAlertWidget.showExchangeTitle("正在更新数据...");
+        LoadingAlertWidget.showExchangeTitle("正在更新数据...".localize);
         String? ret = await IMApi.groupCreate(headImage ?? "", titleController.text, descController.text);
         LoadingAlertWidget.cancel(context);
         if(ret?.isNotEmpty == true){
-          showToast(msg: "群创建失败");
+          showToast(msg: "群创建失败".localize);
         }else {
-          showToast(msg: "群创建成功");
+          showToast(msg: "群创建成功".localize);
           Navigator.pop(context);
         }
       }else {
         LoadingAlertWidget.cancel(context);
-        showToast(msg: "头像上传失败");
+        showToast(msg: "头像上传失败".localize);
       }
     }catch(e){
       LoadingAlertWidget.cancel(context);
-      showToast(msg: "群创建失败");
+      showToast(msg: "群创建失败".localize);
       debugLog(e);
     }
 
@@ -86,9 +86,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
               height: 40,
               child: Row(
                 children: [
-                  const Text(
-                    "群名称",
-                    style: TextStyle(color: Color(0xff666666), fontSize: 14),
+                   Text(
+                    "群名称".localize,
+                    style: const TextStyle(color: Color(0xff666666), fontSize: 14),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
@@ -98,7 +98,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                       ),
                       child: GroupTextFiled(
                         controller: titleController,
-                        placeholder: "请输入群名称",
+                        placeholder: "请输入群名称".localize,
                         maxLines: 1,
                       ),
                     ),
@@ -114,9 +114,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(top: 6),
-                    child: const Text(
-                      "群公告",
-                      style: TextStyle(color: Color(0xff666666), fontSize: 14),
+                    child:  Text(
+                      "群公告".localize,
+                      style:const TextStyle(color: Color(0xff666666), fontSize: 14),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -130,7 +130,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                       child: GroupTextFiled(
                         alignment: Alignment.topRight,
                         controller: descController,
-                        placeholder: "请输入群公告",
+                        placeholder: "请输入群公告".localize,
                       ),
                     ),
                   ),
@@ -138,9 +138,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              "群头像",
-              style: TextStyle(color: Color(0xff666666), fontSize: 14),
+             Text(
+              "群头像".localize,
+              style: const TextStyle(color: Color(0xff666666), fontSize: 14),
             ),
             const SizedBox(height: 12),
             AlbumPickerView(
@@ -173,9 +173,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 height: 40,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.circular(20)),
-                child: const Text(
-                  "创建",
-                  style: TextStyle(
+                child:  Text(
+                  "创建".localize,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.white,
                   ),

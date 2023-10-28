@@ -34,13 +34,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
   String checkData() {
     if (nameController.text.isEmpty) {
-      return "请输入用户名";
+      return "请输入用户名".localize;
     }
     if (psdController.text.isEmpty) {
-      return "请输入登录密码";
+      return "请输入登录密码".localize;
     }
     if (nickController.text.isEmpty) {
-      return "请输入昵称";
+      return "请输入昵称".localize;
     }
     return "";
   }

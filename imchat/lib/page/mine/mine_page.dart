@@ -42,7 +42,7 @@ class _MinePageState extends State<MinePage> {
   void _exitLoginEvent() async {
 
 
-    var ret = await NormalAlert.show(context,  content: "您确定要退出账号吗?", buttonTitle: "取消");
+    var ret = await NormalAlert.show(context,  content: "您确定要退出账号吗?".localize, buttonTitle: "取消".localize);
     if(ret != true) return;
     LoadingAlertWidget.show(context);
     try {
@@ -127,9 +127,9 @@ class _MinePageState extends State<MinePage> {
             onTap: _exitLoginEvent,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
-              child: const Text(
-                "退出登录",
-                style: TextStyle(
+              child:  Text(
+                "退出登录".localize,
+                style: const TextStyle(
                   color: Colors.redAccent,
                   fontSize: 16,
                 ),
@@ -206,7 +206,7 @@ class _MinePageState extends State<MinePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "昵称：${userInfo?.nickName}",
+                    "${"昵称".localize}：${userInfo?.nickName}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -215,7 +215,7 @@ class _MinePageState extends State<MinePage> {
                     ),
                   ),
                   Text(
-                    "账号：${userInfo?.loginName}",
+                    "${"账号".localize}：${userInfo?.loginName}",
                     style: const TextStyle(
                       fontSize: 14,
                       color: Color(0xff999999),

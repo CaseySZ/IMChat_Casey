@@ -66,7 +66,7 @@ class _GroupAddFriendPageState extends State<GroupAddFriendPage> {
 
   void submitEvent() async {
     if (selectItemArr.isEmpty) {
-      showToast(msg: "请选择成员");
+      showToast(msg: "请选择成员".localize);
       return;
     }
     LoadingAlertWidget.show(context);
@@ -83,7 +83,7 @@ class _GroupAddFriendPageState extends State<GroupAddFriendPage> {
     if (ret?.isNotEmpty == true) {
       showToast(msg: ret!);
     } else {
-      showToast(msg: widget.isDelete ?  "删除成功" : "添加成功");
+      showToast(msg: widget.isDelete ?  "删除成功".localize : "添加成功".localize);
       Navigator.pop(context, true);
     }
   }
@@ -100,7 +100,7 @@ class _GroupAddFriendPageState extends State<GroupAddFriendPage> {
               alignment: Alignment.centerRight,
               padding: const EdgeInsets.fromLTRB(12, 6, 16, 6),
               child:  Text(
-                widget.isDelete ? "移除": "添加",
+                widget.isDelete ? "移除".localize: "添加".localize,
                 style: const TextStyle(
                   color: Color(0xff666666),
                   fontSize: 14,

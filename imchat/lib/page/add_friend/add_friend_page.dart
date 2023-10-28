@@ -35,11 +35,11 @@ class _AddFriendPageState extends State<AddFriendPage> {
 
   void _loadData() async {
     if (controller.text.isEmpty) {
-      showToast(msg: "请输入内容");
+      showToast(msg: "请输入内容".localize);
       return;
     }
     if (_isLoading) {
-      showToast(msg: "正在搜索中哦～");
+      showToast(msg: "正在搜索中哦～".localize);
       return;
     }
     _isLoading = true;
@@ -53,7 +53,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
           userInfoArr?.clear();
           userInfoArr = (response!.respData["data"] as List).map((e) => UserInfo.fromJson(e)).toList();
         } else {
-          showToast(msg: "未查到相关信息");
+          showToast(msg: "未查到相关信息".localize);
         }
       } else {
         showToast(msg: response?.tips ?? defaultErrorMsg);

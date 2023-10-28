@@ -101,7 +101,7 @@ class LongPressBoxMenu extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildItem(context, 0, model?.isTop == 1 ? "取消置顶" : "置顶该聊天".localize, ""),
+                      _buildItem(context, 0, model?.isTop == 1 ? "取消置顶".localize : "置顶该聊天".localize, ""),
                       //_buildItem(1, "转发", ""),
                       if ((model?.messageNum ?? 0) > 0) _buildItem(context, 2, "标为已读".localize, ""),
                     ],

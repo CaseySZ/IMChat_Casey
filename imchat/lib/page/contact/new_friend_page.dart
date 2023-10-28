@@ -20,7 +20,7 @@ class NewFriendPage extends StatefulWidget {
 class _NewFriendPageState extends State<NewFriendPage> with TickerProviderStateMixin{
 
 
-  List<String> tabTitleArr = ["好友申请", "我的申请"];
+  List<String> tabTitleArr = ["好友申请".localize, "我的申请".localize];
   late TabController tabController = TabController(length: tabTitleArr.length, vsync: this);
   @override
   void initState() {

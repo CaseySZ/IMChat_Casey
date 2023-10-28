@@ -81,14 +81,14 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
 
   void deleteEvent() async {
 
-    bool ret = await NormalAlert.show(context, content: isCreater ? "你确认要解散群吗?" : "你确认要退出群吗?" , buttonTitle: "取消");
+    bool ret = await NormalAlert.show(context, content: isCreater ? "你确认要解散群吗?".localize : "你确认要退出群吗?".localize  , buttonTitle: "取消".localize );
     if(ret != true) return;
     LoadingAlertWidget.show(context);
     String? errorStr = await IMApi.groupRemove(groupModel?.groupNo ?? "");
     // 外面收到消息，进行pop操作
    // LoadingAlertWidget.cancel(context);
     if (errorStr?.isEmpty == true) {
-      showToast(msg: isCreater ? "已解散" : "已退出");
+      showToast(msg: isCreater ? "已解散".localize  : "已退出".localize );
     } else {
       showToast(msg: errorStr ?? defaultErrorMsg);
     }
@@ -108,10 +108,10 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
     }
     LoadingAlertWidget.show(context);
     try {
-      LoadingAlertWidget.showExchangeTitle("正在上传头像");
+      LoadingAlertWidget.showExchangeTitle("正在上传头像".localize );
       String? headImage = await FileAPi.updateImg(listMedia.first.path ?? "");
       if (headImage?.isNotEmpty == true) {
-        LoadingAlertWidget.showExchangeTitle("正在更新数据...");
+        LoadingAlertWidget.showExchangeTitle("正在更新数据...".localize );
         String? retStr = await IMApi.groupEdit(
           groupNo: groupModel?.groupNo,
           name: groupModel?.name,
@@ -126,12 +126,12 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
           setState(() {});
         }
       } else {
-        showToast(msg: "头像上传失败");
+        showToast(msg: "头像上传失败".localize );
       }
       LoadingAlertWidget.cancel(context);
     } catch (e) {
       LoadingAlertWidget.cancel(context);
-      showToast(msg: "更新头像失败");
+      showToast(msg: "更新头像失败".localize );
       debugLog(e);
     }
   }
@@ -155,7 +155,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: "群聊信息",
+        title: "群聊信息".localize ,
       ),
       body: _buildContent(),
     );
@@ -204,13 +204,13 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                     await Navigator.push(context, MaterialPageRoute(builder: (context) {
                       return GroupEditTxtPage(
                         groupModel: groupModel,
-                        title: "群聊名称",
+                        title: "群聊名称".localize ,
                       );
                     }));
                     setState(() {});
                   }
                 },
-                child: _buldItem("群聊名称", rightTitle: groupModel?.name),
+                child: _buldItem("群聊名称".localize , rightTitle: groupModel?.name),
               ),
               InkWell(
                 onTap: () async {
@@ -218,14 +218,14 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                     await Navigator.push(context, MaterialPageRoute(builder: (context) {
                       return GroupEditTxtPage(
                         groupModel: groupModel,
-                        title: "群公告",
+                        title: "群公告".localize ,
                       );
                     }));
                     setState(() {});
                   }
                 },
                 child: _buldItem(
-                  "群公告",
+                  "群公告".localize ,
                   rightTitle: groupModel?.personalitySign,
                 ),
               ),
@@ -242,7 +242,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                   setState(() {});
                 },
                 child: _buldItem(
-                  isAdmin ? "群成员管理" : "群成员",
+                  isAdmin ? "群成员管理".localize  : "群成员".localize ,
                   rightTitle: groupMemberArr.length.toString(),
                   isShowArrow: true,
                 ),
@@ -269,26 +269,26 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                       );
                     }));
                   },
-                  child: _buldItem("群成员删除", rightTitle: ""),
+                  child: _buldItem("群成员删除".localize , rightTitle: ""),
                 ),
                 GroupSettingItem(
                   groupModel: groupModel,
-                  title: "允许全体发言",
+                  title: "允许全体发言".localize ,
                 ),
                 GroupSettingItem(
                   groupModel: groupModel,
-                  title: "允许添加好友",
+                  title: "允许添加好友".localize ,
                 ),
                 GroupSettingItem(
                   groupModel: groupModel,
-                  title: "允许成员退群",
+                  title: "允许成员退群".localize ,
                   callback: (){
                     setState(() {});
                   },
                 ),
                 GroupSettingItem(
                   groupModel: groupModel,
-                  title: "显示群全成员",
+                  title: "显示群全成员".localize ,
                 ),
               ],
               if (isCreater || groupAuth?.allowGroupMemberExit == 0)
@@ -304,7 +304,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child:  Text(
-                          isCreater ? "删除群" : "退出群",
+                          isCreater ? "删除群".localize  : "退出群".localize ,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,

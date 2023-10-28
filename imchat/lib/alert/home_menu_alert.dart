@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/page/add_friend/add_friend_page.dart';
 import 'package:imchat/page/create_group/create_group_page.dart';
 
@@ -35,8 +36,8 @@ class HomeMenuAlert extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  _buildItem(context, "添加好友", "assets/images/hN.png"),
-                  _buildItem(context, "创建群聊", "assets/images/Gn.9.png"),
+                  _buildItem(context, "添加好友".localize, "assets/images/hN.png"),
+                  _buildItem(context, "创建群聊".localize, "assets/images/Gn.9.png"),
                 ],
               ),
             ),
@@ -50,7 +51,7 @@ class HomeMenuAlert extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pop(context);
-        if(title == "添加好友"){
+        if(title == "添加好友".localize){
           Navigator.push(context, MaterialPageRoute(builder: (context){
             return const  AddFriendPage();
           }));

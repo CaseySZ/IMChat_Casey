@@ -305,7 +305,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
 
   void _sendTextMessage({Media? imageInfo}) async {
     if (eidtController.text.isEmpty && imageInfo == null) {
-      showToast(msg: "请输入内容");
+      showToast(msg: "请输入内容".localize);
       return;
     }
     String contentText = eidtController.text;
@@ -586,7 +586,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                           bgColor: Colors.transparent,
                                           controller: eidtController,
                                           focusNode: focusNode,
-                                          placeholder: "请输入消息",
+                                          placeholder: "请输入消息".localize,
                                           onSubmitted: (text) {},
                                           onChange: (text) {
                                             if (chatType == 1 && "$inputPreText@" == text) {
@@ -671,7 +671,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                           pictureCallback: (imageArr) {
                             if (imageArr.isNotEmpty) {
                               if (isUpLoadImg) {
-                                showToast(msg: "正在发送图片,请耐心等待");
+                                showToast(msg: "正在发送图片,请耐心等待".localize);
                                 return;
                               }
                               _sendTextMessage(imageInfo: imageArr.first);
@@ -700,7 +700,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                       right: 0,
                       child: InkWell(
                           onTap: () {
-                            NormalAlert.show(context, title: "公告", content: groupModel?.personalitySign);
+                            NormalAlert.show(context, title: "公告".localize, content: groupModel?.personalitySign);
                           },
                           child: Container(
                             height: 30,
@@ -711,7 +711,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                               widgets: [
                                 SizedBox(width: screen.screenWidth),
                                 Text(
-                                  "公告：${groupModel?.personalitySign}      ",
+                                  "${"公告".localize}：${groupModel?.personalitySign}      ",
                                   maxLines: 1,
                                   style: const TextStyle(
                                     color: Colors.white,

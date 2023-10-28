@@ -193,7 +193,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
                   timer?.cancel();
                   await stopRecorder();
                   if (timerCount < 2) {
-                    showToast(msg: "语音时间太短, 发送已被取消");
+                    showToast(msg: "语音时间太短, 发送已被取消".localize);
                     widget.callback?.call("", false);
                   } else {
 
