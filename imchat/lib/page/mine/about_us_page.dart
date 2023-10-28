@@ -27,8 +27,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
         title: "关于我们".localize,
       ),
       body: Container(
-        padding: const EdgeInsets.only(top: 16, bottom: 56),
+        padding: const EdgeInsets.only(top: 102, bottom: 56),
+        alignment: Alignment.center,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               "assets/images/app_logo.png",

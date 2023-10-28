@@ -74,7 +74,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   ChatRecordModel? replyModel;
 
   List<GroupMemberModel> groupMemberArr = [];
-  int currentPage = 1;
 
   FocusNode focusNode = FocusNode();
   bool isShowSoftKeyboard = false;
@@ -201,6 +200,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       });
     }
     if (chatType == 0) {
+      if (protocol.cmd == MessageType.friendMsgClear.responseName && protocol.isSuccess == true) {
+        String? deleteNo = protocol.dataMap?["friendNo"];
+        if(deleteNo == friendNo){
+          chatArr?.clear();
+          setState(() {});
+        }
+      }
       if (protocol.cmd == MessageType.chatHistory.responseName && protocol.isSuccess == true) {
         ChatRecordModel model = ChatRecordModel.fromJson(protocol.dataMap ?? {});
         if (model.receiveNo == widget.model?.friendNo || model.sendNo == widget.model?.friendNo) {
@@ -208,6 +214,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
         }
       }
     } else {
+      if (protocol.cmd == MessageType.groupMsgClear.responseName && protocol.isSuccess == true) {
+        String? deleteNo = protocol.dataMap?["groupNo"];
+        if(deleteNo == friendNo){
+          chatArr?.clear();
+          setState(() {});
+        }
+      }
       if (protocol.cmd == MessageType.chatGroupHistory.responseName && protocol.isSuccess == true) {
         ChatRecordModel model = ChatRecordModel.fromJson(protocol.dataMap ?? {});
         if (model.groupNo == widget.model?.friendNo) {
