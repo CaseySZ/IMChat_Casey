@@ -1,14 +1,19 @@
 
 
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/language.dart';
 import 'package:imchat/page/chat/view/group_setting_item.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
+import 'package:imchat/utils/toast_util.dart';
 
 import '../../model/friend_item_info.dart';
 import '../../tool/image/custom_new_image.dart';
 import 'group_edit_txt_page.dart';
+import 'package:imchat/tool/network/response_status.dart';
 
 class PersonDetailPage extends StatefulWidget {
   final FriendItemInfo? model;
@@ -28,8 +33,17 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
     super.initState();
   }
 
+  bool _isLoading = false;
   void _loadData() async {
-
+    if(_isLoading) return;
+    _isLoading = true;
+    Response? ret =  await IMApi.clearFriendChatHistory(model?.friendNo ?? "");
+    _isLoading = false;
+    if(ret?.isSuccess == true){
+      Navigator.popUntil(context, (route) => route.isFirst);
+    }else {
+      showToast(msg: "删除失败".localize);
+    }
   }
 
   @override
@@ -72,6 +86,20 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
               GroupSettingItem(
                 model: model,
                 title: "聊天置顶".localize,
+              ),
+              const SizedBox(height: 16),
+              InkWell(
+                onTap: _loadData,
+                child: Container(
+                  height: 40,
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.lightBlueAccent,
+                  ),
+                  child:  Text("删除聊天记录".localize, style:const TextStyle(color: Colors.white),),
+                ),
               ),
             ],
           ),

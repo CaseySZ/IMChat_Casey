@@ -9,6 +9,7 @@ import 'package:image_pickers/image_pickers.dart';
 import 'package:imchat/alert/normal_alert.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/page/chat/group_edit_txt_page.dart';
 import 'package:imchat/page/chat/model/group_detail_model.dart';
 import 'package:imchat/page/chat/view/group_setting_item.dart';
@@ -135,6 +136,21 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
     }
   }
 
+  void _clickClearChat() async {
+    var ret = await NormalAlert.show(context, content: "确认清除聊天记录?".localize, buttonTitle: "取消".localize);
+    if(ret == true){
+      LoadingAlertWidget.show(context);
+      Response? ret =  await IMApi.clearGroupChatHistory(groupModel?.groupNo ?? "");
+      LoadingAlertWidget.cancel(context);
+      if(ret?.isSuccess == true){
+        Navigator.popUntil(context, (route) => route.isFirst);
+      }else {
+        showToast(msg: "删除失败".localize);
+      }
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -237,9 +253,13 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                     return GroupAddFriendPage(groupNo: widget.groupNo);
                   }));
                 },
-                child: _buldItem("群成员添加", rightTitle: "", isShowArrow: true),
+                child: _buldItem("群成员添加".localize, rightTitle: "", isShowArrow: true),
               ),
               if (isAdmin) ...[
+                InkWell(
+                  onTap: _clickClearChat,
+                  child: _buldItem("删除聊天记录".localize, rightTitle: "", isShowArrow: false),
+                ),
                 InkWell(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) {

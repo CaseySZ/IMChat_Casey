@@ -629,10 +629,23 @@ class IMApi {
     }
   }
 
-  static Future<Response?> clearChatHistory(String friendNo) async {
+  static Future<Response?> clearGroupChatHistory(String groupNo) async {
     try {
       Response? response =
       await DioBase.instance.post("/api/groupChatRecord/clearChatHistory", {
+        "groupNo": groupNo,
+      },);
+      return response;
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
+  static Future<Response?> clearFriendChatHistory(String friendNo) async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/memberChatRecord/clearChatHistory", {
         "friendNo": friendNo,
       },);
       return response;
@@ -641,4 +654,5 @@ class IMApi {
       return null;
     }
   }
+
 }
