@@ -1,4 +1,4 @@
-#Sat Oct 28 16:53:49 CST 2023
+#Sat Oct 28 18:30:23 CST 2023
 base.0=/Users/sy/Documents/GitHub/IMChat/imchat/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

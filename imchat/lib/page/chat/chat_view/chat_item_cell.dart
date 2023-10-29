@@ -14,14 +14,14 @@ import '../model/chat_record_model.dart';
 
 class ChatItemCell extends StatefulWidget {
   final ChatRecordModel? model;
-  final ChatRecordModel? preModel;
+  final ChatRecordModel? afterModel;
   final bool isGroup;
   final Function(double, double)? callback;
   final GestureTapCallback? replyCallback;
   const ChatItemCell({
     super.key,
     this.model,
-    this.preModel,
+    this.afterModel,
     this.callback,
     this.isGroup = false,
     this.replyCallback,
@@ -164,7 +164,7 @@ class _ChatItemCellState extends State<ChatItemCell> {
     } else {
       return ChatItemLeftWidget(
         model: widget.model,
-        preModel: widget.preModel,
+        afterModel: widget.afterModel,
         callback: _showImageScan,
         replyCallback:widget.replyCallback,
       );

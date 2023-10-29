@@ -531,16 +531,16 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                             controller: scrollController,
                             cacheExtent: 10000,
                             itemBuilder: (context, index) {
-                              int pre = index - 1;
-                              ChatRecordModel? preModel;
+                              int after = index + 1;
+                              ChatRecordModel? afterModel;
                               ChatRecordModel model = chatArr![index];
-                              if (pre >= 0 && chatType == 1) {
-                                preModel = chatArr![index - 1];
+                              if (after < chatArr!.length  && chatType == 1) {
+                                afterModel = chatArr![after];
                               }
                               return ChatItemCell(
                                 model: model,
                                 isGroup: chatType == 1,
-                                preModel: preModel,
+                                afterModel: afterModel,
                                 replyCallback: () => _replyClickEvent(model),
                                 callback: (dx, dy) {
                                   isShowMenu = true;

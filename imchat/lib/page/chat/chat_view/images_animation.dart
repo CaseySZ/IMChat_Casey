@@ -56,6 +56,7 @@ class _InState extends State<ImagesAnimation> with TickerProviderStateMixin {
             gaplessPlayback: true, //避免图片闪烁
             width: widget.w,
             height: widget.h,
+            color: Colors.white,
           ),
         );
       },

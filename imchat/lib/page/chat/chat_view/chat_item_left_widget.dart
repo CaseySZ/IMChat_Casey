@@ -8,10 +8,10 @@ import 'chat_item_audio_widget.dart';
 
 class ChatItemLeftWidget extends StatelessWidget {
   final ChatRecordModel? model;
-  final ChatRecordModel? preModel;
+  final ChatRecordModel? afterModel;
   final Function(String imageUrl, {bool? isLocalPath})? callback;
   final GestureTapCallback? replyCallback;
-  const ChatItemLeftWidget({super.key, this.model,  this.preModel ,this.callback, this.replyCallback,});
+  const ChatItemLeftWidget({super.key, this.model,  this.afterModel ,this.callback, this.replyCallback,});
 
   bool get isImg => model?.contentType == 1;
 
@@ -64,7 +64,7 @@ class ChatItemLeftWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if(model?.groupNo?.isNotEmpty == true && (preModel?.sendNickName != model?.sendNickName || preModel?.contentType != model?.contentType ))
+                      if(model?.groupNo?.isNotEmpty == true && (afterModel?.sendNickName != model?.sendNickName || afterModel?.contentType != model?.contentType))
                         ...[
                           Text(model?.sendNickName ?? "", style: TextStyle(
                             color: Colors.blue.withOpacity(0.7),

@@ -290,6 +290,7 @@ class _ChatItemAudioWidgetState extends State<ChatItemAudioWidget> {
           gaplessPlayback: true, //避免图片闪烁
           width: 12,
           height: 16,
+          color: Colors.white,
           fit: BoxFit.cover,
         ),
       );

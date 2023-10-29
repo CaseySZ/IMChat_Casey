@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
@@ -59,6 +60,16 @@ class MyApp extends StatelessWidget {
       //初始化的时候加载的路由
       //routes: AppRoutes.routes,
       onGenerateRoute: AppRoutes.onGenerateRoute,
+      locale: const Locale("zh", 'CH'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,//是Flutter的一个本地化委托，用于提供Material组件库的本地化支持
+        GlobalWidgetsLocalizations.delegate,//用于提供通用部件（Widgets）的本地化支持
+        GlobalCupertinoLocalizations.delegate,//用于提供Cupertino风格的组件的本地化支持
+      ],
+      supportedLocales: const [
+        Locale("zh", 'CH'),
+        Locale("en", 'US'),
+      ],
       theme: ThemeData(
         platform: TargetPlatform.iOS,
         primaryColor: const Color(0xfff21313),
