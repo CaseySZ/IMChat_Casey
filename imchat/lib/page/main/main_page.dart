@@ -73,6 +73,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       _loginEvent();
     });
     DioBase.addLister(_reLogin);
+    Language.addListener(_langExchange);
   }
 
   @override
@@ -185,6 +186,13 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   //     debugLable = platformVersion;
   //   });
   // }
+
+  void _langExchange() {
+    if(mounted){
+      setState(() {
+      });
+    }
+  }
 
   void _reLogin() {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
@@ -334,7 +342,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       return Container(
         color: Colors.white,
         child: EmptyErrorWidget(
-          errorMsg: "IM服务器连接失败",
+          errorMsg: "IM服务器连接失败".localize,
           retryOnTap: () {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
               return const LoginPage();
@@ -350,6 +358,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   @override
   void dispose() {
     DioBase.removeLister(_reLogin);
+    Language.removeListener(_langExchange);
     controller?.dispose();
     WidgetsBinding.instance.removeObserver(this);
     WebSocketModel.removeListener(_receiveMessage);

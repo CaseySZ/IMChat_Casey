@@ -37,6 +37,15 @@ class _MinePageState extends State<MinePage> {
   @override
   void initState() {
     super.initState();
+    Language.addListener(_langExchange);
+
+  }
+
+  void _langExchange() {
+    if(mounted){
+      setState(() {
+      });
+    }
   }
 
   void _exitLoginEvent() async {
@@ -241,5 +250,11 @@ class _MinePageState extends State<MinePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    Language.removeListener(_langExchange);
+    super.dispose();
   }
 }

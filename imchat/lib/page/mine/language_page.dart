@@ -28,7 +28,7 @@ class LanguagePage extends StatefulWidget {
 class _LanguagePageState extends State<LanguagePage> {
   UserInfo? get userInfo => IMConfig.userInfo;
 
-  int currentSelectIndex = 0;
+  int get currentSelectIndex => Language.languageIndex;
 
   @override
   void initState() {
@@ -36,10 +36,7 @@ class _LanguagePageState extends State<LanguagePage> {
   }
 
   List<String> get typeArr {
-    return [
-      "中文".localize,
-      "英文".localize,
-    ];
+    return Language.typeArr;
   }
 
   @override
@@ -58,8 +55,12 @@ class _LanguagePageState extends State<LanguagePage> {
   Widget _buildItem(String title, int index) {
     return InkWell(
       onTap: () async {
-        currentSelectIndex = index;
-        setState(() {});
+        if (Language.languageIndex != index) {
+          Language.languageIndex = index;
+          Language.storeLocal();
+          Language.notification();
+          setState(() {});
+        }
       },
       child: Container(
         height: 50,

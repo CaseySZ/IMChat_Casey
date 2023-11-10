@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:imchat/config/language.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/web_socket/web_socket_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -10,10 +11,11 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  Language.initData();
   runApp(RefreshConfiguration(
     headerBuilder: () => WaterDropHeader(
       complete: Text(
-        "客官慢一点～",
+        "客官慢一点～".localize,
         style: TextStyle(color: Colors.black.withAlpha(128), fontSize: 12),
       ),
     ),
@@ -27,10 +29,10 @@ void main() {
           ),
         ),
       ),
-      loadingText: "加载中...",
-      canLoadingText: "松开加载更多...",
-      noDataText: "没有数据了",
-      idleText: "上拉加载更多",
+      loadingText: "加载中...".localize,
+      canLoadingText: "松开加载更多...".localize,
+      noDataText: "没有数据了".localize,
+      idleText: "上拉加载更多".localize,
       textStyle: TextStyle(
         color: Colors.black.withOpacity(0.5),
         fontSize: 12,
