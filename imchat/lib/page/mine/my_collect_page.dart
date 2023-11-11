@@ -51,6 +51,8 @@ class _MyCollectPageState extends State<MyCollectPage> {
       showToast(msg: e.toString());
       debugLog(e);
     }
+    //http://8.217.117.185:90991718446972093992960.642421_726.jpeg
+    //https://pking.s3.ap-east-1.amazonaws.com/1718446972093992960.642421_726.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231111T151045Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Credential=AKIA4TG4XTMLKOHIWMNR%2F20231111%2Fap-east-1%2Fs3%2Faws4_request&X-Amz-Signature=50f4bcff8c7a9ba8145998f5c7046151c292458f42453d1ff23d5dea36881292
     modelArr ??= [];
     if (mounted) {
       setState(() {});
