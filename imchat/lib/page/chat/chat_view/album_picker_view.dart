@@ -28,16 +28,20 @@ Future<PermissionStatus> canReadStorage() async {
 
 Future checkPermissionAlways(BuildContext context) async {
   if (!Platform.isAndroid) return;
-  var status = await canReadStorage();
-  if (status.isGranted) return;
-  // 展示无权限，去设置的对话框
-  var val = await NoPermissionDialog.show(context);
-  if (val == true) {
-    // 跳转到应用配置界面
-    var isCanOpen = await openAppSettings();
-    debugLog("isCanOpen: $isCanOpen");
-  } else {
-    return await checkPermissionAlways(context);
+  try {
+    var status = await canReadStorage();
+    if (status.isGranted) return;
+    // 展示无权限，去设置的对话框
+    var val = await NoPermissionDialog.show(context);
+    if (val == true) {
+      // 跳转到应用配置界面
+      var isCanOpen = await openAppSettings();
+      debugLog("isCanOpen: $isCanOpen");
+    } else {
+      return await checkPermissionAlways(context);
+    }
+  }catch(e){
+    debugLog(e);
   }
 }
 

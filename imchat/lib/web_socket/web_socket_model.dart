@@ -49,6 +49,8 @@ extension JsonProto on Protocol {
 class WebSocketModel {
   static bool? isConnectSocketSuccess;
   static final List<Function(Protocol protocol)> _listernArr = [];
+  static int retryConnectStatus = -1; // 0连上了，  1 重连，
+  static Function(int pre, int cur)? retryConnectCallback;
 
   static void addListener(Function(Protocol protocol) item) {
     _listernArr.add(item);
@@ -70,22 +72,34 @@ class WebSocketModel {
 
   static IOWebSocketChannel? channel; //= IOWebSocketChannel.connect('ws://8.217.117.185:9090');
   static init() async {
-    channel =  IOWebSocketChannel.connect('ws://8.217.117.185:9090');
-    channel?.stream.listen((message) {
-      Protocol protocol = Protocol.fromBuffer(message);
-      _parseMessage(protocol);
-    });
+    try {
+      channel = IOWebSocketChannel.connect('ws://8.217.117.185:9090');
+      channel?.stream.listen((message) {
+        Protocol protocol = Protocol.fromBuffer(message);
+        _parseMessage(protocol);
+      });
+    }catch(e){
+      debugLog(e);
+    }
   }
 
   static Future retryConnect() async{
-    preReceiveHeaderTimer = DateTime.now().millisecondsSinceEpoch;
-    channel =  IOWebSocketChannel.connect('ws://8.217.117.185:9090');
-    channel?.stream.listen((message) {
-      Protocol protocol = Protocol.fromBuffer(message);
-      _parseMessage(protocol);
-    });
-    await WebSocketSend.login();
-    WebSocketSend.sendHeartBeat();
+    try {
+      preReceiveHeaderTimer = DateTime
+          .now()
+          .millisecondsSinceEpoch;
+      retryConnectCallback?.call(retryConnectStatus, 1);
+      retryConnectStatus = 1;
+      channel = IOWebSocketChannel.connect('ws://8.217.117.185:9090');
+      channel?.stream.listen((message) {
+        Protocol protocol = Protocol.fromBuffer(message);
+        _parseMessage(protocol);
+      });
+      await WebSocketSend.login();
+      WebSocketSend.sendHeartBeat();
+    }catch(e){
+      debugLog(e);
+    }
   }
 
   static int preReceiveHeaderTimer = 0;

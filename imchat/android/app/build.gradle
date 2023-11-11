@@ -27,7 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     namespace "com.example.imchat"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33 //flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {

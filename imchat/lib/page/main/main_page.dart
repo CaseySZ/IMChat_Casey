@@ -74,6 +74,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     });
     DioBase.addLister(_reLogin);
     Language.addListener(_langExchange);
+    WebSocketModel.retryConnectCallback = retryConnectEvent;
   }
 
   @override
@@ -96,6 +97,12 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       case AppLifecycleState.detached:
         debugLog("AppLifecycleState.detached");
         break;
+    }
+  }
+
+  void retryConnectEvent(int pre, int cur){
+    if(pre != cur && cur == 1){
+      showToast(msg: "网络异常，正在重新连接...".localize);
     }
   }
 
@@ -277,6 +284,10 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     if (protocol.cmd == MessageType.login.responseName) {
       if (protocol.isSuccess) {
         WebSocketModel.isConnectSocketSuccess = true;
+        if( WebSocketModel.retryConnectStatus == 1){
+          WebSocketModel.retryConnectStatus = 0;
+          showToast(msg: "重新连接成功".localize);
+        }
       } else {
         WebSocketModel.isConnectSocketSuccess = false;
       }
@@ -362,6 +373,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     controller?.dispose();
     WidgetsBinding.instance.removeObserver(this);
     WebSocketModel.removeListener(_receiveMessage);
+    WebSocketModel.retryConnectCallback = null;
     super.dispose();
   }
 }

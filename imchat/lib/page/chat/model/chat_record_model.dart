@@ -66,10 +66,10 @@ class ChatRecordModel {
   String? createTime;
   String? contentTime;
   String? get showNickName {
-    return sendNickNameRemark ?? nickName;
+    return nickNameRemark?.isNotEmpty == true ? nickNameRemark : nickName;
   }
 
-  String? sendNickNameRemark;
+  String? nickNameRemark;
   String? sendNickName;
   String? sendHeadImage;
   String? receiveNo;
@@ -133,7 +133,7 @@ class ChatRecordModel {
     readStatus = json["readStatus"];
     createTime = json["createTime"];
     contentTime = json["contentTime"];
-    sendNickNameRemark = json["sendNickNameRemark"];
+    nickNameRemark = json["nickNameRemark"];
     sendNickName = json["sendNickName"];
     sendHeadImage = json["sendHeadImage"];
     if (json["headImage"] != null) {

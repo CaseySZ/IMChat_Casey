@@ -67,7 +67,7 @@ class _MsgBoxCellState extends State<MsgBoxCell> {
           FriendItemInfo itemModel = FriendItemInfo.fromJson({});
           itemModel.friendNo = model?.targetNo;
           itemModel.contentType = model?.contentType;
-          itemModel.nickName = model?.nickName;
+          itemModel.nickName = model?.showNickName;
           itemModel.targetType = model?.targetType;
           itemModel.isTop = model?.isTop;
           itemModel.headImage = model?.sendHeadImage;

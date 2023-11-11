@@ -59,7 +59,7 @@ class WebSocketSend {
       int currentEpoch = DateTime.now().millisecondsSinceEpoch;
       int gap =  currentEpoch- preSendHeatTime;
       int receiveGap = currentEpoch - WebSocketModel.preReceiveHeaderTimer;
-      if(receiveGap > 6000){
+      if(receiveGap > 6000 && preSendHeatTime != 0){
         await WebSocketModel.retryConnect();
       }
       if(gap > 4000){
