@@ -91,7 +91,7 @@ class LongPressMenu extends StatelessWidget {
     if (errorStr?.isNotEmpty == true) {
       showToast(msg: errorStr!);
     } else {
-      showToast(msg: "收藏成功");
+      showToast(msg: "收藏成功".localize);
     }
     isCollectNetIng = false;
   }

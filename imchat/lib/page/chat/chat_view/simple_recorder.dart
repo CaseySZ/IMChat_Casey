@@ -272,9 +272,9 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
                     ),
                     border: Border.all(color: Colors.black),
                   ),
-                  child: const Text(
-                    "取消录制",
-                    style: TextStyle(color: Color(0xff666666), fontSize: 14),
+                  child:  Text(
+                    "取消录制".localize,
+                    style: const TextStyle(color: Color(0xff666666), fontSize: 14),
                   ),
                 ),
               )

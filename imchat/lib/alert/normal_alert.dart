@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:imchat/config/language.dart';
 
 class NormalAlert extends StatelessWidget {
 
@@ -110,9 +111,9 @@ class NormalAlert extends StatelessWidget {
           color: Colors.blueAccent,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: const  Text(
-          "确认",
-          style:  TextStyle(
+        child:  Text(
+          "确认".localize,
+          style:  const TextStyle(
             fontSize: 14,
             color: Colors.white,
           ),

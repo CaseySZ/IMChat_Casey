@@ -109,9 +109,9 @@ class _AudioPickerViewState extends State<AudioPickerView> {
                                 border: Border.all(color: Colors.white),
                               ),
                               padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                              child: const Text(
-                                "发送",
-                                style: TextStyle(
+                              child:  Text(
+                                "发送".localize,
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                 ),
