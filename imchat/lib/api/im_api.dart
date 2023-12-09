@@ -655,4 +655,28 @@ class IMApi {
     }
   }
 
+  static Future<Response?> getConfigBefore() async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/getSystemConfigLoginAfter", {
+      },);
+      return response;
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
+  static Future<Response?> getConfigAfter() async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/getSystemConfigLoginBefore", {
+      },);
+      return response;
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
 }

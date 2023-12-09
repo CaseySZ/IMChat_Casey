@@ -9,6 +9,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:imchat/api/emo_data.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
+import 'package:imchat/model/system_config.dart';
 import 'package:imchat/model/version_model.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/tool/network/response_status.dart';
@@ -50,6 +51,30 @@ class _SplashPageState extends State<SplashPage> {
 
   void _loadData() async{
 
+    try{
+      Response? resp = await IMApi.getConfigBefore();
+      if(resp?.isSuccess == true){
+        try {
+          systemConfigBeModel = SystemConfigBefore.fromJson(resp?.respData);
+        }catch(e){
+          debugLog(e);
+        }
+      }
+    }catch(e){
+      debugLog(e);
+    }
+    try{
+      Response? resp = await IMApi.getConfigAfter();
+      if(resp?.isSuccess == true){
+        try {
+          systemConfigAfModel = SystemConfigAfter.fromJson(resp?.respData);
+        }catch(e){
+          debugLog(e);
+        }
+      }
+    }catch(e){
+      debugLog(e);
+    }
     Response? response = await DioBase.instance.post("/api/getSystemConfig", {});
     if(response?.isSuccess == true){
       IMConfig.memberRegisterCodeRequiredSwitch = response?.respData["memberRegisterCodeRequiredSwitch"] ?? 1;
