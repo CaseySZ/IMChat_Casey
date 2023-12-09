@@ -48,6 +48,7 @@ class ChatRecordModel {
   }
 
   String? localPath;
+  //(0文字，1图片，2语言，3文件，4红包，5转账，6消息回撤，7系统消息，8回复，9艾特，10转发)
   int? contentType; //0文字，1图片，2语音，3文件，4红包，5转账，6消息回撤
   String get contentTypeDesc {
     if (contentType == 1) {

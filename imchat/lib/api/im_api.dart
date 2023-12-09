@@ -456,8 +456,9 @@ class IMApi {
     }
   }
 
-  //向群发送信息
-  static Future<String?> sendGroupMsg(String groupNo, String content, int contentType,{ChatRecordModel? reply}) async {
+  //向群发送信息 // (0文字，1图片，2语言，3文件，4红包，5转账，6消息回撤，7系统消息，8回复，9艾特，10转发)
+  // relateIdArr @人 id； reply回复数据
+  static Future<String?> sendGroupMsg(String groupNo, String content, int contentType,{ChatRecordModel? reply,List<String>? relateIdArr,}) async {
     try {
       var param = {"content": content, "groupNo": groupNo, "contentType": contentType};
       if(reply?.id?.isNotEmpty == true){

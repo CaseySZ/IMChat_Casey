@@ -84,7 +84,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   double menuDy = 0;
   double keyboardSize = 277;
   String inputPreText = "";
-
+  List<String> selectNameArr = []; // @的名称
   @override
   void initState() {
     super.initState();
@@ -175,7 +175,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     if (mounted) {
       setState(() {});
     }
-    if(_isRequestReply && clickReplyModel != null){
+    if (_isRequestReply && clickReplyModel != null) {
       _isRequestReply = false;
       _replyClickEvent(clickReplyModel!);
     }
@@ -202,7 +202,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     if (chatType == 0) {
       if (protocol.cmd == MessageType.friendMsgClear.responseName && protocol.isSuccess == true) {
         String? deleteNo = protocol.dataMap?["friendNo"];
-        if(deleteNo == friendNo){
+        if (deleteNo == friendNo) {
           chatArr?.clear();
           setState(() {});
         }
@@ -216,7 +216,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     } else {
       if (protocol.cmd == MessageType.groupMsgClear.responseName && protocol.isSuccess == true) {
         String? deleteNo = protocol.dataMap?["groupNo"];
-        if(deleteNo == friendNo){
+        if (deleteNo == friendNo) {
           chatArr?.clear();
           setState(() {});
         }
@@ -404,15 +404,33 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     }
     model.content = contentText;
     String? errorDesc;
+    int contentType = isVideo ? 3 : 2;
     if (chatType == 0) {
       errorDesc = await IMApi.sendMsg(friendNo, contentText, isVideo ? 3 : 2, reply: replyModel);
     } else {
-      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, isVideo ? 3 : 2, reply: replyModel);
+      List<String> atRelateIds = [];
+      for (var name in selectNameArr) {
+        if (contentText.contains("@$name")) {
+          for (GroupMemberModel tMM in groupMemberArr) {
+            if (tMM.nickNameRemark == name) {
+              atRelateIds.add(tMM.memberNo ?? "");
+            }
+          }
+        }
+      }
+      errorDesc = await IMApi.sendGroupMsg(
+        friendNo,
+        contentText,
+        contentType,
+        reply: replyModel,
+        relateIdArr: atRelateIds,
+      );
     }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
       showToast(msg: errorDesc ?? defaultErrorMsg);
     }
+    selectNameArr.clear();
     replyModel = null;
     setState(() {});
   }
@@ -443,6 +461,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
   }
 
   bool _isRequestReply = false;
+
   void _replyClickEvent(ChatRecordModel model) async {
     String chatId = model.relationId ?? "";
     double height = 0;
@@ -459,14 +478,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     height -= listHeight;
     height += listHeight / 2;
     height = max(0, height);
-    debugLog(
-        "reply position: $index, $height, ${scrollController.position.maxScrollExtent}, ${listHeight}");
+    debugLog("reply position: $index, $height, ${scrollController.position.maxScrollExtent}, ${listHeight}");
     if (height > scrollController.position.maxScrollExtent) {
       height = scrollController.position.maxScrollExtent;
     }
 
     if (index != -1) {
-    //  scrollController.jumpTo(height);
+      //  scrollController.jumpTo(height);
       await scrollController.animateTo(height, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
       setState(() {});
       Future.delayed(const Duration(milliseconds: 500), () {
@@ -475,7 +493,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
           setState(() {});
         }
       });
-    }else {
+    } else {
       _isRequestReply = true;
       refreshController.requestLoading();
     }
@@ -534,7 +552,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                               int after = index + 1;
                               ChatRecordModel? afterModel;
                               ChatRecordModel model = chatArr![index];
-                              if (after < chatArr!.length  && chatType == 1) {
+                              if (after < chatArr!.length && chatType == 1) {
                                 afterModel = chatArr![after];
                               }
                               return ChatItemCell(
@@ -605,6 +623,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                                             if (chatType == 1 && "$inputPreText@" == text) {
                                               MemberListAlert.show(context, groupMemberArr, callback: (model) {
                                                 if (model != null) {
+                                                  selectNameArr.remove(model.nickNameRemark ?? "");
+                                                  selectNameArr.add(model.nickNameRemark ?? "");
                                                   eidtController.text = "${eidtController.text}${model.nickNameRemark ?? ""} ";
                                                   inputPreText = eidtController.text;
                                                 }
