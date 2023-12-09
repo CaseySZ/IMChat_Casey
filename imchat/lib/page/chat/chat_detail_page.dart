@@ -346,10 +346,24 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
       model.content = contentText;
     }
     String? errorDesc;
+    int contentType = imageInfo == null ? 0 : 1;
     if (chatType == 0) {
-      errorDesc = await IMApi.sendMsg(friendNo, contentText, imageInfo == null ? 0 : 1, reply: replyModel);
+      errorDesc = await IMApi.sendMsg(friendNo, contentText, contentType, reply: replyModel);
     } else {
-      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, imageInfo == null ? 0 : 1, reply: replyModel);
+      List<String> atRelateIds = [];
+      for (var name in selectNameArr) {
+        if (contentText.contains("@$name")) {
+          for (GroupMemberModel tMM in groupMemberArr) {
+            if (tMM.nickNameRemark == name) {
+              atRelateIds.add(tMM.memberNo ?? "");
+            }
+          }
+        }
+      }
+      if(atRelateIds.isNotEmpty){
+        contentType = 9;
+      }
+      errorDesc = await IMApi.sendGroupMsg(friendNo, contentText, contentType, reply: replyModel, relateIdArr: atRelateIds);
     }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
@@ -369,10 +383,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     chatArr?.insert(0, model);
     setState(() {});
     String? errorDesc;
+    int contentType =  1;
     if (chatType == 0) {
-      errorDesc = await IMApi.sendMsg(friendNo, collectModel.imagePath ?? "", 1, reply: replyModel);
+      errorDesc = await IMApi.sendMsg(friendNo, collectModel.imagePath ?? "", contentType, reply: replyModel);
     } else {
-      errorDesc = await IMApi.sendGroupMsg(friendNo, collectModel.imagePath ?? "", 1, reply: replyModel);
+      errorDesc = await IMApi.sendGroupMsg(friendNo, collectModel.imagePath ?? "", contentType, reply: replyModel);
     }
     if (errorDesc?.isNotEmpty == true) {
       model.sendStatus = 1;
@@ -408,22 +423,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     if (chatType == 0) {
       errorDesc = await IMApi.sendMsg(friendNo, contentText, isVideo ? 3 : 2, reply: replyModel);
     } else {
-      List<String> atRelateIds = [];
-      for (var name in selectNameArr) {
-        if (contentText.contains("@$name")) {
-          for (GroupMemberModel tMM in groupMemberArr) {
-            if (tMM.nickNameRemark == name) {
-              atRelateIds.add(tMM.memberNo ?? "");
-            }
-          }
-        }
-      }
       errorDesc = await IMApi.sendGroupMsg(
         friendNo,
         contentText,
         contentType,
         reply: replyModel,
-        relateIdArr: atRelateIds,
       );
     }
     if (errorDesc?.isNotEmpty == true) {
