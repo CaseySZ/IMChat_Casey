@@ -256,10 +256,10 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                 child: _buldItem("群成员添加".localize, rightTitle: "", isShowArrow: true),
               ),
               if (isAdmin) ...[
-                InkWell(
-                  onTap: _clickClearChat,
-                  child: _buldItem("删除聊天记录".localize, rightTitle: "", isShowArrow: false),
-                ),
+                // InkWell(
+                //   onTap: _clickClearChat,
+                //   child: _buldItem("删除聊天记录".localize, rightTitle: "", isShowArrow: false),
+                // ),
                 InkWell(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) {

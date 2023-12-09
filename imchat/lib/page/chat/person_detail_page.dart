@@ -37,7 +37,7 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
   void _loadData() async {
     if(_isLoading) return;
     _isLoading = true;
-    Response? ret =  await IMApi.clearFriendChatHistory(model?.friendNo ?? "");
+    Response? ret =  await IMApi.deleteFriend(model?.friendNo ?? "");
     _isLoading = false;
     if(ret?.isSuccess == true){
       Navigator.popUntil(context, (route) => route.isFirst);
@@ -98,7 +98,7 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.lightBlueAccent,
                   ),
-                  child:  Text("删除聊天记录".localize, style:const TextStyle(color: Colors.white),),
+                  child:  Text("删除好友".localize, style:const TextStyle(color: Colors.white),),
                 ),
               ),
             ],

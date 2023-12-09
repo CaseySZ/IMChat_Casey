@@ -27,7 +27,7 @@ class LongPressBoxMenu extends StatelessWidget {
   const LongPressBoxMenu({super.key, required this.dx, required this.dy, this.model, this.callback});
 
   double get height {
-    return (model?.messageNum ?? 0) > 0 ? 40 * 2 : 40 ;
+    return (model?.messageNum ?? 0) > 0 ? 40 * 3 : 40*2 ;
   }
 
   bool get isMy {
@@ -69,6 +69,15 @@ class LongPressBoxMenu extends StatelessWidget {
 
   }
 
+  Future _setDeleteBox(BuildContext context) async {
+    LoadingAlertWidget.show(context);
+    String? errorStr = await IMApi.deleteBoxMsg(model?.targetNo);
+    LoadingAlertWidget.cancel(context);
+    if (errorStr?.isNotEmpty == true) {
+      showToast(msg: errorStr!);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -104,6 +113,7 @@ class LongPressBoxMenu extends StatelessWidget {
                       _buildItem(context, 0, model?.isTop == 1 ? "取消置顶".localize : "置顶该聊天".localize, ""),
                       //_buildItem(1, "转发", ""),
                       if ((model?.messageNum ?? 0) > 0) _buildItem(context, 2, "标为已读".localize, ""),
+                      _buildItem(context, 3, "删除".localize, ""),
                     ],
                   ),
                 ),
@@ -122,6 +132,8 @@ class LongPressBoxMenu extends StatelessWidget {
           await _setTopMessageBox(context);
         } else if (title == "标为已读".localize) {
           await _setReadedBox(context);
+        }else if(index == 3){
+          await _setDeleteBox(context);
         } else {}
         callback?.call(index);
       },

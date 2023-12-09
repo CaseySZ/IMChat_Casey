@@ -658,7 +658,7 @@ class IMApi {
   static Future<Response?> getConfigBefore() async {
     try {
       Response? response =
-      await DioBase.instance.post("/api/getSystemConfigLoginAfter", {
+      await DioBase.instance.get("/api/getSystemConfigLoginAfter", {
       },);
       return response;
     } catch (e) {
@@ -670,7 +670,37 @@ class IMApi {
   static Future<Response?> getConfigAfter() async {
     try {
       Response? response =
-      await DioBase.instance.post("/api/getSystemConfigLoginBefore", {
+      await DioBase.instance.get("/api/getSystemConfigLoginBefore", {
+      },);
+      return response;
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
+  static Future<String?> deleteBoxMsg(String? targetNo) async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/charTarget/remove", {
+        "targetNo": targetNo,
+      },);
+      if (response?.isSuccess == true) {
+        return "";
+      } else {
+        return response?.tips;
+      }
+    } catch (e) {
+      debugLog(e);
+      return null;
+    }
+  }
+
+  static Future<Response?> deleteFriend(String? friendNo) async {
+    try {
+      Response? response =
+      await DioBase.instance.post("/api/memberFriend/remove", {
+        "friendNo": friendNo,
       },);
       return response;
     } catch (e) {
