@@ -5,10 +5,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/model/system_config.dart';
+import 'package:imchat/page/login_register/user_rule_page.dart';
 import 'package:imchat/tool/appbar/base_app_bar.dart';
 import 'package:imchat/tool/loading/loading_alert_widget.dart';
 import 'package:imchat/tool/network/dio_base.dart';
 import 'package:imchat/tool/network/response_status.dart';
+import 'package:imchat/utils/screen.dart';
 import 'package:imchat/utils/toast_util.dart';
 
 import '../chat/chat_view/group_text_filed.dart';
@@ -26,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController psdController = TextEditingController();
   TextEditingController nickController = TextEditingController();
+  TextEditingController inviteCodeController = TextEditingController();
 
   @override
   void initState() {
@@ -41,6 +45,9 @@ class _RegisterPageState extends State<RegisterPage> {
     }
     if (nickController.text.isEmpty) {
       return "请输入昵称".localize;
+    }
+    if (allConfigBeModel?.memberRegisterCodeSwitch == 0 && nickController.text.isEmpty) {
+      return "请输入邀请码".localize;
     }
     return "";
   }
@@ -67,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
         "password": pwd,
         "nickName": nickName,
         "deviceType":deviceType,
-        "registerCode": "",
+        "registerCode": inviteCodeController.text,
         "sex": 0,
       },
     );
@@ -174,30 +181,65 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                   ),
+                  if(allConfigBeModel?.memberRegisterCodeSwitch == 0)
+                    ...[
+                      const SizedBox(height: 12),
+                      Container(
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(color: Color(0xffcccccc)),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.qr_code,
+                              color: Colors.blue,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 2),
+                            Expanded(
+                              child: GroupTextFiled(
+                                controller: inviteCodeController,
+                                placeholder: "请输入邀请码".localize,
+                                maxLines: 1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]
+
                 ],
               ),
               const SizedBox(height: 16),
-              // SizedBox(
-              //   height: 24,
-              //   child: Row(
-              //     children: [
-              //       Text(
-              //         "我已阅读并接受".localize,
-              //         style: const TextStyle(
-              //           color: Colors.grey,
-              //           fontSize: 14,
-              //         ),
-              //       ),
-              //       Text(
-              //         "《用户协议》".localize,
-              //         style: const TextStyle(
-              //           color: Colors.blue,
-              //           fontSize: 14,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
+              SizedBox(
+                height: 24,
+                child: Row(
+                  children: [
+                    Text(
+                      "我已阅读并接受".localize,
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        pushToPage(context, UserRulePage());
+                      },
+                      child: Text(
+                        "《用户协议》".localize,
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: 32),
               GestureDetector(
                 onTap: _loadData,

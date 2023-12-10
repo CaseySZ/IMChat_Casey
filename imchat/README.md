@@ -24,3 +24,8 @@ protoc  --plugin=/Users/sy/.pub-cache/bin/protoc-gen-dart --dart_out=/Users/sy/D
 protoc  --plugin=/Users/sy/.pub-cache/bin/protoc-gen-dart --dart_out=/Users/sy/Documents/GitHub/IMChat/imchat/lib/protobuf/model  base.proto
 
 
+
+/// 请输入邀请码
+我已阅读并接受
+《用户协议》
+用户协议

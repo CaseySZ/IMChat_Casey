@@ -1,7 +1,7 @@
 
 
-SystemConfigBefore? systemConfigBeModel;
-SystemConfigAfter? systemConfigAfModel;
+SystemConfigBefore? allConfigBeModel;
+SystemConfigAfter? allConfigAfModel;
 class SystemConfigBefore {
 
   int? memberAppRegisterSwitch; //开放注册(手机客户端)(0-开 1-关)

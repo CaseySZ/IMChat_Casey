@@ -39,3 +39,9 @@ class _Screen {
 Widget buildLineWidget({double height = 1}){
   return Container(height: height, color: const Color(0xfff6f7fb),);
 }
+
+Future pushToPage(BuildContext context, Widget page,) async {
+  return Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return page;
+  }));
+}

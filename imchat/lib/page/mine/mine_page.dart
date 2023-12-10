@@ -58,15 +58,11 @@ class _MinePageState extends State<MinePage> {
       LocalStore.removePassword();
       await IMApi.logout();
       IMConfig.token = null;
-      IMConfig.memberRegisterCodeRequiredSwitch = 0;
-      IMConfig.memberRegisterCodeSwitch = 0;
       await WebSocketSend.logout();
       LoadingAlertWidget.cancel(context);
     } catch (e) {
       LoadingAlertWidget.cancel(context);
       IMConfig.token = null;
-      IMConfig.memberRegisterCodeRequiredSwitch = 0;
-      IMConfig.memberRegisterCodeSwitch = 0;
       debugLog(e);
     }
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {

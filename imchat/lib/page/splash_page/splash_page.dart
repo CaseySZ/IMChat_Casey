@@ -55,7 +55,7 @@ class _SplashPageState extends State<SplashPage> {
       Response? resp = await IMApi.getConfigBefore();
       if(resp?.isSuccess == true){
         try {
-          systemConfigBeModel = SystemConfigBefore.fromJson(resp?.respData);
+          allConfigBeModel = SystemConfigBefore.fromJson(resp?.respData);
         }catch(e){
           debugLog(e);
         }
@@ -67,18 +67,13 @@ class _SplashPageState extends State<SplashPage> {
       Response? resp = await IMApi.getConfigAfter();
       if(resp?.isSuccess == true){
         try {
-          systemConfigAfModel = SystemConfigAfter.fromJson(resp?.respData);
+          allConfigAfModel = SystemConfigAfter.fromJson(resp?.respData);
         }catch(e){
           debugLog(e);
         }
       }
     }catch(e){
       debugLog(e);
-    }
-    Response? response = await DioBase.instance.post("/api/getSystemConfig", {});
-    if(response?.isSuccess == true){
-      IMConfig.memberRegisterCodeRequiredSwitch = response?.respData["memberRegisterCodeRequiredSwitch"] ?? 1;
-      IMConfig.memberRegisterCodeSwitch = response?.respData["memberRegisterCodeSwitch"] ?? 1;
     }
     bool isIos = true;
     if(Platform.isAndroid){

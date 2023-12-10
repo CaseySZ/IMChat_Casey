@@ -1,15 +1,17 @@
 // ignore_for_file: use_build_context_synchronously
 
-
 import 'package:flutter/material.dart';
 import 'package:imchat/api/im_api.dart';
 import 'package:imchat/config/config.dart';
 import 'package:imchat/config/language.dart';
+import 'package:imchat/model/system_config.dart';
+import 'package:imchat/page/login_register/user_rule_page.dart';
 import 'package:imchat/routers/router_map.dart';
 import 'package:imchat/utils/toast_util.dart';
 
 import '../../tool/loading/loading_alert_widget.dart';
 import '../../utils/local_store.dart';
+import '../../utils/screen.dart';
 import '../../web_socket/web_socket_model.dart';
 import '../chat/chat_view/group_text_filed.dart';
 
@@ -48,8 +50,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loginEvent({bool isKeyLogin = false}) async {
-
-    if(isKeyLogin){
+    if (isKeyLogin) {
       FocusScope.of(context).unfocus();
       LoadingAlertWidget.show(context);
       String? errorDesc = await IMApi.autoLogin();
@@ -60,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
         IMConfig.isOneKeyLogin = true;
         Navigator.pushReplacementNamed(context, AppRoutes.main);
       }
-    }else {
+    } else {
       String errorStr = checkData();
       if (errorStr.isNotEmpty) {
         showToast(msg: errorStr);
@@ -163,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: GroupTextFiled(
                                 controller: psdController,
                                 placeholder: "请输入密码".localize,
-                                obscureText:true,
+                                obscureText: true,
                                 maxLines: 1,
                               ),
                             ),
@@ -172,32 +173,61 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
+                  if (allConfigBeModel?.memberAppRegisterSwitch != 1) ...[
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 24,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              var ret = await Navigator.pushNamed(context, AppRoutes.register);
+                              if (ret is String) {
+                                nameController.text = ret;
+                              }
+                            },
+                            child: Text(
+                              "注册账号".localize,
+                              style: const TextStyle(
+                                color: Colors.blue,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: const Text(
+                              "", // "忘记密码?".localize,
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 16),
                   SizedBox(
                     height: 24,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          onTap: () async{
-                             var ret = await Navigator.pushNamed(context, AppRoutes.register);
-                             if(ret is String){
-                               nameController.text = ret;
-                             }
-                          },
-                          child: Text(
-                            "注册账号".localize,
-                            style: const TextStyle(
-                              color: Colors.blue,
-                              fontSize: 14,
-                            ),
+                        Text(
+                          "我已阅读并接受".localize,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
-                          child: const Text(
-                            "",// "忘记密码?".localize,
-                            style:  TextStyle(
+                          onTap: (){
+                            pushToPage(context, UserRulePage());
+                          },
+                          child: Text(
+                            "《用户协议》".localize,
+                            style: const TextStyle(
                               color: Colors.blue,
                               fontSize: 14,
                             ),
@@ -206,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 16),
                   GestureDetector(
                     onTap: _loginEvent,
                     child: Container(
@@ -229,33 +259,39 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                 InkWell(
-                   onTap: (){
-                     _loginEvent(isKeyLogin: true);
-                   },
-                   child:  Container(
-                     padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
-                     child:  Text(
-                       "一键登录".localize,
-                       style: const TextStyle(
-                         color: Colors.black,
-                         fontSize: 14,
-                       ),
-                     ),
-                   ),
-                 )
+                  if (allConfigBeModel?.memberAutoRegisterSwitch != 1)
+                    InkWell(
+                      onTap: () {
+                        _loginEvent(isKeyLogin: true);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                        child: Text(
+                          "一键登录".localize,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
           ),
           Positioned(
             bottom: 16,
-            child: Text(
-              "${"版本号".localize}：v1.0.0",
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 14,
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "${"版本号".localize}：v1.0.0",
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                )
+              ],
             ),
           ),
         ],
