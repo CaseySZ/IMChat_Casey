@@ -383,7 +383,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
     chatArr?.insert(0, model);
     setState(() {});
     String? errorDesc;
-    int contentType =  1;
+    int contentType =  10;
     if (chatType == 0) {
       errorDesc = await IMApi.sendMsg(friendNo, collectModel.imagePath ?? "", contentType, reply: replyModel);
     } else {
@@ -722,6 +722,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> with WidgetsBindingObse
                       dx: menuDx,
                       dy: menuDy,
                       model: menuChatModel,
+                      isGroupAdmin: groupModel?.isAdmin == 0,
                       callback: (value) {
                         isShowMenu = false;
                         setState(() {});

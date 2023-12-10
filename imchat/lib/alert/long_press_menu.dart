@@ -13,6 +13,7 @@ class LongPressMenu extends StatelessWidget {
   final double dy;
   final Function(String?)? callback;
   final ChatRecordModel? model;
+  final bool isGroupAdmin;
 
   List<IconData> get iconArr => [
         Icons.copy,
@@ -20,28 +21,44 @@ class LongPressMenu extends StatelessWidget {
         Icons.keyboard_return_rounded,
         Icons.delete_outline,
         Icons.collections_sharp,
+        Icons.delete_forever_outlined,
       ];
 
-  LongPressMenu({super.key, required this.dx, required this.dy, this.model, this.callback, this.isCollectNetIng = false});
+  LongPressMenu({
+    super.key,
+    required this.dx,
+    required this.dy,
+    this.model,
+    this.callback,
+    this.isCollectNetIng = false,
+    this.isGroupAdmin = false,
+  });
 
   bool get isTextType => model?.contentType == 0;
 
   bool get isImgType => model?.contentType == 1;
 
+  bool get isShowDelete => model?.targetType == 0 || isGroupAdmin == true || isMy;
+
   double get height {
+    double sizeHeight = 40;
     if (isMy) {
       if (isTextType || isImgType) {
-        return 40 * 3;
+        sizeHeight = 40 * 3;
       } else {
-        return 40 * 2;
+        sizeHeight = 40 * 2;
       }
     } else {
       if (isTextType || isImgType) {
-        return 40 * 2;
+        sizeHeight = 40 * 2;
       } else {
-        return 40;
+        sizeHeight = 40;
       }
     }
+    if(isShowDelete){
+      sizeHeight += 40;
+    }
+    return sizeHeight;
   }
 
   bool get isMy {
@@ -76,6 +93,33 @@ class LongPressMenu extends StatelessWidget {
     }
   }
 
+  void _deleteTwoMsg(BuildContext context) async {
+    String? errorStr;
+    int contentType = 11;
+    if (model?.groupNo?.isNotEmpty == true) {
+      errorStr = await IMApi.sendMsg(
+        model?.groupNo ?? "",
+        "",
+        contentType,
+        relationChatRecordType: "1",
+        relationMemberNo: model?.groupNo,
+        relationChatRecordId: model?.id,
+      );
+    } else {
+      errorStr = await IMApi.sendGroupMsg(
+        model?.sendNo ?? "",
+        "",
+        contentType,
+        relationChatRecordType: "0",
+        relationMemberNo: model?.sendNo,
+        relationChatRecordId: model?.id,
+      );
+    }
+    if (errorStr?.isNotEmpty == true) {
+      showToast(msg: errorStr!);
+    }
+  }
+
   bool isCollectNetIng = false;
 
   void _collectMsg(BuildContext context) async {
@@ -84,9 +128,9 @@ class LongPressMenu extends StatelessWidget {
     isCollectNetIng = true;
     String? errorStr;
     if (model?.groupNo?.isNotEmpty == true) {
-      errorStr = await IMApi.collectAdd(chatRecordId:model?.id, chatRecordType: 1);
+      errorStr = await IMApi.collectAdd(chatRecordId: model?.id, chatRecordType: 1);
     } else {
-      errorStr = await IMApi.collectAdd(chatRecordId:model?.id, chatRecordType: 0);
+      errorStr = await IMApi.collectAdd(chatRecordId: model?.id, chatRecordType: 0);
     }
     if (errorStr?.isNotEmpty == true) {
       showToast(msg: errorStr!);
@@ -127,12 +171,14 @@ class LongPressMenu extends StatelessWidget {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       if (isTextType) _buildItem(context, 0, "复制内容".localize, ""),
                       //_buildItem(1, "转发", ""),
                       _buildItem(context, 2, "回复".localize, ""),
                       if (isMy) _buildItem(context, 3, "撤回消息".localize, ""),
                       if (isImgType) _buildItem(context, 4, "收藏".localize, ""),
+                      if (isShowDelete) _buildItem(context, 5, "删除".localize, ""),
                     ],
                   ),
                 ),
@@ -158,6 +204,8 @@ class LongPressMenu extends StatelessWidget {
           callback?.call("回复".localize);
         } else if (index == 4) {
           _collectMsg(context);
+        }else if (index == 5){
+          _deleteTwoMsg(context);
         }
       },
       child: Container(
